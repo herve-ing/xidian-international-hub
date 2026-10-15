@@ -1,0 +1,26 @@
+{
+  "name": "xidian-international-hub",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Prototype GitHub Pages de Xidian International Hub et Xie-Visas",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --open /prototype.html",
+    "test": "node --experimental-strip-types --test *.test.mjs",
+    "build": "tsc --noEmit && vite build && node publish.mjs",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "gsap": "3.15.0"
+  },
+  "devDependencies": {
+    "vite": "8.0.13",
+    "@vitejs/plugin-react": "6.0.2",
+    "typescript": "5.9.3",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/node": "22.19.19"
+  }
+}
