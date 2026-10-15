@@ -1,8 +1,8 @@
-import {supervisors} from './supervisors.ts';
+import {supervisors,directoryMeta} from './supervisors.ts';
 import {remainingDays,alertThreshold,validDate,documentTypes} from './domain.ts';
 import {answerFAQ} from './faq.ts';
 const key='xidian-pages-prototype-v1';
-function read(){try{const raw=localStorage.getItem(key);if(raw){const data=JSON.parse(raw);if(data&&Array.isArray(data.documents)&&Array.isArray(data.alerts)&&Array.isArray(data.supervisors))return data;}}catch{}return {profile:null,documents:[],alerts:[],supervisors};}
+function read(){try{const raw=localStorage.getItem(key);if(raw){const data=JSON.parse(raw);if(data&&Array.isArray(data.documents)&&Array.isArray(data.alerts)&&Array.isArray(data.supervisors)){if(data.directoryVersion!==directoryMeta.version){const legacy=new Set(['li-chenxi','li-jun','sheng-kai']);const custom=data.supervisors.filter((s:any)=>!legacy.has(s.id)&&!s.id.startsWith('sie-'));const canonical=new Map(supervisors.map(s=>[s.id,s]));for(const s of custom)canonical.set(s.id,s);data.supervisors=[...canonical.values()];data.directoryVersion=directoryMeta.version;}return data;}}}catch{}return {profile:null,documents:[],alerts:[],supervisors,directoryVersion:directoryMeta.version};}
 function write(data:any){try{localStorage.setItem(key,JSON.stringify(data));}catch{throw new Error('Browser storage is unavailable or full. Changes were not saved.');}}
 export async function prototypeRequest(url:string,method='GET',body?:unknown):Promise<any>{
  const data=read(), b=(body||{}) as any, now=new Date().toISOString();

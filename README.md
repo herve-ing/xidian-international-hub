@@ -35,4 +35,17 @@ Settings → Pages → Deploy from a branch → main → / (root).
 
 Les liens internes utilisent des fragments (#/visas, #/supervisors) pour fonctionner après rechargement.
 
-Sept tests couvrent les dates de Pékin, les seuils d’alerte, la validation des dates, la sauvegarde locale et la FAQ. Compilation TypeScript et build Vite validés.
+Neuf tests couvrent les dates de Pékin, les seuils d’alerte, la validation des dates, la sauvegarde locale et la FAQ. Compilation TypeScript et build Vite validés.
+
+## Annuaire officiel SIE — mise à jour du 15 octobre 2026
+
+252 fiches provenant des 19 rubriques et des 22 pages de listes de l’annuaire anglais SIE, plus les 3 profils officiels précédemment sélectionnés : **255 profils**. La rubrique Hangzhou ne contient aucune fiche à cette date.
+
+243 fiches SIE proposent des documents en images ; les 9 autres pages ne fournissent actuellement aucun document détaillé. Les images restent hébergées par Xidian et sont affichées à la demande dans les fiches, avec un lien vers leur page source. Les titres, emails, domaines, niveaux et langues non structurés ne sont pas inventés. La recherche par domaine et les filtres de niveau ne portent donc que sur les champs renseignés. L’inscription dans cet annuaire ne garantit pas de place disponible.
+
+- `supervisors.ts` : données typées utilisées par le prototype.
+- `supervisors-data.json` : données et métadonnées exportables.
+- `supervisor-sources.json` : provenance et pagination de toutes les fiches.
+- `directory.test.mjs` : contrôle d’exhaustivité et migration des anciens espaces locaux.
+
+Pagination par 18 profils ; filtres par école, recherche par nom et favoris. La migration conserve les documents, préférences et ajouts locaux.
