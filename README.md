@@ -35,13 +35,13 @@ Settings → Pages → Deploy from a branch → main → / (root).
 
 Les liens internes utilisent des fragments (#/visas, #/supervisors) pour fonctionner après rechargement.
 
-Neuf tests couvrent les dates de Pékin, les seuils d’alerte, la validation des dates, la sauvegarde locale et la FAQ. Compilation TypeScript et build Vite validés.
+Les tests couvrent les dates de Pékin, les seuils d’alerte, la validation des dates, la sauvegarde locale et la FAQ. Compilation TypeScript et build Vite validés.
 
 ## Annuaire officiel SIE — mise à jour du 15 octobre 2026
 
 252 fiches provenant des 19 rubriques et des 22 pages de listes de l’annuaire anglais SIE, plus les 3 profils officiels précédemment sélectionnés : **255 profils**. La rubrique Hangzhou ne contient aucune fiche à cette date.
 
-243 fiches SIE proposent des documents en images ; les 9 autres pages ne fournissent actuellement aucun document détaillé. Les images restent hébergées par Xidian et sont affichées à la demande dans les fiches, avec un lien vers leur page source. Les titres, emails, domaines, niveaux et langues non structurés ne sont pas inventés. La recherche par domaine et les filtres de niveau ne portent donc que sur les champs renseignés. L’inscription dans cet annuaire ne garantit pas de place disponible.
+243 fiches SIE proposent des documents en images ; les 9 autres pages ne fournissent actuellement aucun document détaillé. Les images restent hébergées par Xidian et sont affichées à la demande dans les fiches, avec un lien vers leur page source. Les titres, emails, domaines, niveaux et langues non structurés ne sont pas inventés. La recherche par domaine porte sur les champs renseignés. Le filtre de niveau inclut par défaut les profils non renseignés, clairement signalés et désactivables. L’inscription dans cet annuaire ne garantit pas de place disponible.
 
 - `supervisors.ts` : données typées utilisées par le prototype.
 - `supervisors-data.json` : données et métadonnées exportables.
@@ -49,3 +49,11 @@ Neuf tests couvrent les dates de Pékin, les seuils d’alerte, la validation de
 - `directory.test.mjs` : contrôle d’exhaustivité et migration des anciens espaces locaux.
 
 Pagination par 18 profils ; filtres par école, recherche par nom et favoris. La migration conserve les documents, préférences et ajouts locaux.
+
+## Vie de campus et corrections — 15 octobre 2026
+
+Nouvelle rubrique `#/campus` : découverte par catégories et recherche, favoris, adhésions locales de démonstration, agenda d’exemple, inscription/annulation locale, export calendrier ICS avec dates en heure de Pékin, propositions de clubs et espace personnel. Les six communautés et quatre activités sont des exemples clairement identifiés, pas des associations ou événements officiellement confirmés. Aucun formulaire n’est envoyé à un responsable.
+
+Le filtre Master/Doctorat conserve par défaut les fiches dont le niveau n’a pas été structuré depuis les documents images. Les correspondances renseignées sont affichées en premier ; une option permet de ne garder que celles-ci. Aucun niveau de diplôme n’est inventé.
+
+Traductions : contenu de la rubrique Vie de campus disponible dans les 11 langues, catalogue étendu de plus de 1 300 traductions et correction des libellés/confirmations FR/EN/ZH. Les documents sources restent dans leur langue originale. Certains textes détaillés des autres modules restent en anglais dans les huit langues supplémentaires ; une indication dans la langue sélectionnée le précise. Relecture humaine nécessaire avant usage institutionnel.

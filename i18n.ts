@@ -1,3 +1,4 @@
+import {translations} from './translations.ts';
 export const languages=[['fr','Français'],['en','English'],['zh','中文'],['ar','العربية'],['es','Español'],['ln','Lingála'],['ru','Русский'],['tr','Türkçe'],['ary','الدارجة المغربية'],['tk','Türkmençe'],['ur','اردو']];
 const keys=['home','supervisors','visas','guide','chat','admin','settings','search','notifications','documents','add','save','cancel','all','profile','days','viewAll','welcome','help','favorites','language','export','renew','checklist','student'];
 const rows:Record<string,string[]>={
@@ -13,5 +14,5 @@ ary:['نظرة عامة','المشرفين','Xie-Visas','دليل الوصول',
 tk:['Umumy syn','Ylmy ýolbaşçylar','Xie-Visas','Geliş gollanmasy','Kömekçi','ISO paneli','Sazlamalar','Gözleg','Bildirişler','Resminamalarym','Goş','Ýatda sakla','Ýatyr','Ählisi','Profilim','gün','Ählisini gör','Xidian-a hoş geldiňiz','Kömek gerekmi?','Halanlarym','Dil','Eksport','Nädip uzaltmaly','Sanawym','Talyp'],
 ur:['جائزہ','نگران','Xie-Visas','آمد کی رہنمائی','معاون','ISO ڈیش بورڈ','ترتیبات','تلاش','اطلاعات','میری دستاویزات','شامل کریں','محفوظ کریں','منسوخ','سب','میرا پروفائل','دن','سب دیکھیں','شیڈیان میں خوش آمدید','مدد چاہیے؟','پسندیدہ','زبان','برآمد','تجدید کیسے کریں','میری فہرست','طالب علم']
 };
-export function translate(lang:string,key:string){const i=keys.indexOf(key);return i<0?key:(rows[lang]||rows.en)[i];}
-export function content(lang:string,fr:string,en:string,zh?:string){return lang==='fr'?fr:lang==='zh'&&zh?zh:en;}
+export function translate(lang:string,key:string){if(key==='campus')return ({fr:'Vie de campus',en:'Campus life',zh:'校园生活',ar:'الحياة الجامعية',es:'Vida universitaria',ln:'Bomoi na campus',ru:'Жизнь кампуса',tr:'Kampüs hayatı',ary:'الحياة فالجامعة',tk:'Uniwersitet durmuşy',ur:'کیمپس کی زندگی'} as Record<string,string>)[lang]||'Campus life';const i=keys.indexOf(key);return i<0?key:(rows[lang]||rows.en)[i];}
+export function content(lang:string,fr:string,en:string,zh?:string){return lang==='fr'?fr:lang==='en'?en:lang==='zh'&&zh?zh:translations[lang]?.[en]||en;}
