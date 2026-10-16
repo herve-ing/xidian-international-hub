@@ -57,3 +57,13 @@ Nouvelle rubrique `#/campus` : découverte par catégories et recherche, favoris
 Le filtre Master/Doctorat conserve par défaut les fiches dont le niveau n’a pas été structuré depuis les documents images. Les correspondances renseignées sont affichées en premier ; une option permet de ne garder que celles-ci. Aucun niveau de diplôme n’est inventé.
 
 Traductions : contenu de la rubrique Vie de campus disponible dans les 11 langues, catalogue étendu de plus de 1 300 traductions et correction des libellés/confirmations FR/EN/ZH. Les documents sources restent dans leur langue originale. Certains textes détaillés des autres modules restent en anglais dans les huit langues supplémentaires ; une indication dans la langue sélectionnée le précise. Relecture humaine nécessaire avant usage institutionnel.
+
+## Comptes étudiant et professeur — 16 octobre 2026
+
+Le portail propose la création puis la connexion d’un compte étudiant avec nom complet, matricule, nationalité, spécialité (major), niveau d’études (grade), téléphone, email et mot de passe. La connexion suivante accepte l’email ou le matricule et le mot de passe. Chaque compte dispose de documents, favoris, checklist et activités distincts sur ce navigateur. La déconnexion efface la session de l’onglet ; les données du compte sont conservées pour la prochaine connexion.
+
+L’étudiant ne voit pas l’espace ISO. Une navigation directe vers `#/admin` renvoie vers l’accueil, et l’API locale refuse les opérations ISO et la modification des superviseurs pour un compte étudiant. Les professeurs accèdent à toutes les rubriques ; l’espace ISO ne voit que les comptes créés sur ce même navigateur et ses rappels restent locaux.
+
+**Code professeur public de démonstration : `XIDIAN-PROF-DEMO-2026`.** Ce code est volontairement un code de test, jamais un secret de production. GitHub Pages sert des fichiers publics : ce prototype ne fournit pas une authentification serveur ni une autorisation résistante à une modification du navigateur. Ne pas y saisir de véritables informations personnelles. Les mots de passe de démonstration sont dérivés avec PBKDF2-SHA256 (sel aléatoire, 210 000 itérations) et ne sont pas stockés en clair. Utiliser un mot de passe réservé à la démo.
+
+Pour la mise en service : déplacer les comptes et rôles sur le backend, vérifier l’email et le statut universitaire, remplacer le code partagé par des invitations nominatives révocables et contrôler les droits sur chaque requête serveur.
