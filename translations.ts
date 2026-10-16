@@ -1334,3 +1334,6 @@ export const translations:Record<string,Record<string,string>>={
     "Sensor fusion": "传感器融合"
   }
 };
+
+const workspaceCopy: Record<string,string[]> = {"es": ["Prototipo GitHub Pages · datos de ejemplo", "Prototipo · espacio local del navegador"], "ar": ["نموذج GitHub Pages · بيانات تجريبية", "نموذج · مساحة محلية في المتصفح"], "ln": ["Ndakisa GitHub Pages · ba données ya komeka", "Ndakisa · esika ya mosala na navigateur"], "ru": ["Прототип GitHub Pages · примеры данных", "Прототип · локальное пространство браузера"], "tr": ["GitHub Pages prototipi · örnek veriler", "Prototip · tarayıcıda yerel alan"], "ary": ["نموذج GitHub Pages · معطيات تجريبية", "نموذج · مساحة محلية فالمتصفح"], "tk": ["GitHub Pages nusgasy · nusga maglumatlar", "Nusga · brauzerdäki ýerli iş meýdançasy"], "ur": ["GitHub Pages نمونہ · مثالی ڈیٹا", "نمونہ · براؤزر میں مقامی جگہ"]};
+for (const [locale, copy] of Object.entries(workspaceCopy)) { translations[locale]["GitHub Pages prototype · sample data"]=copy[0]; translations[locale]["Prototype · browser-local workspace"]=copy[1]; }
