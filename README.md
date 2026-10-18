@@ -1,110 +1,68 @@
 # Xidian International Hub + Xie-Visas
 
-Prototype public pour GitHub Pages. Les fichiers HTML/CSS/JS compilés sont à la racine : publication depuis `main` / `/ (root)`.
+Prototype étudiant indépendant : recherche de superviseurs, suivi des échéances administratives, guide d’arrivée, clubs et journal communautaire. Interface conservée dans cette refonte ; aucune donnée de navigateur n’est transférée sur un serveur.
 
-## Modules
+## Développer
 
-Dashboard étudiant et ISO simulé, recherche de superviseurs, Xie-Visas, checklist d’arrivée, assistant FAQ, exports calendrier ICS/CSV/JSON et impression PDF.
+Node.js 22.18+ ou 24, npm.
 
-Les exemples et rôles sont fictifs. « Tester mon espace local » conserve les dates, favoris et démarches uniquement dans le navigateur. Aucune authentification réelle, synchronisation serveur, IA générative ni notification externe n’est active. Ne pas entrer de données personnelles sensibles.
-
-Navigation dans 11 langues ; contenus détaillés FR/EN/ZH. Informations à confirmer avec l’ISO et les autorités compétentes. Initiative étudiante indépendante, sans affiliation officielle à Xidian.
-
-## Code source
-
-Fichiers TypeScript directement consultables à la racine : hub.tsx, icons.tsx, navigation.tsx, prototype-api.ts, domain.ts, i18n.ts, supervisors.ts, faq.ts et main.tsx.
-
-Xidian-source-complete.zip contient le projet Vite initial, le workflow GitHub Actions, les modules de la version serveur et sa documentation. Aucun secret ni donnée personnelle d’utilisateur n’est inclus.
-
-## Développer et mettre à jour
-
-Node.js 22 ou supérieur.
-
-```bash
+```sh
 npm ci
-npm test
 npm run dev
+npm test
+npm run format:check
 npm run build
+npm run preview
 ```
 
-La compilation vérifie les types et met à jour index.html ainsi que les assets à la racine. Publier ces fichiers sur main actualise GitHub Pages. prototype.html est le point d’entrée de développement ; index.html est le fichier compilé public.
+`npm run build` vérifie les types, reconstruit `dist/` et vérifie que les ressources référencées existent. Le lockfile est portable : aucune dépendance ne pointe vers un chemin de la machine de développement.
 
-## Publication GitHub Pages
+## Organisation
 
-Settings → Pages → Deploy from a branch → main → / (root).
+| Dossier                       | Contenu                                                        |
+| ----------------------------- | -------------------------------------------------------------- |
+| `src/`                        | Composants React, styles et logique métier TypeScript          |
+| `tests/`                      | Tests métier, accès, migration, traductions et rendu React     |
+| `public/`                     | Favicon, contrat OpenAPI et données publiques des superviseurs |
+| `scripts/`                    | Vérification du résultat de compilation                        |
+| `docs/`                       | Revue technique, historique et guide de mise en production     |
+| `dist/`                       | Site compilé, ignoré par Git et produit en CI                  |
+| `.github/workflows/pages.yml` | Vérification et déploiement GitHub Pages                       |
 
-Les liens internes utilisent des fragments (#/visas, #/supervisors) pour fonctionner après rechargement.
+Les sources lisibles sont dans `src/`. Les bundles et archives historiques ne sont pas conservés à la racine. Prettier possède une configuration partagée et deux commandes : `npm run format` et `npm run format:check`.
 
-Les tests couvrent les dates de Pékin, les seuils d’alerte, la validation des dates, la sauvegarde locale et la FAQ. Compilation TypeScript et build Vite validés.
+## Comptes et clubs
 
-## Annuaire officiel SIE — mise à jour du 15 octobre 2026
+Trois rôles de démonstration : étudiant, responsable de club et professeur. Le responsable conserve les fonctions étudiantes et gère uniquement ses clubs ; le professeur accède à l’ISO et à tous les clubs.
 
-252 fiches provenant des 19 rubriques et des 22 pages de listes de l’annuaire anglais SIE, plus les 3 profils officiels précédemment sélectionnés : **255 profils**. La rubrique Hangzhou ne contient aucune fiche à cette date.
+1. L’étudiant crée son compte sur le navigateur de démonstration.
+2. Un professeur ouvre **Gestion des clubs → Responsables**, sélectionne ce compte et lui attribue des clubs.
+3. Le responsable utilise son compte étudiant habituel dans l’onglet **Responsable de club**.
 
-243 fiches SIE proposent des documents en images ; les 9 autres pages ne fournissent actuellement aucun document détaillé. Les images restent hébergées par Xidian et sont affichées à la demande dans les fiches, avec un lien vers leur page source. Les titres, emails, domaines, niveaux et langues non structurés ne sont pas inventés. La recherche par domaine porte sur les champs renseignés. Le filtre de niveau inclut par défaut les profils non renseignés, clairement signalés et désactivables. L’inscription dans cet annuaire ne garantit pas de place disponible.
+Le professeur peut également créer un club et désigner son responsable dans **Articles et clubs**. Les responsables et professeurs y rédigent des brouillons ou publient des articles avec jusqu’à six images/vidéos et leurs légendes. Le journal public affiche seulement les articles publiés. Les nouvelles présentations et les articles conservent leur langue de rédaction.
 
-- `supervisors.ts` : données typées utilisées par le prototype.
-- `supervisors-data.json` : données et métadonnées exportables.
-- `supervisor-sources.json` : provenance et pagination de toutes les fiches.
-- `directory.test.mjs` : contrôle d’exhaustivité et migration des anciens espaces locaux.
+Les 13 clubs initiaux restent disponibles, avec des illustrations originales. Les inscriptions, décisions, réponses et historiques sont conservés sur ce navigateur. Photos et vidéos sont conservées dans IndexedDB, autres données dans localStorage.
 
-Pagination par 18 profils ; filtres par école, recherche par nom et favoris. La migration conserve les documents, préférences et ajouts locaux.
+## Authentification : limites et renforcement
 
-## Vie de campus et corrections — 15 octobre 2026
+**Ce site n’est pas prêt à collecter de vraies données étudiantes.** Un navigateur contrôlé par son utilisateur ne peut pas être une autorité de sécurité. Le code professeur `XIDIAN-PROF-DEMO-2026` est public et sert uniquement à explorer le prototype.
 
-Nouvelle rubrique `#/campus` : découverte par catégories et recherche, favoris, adhésions locales de démonstration, agenda d’exemple, inscription/annulation locale, export calendrier ICS avec dates en heure de Pékin, propositions de clubs et espace personnel. Les six communautés et quatre activités sont des exemples clairement identifiés, pas des associations ou événements officiellement confirmés. Aucun formulaire n’est envoyé à un responsable.
+Le modèle évite désormais d’accepter une simple déclaration `role: 'professor'` dans sessionStorage. Une connexion professeur validée par le code de démonstration crée une référence temporaire en mémoire. Sans cette référence, un objet professeur fabriqué est refusé ; déconnexion et rechargement l’invalident. **Les professeurs doivent donc se reconnecter après un rechargement.** Les documents, comptes étudiants, articles et médias ne sont pas effacés.
 
-Le filtre Master/Doctorat conserve par défaut les fiches dont le niveau n’a pas été structuré depuis les documents images. Les correspondances renseignées sont affichées en premier ; une option permet de ne garder que celles-ci. Aucun niveau de diplôme n’est inventé.
+Cette défense empêche une falsification triviale de la session, mais **ne remplace ni une session serveur ni des autorisations côté serveur**. Le code démo étant public et les données locales modifiables, elle ne garantit pas une identité universitaire. Avant tout usage réel, suivre [le guide de mise en production](docs/PRODUCTION.md).
 
-Traductions : contenu de la rubrique Vie de campus disponible dans les 11 langues, catalogue étendu de plus de 1 300 traductions et correction des libellés/confirmations FR/EN/ZH. Les documents sources restent dans leur langue originale. Certains textes détaillés des autres modules restent en anglais dans les huit langues supplémentaires ; une indication dans la langue sélectionnée le précise. Relecture humaine nécessaire avant usage institutionnel.
+Les mots de passe de démonstration sont dérivés avec PBKDF2-SHA256 (sel aléatoire et 210 000 itérations). Les réponses publiques n’exposent ni sel ni hachage. Les erreurs d’authentification utilisent `AuthError` et `AuthErrorCode` ; l’interface ne déduit plus leur type en analysant un message arbitraire.
 
-## Comptes étudiant et professeur — 16 octobre 2026
+## Déploiement GitHub Pages
 
-Le portail propose la création puis la connexion d’un compte étudiant avec nom complet, matricule, nationalité, spécialité (major), niveau d’études (grade), téléphone, email et mot de passe. La connexion suivante accepte l’email ou le matricule et le mot de passe. Chaque compte dispose de documents, favoris, checklist et activités distincts sur ce navigateur. La déconnexion efface la session de l’onglet ; les données du compte sont conservées pour la prochaine connexion.
+Configurer **Settings → Pages → Source → GitHub Actions**. Le workflow installe les dépendances verrouillées, contrôle le format, lance les tests, compile puis publie uniquement `dist/`. Les sources TypeScript et archives ne sont pas nécessaires dans le site public.
 
-L’étudiant ne voit pas l’espace ISO. Une navigation directe vers `#/admin` renvoie vers l’accueil, et l’API locale refuse les opérations ISO et la modification des superviseurs pour un compte étudiant. Les professeurs accèdent à toutes les rubriques ; l’espace ISO ne voit que les comptes créés sur ce même navigateur et ses rappels restent locaux.
+Les permissions de lecture du code et de déploiement sont séparées par job. Aucun job ne peut réécrire les sources ; aucun secret applicatif n’est ajouté. La version précédente reste accessible dans l’historique Git pour un retour arrière.
 
-**Code professeur public de démonstration : `XIDIAN-PROF-DEMO-2026`.** Ce code est volontairement un code de test, jamais un secret de production. GitHub Pages sert des fichiers publics : ce prototype ne fournit pas une authentification serveur ni une autorisation résistante à une modification du navigateur. Ne pas y saisir de véritables informations personnelles. Les mots de passe de démonstration sont dérivés avec PBKDF2-SHA256 (sel aléatoire, 210 000 itérations) et ne sont pas stockés en clair. Utiliser un mot de passe réservé à la démo.
+## Données et vérifications
 
-Pour la mise en service : déplacer les comptes et rôles sur le backend, vérifier l’email et le statut universitaire, remplacer le code partagé par des invitations nominatives révocables et contrôler les droits sur chaque requête serveur.
+255 profils de superviseurs, dont 252 entrées du répertoire anglais officiel SIE. Les champs non structurés des documents en images ne sont pas inventés ; disponibilité et informations à vérifier auprès de Xidian. Le filtre Master/PhD conserve une option explicite pour les profils au niveau non renseigné.
 
-## Annuaire des clubs — 18 octobre 2026
+La logique des dates utilise le jour civil de Pékin. Les seuils sont couverts par les tests, y compris à minuit, aux frontières des alertes et lors des années bissextiles. Le prototype ne constitue pas un conseil administratif officiel et n’envoie aucune notification externe.
 
-Les six clubs fictifs sont remplacés par les 13 clubs communiqués par le porteur du projet : International Basketball, Badminton, Volleyball, Tennis, Pickleball, Football, Boxing, Open Canvas, Singing, Street Dance, Chinese Dance, Filmmaker of Xidian (FOX), Math Club. Les noms chinois sont des traductions descriptives à valider, pas des dénominations officielles garanties.
-
-Fonctions : recherche avec alias et accents, filtres catégorie/format, favoris, fiches détaillées et préparation d’une première visite, brouillons de contact (expérience, jours disponibles et message à copier), coordonnées exclues par défaut, suivi manuel « contact effectué », agenda personnel en heure de Pékin et export ICS provisoire avec rappel un jour avant. Les rendez-vous ne sont jamais présentés comme confirmés. L’ancien agenda fictif est retiré ; les propositions locales sont conservées lors de la migration.
-
-Le catalogue public `#/clubs` permet de découvrir les clubs avant connexion, avec un espace de découverte local distinct des comptes. Les comptes connectés retrouvent leur suivi dans `#/campus` ; aucun accès ISO n’est ouvert au visiteur public.
-
-Source communautaire consultée le 18 octobre 2026 : https://freshman-guide-and-clubs.onrender.com/ et sa fiche basketball https://freshman-guide-and-clubs.onrender.com/basketball.html. Cette dernière indique Oussama Boumlik et le contact WeChat `lkhawa101`, reproduits avec leur source. Les autres responsables, groupes, horaires, lieux et frais ne sont pas inventés. Aucune photo ni texte éditorial du site de référence n’est recopié. Descriptifs et conseils de préparation rédigés pour ce prototype ; à valider avec les clubs.
-
-L’interface des clubs est traduite dans les 11 langues. Les descriptions et conseils détaillés des 13 nouveaux clubs sont rédigés en français, anglais et chinois, avec repli anglais et indication visible pour les autres langues. Les 17 tests couvrent notamment les 13 entrées, les recherches, la migration et les exports calendaires de Pékin.
-
-## Trois niveaux et inscriptions aux clubs — 18 octobre 2026
-
-- Étudiant : toutes les fonctions personnelles, inscription aux 13 clubs, suivi des décisions, annulation ou départ et réinscription après refus/annulation. Aucun espace ISO ni gestion des autres demandes.
-- Responsable de club : conserve les fonctions étudiantes et accède à `#/club-office` pour les seuls clubs attribués. Peut examiner les demandes, accepter/refuser avec une réponse et consulter les membres acceptés. Aucun accès ISO ni nomination de responsables.
-- Professeur : toutes les fonctions, tous les clubs, toutes les demandes, l’ISO et la nomination/révocation des responsables. Peut également s’inscrire comme membre ; personne ne valide sa propre demande.
-
-Nomination : l’étudiant crée d’abord son compte. Un professeur ouvre **Gestion des clubs → Responsables**, sélectionne le compte et coche ses clubs. Le compte utilise ensuite le portail **Responsable de club** avec son email/matricule et son mot de passe habituels. Retirer tous les clubs lui rend le rôle étudiant. Aucun code responsable partagé n’est nécessaire.
-
-L’inscription au club est maintenant un enregistrement local distinct du brouillon de message. Le formulaire demande le niveau d’expérience, une motivation/disponibilité et l’autorisation de partager les informations nécessaires avec les responsables. Le téléphone reste facultatif. Les états sont `pending`, `approved`, `declined`, `cancelled`, avec un historique daté et une décision visible dans **Mes inscriptions**. Les doublons actifs sont refusés, et une réinscription réutilise le dossier en conservant son historique.
-
-**Limite du prototype :** ces échanges fonctionnent entre comptes du même navigateur. Le stockage local et les contrôles du client ne constituent pas une authentification ou une autorisation serveur. Aucun message externe n’est envoyé et aucune donnée n’est synchronisée entre appareils. Pour ouvrir les inscriptions à de vrais étudiants sur plusieurs appareils, connecter ce modèle au backend et à une base de données, puis y appliquer les vérifications de rôle et d’appartenance au club.
-
-Les tests couvrent les trois rôles, l’absence d’ISO pour les responsables, la nomination/révocation, la portée des données par club, le consentement et la confidentialité du téléphone, les doublons, les décisions et la réinscription.
-
-## Journal des clubs et atelier éditorial
-
-Dans **Gestion des clubs → Articles et clubs**, un responsable rédige, enregistre un brouillon et publie dans ses seuls clubs. Les professeurs peuvent intervenir dans tous les clubs. Chaque article comporte une langue, un titre, un texte, jusqu’à six photos/vidéos et leurs légendes ; le texte saisi reste dans sa langue originale. Les articles publiés apparaissent dans **Vie de campus → Le journal** ; les brouillons restent dans l’atelier. Le lecteur affiche les images et un lecteur vidéo natif sans lecture automatique. Le texte est rendu comme texte React, sans HTML fourni par l’auteur.
-
-Le professeur peut également **Créer un club**, remplir sa présentation et choisir un étudiant déjà inscrit comme responsable. Le nouveau club rejoint immédiatement l’annuaire, les filtres, les inscriptions et l’atelier. Les nominations restent modifiables dans **Responsables**. Les 13 clubs initiaux ont chacun une illustration vectorielle originale intégrée au code, sans dépendance à une banque d’images externe.
-
-**Limite du prototype GitHub Pages :** clubs supplémentaires, comptes, demandes et articles sont propres au navigateur. Les médias sont dans IndexedDB ; les métadonnées sont dans localStorage. Rien n’est envoyé sur GitHub ni sur un stockage distant lorsqu’un responsable publie. Un autre appareil ne reçoit pas ces données. Effacer les données du site les supprime. Pour un usage réel, il faut une API avec authentification et contrôle des rôles côté serveur, une base partagée et un stockage de médias. L’interface n’annonce aucune validation ISO officielle des clubs créés.
-
-Formats acceptés : JPG, PNG, WebP, GIF (8 Mo par image), MP4, WebM, OGG (50 Mo par vidéo). Les SVG/HTML et formats non pris en charge sont refusés. Les légendes servent de description accessible. Les animations GSAP sont limitées aux éléments de la rubrique et désactivées avec `prefers-reduced-motion` ; aucun défilement forcé.
-
-Références fonctionnelles étudiées (18 octobre 2026), sans copie de leurs contenus ou visuels :
-- HKU SOConnect : https://soconnect.cedars.hku.hk/about-us — découverte des sociétés et actualités, accès étudiant et société distincts.
-- Imperial College Union : https://www.imperialcollegeunion.org/activities — annuaire et espace d’aide aux responsables, création de groupe.
-- NUS OSA / NUSync : https://osa.nus.edu.sg/experience-communities/clubs-and-groups-nusync/ — répertoire et ressources de gestion des membres.
+Voir [la revue de code](docs/TECHNICAL_REVIEW.md) et [l’historique fonctionnel](docs/HISTORY.md). Les contenus détaillés restent principalement FR/EN/ZH ; certaines autres langues utilisent un repli anglais annoncé dans l’interface.
