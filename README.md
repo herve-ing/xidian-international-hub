@@ -67,3 +67,15 @@ L’étudiant ne voit pas l’espace ISO. Une navigation directe vers `#/admin` 
 **Code professeur public de démonstration : `XIDIAN-PROF-DEMO-2026`.** Ce code est volontairement un code de test, jamais un secret de production. GitHub Pages sert des fichiers publics : ce prototype ne fournit pas une authentification serveur ni une autorisation résistante à une modification du navigateur. Ne pas y saisir de véritables informations personnelles. Les mots de passe de démonstration sont dérivés avec PBKDF2-SHA256 (sel aléatoire, 210 000 itérations) et ne sont pas stockés en clair. Utiliser un mot de passe réservé à la démo.
 
 Pour la mise en service : déplacer les comptes et rôles sur le backend, vérifier l’email et le statut universitaire, remplacer le code partagé par des invitations nominatives révocables et contrôler les droits sur chaque requête serveur.
+
+## Annuaire des clubs — 18 octobre 2026
+
+Les six clubs fictifs sont remplacés par les 13 clubs communiqués par le porteur du projet : International Basketball, Badminton, Volleyball, Tennis, Pickleball, Football, Boxing, Open Canvas, Singing, Street Dance, Chinese Dance, Filmmaker of Xidian (FOX), Math Club. Les noms chinois sont des traductions descriptives à valider, pas des dénominations officielles garanties.
+
+Fonctions : recherche avec alias et accents, filtres catégorie/format, favoris, fiches détaillées et préparation d’une première visite, brouillons de contact (expérience, jours disponibles et message à copier), coordonnées exclues par défaut, suivi manuel « contact effectué », agenda personnel en heure de Pékin et export ICS provisoire avec rappel un jour avant. Les rendez-vous ne sont jamais présentés comme confirmés. L’ancien agenda fictif est retiré ; les propositions locales sont conservées lors de la migration.
+
+Le catalogue public `#/clubs` permet de découvrir les clubs avant connexion, avec un espace de découverte local distinct des comptes. Les comptes connectés retrouvent leur suivi dans `#/campus` ; aucun accès ISO n’est ouvert au visiteur public.
+
+Source communautaire consultée le 18 octobre 2026 : https://freshman-guide-and-clubs.onrender.com/ et sa fiche basketball https://freshman-guide-and-clubs.onrender.com/basketball.html. Cette dernière indique Oussama Boumlik et le contact WeChat `lkhawa101`, reproduits avec leur source. Les autres responsables, groupes, horaires, lieux et frais ne sont pas inventés. Aucune photo ni texte éditorial du site de référence n’est recopié. Descriptifs et conseils de préparation rédigés pour ce prototype ; à valider avec les clubs.
+
+L’interface des clubs est traduite dans les 11 langues. Les descriptions et conseils détaillés des 13 nouveaux clubs sont rédigés en français, anglais et chinois, avec repli anglais et indication visible pour les autres langues. Les 17 tests couvrent notamment les 13 entrées, les recherches, la migration et les exports calendaires de Pékin.

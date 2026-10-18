@@ -13,5 +13,6 @@ test('account portal and role-specific navigation render without exposing ISO to
  const {default:Hub}=await server.ssrLoadModule('/hub.tsx');const account={id:'test',role:'student',displayName:'Demo Student',email:'demo@example.com',studentId:'DEMO',nationality:'Example',major:'Science',grade:'Master',phone:'+8613800000000'};
  for(const route of ['#/','#/admin']){window.location.hash=route;html=renderToStaticMarkup(React.createElement(Hub,{account,onSignOut(){},onAccountChange(){}}));assert.doesNotMatch(html,/href="#\/admin"/);assert.doesNotMatch(html,/Suivi des étudiants/);assert.match(html,/Se déconnecter/);}
  window.location.hash='#/';html=renderToStaticMarkup(React.createElement(Hub,{account:{...account,role:'professor'},onSignOut(){},onAccountChange(){}}));assert.match(html,/href="#\/admin"/);assert.match(html,/Professeur · accès complet/);
+ window.location.hash='#/clubs';html=renderToStaticMarkup(React.createElement(Portal));assert.match(html,/International Pickleball Club/);assert.match(html,/Filmmaker of Xidian/);assert.doesNotMatch(html,/href="#\/admin"/);assert.equal((html.match(/class="campus-club"/g)||[]).length,13);
  }finally{await server.close();}
 });

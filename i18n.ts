@@ -1,3 +1,4 @@
+import {clubTranslations} from './club-translations.ts';
 import {translations} from './translations.ts';
 export const languages=[['fr','Français'],['en','English'],['zh','中文'],['ar','العربية'],['es','Español'],['ln','Lingála'],['ru','Русский'],['tr','Türkçe'],['ary','الدارجة المغربية'],['tk','Türkmençe'],['ur','اردو']];
 const keys=['home','supervisors','visas','guide','chat','admin','settings','search','notifications','documents','add','save','cancel','all','profile','days','viewAll','welcome','help','favorites','language','export','renew','checklist','student'];
@@ -15,4 +16,4 @@ tk:['Umumy syn','Ylmy ýolbaşçylar','Xie-Visas','Geliş gollanmasy','Kömekçi
 ur:['جائزہ','نگران','Xie-Visas','آمد کی رہنمائی','معاون','ISO ڈیش بورڈ','ترتیبات','تلاش','اطلاعات','میری دستاویزات','شامل کریں','محفوظ کریں','منسوخ','سب','میرا پروفائل','دن','سب دیکھیں','شیڈیان میں خوش آمدید','مدد چاہیے؟','پسندیدہ','زبان','برآمد','تجدید کیسے کریں','میری فہرست','طالب علم']
 };
 export function translate(lang:string,key:string){if(key==='campus')return ({fr:'Vie de campus',en:'Campus life',zh:'校园生活',ar:'الحياة الجامعية',es:'Vida universitaria',ln:'Bomoi na campus',ru:'Жизнь кампуса',tr:'Kampüs hayatı',ary:'الحياة فالجامعة',tk:'Uniwersitet durmuşy',ur:'کیمپس کی زندگی'} as Record<string,string>)[lang]||'Campus life';const i=keys.indexOf(key);return i<0?key:(rows[lang]||rows.en)[i];}
-export function content(lang:string,fr:string,en:string,zh?:string){return lang==='fr'?fr:lang==='en'?en:lang==='zh'&&zh?zh:translations[lang]?.[en]||en;}
+export function content(lang:string,fr:string,en:string,zh?:string){return lang==='fr'?fr:lang==='en'?en:lang==='zh'&&zh?zh:clubTranslations[lang]?.[en]||translations[lang]?.[en]||en;}
