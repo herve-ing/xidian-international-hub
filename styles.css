@@ -26,3 +26,5 @@
 @media(max-width:1050px){.journal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.studio-heading{align-items:flex-start;flex-direction:column}.studio-row{align-items:flex-start;flex-direction:column}}
 @media(max-width:640px){.journal-grid,.journal-filters,.editor-media-grid{grid-template-columns:1fr}.studio-heading{padding:22px 0}.studio-guide,.studio-row{padding:20px}.campus-toolbar [role=tablist]{gap:4px}.campus-toolbar [role=tab]{font-size:12px;padding:12px 9px}.journal-empty{padding:28px 20px}.club-art{min-height:190px}.studio-heading .row{width:100%}.studio-heading .row .button{flex:1}.office-tabs button{font-size:12px;padding:12px}.club-journal .section-heading{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){.campus-club .club-visual,.journal-card{transition:none}.journal-card:hover,.campus-club:hover .club-visual{transform:none}}
+
+.club-art:after{content:none}
