@@ -8,7 +8,7 @@ Object.defineProperty(globalThis,'localStorage',{value:{getItem:k=>storage.get(k
 Object.defineProperty(globalThis,'sessionStorage',{value:{getItem:()=>null},configurable:true});
 Object.defineProperty(globalThis,'window',{value:{location:{hash:'#/'}},configurable:true});
 test('account portal and role-specific navigation render without exposing ISO to students',async()=>{
- const server=await createServer({root:new URL('.',import.meta.url).pathname,server:{middlewareMode:true},appType:'custom'});
+ const server=await createServer({root:new URL('.',import.meta.url).pathname,server:{middlewareMode:true,hmr:false},appType:'custom'});
  try{const {default:Portal}=await server.ssrLoadModule('/account-portal.tsx');let html=renderToStaticMarkup(React.createElement(Portal));assert.match(html,/Email ou matricule étudiant/);assert.match(html,/Professeur/);assert.match(html,/Responsable de club/);assert.doesNotMatch(html,/href="#\/admin"/);
  const {default:Hub}=await server.ssrLoadModule('/hub.tsx');const account={id:'test',role:'student',displayName:'Demo Student',email:'demo@example.com',studentId:'DEMO',nationality:'Example',major:'Science',grade:'Master',phone:'+8613800000000'};
  for(const route of ['#/','#/admin','#/club-office']){window.location.hash=route;html=renderToStaticMarkup(React.createElement(Hub,{account,onSignOut(){},onAccountChange(){}}));assert.doesNotMatch(html,/href="#\/admin"/);assert.doesNotMatch(html,/Suivi des étudiants/);assert.doesNotMatch(html,/href="#\/club-office"/);assert.match(html,/Se déconnecter/);}

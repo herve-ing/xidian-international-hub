@@ -93,3 +93,18 @@ L’inscription au club est maintenant un enregistrement local distinct du broui
 **Limite du prototype :** ces échanges fonctionnent entre comptes du même navigateur. Le stockage local et les contrôles du client ne constituent pas une authentification ou une autorisation serveur. Aucun message externe n’est envoyé et aucune donnée n’est synchronisée entre appareils. Pour ouvrir les inscriptions à de vrais étudiants sur plusieurs appareils, connecter ce modèle au backend et à une base de données, puis y appliquer les vérifications de rôle et d’appartenance au club.
 
 Les tests couvrent les trois rôles, l’absence d’ISO pour les responsables, la nomination/révocation, la portée des données par club, le consentement et la confidentialité du téléphone, les doublons, les décisions et la réinscription.
+
+## Journal des clubs et atelier éditorial
+
+Dans **Gestion des clubs → Articles et clubs**, un responsable rédige, enregistre un brouillon et publie dans ses seuls clubs. Les professeurs peuvent intervenir dans tous les clubs. Chaque article comporte une langue, un titre, un texte, jusqu’à six photos/vidéos et leurs légendes ; le texte saisi reste dans sa langue originale. Les articles publiés apparaissent dans **Vie de campus → Le journal** ; les brouillons restent dans l’atelier. Le lecteur affiche les images et un lecteur vidéo natif sans lecture automatique. Le texte est rendu comme texte React, sans HTML fourni par l’auteur.
+
+Le professeur peut également **Créer un club**, remplir sa présentation et choisir un étudiant déjà inscrit comme responsable. Le nouveau club rejoint immédiatement l’annuaire, les filtres, les inscriptions et l’atelier. Les nominations restent modifiables dans **Responsables**. Les 13 clubs initiaux ont chacun une illustration vectorielle originale intégrée au code, sans dépendance à une banque d’images externe.
+
+**Limite du prototype GitHub Pages :** clubs supplémentaires, comptes, demandes et articles sont propres au navigateur. Les médias sont dans IndexedDB ; les métadonnées sont dans localStorage. Rien n’est envoyé sur GitHub ni sur un stockage distant lorsqu’un responsable publie. Un autre appareil ne reçoit pas ces données. Effacer les données du site les supprime. Pour un usage réel, il faut une API avec authentification et contrôle des rôles côté serveur, une base partagée et un stockage de médias. L’interface n’annonce aucune validation ISO officielle des clubs créés.
+
+Formats acceptés : JPG, PNG, WebP, GIF (8 Mo par image), MP4, WebM, OGG (50 Mo par vidéo). Les SVG/HTML et formats non pris en charge sont refusés. Les légendes servent de description accessible. Les animations GSAP sont limitées aux éléments de la rubrique et désactivées avec `prefers-reduced-motion` ; aucun défilement forcé.
+
+Références fonctionnelles étudiées (18 octobre 2026), sans copie de leurs contenus ou visuels :
+- HKU SOConnect : https://soconnect.cedars.hku.hk/about-us — découverte des sociétés et actualités, accès étudiant et société distincts.
+- Imperial College Union : https://www.imperialcollegeunion.org/activities — annuaire et espace d’aide aux responsables, création de groupe.
+- NUS OSA / NUSync : https://osa.nus.edu.sg/experience-communities/clubs-and-groups-nusync/ — répertoire et ressources de gestion des membres.

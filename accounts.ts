@@ -25,3 +25,5 @@ export function workspaceKey(a:Account|null=currentAccount()){return a?'xidian-w
 export function canManageClubs(a:Account|null){return a?.role==='professor'||a?.role==='club_leader'&&!!a.clubIds?.length;}
 export function managedClubIds(a:Account|null){return a?.role==='professor'?clubs.map(c=>c.id):a?.role==='club_leader'?(a.clubIds||[]):[];}
 export function assignClubLeadership(accountId:string,clubIds:string[]){if(!canAccessISO(currentAccount()))throw new Error('forbidden');if(clubIds.some(id=>!clubs.some(c=>c.id===id)))throw new Error('club');const all=accounts(),index=all.findIndex(a=>a.id===accountId);if(index<0)throw new Error('student');all[index]={...all[index],role:clubIds.length?'club_leader':'student',clubIds:[...new Set(clubIds)]};localStorage.setItem(accountsKey,JSON.stringify(all));return publicAccount(all[index]);}
+
+export function clubLeaderNames(clubId:string){return studentAccounts().filter(a=>a.role==='club_leader'&&a.clubIds?.includes(clubId)).map(a=>a.displayName);}
