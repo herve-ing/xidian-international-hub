@@ -1,0 +1,3473 @@
+import { usePageMotion } from './use-page-motion';
+('use client');
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, usePathname, useRouter } from './navigation';
+import { prototypeRequest } from './prototype-api';
+
+import { canAccessISO, canManageClubs, updateAccountProfile, type Account } from './accounts';
+import ClubOffice from './club-office';
+import CampusLife from './campus';
+import { matchesDegree } from './supervisor-filter';
+import { Icon, Campus } from './icons';
+import { languages, translate, content } from './i18n';
+import { remainingDays, urgency, beijingDate } from './domain';
+import { supervisors, directoryMeta } from './supervisors';
+
+type Doc = { id: string; type: string; label: string; expiry: string; issueDate?: string };
+type Alert = {
+  id: string;
+  message: string;
+  sentAt: string;
+  status: string;
+  channel: string;
+  documentType: string;
+};
+type Profile = {
+  displayName: string;
+  nationality: string;
+  studentId: string;
+  program: string;
+  major?: string;
+  grade?: string;
+  phone?: string;
+  email?: string;
+  arrivalDate: string;
+  registrationDate: string;
+  checklist?: string;
+  preferences?: string;
+};
+type State = {
+  user: { name: string; email: string; admin: boolean };
+  profile: Profile | null;
+  documents: Doc[];
+  alerts: Alert[];
+  mode: string;
+};
+const emptyProfile: Profile = {
+  displayName: '',
+  nationality: '',
+  studentId: '',
+  program: 'Master',
+  arrivalDate: '',
+  registrationDate: '',
+};
+const paths = [
+  '/',
+  '/supervisors',
+  '/visas',
+  '/guide',
+  '/chat',
+  '/campus',
+  '/club-office',
+  '/admin',
+  '/settings',
+];
+const navKeys = [
+  'home',
+  'supervisors',
+  'visas',
+  'guide',
+  'chat',
+  'campus',
+  'clubOffice',
+  'admin',
+  'settings',
+];
+const navIcons = [
+  'home',
+  'cap',
+  'shield',
+  'compass',
+  'chat',
+  'globe',
+  'users',
+  'users',
+  'settings',
+];
+const day = (n: number) =>
+  new Date(Date.parse(beijingDate() + 'T12:00:00Z') + n * 86400000).toISOString().slice(0, 10);
+const seedDocs = (): Doc[] => [
+  {
+    id: 'demo-residence',
+    type: 'residence',
+    label: 'Permis de séjour',
+    expiry: day(23),
+    issueDate: day(-342),
+  },
+  {
+    id: 'demo-passport',
+    type: 'passport',
+    label: 'Passeport',
+    expiry: day(348),
+    issueDate: day(-1200),
+  },
+  {
+    id: 'demo-insurance',
+    type: 'insurance',
+    label: 'Assurance santé',
+    expiry: day(64),
+    issueDate: day(-301),
+  },
+];
+const tasks = [
+  ['Préparer les documents de voyage', 'Prepare travel documents', '准备旅行证件'],
+  ['Rejoindre le campus', 'Travel to campus', '前往校园'],
+  ['Enregistrer son hébergement', 'Register accommodation', '办理住宿登记'],
+  ['S’inscrire auprès de l’ISO', 'Complete ISO registration', '到国际学生办公室报到'],
+  ['Vérifier son assurance', 'Check health insurance', '核验医疗保险'],
+  ['Préparer le permis de séjour', 'Prepare residence permit application', '准备居留许可申请'],
+  ['Ouvrir un compte bancaire', 'Open a bank account', '办理银行账户'],
+  ['Activer son numéro chinois', 'Activate a Chinese phone number', '办理中国手机号码'],
+  ['Découvrir les services du campus', 'Explore campus services', '了解校园服务'],
+];
+const taskDescriptions = [
+  [
+    'Passeport, visa, lettre d’admission, JW201/JW202 si applicable : gardez les originaux et des copies.',
+    'Keep your passport, visa, admission notice and JW201/JW202 if applicable, plus copies.',
+    '准备护照、签证、录取通知书及适用的JW201/JW202表和复印件。',
+  ],
+  [
+    'Confirmez votre campus et votre logement avec l’ISO avant de réserver votre trajet.',
+    'Confirm your campus and accommodation with ISO before booking your journey.',
+    '出发前请向国际学生办公室确认校区和住宿。',
+  ],
+  [
+    'Hors hôtel : normalement sous 24 h après l’installation. L’hôtel enregistre ses clients. Vérifiez les modalités officielles.',
+    'Outside hotels: normally within 24 hours of arrival at your accommodation. Hotels register their guests. Check the official procedure.',
+    '旅馆以外的住所一般应在入住后24小时内办理登记。旅馆为住客办理。请核验官方规定。',
+  ],
+  [
+    'Présentez vos documents originaux et vérifiez le calendrier d’inscription communiqué par Xidian.',
+    'Bring original documents and follow Xidian’s published enrollment schedule.',
+    '携带证件原件，按学校公布的报到时间办理。',
+  ],
+  [
+    'Vérifiez la couverture, la date de fin et la procédure de prise en charge de votre contrat.',
+    'Check your policy coverage, expiry date and claims procedure.',
+    '核实保险范围、到期日期及理赔流程。',
+  ],
+  [
+    'Si votre visa l’exige, déposez la demande dans les 30 jours après l’entrée. Confirmez la liste des pièces avec l’ISO.',
+    'If required by your visa, apply within 30 days of entry. Confirm the document checklist with ISO.',
+    '如签证要求，应在入境后30日内申请居留许可。请向国际学生办公室确认材料。',
+  ],
+  [
+    'Demandez à la banque les pièces nécessaires ; les exigences peuvent varier selon l’agence.',
+    'Ask your chosen bank which documents it requires; branch requirements may vary.',
+    '向银行确认所需材料，各网点要求可能不同。',
+  ],
+  [
+    'Présentez les documents demandés par l’opérateur et vérifiez la compatibilité de votre téléphone.',
+    'Bring the operator’s required documents and check your phone’s compatibility.',
+    '向运营商提交所需证件，并确认手机兼容性。',
+  ],
+  [
+    'Repérez la bibliothèque, la restauration, les services médicaux et le bureau international.',
+    'Locate the library, dining halls, medical services and international office.',
+    '了解图书馆、食堂、医疗服务和国际学生办公室的位置。',
+  ],
+];
+function Modal({
+  title,
+  children,
+  onClose,
+}: {
+  title: string;
+  children: React.ReactNode;
+  onClose: () => void;
+}) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const d = ref.current;
+    d?.showModal();
+    return () => d?.close();
+  }, []);
+  return (
+    <dialog
+      ref={ref}
+      className="modal"
+      onCancel={onClose}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <header>
+        <h2>{title}</h2>
+        <button
+          className="icon-button"
+          onClick={onClose}
+          aria-label={content(document.documentElement.lang, 'Fermer', 'Close', '关闭')}
+        >
+          <Icon name="close" />
+        </button>
+      </header>
+      {children}
+    </dialog>
+  );
+}
+function download(text: string, name: string, type: string) {
+  const u = URL.createObjectURL(new Blob([text], { type }));
+  const a = document.createElement('a');
+  a.href = u;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(u), 2000);
+}
+function csv(rows: unknown[][]) {
+  return (
+    '\uFEFF' +
+    rows
+      .map((r) =>
+        r
+          .map((v) => {
+            let s = String(v ?? '');
+            if (/^[=+@\-\t\r]/.test(s)) s = "'" + s;
+            return '"' + s.replaceAll('"', '""') + '"';
+          })
+          .join(','),
+      )
+      .join('\r\n')
+  );
+}
+
+export default function Hub({
+  account,
+  onSignOut,
+  onAccountChange,
+}: {
+  account: Account;
+  onSignOut: () => void;
+  onAccountChange: (a: Account) => void;
+}) {
+  const pathname = usePathname() || '/';
+  const router = useRouter();
+  const isProfessor = canAccessISO(account),
+    mayManageClubs = canManageClubs(account);
+  const page =
+    paths.includes(pathname) &&
+    !(pathname === '/admin' && !isProfessor) &&
+    !(pathname === '/club-office' && !mayManageClubs)
+      ? pathname
+      : '/';
+  const [lang, setLang] = useState(() => {
+      try {
+        return localStorage.getItem('xidian-locale') || 'fr';
+      } catch {
+        return 'fr';
+      }
+    }),
+    [mobile, setMobile] = useState(false),
+    [demo, setDemo] = useState(false),
+    [live, setLive] = useState<State | null>(null),
+    [loading, setLoading] = useState(false),
+    [loadError, setLoadError] = useState('');
+  const [docs, setDocs] = useState<Doc[]>([]),
+    [checked, setChecked] = useState<number[]>([0, 1, 2]),
+    [favorites, setFavorites] = useState<string[]>([]),
+    [savedFilter, setSavedFilter] = useState<any>(null),
+    [profile, setProfile] = useState<Profile>(emptyProfile);
+  const [toast, setToast] = useState(''),
+    [modal, setModal] = useState(''),
+    [editDoc, setEditDoc] = useState<Doc | null>(null),
+    [selected, setSelected] = useState<(typeof supervisors)[number] | null>(null),
+    [busy, setBusy] = useState(false);
+  const [facultyPage, setFacultyPage] = useState(1);
+  const [includeUnknown, setIncludeUnknown] = useState(true);
+  const [roster, setRoster] = useState(supervisors),
+    [editFaculty, setEditFaculty] = useState<(typeof supervisors)[number] | null>(null);
+  const [query, setQuery] = useState(''),
+    [school, setSchool] = useState(''),
+    [level, setLevel] = useState(''),
+    [superLang, setSuperLang] = useState(''),
+    [onlyFav, setOnlyFav] = useState(false),
+    [globalSearch, setGlobalSearch] = useState('');
+  const [chatInput, setChatInput] = useState(''),
+    [messages, setMessages] = useState<{ role: string; text: string; source?: string }[]>([]),
+    [chatBusy, setChatBusy] = useState(false);
+  const [adminData, setAdminData] = useState<any>(null),
+    [adminQuery, setAdminQuery] = useState(''),
+    [adminUrgency, setAdminUrgency] = useState(''),
+    [adminNationality, setAdminNationality] = useState(''),
+    [chosenStudents, setChosenStudents] = useState<string[]>([]);
+  const t = (key: string) => translate(lang, key);
+  const c = (fr: string, en: string, zh?: string) => content(lang, fr, en, zh);
+  const navLabel = (i: number) =>
+    navKeys[i] === 'clubOffice'
+      ? c('Gestion des clubs', 'Club management', '社团管理')
+      : t(navKeys[i]);
+  const activeDocs = demo ? docs : live?.documents || [];
+  const activeProfile = demo ? profile : live?.profile || emptyProfile;
+  const activeAlerts: Alert[] = demo
+    ? [
+        {
+          id: 'example-alert',
+          message: c(
+            'Votre permis de séjour expire dans 23 jours. Préparez votre renouvellement.',
+            'Your residence permit expires in 23 days. Prepare your renewal.',
+            '您的居留许可将在23天后到期，请准备续签。',
+          ),
+          sentAt: new Date().toISOString(),
+          status: 'unread',
+          channel: 'in-app',
+          documentType: 'residence',
+        },
+      ]
+    : live?.alerts || [];
+  const unread = activeAlerts.filter((a) => a.status === 'unread').length;
+  const sorted = [...activeDocs].sort((a, b) => a.expiry.localeCompare(b.expiry));
+  const next = sorted[0];
+  const nextDays = next ? remainingDays(next.expiry) : null;
+  const showToast = (s: string) => {
+    setToast(s);
+  };
+  async function request(url: string, method = 'GET', body?: unknown): Promise<any> {
+    return prototypeRequest(url, method, body);
+  }
+  async function load() {
+    setLoading(true);
+    setLoadError('');
+    try {
+      const data = await request('/api/state');
+      setLive(data);
+      if (!demo) {
+        setChecked(JSON.parse(data.profile?.checklist || '[]'));
+        const p = JSON.parse(data.profile?.preferences || '{}');
+        setFavorites(p.favorites || []);
+        setSavedFilter(p.savedFilter || null);
+      }
+      return data;
+    } catch (e) {
+      setLoadError((e as Error).message);
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    if ((pathname === '/admin' && !isProfessor) || (pathname === '/club-office' && !mayManageClubs))
+      router.push('/');
+  }, [pathname, isProfessor, mayManageClubs]);
+  useEffect(() => {
+    setDocs(seedDocs());
+    request('/api/supervisors')
+      .then((d) => setRoster(d.items))
+      .catch(() => {});
+    const l = localStorage.getItem('xidian-locale');
+    if (l && languages.some((x) => x[0] === l)) setLang(l);
+    load();
+  }, []);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['ar', 'ary', 'ur'].includes(lang) ? 'rtl' : 'ltr';
+    localStorage.setItem('xidian-locale', lang);
+  }, [lang]);
+  useEffect(() => {
+    if (!toast) return;
+    const id = setTimeout(() => setToast(''), 5000);
+    return () => clearTimeout(id);
+  }, [toast]);
+  useEffect(() => {
+    setMobile(false);
+    if (page === '/supervisors') {
+      const q = new URLSearchParams(window.location.hash.split('?')[1] || '').get('q');
+      if (q) setQuery(q);
+    }
+  }, [page]);
+  useEffect(() => {
+    if (page === '/admin' && !demo && live?.user.admin) {
+      request('/api/admin')
+        .then(setAdminData)
+        .catch((e) => showToast(e.message));
+    }
+  }, [page, demo, live?.user.admin]);
+  const motionRoot = useRef<HTMLDivElement>(null);
+  usePageMotion(page, motionRoot);
+  async function activate() {
+    let data = live;
+    if (!data) data = await load();
+    if (!data) {
+      setModal('signin');
+      return;
+    }
+    setDemo(false);
+    setChecked(JSON.parse(data.profile?.checklist || '[]'));
+    const p = JSON.parse(data.profile?.preferences || '{}');
+    setFavorites(p.favorites || []);
+    setSavedFilter(p.savedFilter || null);
+  }
+  async function savePrefs(nextFavorites: string[], filter: any = savedFilter) {
+    setFavorites(nextFavorites);
+    setSavedFilter(filter);
+    if (!demo)
+      try {
+        await request('/api/preferences', 'PUT', {
+          favorites: nextFavorites,
+          savedFilter: filter,
+          locale: lang,
+        });
+        if (live)
+          setLive({
+            ...live,
+            profile: {
+              ...(live.profile || emptyProfile),
+              preferences: JSON.stringify({ favorites: nextFavorites, savedFilter: filter }),
+            },
+          });
+      } catch (e) {
+        showToast((e as Error).message);
+      }
+  }
+  async function toggleTask(index: number) {
+    const previous = checked;
+    const items = checked.includes(index)
+      ? checked.filter((x) => x !== index)
+      : [...checked, index];
+    setChecked(items);
+    if (!demo)
+      try {
+        await request('/api/checklist', 'PUT', { items });
+      } catch (e) {
+        setChecked(previous);
+        showToast((e as Error).message);
+      }
+  }
+  async function submitDoc(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setBusy(true);
+    const data = Object.fromEntries(new FormData(e.currentTarget)) as any;
+    try {
+      if (data.issueDate && data.issueDate > data.expiry)
+        throw new Error(
+          c('La date de délivrance doit précéder l’expiration.', 'Issue date must precede expiry.'),
+        );
+      if (demo) {
+        setDocs((old) =>
+          editDoc
+            ? old.map((d) => (d.id === editDoc.id ? { ...editDoc, ...data } : d))
+            : [...old, { ...data, id: crypto.randomUUID() }],
+        );
+      } else {
+        await request('/api/documents', 'POST', { ...data, id: editDoc?.id });
+        await load();
+      }
+      setModal('');
+      showToast(
+        demo
+          ? c('Document d’exemple enregistré.', 'Example document saved.')
+          : c(
+              'Document enregistré sur cet appareil.',
+              'Document saved in this browser.',
+              '文件已保存。',
+            ),
+      );
+    } catch (e) {
+      showToast((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function removeDoc(d: Doc) {
+    setBusy(true);
+    try {
+      if (demo) setDocs((old) => old.filter((x) => x.id !== d.id));
+      else {
+        await request('/api/documents', 'DELETE', { id: d.id });
+        await load();
+      }
+      setModal('');
+      showToast(c('Document supprimé.', 'Document removed.'));
+    } catch (e) {
+      showToast((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function submitProfile(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setBusy(true);
+    const p = Object.fromEntries(new FormData(e.currentTarget)) as any;
+    try {
+      if (demo) setProfile({ ...emptyProfile, ...p });
+      else {
+        const updated = updateAccountProfile({ ...p, grade: p.program });
+        onAccountChange(updated);
+        await request('/api/profile', 'PUT', { ...p, email: updated.email, grade: p.program });
+        await load();
+      }
+      setModal('');
+      showToast(c('Profil enregistré.', 'Profile saved.'));
+    } catch (e) {
+      showToast((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  const date = (s: string) =>
+    new Intl.DateTimeFormat(lang === 'ary' ? 'ar-MA' : lang === 'ln' ? 'fr' : lang, {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      timeZone: 'Asia/Shanghai',
+    }).format(new Date(s + 'T12:00:00Z'));
+  const docTitle = (d: Doc) =>
+    ({
+      residence: c('Permis de séjour', 'Residence permit', '居留许可'),
+      passport: c('Passeport', 'Passport', '护照'),
+      visa: c('Visa étudiant', 'Student visa', '学生签证'),
+      insurance: c('Assurance santé', 'Health insurance', '医疗保险'),
+    })[d.type] || d.label;
+  const status = (days: number) =>
+    days < 0
+      ? c('Expiré', 'Expired', '已到期')
+      : days < 7
+        ? c('Urgent', 'Urgent', '紧急')
+        : days < 30
+          ? c('À renouveler', 'Renew soon', '即将到期')
+          : days <= 90
+            ? c('À anticiper', 'Plan ahead', '提前准备')
+            : c('À jour', 'Up to date', '有效');
+  const addDoc = () => {
+    setEditDoc(null);
+    setModal('document');
+  };
+  function calendar() {
+    if (!activeDocs.length) {
+      showToast(
+        c('Ajoutez un document pour exporter les rappels.', 'Add a document to export reminders.'),
+      );
+      return;
+    }
+    const esc = (s: string) =>
+      s
+        .replaceAll('\\', '\\\\')
+        .replaceAll(';', '\\;')
+        .replaceAll(',', '\\,')
+        .replaceAll('\n', '\\n');
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//XidianHub//XieVisas//FR',
+      'CALSCALE:GREGORIAN',
+    ];
+    activeDocs.forEach((d) => {
+      lines.push(
+        'BEGIN:VEVENT',
+        `UID:${d.id}-${d.expiry}@xidianhub.local`,
+        `DTSTAMP:${new Date()
+          .toISOString()
+          .replace(/[-:]/g, '')
+          .replace(/\.\d{3}/, '')}`,
+        `DTSTART;VALUE=DATE:${d.expiry.replaceAll('-', '')}`,
+        `SUMMARY:${esc('Xie-Visas · ' + docTitle(d))}`,
+        'DESCRIPTION:Check your document and contact ISO before expiry.',
+      );
+      [30, 15, 7, 1].forEach((n) =>
+        lines.push(
+          'BEGIN:VALARM',
+          `TRIGGER:-P${n}D`,
+          'ACTION:DISPLAY',
+          `DESCRIPTION:Document expires in ${n} days`,
+          'END:VALARM',
+        ),
+      );
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    download(lines.join('\r\n'), 'Xie-Visas-rappels.ics', 'text/calendar');
+    showToast(
+      c(
+        'Importez le fichier dans votre calendrier pour activer les rappels.',
+        'Import the file into your calendar to enable reminders.',
+      ),
+    );
+  }
+  async function sendChat(question: string) {
+    if (!question.trim() || chatBusy) return;
+    setChatInput('');
+    setMessages((m) => [...m, { role: 'user', text: question }]);
+    setChatBusy(true);
+    try {
+      const a = await request('/api/chatbot', 'POST', { question, lang });
+      setMessages((m) => [...m, { role: 'assistant', text: a.answer, source: a.source }]);
+    } catch (e) {
+      setMessages((m) => [...m, { role: 'assistant', text: (e as Error).message }]);
+    } finally {
+      setChatBusy(false);
+    }
+  }
+  const emailText = selected
+    ? `Subject: Prospective ${level && level !== 'unconfirmed' ? level : 'Master / PhD'} student — Research supervision inquiry\n\nDear ${selected.title === 'Professor' ? 'Professor ' : ''}${selected.name},\n\nMy name is [your name], and I am a [degree / major] student at [university]. I am interested in applying for the [program] at Xidian University.\n\nMy research interests include [specific topic], and I would like to explore how my proposed research on [project] relates to your work in ${selected.research[0]?.toLowerCase() || '[research area from the official profile]'}.\n\nAre you currently accepting international students for [intake]? Could you also confirm the language of supervision and application requirements?\n\nI have attached my CV, transcripts and research proposal for your review.\n\nThank you for your time and consideration.\n\nBest regards,\n[your name]\n[email / contact]`
+    : '';
+  useEffect(() => setFacultyPage(1), [query, school, level, superLang, onlyFav, includeUnknown]);
+  const filtered = roster.filter(
+    (s) =>
+      (!query ||
+        [s.name, s.zh, s.school, s.schoolFr, ...s.research, ...s.researchFr]
+          .join(' ')
+          .toLowerCase()
+          .includes(query.toLowerCase())) &&
+      (!school || s.school === school || s.schools?.includes(school)) &&
+      matchesDegree(s, level, includeUnknown) &&
+      (!superLang || superLang === 'unconfirmed') &&
+      (!onlyFav || favorites.includes(s.id)),
+  );
+  if (level && level !== 'unconfirmed')
+    filtered.sort((a, b) => Number(b.levels.includes(level)) - Number(a.levels.includes(level)));
+  const totalFacultyPages = Math.max(1, Math.ceil(filtered.length / 18));
+  const currentFacultyPage = Math.min(facultyPage, totalFacultyPages);
+  const shownFaculty = filtered.slice((currentFacultyPage - 1) * 18, currentFacultyPage * 18);
+  const demoStudents = [
+    {
+      userId: 'example-1',
+      displayName: 'Étudiant exemple A',
+      nationality: 'Congo',
+      program: 'Master',
+      studentId: 'DEMO-001',
+      expiry: day(5),
+    },
+    {
+      userId: 'example-2',
+      displayName: 'Étudiant exemple B',
+      nationality: 'Maroc',
+      program: 'PhD',
+      studentId: 'DEMO-002',
+      expiry: day(14),
+    },
+    {
+      userId: 'example-3',
+      displayName: 'Étudiant exemple C',
+      nationality: 'Pakistan',
+      program: 'Master',
+      studentId: 'DEMO-003',
+      expiry: day(47),
+    },
+    {
+      userId: 'example-4',
+      displayName: 'Étudiant exemple D',
+      nationality: 'Russie',
+      program: 'PhD',
+      studentId: 'DEMO-004',
+      expiry: day(126),
+    },
+  ];
+  const students = (
+    demo
+      ? demoStudents
+      : (adminData?.students || []).map((p: any) => ({
+          ...p,
+          expiry:
+            adminData.documents
+              .filter((d: any) => d.userId === p.userId && ['visa', 'residence'].includes(d.type))
+              .sort((a: any, b: any) => a.expiry.localeCompare(b.expiry))[0]?.expiry || null,
+        }))
+  )
+    .filter(
+      (s: any) =>
+        (!adminQuery ||
+          [s.displayName, s.studentId, s.nationality]
+            .join(' ')
+            .toLowerCase()
+            .includes(adminQuery.toLowerCase())) &&
+        (!adminNationality || s.nationality === adminNationality) &&
+        (!adminUrgency || (s.expiry && urgency(remainingDays(s.expiry)) === adminUrgency)),
+    )
+    .sort((a: any, b: any) => (a.expiry || '9999').localeCompare(b.expiry || '9999'));
+  async function remind() {
+    if (!chosenStudents.length) {
+      showToast(c('Sélectionnez au moins un étudiant.', 'Select at least one student.'));
+      return;
+    }
+    if (demo) {
+      showToast(c('Démonstration : aucun rappel n’a été envoyé.', 'Demo: no reminders were sent.'));
+      return;
+    }
+    setBusy(true);
+    try {
+      const r = await request('/api/admin', 'POST', { studentIds: chosenStudents });
+      showToast(
+        c(
+          `${r.created} rappel(s) ajoutés dans les espaces étudiants.`,
+          `${r.created} in-app reminder(s) created.`,
+        ),
+      );
+      setChosenStudents([]);
+    } catch (e) {
+      showToast((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  function docCard(d: Doc) {
+    const n = remainingDays(d.expiry);
+    return (
+      <article className="doc-card reveal" key={d.id}>
+        <div className="row between">
+          <span className={'document-icon ' + urgency(n)}>
+            <Icon
+              name={
+                d.type === 'residence'
+                  ? 'shield'
+                  : d.type === 'passport'
+                    ? 'globe'
+                    : d.type === 'insurance'
+                      ? 'plus'
+                      : 'file'
+              }
+              size={24}
+            />
+          </span>
+          <span className={'status ' + urgency(n)}>
+            <span />
+            {status(n)}
+          </span>
+        </div>
+        <h3>{docTitle(d)}</h3>
+        <p className="muted small">
+          {d.label && !d.id.startsWith('demo-') && d.label !== docTitle(d)
+            ? d.label
+            : c('Expiration le', 'Expires on', '到期日期')}{' '}
+          {date(d.expiry)}
+        </p>
+        <div className="doc-count">
+          <strong>{Math.abs(n)}</strong>
+          <span>{n < 0 ? c('jours de retard', 'days overdue', '逾期天数') : t('days')}</span>
+        </div>
+        <div className="progress">
+          <i
+            className={urgency(n)}
+            style={{ width: Math.max(3, Math.min(100, (n / 365) * 100)) + '%' }}
+          />
+        </div>
+        <button
+          className="text-button"
+          onClick={() => {
+            setEditDoc(d);
+            setModal('document');
+          }}
+        >
+          {c('Gérer ce document', 'Manage document', '管理文件')}
+          <Icon name="arrow" size={16} />
+        </button>
+      </article>
+    );
+  }
+  return (
+    <div ref={motionRoot} className={'app ' + (mobile ? 'menu-open' : '')}>
+      <a href="#main" className="skip-link">
+        {c('Aller au contenu', 'Skip to content', '跳至内容')}
+      </a>
+      {mobile && (
+        <button
+          className="sidebar-overlay"
+          aria-label={c('Fermer le menu', 'Close menu', '关闭菜单')}
+          onClick={() => setMobile(false)}
+        />
+      )}
+      <aside className="sidebar">
+        <Link className="brand" href="/">
+          <span className="brand-mark">
+            X<span />
+          </span>
+          <span>
+            XIDIAN<span>INTERNATIONAL HUB</span>
+          </span>
+        </Link>
+        <div className="workspace">
+          <span className="workspace-dot" />{' '}
+          {c('Votre campus, votre communauté', 'Your campus, your community', '你的校园，你的社区')}
+        </div>
+        <nav aria-label={c('Navigation principale', 'Main navigation', '主导航')}>
+          {paths.map((p, i) =>
+            (p === '/admin' && !isProfessor) || (p === '/club-office' && !mayManageClubs) ? null : (
+              <React.Fragment key={p}>
+                {i === 6 && <div className="nav-divider" />}
+                <Link
+                  href={p}
+                  className={'nav-link ' + (page === p ? 'active' : '')}
+                  aria-current={page === p ? 'page' : undefined}
+                >
+                  <Icon name={navIcons[i]} />
+                  <span>{navLabel(i)}</span>
+                  {i === 2 && <span className="nav-new">Xie</span>}
+                  {i === 4 && <span className="small-dot" />}
+                </Link>
+              </React.Fragment>
+            ),
+          )}
+        </nav>
+        <div className="sidebar-bottom">
+          <div className="help-card">
+            <span className="help-icon">
+              <Icon name="chat" />
+            </span>
+            <h3>{t('help')}</h3>
+            <p>
+              {c(
+                'Un point de départ pour chaque question.',
+                'A starting point for every question.',
+                '为每个问题找到起点。',
+              )}
+            </p>
+            <Link href="/chat">
+              {c('Parlons-en', 'Let’s talk', '聊一聊')}
+              <Icon name="arrow" size={16} />
+            </Link>
+          </div>
+          <button className="sidebar-profile" onClick={() => setModal('profile')}>
+            <span className="avatar">
+              {(activeProfile.displayName || live?.user.name || 'X').slice(0, 1).toUpperCase()}
+            </span>
+            <span>
+              <strong>{activeProfile.displayName || account.displayName}</strong>
+              <small>
+                {isProfessor
+                  ? c('Professeur · accès complet', 'Professor · full access', '教师 · 完整访问')
+                  : account.role === 'club_leader'
+                    ? c('Responsable de club', 'Club leader', '社团负责人')
+                    : c('Compte étudiant', 'Student account', '学生账户')}
+              </small>
+            </span>
+            <Icon name="chevron" size={16} />
+          </button>
+          <button className="sidebar-signout text-button" onClick={onSignOut}>
+            <Icon name="arrow" size={16} />
+            {c('Se déconnecter', 'Sign out', '退出登录')}
+          </button>
+        </div>
+      </aside>
+      <div className="workspace-main">
+        <header className="topbar">
+          <div className="row">
+            <button
+              className="icon-button mobile-only"
+              aria-label={c('Menu', 'Menu', '菜单')}
+              onClick={() => setMobile(!mobile)}
+            >
+              <Icon name="menu" />
+            </button>
+            <span className="breadcrumb">
+              {c('Mon espace', 'My workspace', '我的空间')} <span>/</span>{' '}
+              <strong>{navLabel(paths.indexOf(page))}</strong>
+            </span>
+          </div>
+          <div className="topbar-actions">
+            <form
+              className="global-search"
+              onSubmit={(e) => {
+                e.preventDefault();
+                setQuery(globalSearch);
+                router.push('/supervisors?q=' + encodeURIComponent(globalSearch));
+              }}
+            >
+              <Icon name="search" size={17} />
+              <input
+                aria-label={t('search')}
+                value={globalSearch}
+                onChange={(e) => setGlobalSearch(e.target.value)}
+                placeholder={t('search') + '…'}
+              />
+              <kbd>↵</kbd>
+            </form>
+            <label className="language-picker">
+              <Icon name="globe" size={17} />
+              <select
+                aria-label={t('language')}
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+              >
+                {languages.map(([v, l]) => (
+                  <option key={v} value={v}>
+                    {l}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <button
+              className="icon-button notification-button"
+              aria-label={t('notifications')}
+              onClick={() => setModal('notifications')}
+            >
+              <Icon name="bell" />
+              {unread > 0 && <i />}
+            </button>
+            <button
+              className="avatar small-avatar"
+              aria-label={t('profile')}
+              onClick={() => setModal('profile')}
+            >
+              {(activeProfile.displayName || 'X').slice(0, 1).toUpperCase()}
+            </button>
+          </div>
+        </header>
+        <main id="main">
+          <div className="mode-bar">
+            <span>
+              <i className={demo ? 'sample' : 'live'} />
+              {demo
+                ? c(
+                    'Prototype GitHub Pages · exemples',
+                    'GitHub Pages prototype · sample data',
+                    'GitHub Pages 原型 · 示例数据',
+                  )
+                : c(
+                    'Prototype · espace local à ce navigateur',
+                    'Prototype · browser-local workspace',
+                    '原型 · 本浏览器本地空间',
+                  )}
+            </span>
+            <button
+              onClick={() =>
+                demo ? activate() : (setDemo(true), setChecked([0, 1, 2]), setFavorites([]))
+              }
+            >
+              {loading
+                ? c('Chargement…', 'Loading…')
+                : demo
+                  ? c('Tester mon espace local', 'Try my local workspace', '体验本地空间')
+                  : c('Voir la démonstration', 'View demo', '查看演示')}
+              <Icon name="arrow" size={14} />
+            </button>
+          </div>
+          {!['fr', 'en', 'zh'].includes(lang) && (
+            <div className="locale-note">
+              {c(
+                'Certains textes détaillés restent en anglais. Les documents sources conservent leur langue originale.',
+                'Some detailed text is still in English. Source documents retain their original language.',
+                '部分详细内容仍为英文，来源文件保留原始语言。',
+              )}
+            </div>
+          )}
+          {page === '/' && (
+            <>
+              <div className="page-title row between reveal">
+                <div>
+                  <div className="date-caption">
+                    {new Intl.DateTimeFormat(
+                      lang === 'ary' ? 'ar-MA' : lang === 'ln' ? 'fr' : lang,
+                      {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        timeZone: 'Asia/Shanghai',
+                      },
+                    ).format(new Date())}{' '}
+                    <span>· Xi’an</span>
+                  </div>
+                  <h1>
+                    {t('welcome')}
+                    <span className="title-dot">.</span>
+                  </h1>
+                  <p>
+                    {c(
+                      'Un nouveau chapitre. Tous vos repères, au même endroit.',
+                      'A new chapter. Everything you need, in one place.',
+                      '开启新篇章。所需信息，尽在一处。',
+                    )}
+                  </p>
+                </div>
+                <button className="button secondary" onClick={() => setModal('profile')}>
+                  <Icon name="users" size={17} />
+                  {t('profile')}
+                </button>
+              </div>
+              <section className="welcome-banner reveal">
+                <div className="banner-content">
+                  <span className="eyebrow">XIDIAN INTERNATIONAL HUB</span>
+                  <h2>
+                    {c('Votre parcours à Xidian,', 'Your journey at Xidian,', '在西电的每一步，')}
+                    <br />
+                    <em>{c('en toute sérénité.', 'with peace of mind.', '安心从容。')}</em>
+                  </h2>
+                  <p>
+                    {c(
+                      'Le bon superviseur. Les documents à jour.\nEt plus de place pour l’essentiel.',
+                      'The right supervisor. Your documents in order.\nMore room for what matters.',
+                      '找到合适的导师，及时管理证件，\n专注于真正重要的事。',
+                    )}
+                  </p>
+                  <div className="row banner-buttons">
+                    <Link href="/visas" className="button primary">
+                      {c('Vérifier mes échéances', 'Check my deadlines', '查看到期提醒')}
+                      <span>
+                        <Icon name="arrow" size={17} />
+                      </span>
+                    </Link>
+                    <Link href="/guide" className="banner-link">
+                      {c('Je viens d’arriver', 'I’ve just arrived', '我刚到校')}
+                      <Icon name="external" size={14} />
+                    </Link>
+                  </div>
+                </div>
+                <div className="campus-wrapper">
+                  <Campus />
+                  <span>
+                    西安电子科技大学
+                    <span>
+                      {c(
+                        'BIENVENUE DANS VOTRE NOUVEAU CHAPITRE',
+                        'WELCOME TO YOUR NEXT CHAPTER',
+                        '开启新的篇章',
+                      )}
+                    </span>
+                  </span>
+                </div>
+              </section>
+              <section className="stats-grid reveal">
+                <article>
+                  <span className="stat-icon rose">
+                    <Icon name="file" />
+                  </span>
+                  <div>
+                    <small>{t('documents')}</small>
+                    <strong>
+                      {activeDocs.length}
+                      <span>{c('documents suivis', 'documents tracked', '份文件')}</span>
+                    </strong>
+                  </div>
+                </article>
+                <article>
+                  <span className="stat-icon amber">
+                    <Icon name="clock" />
+                  </span>
+                  <div>
+                    <small>{c('Prochaine échéance', 'Next deadline', '最近到期')}</small>
+                    <strong>
+                      {nextDays === null ? '—' : nextDays}
+                      <span>
+                        {nextDays === null
+                          ? c('à renseigner', 'add a document', '请添加文件')
+                          : t('days')}
+                      </span>
+                    </strong>
+                  </div>
+                  {nextDays !== null && nextDays < 30 && <span className="stat-dot" />}
+                </article>
+                <article>
+                  <span className="stat-icon sage">
+                    <Icon name="check" />
+                  </span>
+                  <div>
+                    <small>{c('Votre installation', 'Settling in', '入学进度')}</small>
+                    <strong>
+                      {checked.length}
+                      <span>/ 9 {c('étapes terminées', 'steps completed', '项已完成')}</span>
+                    </strong>
+                  </div>
+                </article>
+                <article>
+                  <span className="stat-icon blue">
+                    <Icon name="bookmark" />
+                  </span>
+                  <div>
+                    <small>{c('Votre recherche', 'Your research journey', '导师搜索')}</small>
+                    <strong>
+                      {favorites.length}
+                      <span>{c('superviseurs favoris', 'saved supervisors', '位已收藏导师')}</span>
+                    </strong>
+                  </div>
+                </article>
+              </section>
+              <div className="overview-columns">
+                <section className="panel deadline-panel reveal">
+                  <div className="section-heading">
+                    <h2>{c('À garder en tête', 'Keep on your radar', '值得关注')}</h2>
+                    <Link href="/visas">
+                      {t('viewAll')}
+                      <Icon name="arrow" size={15} />
+                    </Link>
+                  </div>
+                  {next ? (
+                    <>
+                      <div className={'next-deadline ' + urgency(nextDays!)}>
+                        <div className="row between">
+                          <span className="deadline-label">
+                            <Icon name="shield" size={20} /> {docTitle(next)}
+                          </span>
+                          <span className="status warning">{status(nextDays!)}</span>
+                        </div>
+                        <div className="deadline-number">
+                          <strong>{Math.abs(nextDays!)}</strong>
+                          <span>
+                            {nextDays! < 0
+                              ? c('jours de retard', 'days overdue')
+                              : c('jours restants', 'days remaining', '天后到期')}
+                          </span>
+                        </div>
+                        <p>
+                          {c('Expire le', 'Expires on', '到期日期')} {date(next.expiry)}
+                        </p>
+                        <div className="deadline-track">
+                          <i
+                            style={{
+                              width: Math.min(100, (Math.max(3, nextDays!) / 90) * 100) + '%',
+                            }}
+                          />
+                        </div>
+                        <Link href="/visas" className="text-button">
+                          {c('Préparer mon renouvellement', 'Prepare my renewal', '准备续签')}
+                          <Icon name="arrow" size={17} />
+                        </Link>
+                      </div>
+                      <div className="mini-documents">
+                        {sorted.slice(1, 3).map((d) => (
+                          <div className="mini-doc" key={d.id}>
+                            <span className="mini-doc-icon">
+                              <Icon name={d.type === 'passport' ? 'globe' : 'shield'} size={18} />
+                            </span>
+                            <div>
+                              <strong>{docTitle(d)}</strong>
+                              <small>{date(d.expiry)}</small>
+                            </div>
+                            <span className={'status ' + urgency(remainingDays(d.expiry))}>
+                              {remainingDays(d.expiry)} {t('days')}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="empty">
+                      <Icon name="calendar" size={34} />
+                      <h3>
+                        {c(
+                          'Vos échéances commencent ici',
+                          'Your deadlines start here',
+                          '从这里管理到期日期',
+                        )}
+                      </h3>
+                      <p>
+                        {c(
+                          'Ajoutez un document pour voir votre prochain rappel.',
+                          'Add a document to see your next reminder.',
+                          '添加证件，查看提醒。',
+                        )}
+                      </p>
+                      <button className="button primary" onClick={addDoc}>
+                        {t('add')}
+                        <Icon name="plus" size={16} />
+                      </button>
+                    </div>
+                  )}
+                  <div className="note-line">
+                    <Icon name="info" size={16} />
+                    {c(
+                      'Les rappels in-app sont vérifiés à l’ouverture de votre espace.',
+                      'In-app reminders are checked when you open your workspace.',
+                      '打开空间时检查站内提醒。',
+                    )}
+                  </div>
+                </section>
+                <section className="panel checklist-panel reveal">
+                  <div className="section-heading">
+                    <h2>{c('Bien s’installer', 'Make yourself at home', '安心入学')}</h2>
+                    <span className="subtle-badge">{checked.length}/9</span>
+                  </div>
+                  <p className="muted">
+                    {c(
+                      'Un pas après l’autre, vous y êtes presque.',
+                      'One step at a time. You’re getting there.',
+                      '一步一步，从容开启校园生活。',
+                    )}
+                  </p>
+                  <div className="progress checklist-progress">
+                    <i style={{ width: (checked.length / 9) * 100 + '%' }} />
+                  </div>
+                  {tasks.slice(0, 5).map((task, i) => (
+                    <label className={'task ' + (checked.includes(i) ? 'completed' : '')} key={i}>
+                      <input
+                        type="checkbox"
+                        checked={checked.includes(i)}
+                        onChange={() => toggleTask(i)}
+                      />
+                      <span>{c(task[0], task[1], task[2])}</span>
+                      {i === 2 && <small>24 h</small>}
+                    </label>
+                  ))}
+                  <Link href="/guide" className="checklist-footer">
+                    {c('Voir mon guide d’arrivée', 'Open my arrival guide', '打开入学指南')}
+                    <Icon name="arrow" size={17} />
+                  </Link>
+                </section>
+              </div>
+              <section className="next-steps motion-section">
+                <div className="section-heading">
+                  <h2>{c('La suite vous appartient', 'Your next move', '开启下一步')}</h2>
+                  <span className="muted small">
+                    {c('Des outils pour avancer', 'Tools to move forward', '助你前行的工具')}
+                  </span>
+                </div>
+                <div className="quick-grid">
+                  <Link href="/supervisors" className="quick-card">
+                    <div className="quick-illustration research-art">
+                      <div className="mini-portrait">LC</div>
+                      <div className="paper-lines">
+                        <i />
+                        <i />
+                        <i />
+                      </div>
+                      <span>
+                        <Icon name="search" size={25} />
+                      </span>
+                    </div>
+                    <div>
+                      <h3>
+                        {c('Trouvez votre superviseur', 'Find your supervisor', '找到你的导师')}
+                      </h3>
+                      <p>
+                        {c(
+                          'Un projet de recherche commence par une rencontre.',
+                          'Every research journey starts with a connection.',
+                          '每段科研之旅始于一次交流。',
+                        )}
+                      </p>
+                      <span className="round-arrow">
+                        <Icon name="arrow" />
+                      </span>
+                    </div>
+                  </Link>
+                  <Link href="/chat" className="quick-card assistant-quick">
+                    <div className="quick-illustration assistant-art">
+                      <div>
+                        <Icon name="chat" size={38} />
+                      </div>
+                      <span>
+                        <Icon name="spark" size={18} />
+                      </span>
+                    </div>
+                    <div>
+                      <h3>
+                        {c(
+                          'Une question sur votre séjour ?',
+                          'Questions about your stay?',
+                          '对在华生活有疑问？',
+                        )}
+                      </h3>
+                      <p>
+                        {c(
+                          'Retrouvez les réponses et les sources utiles.',
+                          'Find useful answers and official sources.',
+                          '查找实用解答和官方来源。',
+                        )}
+                      </p>
+                      <span className="round-arrow">
+                        <Icon name="arrow" />
+                      </span>
+                    </div>
+                  </Link>
+                </div>
+              </section>
+              <section className="community-strip motion-section">
+                <div className="community-orbit">
+                  <Icon name="globe" size={31} />
+                </div>
+                <div>
+                  <h3>
+                    {c(
+                      'Loin de chez vous. Jamais seul.',
+                      'Far from home. Never on your own.',
+                      '远离家乡，从不孤单。',
+                    )}
+                  </h3>
+                  <p>
+                    {c(
+                      'Un projet né d’une expérience étudiante, pour mieux accompagner la vôtre.',
+                      'Built from a student’s experience, to make yours a little easier.',
+                      '源于学生亲身经历，让你的留学之路更顺畅。',
+                    )}
+                  </p>
+                </div>
+                <Link className="button secondary" href="/campus">
+                  {c('Découvrir la vie de campus', 'Discover campus life', '探索校园生活')}
+                  <Icon name="arrow" size={16} />
+                </Link>
+              </section>
+            </>
+          )}
+          {page === '/visas' && (
+            <>
+              <div className="page-title row between reveal">
+                <div>
+                  <div className="date-caption">XIE-VISAS</div>
+                  <h1>
+                    {c(
+                      'L’esprit libre, les papiers à jour.',
+                      'Peace of mind. Papers in order.',
+                      '证件有序，安心留学。',
+                    )}
+                  </h1>
+                  <p>
+                    {c(
+                      'Anticipez vos échéances. Concentrez-vous sur vos études.',
+                      'Stay ahead of deadlines. Focus on your studies.',
+                      '提前管理到期日期，专注学业。',
+                    )}
+                  </p>
+                </div>
+                <button className="button primary" onClick={addDoc}>
+                  <Icon name="plus" size={18} />
+                  {c('Ajouter un document', 'Add a document', '添加证件')}
+                </button>
+              </div>
+              <div className="visa-toolbar reveal">
+                <span>
+                  <span className="pulse-dot" />
+                  {c('Suivi en heure de Pékin', 'Tracking in Beijing time', '按北京时间追踪')}
+                </span>
+                <button className="text-button" onClick={calendar}>
+                  <Icon name="calendar" size={17} />
+                  {c('Ajouter à mon calendrier', 'Add to my calendar', '添加到日历')}
+                </button>
+              </div>
+              <div className="documents-grid">
+                {activeDocs.map(docCard)}
+                <button className="add-document reveal" onClick={addDoc}>
+                  <span>
+                    <Icon name="plus" size={27} />
+                  </span>
+                  <strong>
+                    {c('Un document de plus,', 'One more document,', '多一个文件，')}
+                    <br />
+                    {c('un souci de moins.', 'one less worry.', '少一份担忧。')}
+                  </strong>
+                  <small>
+                    {c(
+                      'Visa, permis, passeport, assurance',
+                      'Visa, permit, passport, insurance',
+                      '签证、居留许可、护照、保险',
+                    )}
+                  </small>
+                </button>
+              </div>
+              <div className="legend">
+                <span>
+                  <i className="safe" />
+                  &gt; 90 {t('days')}
+                </span>
+                <span>
+                  <i className="upcoming" />
+                  30–90 {t('days')}
+                </span>
+                <span>
+                  <i className="warning" />
+                  7–29 {t('days')}
+                </span>
+                <span>
+                  <i className="critical" />
+                  &lt; 7 {t('days')}
+                </span>
+              </div>
+              <section className="visa-types panel">
+                <h2>{c('Comprendre son document', 'Know your document', '了解你的证件')}</h2>
+                <div>
+                  <article>
+                    <strong>X1</strong>
+                    <p>
+                      {c(
+                        'Études de plus de 180 jours. Vérifiez les conditions de demande du permis de séjour après l’entrée.',
+                        'Study for more than 180 days. Check post-entry residence permit requirements.',
+                        '学习时间超过180天，需核验入境后居留许可办理要求。',
+                      )}
+                    </p>
+                  </article>
+                  <article>
+                    <strong>X2</strong>
+                    <p>
+                      {c(
+                        'Études de 180 jours maximum. Respectez la durée de séjour autorisée sur le visa.',
+                        'Study for no more than 180 days. Follow the permitted stay printed on the visa.',
+                        '学习时间不超过180天，请遵守签证注明的停留期限。',
+                      )}
+                    </p>
+                  </article>
+                  <article>
+                    <strong>{c('Permis de séjour', 'Residence permit', '居留许可')}</strong>
+                    <p>
+                      {c(
+                        'Suivez sa propre date d’expiration et préparez le renouvellement avec l’ISO.',
+                        'Track its own expiry and prepare renewal with ISO.',
+                        '追踪居留许可本身的到期日期，与国际学生办公室准备续签。',
+                      )}
+                    </p>
+                  </article>
+                </div>
+                <a
+                  className="text-button small"
+                  href="https://www.visaforchina.cn/JKT3_EN"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {c(
+                    'Source : centre de demande de visa',
+                    'Source: visa application service centre',
+                    '来源：签证申请服务中心',
+                  )}
+                  <Icon name="external" size={13} />
+                </a>
+              </section>
+              <div className="two-columns">
+                <section className="panel">
+                  <div className="section-heading">
+                    <h2>{c('Renouveler, étape par étape', 'Renew, step by step', '续签流程')}</h2>
+                    <Icon name="shield" />
+                  </div>
+                  <p className="muted">
+                    {c(
+                      'Pour votre permis de séjour étudiant. La liste finale est à confirmer avec l’ISO et le service de l’immigration.',
+                      'For your student residence permit. Confirm the final checklist with ISO and the immigration authority.',
+                      '适用于学习类居留许可。最终材料清单请向国际学生办公室和出入境管理部门确认。',
+                    )}
+                  </p>
+                  {[
+                    [
+                      c('Vérifier les dates', 'Check your dates', '核对日期'),
+                      c(
+                        'Contrôlez la durée de séjour autorisée, le permis et le passeport.',
+                        'Check your permitted stay, residence permit and passport.',
+                        '核对停留期限、居留许可和护照。',
+                      ),
+                    ],
+                    [
+                      c(
+                        'Préparer le dossier avec l’ISO',
+                        'Prepare your application with ISO',
+                        '与办公室准备材料',
+                      ),
+                      c(
+                        'Passeport, formulaire, photo et justificatifs d’études ; d’autres pièces peuvent être requises.',
+                        'Passport, form, photo and study documents; further evidence may be required.',
+                        '准备护照、申请表、照片及学习证明，可能需要其他材料。',
+                      ),
+                    ],
+                    [
+                      c('Déposer la demande', 'Submit your application', '提交申请'),
+                      c(
+                        'Suivez les instructions du service de l’immigration compétent. Conservez le récépissé.',
+                        'Follow your local immigration authority’s instructions. Keep your receipt.',
+                        '按主管出入境管理部门要求办理，并保存受理回执。',
+                      ),
+                    ],
+                    [
+                      c('Mettre à jour votre suivi', 'Update your records', '更新记录'),
+                      c(
+                        'Enregistrez la nouvelle date dès réception du document.',
+                        'Record the new expiry as soon as you receive the document.',
+                        '收到新证件后及时更新到期日期。',
+                      ),
+                    ],
+                  ].map(([a, b], i) => (
+                    <div className="renew-step" key={a}>
+                      <span>{i + 1}</span>
+                      <div>
+                        <h3>{a}</h3>
+                        <p>{b}</p>
+                      </div>
+                    </div>
+                  ))}
+                  <a
+                    className="text-button"
+                    href="https://en.nia.gov.cn/n147423/n147478/n147715/c158270/content.html"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {c(
+                      'Consulter la source NIA',
+                      'Read the NIA guidance',
+                      '查看国家移民管理局指南',
+                    )}
+                    <Icon name="external" size={15} />
+                  </a>
+                </section>
+                <section className="panel">
+                  <div className="section-heading">
+                    <h2>{c('Vos rappels', 'Your reminders', '提醒设置')}</h2>
+                    <span className="subtle-badge">30 · 15 · 7 · 1</span>
+                  </div>
+                  <p className="muted">
+                    {c(
+                      'Quatre repères pour ne plus laisser passer une échéance.',
+                      'Four checkpoints to stay ahead of expiry.',
+                      '四个提醒节点，及时掌握到期日期。',
+                    )}
+                  </p>
+                  {[
+                    [
+                      'bell',
+                      c('Notifications dans le Hub', 'In-app notifications', '站内通知'),
+                      c(
+                        'Vérifiées à chaque ouverture de votre espace',
+                        'Checked whenever you open your workspace',
+                        '打开空间时检查',
+                      ),
+                      true,
+                    ],
+                    [
+                      'calendar',
+                      c('Votre calendrier', 'Your calendar', '日历'),
+                      c(
+                        'Fichier .ics avec rappels à importer',
+                        'Import an .ics file with reminders',
+                        '导入含提醒的ICS文件',
+                      ),
+                      true,
+                    ],
+                    [
+                      'mail',
+                      'Email · WeChat · SMS',
+                      c('Connecteurs non configurés', 'Providers not connected', '服务商尚未连接'),
+                      false,
+                    ],
+                  ].map(([icon, a, b, enabled]) => (
+                    <div className="channel-row" key={String(a)}>
+                      <Icon name={String(icon)} />
+                      <div>
+                        <strong>{a}</strong>
+                        <small>{b}</small>
+                      </div>
+                      <span className={'status ' + (enabled ? 'safe' : 'neutral')}>
+                        {enabled
+                          ? c('Disponible', 'Available', '可用')
+                          : c('À connecter', 'Not connected', '待连接')}
+                      </span>
+                    </div>
+                  ))}
+                  <div className="info-box">
+                    <Icon name="info" size={19} />
+                    <p>
+                      {c(
+                        'Aucun email, SMS ou message WeChat n’est envoyé actuellement. Pour recevoir des rappels sans ouvrir le site, importez votre calendrier et vérifiez ses réglages d’alerte.',
+                        'No email, SMS or WeChat messages are currently sent. To receive reminders while the site is closed, import your calendar and check its alert settings.',
+                        '目前不发送邮件、短信或微信消息。如需在关闭网站时收到提醒，请导入日历并检查提醒设置。',
+                      )}
+                    </p>
+                  </div>
+                  <button
+                    className="button secondary full"
+                    onClick={() => setModal('notifications')}
+                  >
+                    {c('Voir l’historique', 'View history', '查看历史')}
+                    <Icon name="arrow" size={16} />
+                  </button>
+                </section>
+              </div>
+            </>
+          )}
+          {page === '/supervisors' && (
+            <>
+              <div className="page-title reveal">
+                <div className="date-caption">
+                  {c('MASTER · DOCTORAT', 'MASTER · PhD', '硕士 · 博士')}
+                </div>
+                <h1>
+                  {c(
+                    'La bonne rencontre change tout.',
+                    'The right connection changes everything.',
+                    '遇见合适的导师，开启新的可能。',
+                  )}
+                </h1>
+                <p>
+                  {c(
+                    'Explorez les profils officiels et donnez une direction à votre recherche.',
+                    'Explore official faculty profiles and give your research a direction.',
+                    '探索官方导师主页，为研究找到方向。',
+                  )}
+                </p>
+              </div>
+              <div className="search-banner reveal">
+                <Icon name="search" size={23} />
+                <input
+                  aria-label={t('search')}
+                  placeholder={c(
+                    'Nom, domaine de recherche, mot-clé…',
+                    'Name, research area, keyword…',
+                    '姓名、研究方向、关键词…',
+                  )}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                {query && (
+                  <button
+                    className="icon-button"
+                    onClick={() => setQuery('')}
+                    aria-label={c('Effacer', 'Clear', '清除')}
+                  >
+                    <Icon name="close" size={18} />
+                  </button>
+                )}
+                <span>
+                  {roster.length} {c('profils sourcés', 'sourced profiles', '个来源可查的主页')}
+                </span>
+              </div>
+              <div className="filter-row reveal">
+                <label>
+                  <span>{c('École', 'School', '学院')}</span>
+                  <select value={school} onChange={(e) => setSchool(e.target.value)}>
+                    <option value="">{c('Toutes les écoles', 'All schools', '全部学院')}</option>
+                    {directoryMeta.schools.map((s) => (
+                      <option key={s.name} value={s.name}>
+                        {c(s.fr, s.name)} ({s.count})
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>{c('Niveau', 'Degree', '学位')}</span>
+                  <select value={level} onChange={(e) => setLevel(e.target.value)}>
+                    <option value="">{c('Tous les niveaux', 'All degrees', '全部学位')}</option>
+                    <option value="Master">{c('Master', 'Master', '硕士')}</option>
+                    <option value="PhD">{c('Doctorat', 'PhD', '博士')}</option>
+                    <option value="unconfirmed">
+                      {c('Niveau non renseigné', 'Degree not specified', '学位未注明')}
+                    </option>
+                  </select>
+                </label>
+                <label>
+                  <span>{c('Langue de supervision', 'Supervision language', '指导语言')}</span>
+                  <select value={superLang} onChange={(e) => setSuperLang(e.target.value)}>
+                    <option value="">{t('all')}</option>
+                    <option value="unconfirmed">{c('À confirmer', 'To confirm', '待确认')}</option>
+                    {languages.map(([code, name]) => (
+                      <option key={code} value={code}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <button
+                  className={'button secondary ' + (onlyFav ? 'selected' : '')}
+                  onClick={() => setOnlyFav(!onlyFav)}
+                >
+                  <Icon name="bookmark" size={17} />
+                  {t('favorites')} ({favorites.length})
+                </button>
+                <button
+                  className="text-button"
+                  onClick={() => {
+                    savePrefs(favorites, { query, school, level, superLang });
+                    showToast(c('Filtres enregistrés.', 'Filters saved.'));
+                  }}
+                >
+                  {c('Sauvegarder les filtres', 'Save filters', '保存筛选')}
+                </button>
+              </div>
+              <div className="results-heading">
+                <span>
+                  {filtered.length} {c('résultat(s)', 'result(s)', '条结果')}
+                </span>
+                {savedFilter && (
+                  <button
+                    className="text-button"
+                    onClick={() => {
+                      setQuery(savedFilter.query || '');
+                      setSchool(savedFilter.school || '');
+                      setLevel(savedFilter.level || '');
+                      setSuperLang(savedFilter.superLang || '');
+                    }}
+                  >
+                    {c('Restaurer ma recherche', 'Restore saved search', '恢复搜索')}
+                  </button>
+                )}
+                <button
+                  className="text-button"
+                  onClick={() => {
+                    setQuery('');
+                    setSchool('');
+                    setLevel('');
+                    setSuperLang('');
+                    setOnlyFav(false);
+                  }}
+                >
+                  {c('Réinitialiser', 'Reset', '重置')}
+                </button>
+              </div>
+              {level && level !== 'unconfirmed' && (
+                <div className="degree-note">
+                  <p>
+                    {c(
+                      'Les profils avec ce niveau renseigné apparaissent en premier. Les fiches dont le niveau est uniquement dans le document officiel restent consultables, sans garantie de correspondance.',
+                      'Profiles with this degree recorded appear first. Profiles whose degree is only in the official document remain visible, without a confirmed match.',
+                      '已记录该学位的导师优先显示。仅在官方文件中标注学位的资料仍可查看，但不保证符合筛选条件。',
+                    )}
+                  </p>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={includeUnknown}
+                      onChange={(e) => setIncludeUnknown(e.target.checked)}
+                    />
+                    {c(
+                      'Inclure les niveaux à confirmer',
+                      'Include degrees to confirm',
+                      '包含学位待确认的资料',
+                    )}
+                  </label>
+                </div>
+              )}
+              <div className="supervisor-grid">
+                {shownFaculty.map((s) => (
+                  <article className="supervisor-card reveal" key={s.id}>
+                    <div className="row between">
+                      <span className="faculty-avatar" style={{ background: s.color }}>
+                        {s.initials}
+                      </span>
+                      <button
+                        className={'icon-button ' + (favorites.includes(s.id) ? 'bookmarked' : '')}
+                        aria-label={t('favorites') + ' ' + s.name}
+                        aria-pressed={favorites.includes(s.id)}
+                        onClick={() =>
+                          savePrefs(
+                            favorites.includes(s.id)
+                              ? favorites.filter((x) => x !== s.id)
+                              : [...favorites, s.id],
+                          )
+                        }
+                      >
+                        <Icon name="bookmark" />
+                      </button>
+                    </div>
+                    <h2>
+                      {s.name}
+                      <span>{s.zh}</span>
+                    </h2>
+                    <p className="faculty-title">
+                      {s.title
+                        ? c(
+                            s.title === 'Professor'
+                              ? 'Professeur'
+                              : s.title === 'Associate professor'
+                                ? 'Professeur associé'
+                                : s.title,
+                            s.title,
+                            s.title === 'Professor'
+                              ? '教授'
+                              : s.title === 'Associate professor'
+                                ? '副教授'
+                                : s.title,
+                          )
+                        : c(
+                            'Référencé dans l’annuaire SIE',
+                            'Listed in the SIE directory',
+                            'SIE目录收录',
+                          )}
+                    </p>
+                    <p className="faculty-school">
+                      <Icon name="cap" size={17} />
+                      {c(s.schoolFr, s.school)}
+                    </p>
+                    <div className="research-tags">
+                      {s.research.map((r, i) => (
+                        <span key={r}>{c(s.researchFr[i] || r, r)}</span>
+                      ))}
+                      {!s.research.length && (
+                        <span>
+                          {c(
+                            'Domaines : voir la fiche officielle',
+                            'Research: see official profile',
+                            '研究方向：请查看官方资料',
+                          )}
+                        </span>
+                      )}
+                    </div>
+                    <div className="faculty-meta">
+                      <span>
+                        {s.levels.length
+                          ? s.levels
+                              .map((x) =>
+                                x === 'Master'
+                                  ? c('Master', 'Master', '硕士')
+                                  : c('Doctorat', 'PhD', '博士'),
+                              )
+                              .join(' · ')
+                          : c(
+                              'Niveau à consulter',
+                              'See official degree details',
+                              '学位请参阅官方资料',
+                            )}
+                      </span>
+                      <span>
+                        {c('Langue à confirmer', 'Language to confirm', '指导语言待确认')}
+                      </span>
+                    </div>
+                    <button
+                      className="button secondary full"
+                      onClick={() => {
+                        setSelected(s);
+                        setModal('supervisor');
+                      }}
+                    >
+                      {c('Découvrir le profil', 'View profile', '查看导师')}
+                      <Icon name="arrow" size={17} />
+                    </button>
+                  </article>
+                ))}
+              </div>
+              <nav
+                className="faculty-pagination"
+                aria-label={c('Pagination des superviseurs', 'Supervisor pagination', '导师分页')}
+              >
+                <button
+                  className="button secondary"
+                  disabled={currentFacultyPage === 1}
+                  onClick={() => {
+                    setFacultyPage(currentFacultyPage - 1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
+                  {c('Précédent', 'Previous', '上一页')}
+                </button>
+                <span>
+                  {c('Page', 'Page', '页')} {currentFacultyPage} / {totalFacultyPages} ·{' '}
+                  {filtered.length} {c('profils', 'profiles', '个导师')}
+                </span>
+                <button
+                  className="button secondary"
+                  disabled={currentFacultyPage === totalFacultyPages}
+                  onClick={() => {
+                    setFacultyPage(currentFacultyPage + 1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
+                  {c('Suivant', 'Next', '下一页')}
+                  <Icon name="arrow" size={15} />
+                </button>
+              </nav>
+              {!filtered.length && (
+                <div className="panel empty">
+                  <Icon name="search" size={34} />
+                  <h2>
+                    {c('Aucun profil ne correspond', 'No matching profiles', '未找到匹配结果')}
+                  </h2>
+                  <p>
+                    {c(
+                      'Essayez moins de filtres. Les langues de supervision ne sont pas encore confirmées.',
+                      'Try fewer filters. Supervision languages have not yet been confirmed.',
+                      '请减少筛选条件。指导语言尚未确认。',
+                    )}
+                  </p>
+                </div>
+              )}
+              <div className="source-note">
+                <Icon name="info" size={20} />
+                <p>
+                  {c(
+                    `${directoryMeta.officialProfiles} fiches SIE recensées dans ${directoryMeta.schools.length} rubriques, pages suivantes comprises, le 15 octobre 2026. Les documents officiels sont majoritairement des images consultables dans les fiches. Les données absentes ne sont pas inventées ; disponibilité, langue et coordonnées doivent être confirmées.`,
+                    `${directoryMeta.officialProfiles} SIE listings across ${directoryMeta.schools.length} sections, including pagination, checked on October 15, 2026. Official profile documents are mostly images, available inside each profile. Missing fields are not inferred; confirm availability, language and contact details.`,
+                    `2026年10月15日已核对${directoryMeta.schools.length}个栏目及所有分页，共${directoryMeta.officialProfiles}条SIE导师资料。官方资料多以图片发布，可在个人资料中查看。未注明的信息不作推断，请确认招生名额、指导语言和联系方式。`,
+                  )}
+                </p>
+              </div>
+              <a
+                className="text-button"
+                href="https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {c(
+                  'Ouvrir l’annuaire officiel SIE',
+                  'Open the official SIE directory',
+                  '打开SIE官方目录',
+                )}
+                <Icon name="external" size={16} />
+              </a>
+            </>
+          )}
+          {page === '/campus' && (
+            <CampusLife key={account.id} lang={lang} workspaceId={account.id} />
+          )}
+          {page === '/guide' && (
+            <>
+              <div className="page-title row between reveal">
+                <div>
+                  <div className="date-caption">
+                    {c('XI’AN, CHINE', 'XI’AN, CHINA', '中国西安')}
+                  </div>
+                  <h1>
+                    {c(
+                      'Votre nouvelle vie commence ici.',
+                      'Your new chapter starts here.',
+                      '你的新生活，从这里开始。',
+                    )}
+                  </h1>
+                  <p>
+                    {c(
+                      'Des premières démarches aux premiers repères sur le campus.',
+                      'From your first steps to finding your way around campus.',
+                      '从初到校办理手续，到熟悉校园生活。',
+                    )}
+                  </p>
+                </div>
+                <button className="button secondary" onClick={() => window.print()}>
+                  <Icon name="download" size={17} />
+                  {c('Imprimer le guide', 'Print guide', '打印指南')}
+                </button>
+              </div>
+              <div className="guide-summary reveal">
+                <div
+                  className="progress-circle"
+                  style={{
+                    background: `conic-gradient(var(--brand) ${(checked.length / 9) * 360}deg, #e9dfda 0)`,
+                  }}
+                >
+                  <span>
+                    {Math.round((checked.length / 9) * 100)}
+                    <small>%</small>
+                  </span>
+                </div>
+                <div>
+                  <h2>{c('Chaque étape compte.', 'Every step counts.', '每一步，都重要。')}</h2>
+                  <p>
+                    {checked.length}/9{' '}
+                    {c(
+                      'démarches terminées. Votre progression est sauvegardée dans ce navigateur.',
+                      'steps completed. Your progress is saved in this browser.',
+                      '项已完成。进度保存于个人空间。',
+                    )}
+                  </p>
+                </div>
+                <span className="guide-summary-art">
+                  <Icon name="compass" size={58} />
+                </span>
+              </div>
+              <div className="guide-layout">
+                <section className="panel guide-tasks">
+                  <div className="section-heading">
+                    <h2>{t('checklist')}</h2>
+                    <span className="subtle-badge">{checked.length}/9</span>
+                  </div>
+                  {tasks.map((task, i) => (
+                    <div
+                      className={'guide-task ' + (checked.includes(i) ? 'completed' : '')}
+                      key={i}
+                    >
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={checked.includes(i)}
+                          onChange={() => toggleTask(i)}
+                        />
+                        <span>{c(task[0], task[1], task[2])}</span>
+                        {i === 2 && <span className="status warning">24 h</span>}
+                        {i === 6 && <span className="status upcoming">30 {t('days')}</span>}
+                      </label>
+                      <p>
+                        {c(taskDescriptions[i][0], taskDescriptions[i][1], taskDescriptions[i][2])}
+                      </p>
+                      {[2, 5].includes(i) && (
+                        <a
+                          href={
+                            i === 2
+                              ? 'https://en.nia.gov.cn/n147418/n147463/c197328/content.html'
+                              : 'https://en.nia.gov.cn/n147423/n147478/n147715/c158270/content.html'
+                          }
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-button small"
+                        >
+                          {c(
+                            'Source officielle NIA',
+                            'Official NIA source',
+                            '国家移民管理局官方来源',
+                          )}
+                          <Icon name="external" size={13} />
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </section>
+                <aside className="guide-aside">
+                  <section className="panel">
+                    <Icon name="location" size={27} />
+                    <h2>{c('Vos repères à Xi’an', 'Find your way in Xi’an', '西安生活指南')}</h2>
+                    <p className="muted">
+                      {c(
+                        'Choisissez un lieu pour ouvrir la carte et vérifier l’itinéraire.',
+                        'Choose a place to open the map and check directions.',
+                        '选择地点，打开地图并确认路线。',
+                      )}
+                    </p>
+                    {[
+                      [
+                        '西安电子科技大学 南校区',
+                        c('Campus Sud · Chang’an', 'South campus · Chang’an', '南校区 · 长安'),
+                      ],
+                      [
+                        '西安电子科技大学 北校区',
+                        c('Campus Nord · Yanta', 'North campus · Yanta', '北校区 · 雁塔'),
+                      ],
+                      [
+                        '西安市公安局出入境接待大厅',
+                        c(
+                          'Service de l’immigration · PSB',
+                          'Immigration authority · PSB',
+                          '出入境接待大厅',
+                        ),
+                      ],
+                      [
+                        '西安电子科技大学 校医院',
+                        c('Services médicaux du campus', 'Campus medical services', '校医院'),
+                      ],
+                      [
+                        '中国银行 西安电子科技大学',
+                        c('Banques autour du campus', 'Banks near campus', '周边银行'),
+                      ],
+                    ].map(([q, label]) => (
+                      <a
+                        className="map-link"
+                        key={q}
+                        href={
+                          'https://uri.amap.com/search?keyword=' +
+                          encodeURIComponent(q) +
+                          '&city=西安'
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span>
+                          <Icon name="location" size={16} />
+                          {label}
+                        </span>
+                        <Icon name="external" size={14} />
+                      </a>
+                    ))}
+                  </section>
+                  <section className="guide-callout">
+                    <span>24 h</span>
+                    <h3>
+                      {c(
+                        'Le premier réflexe à l’arrivée',
+                        'Your first step on arrival',
+                        '抵达后的第一步',
+                      )}
+                    </h3>
+                    <p>
+                      {c(
+                        'Vérifiez l’enregistrement de votre hébergement. En cas de doute, contactez l’ISO.',
+                        'Check your accommodation registration. If in doubt, contact ISO.',
+                        '确认住宿登记是否完成。如有疑问，请联系国际学生办公室。',
+                      )}
+                    </p>
+                    <button className="text-button" onClick={() => setModal('profile')}>
+                      {c('Noter ma date d’arrivée', 'Record my arrival date', '记录入境日期')}
+                      <Icon name="arrow" size={16} />
+                    </button>
+                  </section>
+                </aside>
+              </div>
+            </>
+          )}
+          {page === '/chat' && (
+            <>
+              <div className="page-title reveal">
+                <div className="date-caption">
+                  {c('POINT INFO XIDIAN', 'XIDIAN HELP DESK', '西电信息服务')}
+                </div>
+                <h1>
+                  {c(
+                    'Une question, un point de départ.',
+                    'A question. A place to start.',
+                    '从一个问题，找到起点。',
+                  )}
+                </h1>
+                <p>
+                  {c(
+                    'Un assistant documentaire pour retrouver les bonnes informations.',
+                    'A reference assistant to help you find the right information.',
+                    '资料助手，帮你查找实用信息。',
+                  )}
+                </p>
+              </div>
+              <section className="chat-panel panel">
+                <div className="chat-header">
+                  <span className="assistant-logo">
+                    <Icon name="spark" size={24} />
+                  </span>
+                  <div>
+                    <strong>{c('Assistant Xidian', 'Xidian Assistant', '西电资料助手')}</strong>
+                    <small>
+                      <span className="pulse-dot" />
+                      {c(
+                        'FAQ sourcée · FR / EN / ZH',
+                        'Sourced FAQ · FR / EN / ZH',
+                        '来源可查的常见问题 · 法/英/中',
+                      )}
+                    </small>
+                  </div>
+                  <span className="subtle-badge">FAQ</span>
+                </div>
+                <div className="chat-messages" aria-live="polite">
+                  {!messages.length ? (
+                    <div className="chat-welcome">
+                      <span className="chat-big-icon">
+                        <Icon name="chat" size={38} />
+                      </span>
+                      <h2>
+                        {c(
+                          'Comment puis-je vous orienter ?',
+                          'How can I point you in the right direction?',
+                          '你想了解什么？',
+                        )}
+                      </h2>
+                      <p>
+                        {c(
+                          'Choisissez un sujet ou posez votre question.',
+                          'Choose a topic or ask a question.',
+                          '选择主题或输入问题。',
+                        )}
+                      </p>
+                      <div className="suggestions">
+                        {[
+                          c(
+                            'Comment demander mon permis de séjour ?',
+                            'How do I apply for a residence permit?',
+                            '如何申请居留许可？',
+                          ),
+                          c(
+                            'Que faire dans les 24 h après l’arrivée ?',
+                            'What should I do within 24 hours of arrival?',
+                            '抵达后24小时内要做什么？',
+                          ),
+                          c(
+                            'Comment contacter un superviseur ?',
+                            'How do I contact a supervisor?',
+                            '如何联系导师？',
+                          ),
+                        ].map((q) => (
+                          <button key={q} onClick={() => sendChat(q)}>
+                            {q}
+                            <Icon name="arrow" size={17} />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    messages.map((m, i) => (
+                      <div className={'message ' + m.role} key={i}>
+                        <span>
+                          {m.role === 'assistant' ? (
+                            <Icon name="spark" size={17} />
+                          ) : (
+                            <Icon name="users" size={17} />
+                          )}
+                        </span>
+                        <div>
+                          <p>{m.text}</p>
+                          {m.source && (
+                            <a
+                              className="text-button small"
+                              href={m.source}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {c('Consulter la source', 'View source', '查看来源')}
+                              <Icon name="external" size={13} />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  )}
+                  {chatBusy && (
+                    <div className="chat-loading" role="status">
+                      {c('Recherche dans la FAQ…', 'Checking the FAQ…', '正在检索常见问题…')}
+                    </div>
+                  )}
+                </div>
+                <form
+                  className="chat-input"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    sendChat(chatInput);
+                  }}
+                >
+                  <input
+                    aria-label={c('Votre question', 'Your question', '你的问题')}
+                    maxLength={1200}
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    placeholder={c('Posez votre question…', 'Ask your question…', '输入你的问题…')}
+                  />
+                  <button
+                    disabled={chatBusy || !chatInput.trim()}
+                    aria-label={c('Envoyer', 'Send', '发送')}
+                  >
+                    <Icon name="arrow" />
+                  </button>
+                </form>
+                <p className="chat-disclosure">
+                  {c(
+                    'Réponses prédéfinies, sans IA générative ni RAG connecté. Les situations individuelles doivent être confirmées avec l’ISO.',
+                    'Predefined answers; generative AI and RAG are not connected. Confirm individual situations with ISO.',
+                    '使用预设答案，尚未连接生成式AI及RAG。个人情况请向国际学生办公室确认。',
+                  )}
+                </p>
+              </section>
+            </>
+          )}
+          {page === '/admin' && isProfessor && (
+            <>
+              <div className="page-title row between reveal">
+                <div>
+                  <div className="date-caption">
+                    {c(
+                      'BUREAU DES ÉTUDIANTS INTERNATIONAUX',
+                      'INTERNATIONAL STUDENTS OFFICE',
+                      '国际学生办公室',
+                    )}
+                  </div>
+                  <h1>
+                    {c(
+                      'Une vue claire. Un meilleur suivi.',
+                      'Clear visibility. Better support.',
+                      '清晰掌握，更好服务。',
+                    )}
+                  </h1>
+                  <p>
+                    {c(
+                      'Repérez les échéances prioritaires et accompagnez chaque étudiant.',
+                      'See upcoming deadlines and support every student.',
+                      '关注即将到期的证件，支持每一位学生。',
+                    )}
+                  </p>
+                </div>
+                <button className="button secondary" onClick={() => window.print()}>
+                  <Icon name="download" size={17} />
+                  PDF / {c('Imprimer', 'Print', '打印')}
+                </button>
+              </div>
+              {!demo && !live?.user.admin ? (
+                <section className="panel empty">
+                  <Icon name="shield" size={40} />
+                  <h2>
+                    {c(
+                      'Cet espace est réservé à l’ISO',
+                      'This workspace is reserved for ISO',
+                      '此工作台仅限ISO人员',
+                    )}
+                  </h2>
+                  <p>
+                    {c(
+                      'Votre compte n’a pas de rôle administrateur. Vous pouvez explorer la démonstration avec des données fictives.',
+                      'Your account has no administrator role. Explore the demo with fictional data.',
+                      '你的账户没有管理员角色。可使用虚构数据查看演示。',
+                    )}
+                  </p>
+                  <button className="button primary" onClick={() => setDemo(true)}>
+                    {c('Explorer la démonstration', 'Explore the demo', '查看演示')}
+                    <Icon name="arrow" size={17} />
+                  </button>
+                </section>
+              ) : (
+                <>
+                  {demo && (
+                    <div className="info-box admin-info">
+                      <Icon name="info" />
+                      <p>
+                        {c(
+                          'Prototype ISO : profils fictifs. Les rôles et rappels sont simulés, sans message externe.',
+                          'ISO prototype: fictional records. Roles and reminders are simulated; no external messages are sent.',
+                          'ISO演示：以下学生均为虚构，不会发送消息。',
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  <div className="admin-stats">
+                    {[
+                      [
+                        students.length,
+                        c('Étudiants affichés', 'Students shown', '显示学生'),
+                        'users',
+                        'rose',
+                      ],
+                      [
+                        students.filter((s: any) => s.expiry && remainingDays(s.expiry) < 7).length,
+                        c('À traiter en priorité', 'Priority cases', '优先处理'),
+                        'clock',
+                        'amber',
+                      ],
+                      [
+                        students.filter((s: any) => s.expiry && remainingDays(s.expiry) < 30)
+                          .length,
+                        c('Échéances sous 30 jours', 'Expiring within 30 days', '30天内到期'),
+                        'calendar',
+                        'blue',
+                      ],
+                      [
+                        new Set(students.map((s: any) => s.nationality)).size,
+                        c('Nationalités', 'Nationalities', '国籍'),
+                        'globe',
+                        'sage',
+                      ],
+                    ].map(([n, label, icon, color]) => (
+                      <article className="panel" key={String(label)}>
+                        <span className={'stat-icon ' + color}>
+                          <Icon name={String(icon)} />
+                        </span>
+                        <strong>{n}</strong>
+                        <span>{label}</span>
+                      </article>
+                    ))}
+                  </div>
+                  <section className="panel admin-table-panel">
+                    <div className="section-heading">
+                      <h2>{c('Suivi des étudiants', 'Student tracking', '学生记录')}</h2>
+                      <button
+                        className="text-button"
+                        onClick={() =>
+                          download(
+                            csv([
+                              ['Name', 'Student ID', 'Nationality', 'Program', 'Expiry', 'Days'],
+                              ...students.map((s: any) => [
+                                s.displayName,
+                                s.studentId,
+                                s.nationality,
+                                s.program,
+                                s.expiry,
+                                s.expiry ? remainingDays(s.expiry) : '',
+                              ]),
+                            ]),
+                            'ISO-etudiants.csv',
+                            'text/csv;charset=utf-8',
+                          )
+                        }
+                      >
+                        <Icon name="download" size={16} />
+                        CSV
+                      </button>
+                    </div>
+                    <div className="admin-filters">
+                      <div className="input-icon">
+                        <Icon name="search" size={17} />
+                        <input
+                          aria-label={t('search')}
+                          placeholder={c(
+                            'Nom, matricule, nationalité…',
+                            'Name, student ID, nationality…',
+                            '姓名、学号、国籍…',
+                          )}
+                          value={adminQuery}
+                          onChange={(e) => setAdminQuery(e.target.value)}
+                        />
+                      </div>
+                      <select
+                        aria-label="Status"
+                        value={adminUrgency}
+                        onChange={(e) => setAdminUrgency(e.target.value)}
+                      >
+                        <option value="">
+                          {c('Tous les statuts', 'All statuses', '全部状态')}
+                        </option>
+                        {['critical', 'warning', 'upcoming', 'safe', 'expired'].map((v, i) => (
+                          <option value={v} key={v}>
+                            {status([3, 14, 60, 120, -1][i])}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        aria-label={c('Nationalité', 'Nationality', '国籍')}
+                        placeholder={c('Nationalité', 'Nationality', '国籍')}
+                        value={adminNationality}
+                        onChange={(e) => setAdminNationality(e.target.value)}
+                      />
+                    </div>
+                    <div className="table-scroll">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>
+                              <input
+                                type="checkbox"
+                                aria-label={c('Tout sélectionner', 'Select all', '全选')}
+                                checked={
+                                  !!students.length &&
+                                  students.every((s: any) => chosenStudents.includes(s.userId))
+                                }
+                                onChange={(e) =>
+                                  setChosenStudents(
+                                    e.target.checked ? students.map((s: any) => s.userId) : [],
+                                  )
+                                }
+                              />
+                            </th>
+                            <th>{t('student')}</th>
+                            <th>{c('Nationalité', 'Nationality', '国籍')}</th>
+                            <th>{c('Programme', 'Program', '项目')}</th>
+                            <th>{c('Expiration', 'Expiry', '到期日')}</th>
+                            <th>{c('Statut', 'Status', '状态')}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {students.map((s: any) => (
+                            <tr key={s.userId}>
+                              <td>
+                                <input
+                                  type="checkbox"
+                                  aria-label={s.displayName}
+                                  checked={chosenStudents.includes(s.userId)}
+                                  onChange={(e) =>
+                                    setChosenStudents(
+                                      e.target.checked
+                                        ? [...chosenStudents, s.userId]
+                                        : chosenStudents.filter((x) => x !== s.userId),
+                                    )
+                                  }
+                                />
+                              </td>
+                              <td>
+                                <div className="table-student">
+                                  <span className="avatar">
+                                    {(s.displayName || 'X').slice(0, 1)}
+                                  </span>
+                                  <span>
+                                    <strong>{s.displayName || '—'}</strong>
+                                    <small>{s.studentId || '—'}</small>
+                                  </span>
+                                </div>
+                              </td>
+                              <td>{s.nationality || '—'}</td>
+                              <td>
+                                <span className="subtle-badge">{s.program}</span>
+                              </td>
+                              <td>{s.expiry ? date(s.expiry) : '—'}</td>
+                              <td>
+                                {s.expiry ? (
+                                  <span className={'status ' + urgency(remainingDays(s.expiry))}>
+                                    {status(remainingDays(s.expiry))} · {remainingDays(s.expiry)} j
+                                  </span>
+                                ) : (
+                                  c('Non renseigné', 'Not provided', '未填写')
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    {!students.length && (
+                      <div className="empty">
+                        <p>
+                          {c(
+                            'Aucun étudiant ne correspond aux filtres.',
+                            'No students match the filters.',
+                            '没有匹配筛选条件的学生。',
+                          )}
+                        </p>
+                      </div>
+                    )}
+                    <div className="table-footer">
+                      <span>
+                        {chosenStudents.length} {c('sélectionné(s)', 'selected', '项已选')}
+                      </span>
+                      <button
+                        className="button primary"
+                        disabled={busy || !chosenStudents.length}
+                        onClick={remind}
+                      >
+                        <Icon name="bell" size={17} />
+                        {c('Rappel collectif in-app', 'Send in-app reminder', '发送站内提醒')}
+                      </button>
+                    </div>
+                  </section>
+                  <div className="two-columns">
+                    <section className="panel">
+                      <h2>
+                        {c('Répartition par nationalité', 'Nationality breakdown', '国籍分布')}
+                      </h2>
+                      <div className="nationality-bars">
+                        {[...new Set<string>(students.map((s: any) => s.nationality || '—'))].map(
+                          (n) => {
+                            const count = students.filter(
+                              (s: any) => (s.nationality || '—') === n,
+                            ).length;
+                            return (
+                              <div key={n}>
+                                <span>
+                                  {n}
+                                  <strong>{count}</strong>
+                                </span>
+                                <div>
+                                  <i
+                                    style={{
+                                      width: (count / Math.max(students.length, 1)) * 100 + '%',
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          },
+                        )}
+                        {!students.length && (
+                          <p className="muted">
+                            {c('Aucune donnée à afficher.', 'No data to display.', '暂无数据。')}
+                          </p>
+                        )}
+                      </div>
+                    </section>
+                    <section className="panel">
+                      <h2>{c('Journal des rappels', 'Reminder log', '提醒日志')}</h2>
+                      <p className="muted">
+                        {c(
+                          'Le journal distingue la création du rappel de sa lecture par l’étudiant.',
+                          'The log distinguishes reminder creation from a student reading it.',
+                          '日志区分提醒创建与学生已读状态。',
+                        )}
+                      </p>
+                      {!demo &&
+                        (adminData?.alerts || []).slice(0, 5).map((a: Alert) => (
+                          <div className="alert-item" key={a.id}>
+                            <Icon name="bell" size={18} />
+                            <div>
+                              <p>{a.message}</p>
+                              <small>
+                                {a.channel} · {a.status} · {new Date(a.sentAt).toLocaleDateString()}
+                              </small>
+                            </div>
+                          </div>
+                        ))}
+                      {(demo || !adminData?.alerts?.length) && (
+                        <div className="empty small-empty">
+                          <Icon name="bell" size={26} />
+                          <p>
+                            {c(
+                              'Aucun rappel envoyé dans cette vue.',
+                              'No reminders sent in this view.',
+                              '此视图暂无提醒。',
+                            )}
+                          </p>
+                        </div>
+                      )}
+                    </section>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+          {page === '/club-office' && mayManageClubs && (
+            <ClubOffice lang={lang} account={account} />
+          )}
+          {page === '/settings' && (
+            <>
+              <div className="page-title reveal">
+                <h1>
+                  {t('settings')}
+                  <span className="title-dot">.</span>
+                </h1>
+                <p>
+                  {c(
+                    'Un espace qui s’adapte à votre parcours.',
+                    'A workspace that fits your journey.',
+                    '为你的留学之旅量身定制。',
+                  )}
+                </p>
+              </div>
+              <div className="two-columns">
+                <section className="panel settings-panel">
+                  <h2>{t('profile')}</h2>
+                  <div className="profile-preview">
+                    <span className="avatar">
+                      {(activeProfile.displayName || 'X').slice(0, 1).toUpperCase()}
+                    </span>
+                    <div>
+                      <strong>
+                        {activeProfile.displayName ||
+                          c('Compléter mon profil', 'Complete my profile', '完善个人信息')}
+                      </strong>
+                      <p>
+                        {account.email} ·{' '}
+                        {isProfessor
+                          ? c('Professeur', 'Professor', '教师')
+                          : account.role === 'club_leader'
+                            ? c('Responsable de club', 'Club leader', '社团负责人')
+                            : c('Étudiant', 'Student', '学生')}
+                      </p>
+                    </div>
+                  </div>
+                  <button className="button secondary" onClick={() => setModal('profile')}>
+                    {c('Modifier mon profil', 'Edit profile', '编辑个人信息')}
+                    <Icon name="arrow" size={16} />
+                  </button>
+                  <button className="text-button account-settings-signout" onClick={onSignOut}>
+                    {c('Se déconnecter', 'Sign out', '退出登录')}
+                  </button>
+                  <hr />
+                  <h2>{t('language')}</h2>
+                  <label className="field">
+                    <span>{c('Langue de navigation', 'Navigation language', '导航语言')}</span>
+                    <select value={lang} onChange={(e) => setLang(e.target.value)}>
+                      {languages.map(([code, name]) => (
+                        <option key={code} value={code}>
+                          {name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <p className="muted small">
+                    {c(
+                      'Navigation : 11 langues. Contenus détaillés : français, anglais et chinois. Les traductions nécessitent une validation humaine avant usage institutionnel.',
+                      'Navigation and campus life: 11 languages. Detailed content: French, English and Chinese; further translations in progress. Human review is required before institutional use.',
+                      '导航支持11种语言，详细内容提供法语、英语和中文版本。正式使用前需人工审核翻译。',
+                    )}
+                  </p>
+                  <hr />
+                  <h2>{c('Mes données', 'My records', '我的数据')}</h2>
+                  <button
+                    className="text-button"
+                    onClick={() =>
+                      download(
+                        JSON.stringify(
+                          {
+                            profile: activeProfile,
+                            documents: activeDocs,
+                            checklist: checked,
+                            favorites,
+                          },
+                          null,
+                          2,
+                        ),
+                        'Xidian-mes-donnees.json',
+                        'application/json',
+                      )
+                    }
+                  >
+                    <Icon name="download" size={17} />
+                    {c('Exporter mes données', 'Export my records', '导出我的数据')}
+                  </button>
+                  <p className="muted small">
+                    {c(
+                      'Les documents sont suivis par leurs dates. Aucun scan ni numéro de passeport n’est demandé.',
+                      'Documents are tracked by date. No scans or passport numbers are requested.',
+                      '仅记录证件日期，不要求证件扫描件或护照号码。',
+                    )}
+                  </p>
+                </section>
+                <section className="panel settings-panel">
+                  <h2>{c('État des services', 'Service status', '服务状态')}</h2>
+                  {[
+                    [
+                      c('Espace local de démonstration', 'Local demo workspace', '个人空间与证件'),
+                      true,
+                    ],
+                    [
+                      c(
+                        'Recherche et favoris superviseurs',
+                        'Supervisor directory and favorites',
+                        '导师目录与收藏',
+                      ),
+                      true,
+                    ],
+                    [
+                      c('Notifications dans l’application', 'In-app notifications', '站内通知'),
+                      true,
+                    ],
+                    [
+                      c(
+                        'Exports calendrier, CSV et impression',
+                        'Calendar, CSV exports and print',
+                        '日历、CSV导出和打印',
+                      ),
+                      true,
+                    ],
+                    ['WeChat / SMS / Email', false],
+                    ['RAG / OpenAI', false],
+                    [
+                      c(
+                        'Mini-programme WeChat publié',
+                        'Published WeChat mini-program',
+                        '已发布微信小程序',
+                      ),
+                      false,
+                    ],
+                    [
+                      c(
+                        'Validation institutionnelle ISO',
+                        'ISO institutional approval',
+                        'ISO机构审核',
+                      ),
+                      false,
+                    ],
+                  ].map(([a, b]) => (
+                    <div className="service-status" key={String(a)}>
+                      <span>{a}</span>
+                      <span className={'status ' + (b ? 'safe' : 'neutral')}>
+                        {b
+                          ? c('Disponible', 'Available', '可用')
+                          : c('À configurer', 'Pending setup', '待配置')}
+                      </span>
+                    </div>
+                  ))}
+                  <div className="info-box">
+                    <Icon name="info" size={18} />
+                    <p>
+                      {c(
+                        'Cette version web est une initiative étudiante indépendante. Elle ne revendique aucune certification MLPS/RGPD ni validation officielle de Xidian.',
+                        'This web version is an independent student initiative. It claims no MLPS/GDPR certification or official Xidian approval.',
+                        '本网站为独立学生倡议，尚无MLPS/RGPD认证或西电官方批准。',
+                      )}
+                    </p>
+                  </div>
+                  <a className="text-button" href="./openapi.json" target="_blank">
+                    {c(
+                      'Documentation API · OpenAPI',
+                      'API documentation · OpenAPI',
+                      'API文档 · OpenAPI',
+                    )}
+                    <Icon name="external" size={16} />
+                  </a>
+                </section>
+              </div>
+            </>
+          )}
+          {page === '/admin' && isProfessor && (demo || live?.user.admin) && (
+            <section className="panel faculty-management">
+              <div className="section-heading">
+                <h2>{c('Gestion des superviseurs', 'Supervisor management', '导师管理')}</h2>
+                <button
+                  className="button secondary"
+                  onClick={() => {
+                    setEditFaculty(null);
+                    setModal('faculty-edit');
+                  }}
+                >
+                  <Icon name="plus" size={16} />
+                  {t('add')}
+                </button>
+              </div>
+              {roster.map((s) => (
+                <div className="service-status" key={s.id}>
+                  <span>
+                    {s.name} · {s.zh}
+                    <small style={{ display: 'block' }}>{s.school}</small>
+                  </span>
+                  <button
+                    className="text-button"
+                    onClick={() => {
+                      setEditFaculty(s);
+                      setModal('faculty-edit');
+                    }}
+                  >
+                    {c('Modifier', 'Edit', '编辑')}
+                    <Icon name="arrow" size={15} />
+                  </button>
+                </div>
+              ))}
+            </section>
+          )}
+          <footer className="site-footer">
+            <span>
+              XIDIAN INTERNATIONAL HUB <i />{' '}
+              {c('Conçu pour avancer ensemble.', 'Made to move forward, together.', '携手同行。')}
+            </span>
+            <button onClick={() => setModal('about')}>
+              {c('À propos & confidentialité', 'About & privacy', '关于与隐私')}
+            </button>
+            <a href="https://sie.xidian.edu.cn/" target="_blank" rel="noreferrer">
+              {c('Site officiel SIE', 'Official SIE website', 'SIE官方网站')}
+              <Icon name="external" size={12} />
+            </a>
+          </footer>
+        </main>
+      </div>
+      {modal === 'faculty-edit' && (
+        <Modal
+          title={c('Profil superviseur', 'Supervisor profile', '导师资料')}
+          onClose={() => setModal('')}
+        >
+          <form
+            className="modal-form"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = new FormData(e.currentTarget);
+              const b: any = Object.fromEntries(form);
+              b.id = editFaculty?.id;
+              b.levels = form.getAll('levels');
+              b.research = String(b.research)
+                .split(',')
+                .map((x) => x.trim())
+                .filter(Boolean);
+              b.schoolFr = b.school;
+              setBusy(true);
+              try {
+                let item;
+                if (demo) {
+                  item = {
+                    ...supervisors[0],
+                    ...b,
+                    id: b.id || crypto.randomUUID(),
+                    researchFr: b.research,
+                    initials: b.name
+                      .split(' ')
+                      .map((x: string) => x[0])
+                      .join('')
+                      .slice(0, 2),
+                    international: 'confirm',
+                  };
+                } else {
+                  item = (await request('/api/supervisors', 'POST', b)).item;
+                }
+                setRoster((old) =>
+                  old.some((s) => s.id === item.id)
+                    ? old.map((s) => (s.id === item.id ? item : s))
+                    : [...old, item],
+                );
+                setModal('');
+                showToast(
+                  demo
+                    ? c('Profil d’exemple modifié.', 'Demo profile updated.')
+                    : c('Profil enregistré.', 'Profile saved.'),
+                );
+              } catch (e) {
+                showToast((e as Error).message);
+              } finally {
+                setBusy(false);
+              }
+            }}
+          >
+            {demo && (
+              <p className="muted small">
+                {c(
+                  'Démonstration : les modifications disparaissent au rechargement.',
+                  'Demo: edits are reset after reload.',
+                  '演示：刷新后重置。',
+                )}
+              </p>
+            )}
+            <div className="two-fields">
+              <label className="field">
+                <span>{c('Nom latin', 'Latin name', '英文姓名')}</span>
+                <input
+                  required
+                  name="name"
+                  defaultValue={editFaculty?.name || ''}
+                  maxLength={100}
+                />
+              </label>
+              <label className="field">
+                <span>{c('Nom chinois', 'Chinese name', '中文姓名')}</span>
+                <input required name="zh" defaultValue={editFaculty?.zh || ''} maxLength={50} />
+              </label>
+            </div>
+            <label className="field">
+              <span>{c('Titre', 'Title', '职称')}</span>
+              <select name="title" defaultValue={editFaculty?.title || ''}>
+                <option value="">{c('Non renseigné', 'Not specified', '未注明')}</option>
+                <option value="Professor">{c('Professeur', 'Professor', '教授')}</option>
+                <option value="Associate professor">
+                  {c('Professeur associé', 'Associate professor', '副教授')}
+                </option>
+              </select>
+            </label>
+            <label className="field">
+              <span>{c('École / département', 'School / department', '学院')}</span>
+              <input
+                required
+                name="school"
+                defaultValue={editFaculty?.school || ''}
+                maxLength={150}
+              />
+            </label>
+            <label className="field">
+              <span>{c('Discipline', 'Discipline', '学科')}</span>
+              <input
+                required
+                name="field"
+                defaultValue={editFaculty?.field || ''}
+                maxLength={100}
+              />
+            </label>
+            <label className="field">
+              <span>
+                {c(
+                  'Recherche (séparée par des virgules)',
+                  'Research (comma-separated)',
+                  '研究方向（逗号分隔）',
+                )}
+              </span>
+              <input
+                name="research"
+                defaultValue={editFaculty?.research.join(', ') || ''}
+                maxLength={500}
+              />
+            </label>
+            <div className="row">
+              <label className="row small">
+                <input
+                  type="checkbox"
+                  name="levels"
+                  value="Master"
+                  defaultChecked={!editFaculty || editFaculty.levels.includes('Master')}
+                />
+                Master
+              </label>
+              <label className="row small">
+                <input
+                  type="checkbox"
+                  name="levels"
+                  value="PhD"
+                  defaultChecked={editFaculty?.levels.includes('PhD')}
+                />
+                PhD
+              </label>
+            </div>
+            <label className="field">
+              <span>Email</span>
+              <input
+                type="email"
+                required
+                name="email"
+                defaultValue={editFaculty?.email || ''}
+                maxLength={200}
+              />
+            </label>
+            <label className="field">
+              <span>
+                {c(
+                  'URL officielle Xidian (HTTPS)',
+                  'Official Xidian source (HTTPS)',
+                  '西电官方链接（HTTPS）',
+                )}
+              </span>
+              <input
+                type="url"
+                required
+                name="source"
+                defaultValue={editFaculty?.source || ''}
+                maxLength={300}
+              />
+            </label>
+            <div className="modal-actions">
+              <button className="button secondary" type="button" onClick={() => setModal('')}>
+                {t('cancel')}
+              </button>
+              <button className="button primary" disabled={busy}>
+                {t('save')}
+                <Icon name="check" size={16} />
+              </button>
+            </div>
+          </form>
+        </Modal>
+      )}
+      {modal === 'document' && (
+        <Modal
+          title={
+            editDoc
+              ? c('Modifier le document', 'Edit document', '编辑文件')
+              : c('Ajouter un document', 'Add a document', '添加文件')
+          }
+          onClose={() => setModal('')}
+        >
+          <form onSubmit={submitDoc} className="modal-form">
+            <p className="muted">
+              {demo
+                ? c(
+                    'Données d’exemple uniquement. Ouvrez votre espace personnel pour conserver vos dates.',
+                    'Sample records only. Open your personal workspace to save your dates.',
+                    '仅用于示例。请打开个人空间保存日期。',
+                  )
+                : c(
+                    'Enregistrez les dates inscrites sur votre document.',
+                    'Record the dates printed on your document.',
+                    '请填写证件上标注的日期。',
+                  )}
+            </p>
+            <label className="field">
+              <span>{c('Type de document', 'Document type', '证件类型')}</span>
+              <select name="type" defaultValue={editDoc?.type || 'residence'} required>
+                {['residence', 'visa', 'passport', 'insurance'].map((type) => (
+                  <option value={type} key={type}>
+                    {docTitle({ id: '', type, label: '', expiry: day(1) })}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="field">
+              <span>{c('Intitulé', 'Title', '名称')}</span>
+              <input
+                name="label"
+                defaultValue={editDoc?.label || ''}
+                placeholder={c(
+                  'Ex. Permis de séjour étudiant',
+                  'e.g. Student residence permit',
+                  '例如：学习类居留许可',
+                )}
+                required
+                maxLength={80}
+              />
+            </label>
+            <div className="two-fields">
+              <label className="field">
+                <span>
+                  {c(
+                    'Date de délivrance (facultatif)',
+                    'Issue date (optional)',
+                    '签发日期（选填）',
+                  )}
+                </span>
+                <input type="date" name="issueDate" defaultValue={editDoc?.issueDate || ''} />
+              </label>
+              <label className="field">
+                <span>{c('Date d’expiration', 'Expiry date', '到期日期')}</span>
+                <input type="date" name="expiry" defaultValue={editDoc?.expiry || ''} required />
+              </label>
+            </div>
+            <div className="info-box">
+              <Icon name="info" size={18} />
+              <p>
+                {c(
+                  'Pour un visa, distinguez la date limite d’entrée de la durée de séjour autorisée. Faites confirmer la date à suivre par l’ISO.',
+                  'For a visa, distinguish the entry validity date from the permitted duration of stay. Confirm the date to track with ISO.',
+                  '请区分签证入境有效期与允许停留期限。需追踪的日期请向国际学生办公室确认。',
+                )}
+              </p>
+            </div>
+            <div className="modal-actions">
+              {editDoc && (
+                <button
+                  type="button"
+                  disabled={busy}
+                  className="icon-button danger"
+                  aria-label={c('Supprimer', 'Delete', '删除')}
+                  onClick={() => setModal('delete-document')}
+                >
+                  <Icon name="trash" />
+                </button>
+              )}
+              <button type="button" className="button secondary" onClick={() => setModal('')}>
+                {t('cancel')}
+              </button>
+              <button disabled={busy} className="button primary">
+                {busy ? '…' : t('save')}
+                <Icon name="check" size={17} />
+              </button>
+            </div>
+          </form>
+        </Modal>
+      )}
+      {modal === 'delete-document' && editDoc && (
+        <Modal
+          title={c('Supprimer ce document ?', 'Delete this document?', '删除此文件？')}
+          onClose={() => setModal('document')}
+        >
+          <p className="muted">
+            {editDoc.label} · {date(editDoc.expiry)}
+          </p>
+          <div className="modal-actions">
+            <button className="button secondary" onClick={() => setModal('document')}>
+              {t('cancel')}
+            </button>
+            <button className="button primary" disabled={busy} onClick={() => removeDoc(editDoc)}>
+              {c('Supprimer', 'Delete', '删除')}
+              <Icon name="trash" size={17} />
+            </button>
+          </div>
+        </Modal>
+      )}
+      {modal === 'profile' && (
+        <Modal title={t('profile')} onClose={() => setModal('')}>
+          <form className="modal-form" onSubmit={submitProfile}>
+            <p className="muted small">
+              {account.email}
+              {!isProfessor && ' · ' + account.studentId}
+            </p>
+            <label className="field">
+              <span>{c('Nom complet', 'Full name', '姓名')}</span>
+              <input
+                name="displayName"
+                maxLength={120}
+                defaultValue={activeProfile.displayName || account.displayName}
+                required
+              />
+            </label>
+            {!isProfessor && (
+              <>
+                <div className="two-fields">
+                  <label className="field">
+                    <span>{c('Nationalité', 'Nationality', '国籍')}</span>
+                    <input
+                      name="nationality"
+                      maxLength={120}
+                      defaultValue={activeProfile.nationality || account.nationality}
+                      required
+                    />
+                  </label>
+                  <label className="field">
+                    <span>{c('Spécialité / major', 'Major', '专业')}</span>
+                    <input
+                      name="major"
+                      maxLength={120}
+                      defaultValue={activeProfile.major || account.major}
+                      required
+                    />
+                  </label>
+                </div>
+                <label className="field">
+                  <span>{c('Niveau d’études / grade', 'Study level / grade', '学习层次')}</span>
+                  <select name="program" defaultValue={activeProfile.program || account.grade}>
+                    {[
+                      ['Bachelor', c('Licence', 'Bachelor', '本科')],
+                      ['Master', c('Master', 'Master', '硕士')],
+                      ['PhD', c('Doctorat', 'PhD', '博士')],
+                      [
+                        'Language program',
+                        c('Programme de langue', 'Language program', '语言项目'),
+                      ],
+                    ].map(([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="field">
+                  <span>
+                    {c(
+                      'Téléphone avec indicatif',
+                      'Phone with country code',
+                      '电话号码（含国家区号）',
+                    )}
+                  </span>
+                  <input
+                    name="phone"
+                    type="tel"
+                    required
+                    maxLength={26}
+                    defaultValue={activeProfile.phone || account.phone}
+                  />
+                </label>
+              </>
+            )}
+            <div className="two-fields">
+              <label className="field">
+                <span>{c('Date d’arrivée en Chine', 'Arrival in China', '入境日期')}</span>
+                <input
+                  name="arrivalDate"
+                  type="date"
+                  defaultValue={activeProfile.arrivalDate || ''}
+                />
+              </label>
+              <label className="field">
+                <span>
+                  {c(
+                    'Enregistrement de l’hébergement',
+                    'Accommodation registration',
+                    '住宿登记日期',
+                  )}
+                </span>
+                <input
+                  name="registrationDate"
+                  type="date"
+                  defaultValue={activeProfile.registrationDate || ''}
+                />
+              </label>
+            </div>
+            <div className="modal-actions">
+              <button type="button" className="button secondary" onClick={() => setModal('')}>
+                {t('cancel')}
+              </button>
+              <button className="button primary" disabled={busy}>
+                {busy ? '…' : t('save')}
+                <Icon name="check" size={17} />
+              </button>
+            </div>
+          </form>
+        </Modal>
+      )}
+      {modal === 'supervisor' && selected && (
+        <Modal
+          title={selected.name + (selected.zh ? ' · ' + selected.zh : '')}
+          onClose={() => setModal('')}
+        >
+          <div className="faculty-detail">
+            <span className="faculty-avatar" style={{ background: selected.color }}>
+              {selected.initials}
+            </span>
+            <div>
+              <strong>
+                {selected.title || c('Fiche officielle SIE', 'Official SIE listing', 'SIE官方资料')}
+              </strong>
+              <p>{c(selected.schoolFr, selected.school)}</p>
+              <span>
+                {selected.levels
+                  .map((x) =>
+                    x === 'Master' ? c('Master', 'Master', '硕士') : c('Doctorat', 'PhD', '博士'),
+                  )
+                  .join(' / ')}
+              </span>
+            </div>
+          </div>
+          {selected.research.length > 0 && (
+            <>
+              <h3>{c('Axes de recherche', 'Research interests', '研究方向')}</h3>
+              <div className="research-tags">
+                {selected.research.map((r, i) => (
+                  <span key={r}>{c(selected.researchFr[i] || r, r)}</span>
+                ))}
+              </div>
+            </>
+          )}
+          <p className="muted">
+            {selected.id === 'sheng-kai'
+              ? c(
+                  'Une annonce officielle de 2025 invitait les candidats internationaux. Les places actuelles et la langue de supervision restent à confirmer.',
+                  'A 2025 official announcement invited international applicants. Current places and supervision language remain unconfirmed.',
+                  '2025年官方招生信息欢迎国际生申请，当前名额和指导语言仍须确认。',
+                )
+              : c(
+                  'Les places pour les étudiants internationaux et la langue de supervision doivent être confirmées directement avec l’enseignant.',
+                  'Confirm international student availability and supervision language directly with the faculty member.',
+                  '国际生名额和指导语言请直接向导师确认。',
+                )}
+          </p>
+          {selected.email ? (
+            <a href={'mailto:' + selected.email} className="contact-email">
+              <Icon name="mail" size={17} />
+              {selected.email}
+            </a>
+          ) : (
+            <p className="missing-field">
+              {c(
+                'Email : consultez le document officiel ci-dessous.',
+                'Email: consult the official document below.',
+                '邮箱：请查阅下方官方资料。',
+              )}
+            </p>
+          )}
+          <a href={selected.source} className="text-button" target="_blank" rel="noreferrer">
+            {c('Ouvrir la fiche officielle', 'Open official profile', '打开官方资料')}
+            <Icon name="external" size={15} />
+          </a>
+          {selected.profileImages?.length ? (
+            <section className="official-profile-images">
+              <h3>
+                {c(
+                  'Document publié par Xidian',
+                  'Document published by Xidian',
+                  '西电发布的官方资料',
+                )}
+              </h3>
+              <p className="muted small">
+                {c(
+                  'Image officielle non retranscrite : cliquez pour l’ouvrir en taille réelle.',
+                  'Original official image: click to open at full size.',
+                  '官方原始图片，点击可查看完整尺寸。',
+                )}
+              </p>
+              {selected.profileImages.map((url, i) => (
+                <a href={url} target="_blank" rel="noreferrer" key={url}>
+                  <img
+                    src={url}
+                    alt={`${selected.name} · SIE · ${i + 1}`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                  />
+                  <span>
+                    {c('Ouvrir le document', 'Open document', '打开资料')} {i + 1}
+                    <Icon name="external" size={14} />
+                  </span>
+                </a>
+              ))}
+            </section>
+          ) : (
+            selected.directorySource && (
+              <div className="info-box">
+                <Icon name="info" size={17} />
+                <p>
+                  {c(
+                    'Cette page officielle ne contient actuellement aucun document détaillé. Consultez-la pour les mises à jour.',
+                    'This official page currently has no detailed document. Check it for updates.',
+                    '详细资料请查看上方链接的官方页面。',
+                  )}
+                </p>
+              </div>
+            )
+          )}
+          <hr />
+          <h3>
+            {c('Un premier email, bien préparé', 'A thoughtful first email', '准备一封介绍邮件')}
+          </h3>
+          <p className="muted small">
+            {c(
+              'Modèle en anglais : remplacez les champs entre crochets avant l’envoi.',
+              'English template: replace bracketed fields before sending.',
+              '英文模板：发送前请替换方括号内容。',
+            )}
+          </p>
+          <textarea
+            className="email-template"
+            readOnly
+            value={emailText}
+            aria-label={c('Modèle d’email', 'Email template', '邮件模板')}
+            rows={9}
+          />
+          <div className="modal-actions">
+            <button
+              className="button secondary"
+              onClick={() => download(emailText, 'supervisor-email.txt', 'text/plain')}
+            >
+              {t('export')}
+              <Icon name="download" size={16} />
+            </button>
+            <button
+              className="button primary"
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(emailText);
+                  showToast(c('Modèle copié.', 'Template copied.', '模板已复制。'));
+                } catch {
+                  showToast(
+                    c(
+                      'La copie n’est pas disponible : utilisez le bouton Exporter.',
+                      'Clipboard unavailable: use Export.',
+                    ),
+                  );
+                }
+              }}
+            >
+              {c('Copier le modèle', 'Copy template', '复制模板')}
+              <Icon name="mail" size={16} />
+            </button>
+          </div>
+        </Modal>
+      )}
+      {modal === 'notifications' && (
+        <Modal title={t('notifications')} onClose={() => setModal('')}>
+          <p className="muted">
+            {c(
+              'Historique des rappels disponibles dans votre espace.',
+              'Your in-app reminder history.',
+              '个人空间内的提醒历史。',
+            )}
+          </p>
+          {activeAlerts.map((a) => (
+            <div className="alert-item" key={a.id}>
+              <span className="stat-icon amber">
+                <Icon name="bell" size={18} />
+              </span>
+              <div>
+                <p>{a.message}</p>
+                <small>
+                  {new Date(a.sentAt).toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+                    timeZone: 'Asia/Shanghai',
+                  })}{' '}
+                  · {a.channel} ·{' '}
+                  {a.status === 'read' ? c('Lu', 'Read', '已读') : c('Non lu', 'Unread', '未读')}
+                </small>
+              </div>
+            </div>
+          ))}
+          {!activeAlerts.length && (
+            <div className="empty small-empty">
+              <Icon name="bell" size={35} />
+              <p>{c('Aucune alerte pour le moment.', 'No alerts right now.', '暂无提醒。')}</p>
+            </div>
+          )}
+          <div className="modal-actions">
+            <button
+              className="button secondary"
+              onClick={async () => {
+                if (!demo) {
+                  try {
+                    await request('/api/alerts', 'PATCH');
+                    await load();
+                  } catch (e) {
+                    showToast((e as Error).message);
+                    return;
+                  }
+                }
+                setModal('');
+              }}
+            >
+              {c('Tout marquer comme lu', 'Mark all as read', '全部标为已读')}
+              <Icon name="check" size={16} />
+            </button>
+          </div>
+        </Modal>
+      )}
+      {modal === 'signin' && (
+        <Modal
+          title={c('Ouvrir votre espace', 'Open your workspace', '打开个人空间')}
+          onClose={() => setModal('')}
+        >
+          <p className="muted">
+            {c(
+              'Connectez-vous pour conserver vos documents, favoris et démarches entre vos visites.',
+              'Sign in to keep your records, favorites and checklist between visits.',
+              '登录后可保存证件信息、收藏和入学清单。',
+            )}
+          </p>
+          {loadError && <p className="error-message">{loadError}</p>}
+          <div className="modal-actions">
+            <button
+              className="button secondary"
+              onClick={() => {
+                setModal('');
+                activate();
+              }}
+            >
+              {c('Réessayer', 'Try again', '重试')}
+            </button>
+            <a className="button primary" href="#/" target="_top">
+              {c('Se connecter', 'Sign in', '登录')}
+              <Icon name="arrow" size={16} />
+            </a>
+          </div>
+        </Modal>
+      )}
+      {modal === 'about' && (
+        <Modal title="Xidian International Hub · Xie-Visas" onClose={() => setModal('')}>
+          <div className="about-mark">
+            <Icon name="globe" size={42} />
+          </div>
+          <h3>
+            {c(
+              'Une expérience personnelle. Une ambition collective.',
+              'A personal experience. A shared ambition.',
+              '亲身经历，共同愿景。',
+            )}
+          </h3>
+          <p className="muted">
+            {c(
+              'Le projet est né d’une expérience de visa expiré et d’une amende de 10 000 RMB. Son ambition : aider les étudiants internationaux à anticiper leurs démarches et à trouver leur place à Xidian.',
+              'This project grew out of an expired-visa experience and a 10,000 RMB fine. Its aim is to help international students plan ahead and find their place at Xidian.',
+              '本项目源于一次签证逾期及10,000元人民币罚款的亲身经历，旨在帮助国际学生提前规划手续，安心融入西电。',
+            )}
+          </p>
+          <h3>
+            {c('Vos données, votre espace', 'Your records, your workspace', '你的记录，你的空间')}
+          </h3>
+          <p className="muted">
+            {c(
+              'Les exemples sont fictifs. Ce prototype utilise uniquement le stockage local du navigateur. Les données ne sont ni envoyées à un serveur, ni synchronisées entre appareils. N’entrez pas de données sensibles. Aucun scan ni numéro de passeport n’est demandé. Les rôles ISO sont simulés dans le prototype. La langue de navigation est mémorisée sur cet appareil.',
+              'Examples are fictional. This prototype uses browser-local storage only. Records are not sent to a server or synchronized across devices. Do not enter sensitive information. No scans or passport numbers are requested. ISO roles are simulated in the prototype. Your language preference is saved on this device.',
+              '示例数据均为虚构。本原型仅在浏览器本地保存数据，不会发送到服务器或跨设备同步。请勿输入敏感信息。不要求证件扫描件或护照号码。ISO角色仅为模拟。语言偏好保存在本设备。',
+            )}
+          </p>
+          <p className="muted small">
+            {c(
+              'Initiative indépendante, non affiliée officiellement à Xidian. Informations indicatives, à confirmer auprès de l’ISO et des autorités compétentes.',
+              'Independent initiative, not officially affiliated with Xidian. Reference information must be confirmed with ISO and the relevant authorities.',
+              '本项目为独立倡议，尚未获得西电官方授权。参考信息请向国际学生办公室和主管部门确认。',
+            )}
+          </p>
+          <div className="modal-actions">
+            <button className="button primary" onClick={() => setModal('')}>
+              {c('C’est compris', 'Got it', '知道了')}
+              <Icon name="check" size={16} />
+            </button>
+          </div>
+        </Modal>
+      )}
+      {toast && (
+        <div className="toast" role="status">
+          <Icon name="info" size={18} />
+          <span>{toast}</span>
+          <button
+            className="icon-button"
+            aria-label={content(document.documentElement.lang, 'Fermer', 'Close', '关闭')}
+            onClick={() => setToast('')}
+          >
+            <Icon name="close" size={16} />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
