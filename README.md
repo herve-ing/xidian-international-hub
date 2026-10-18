@@ -79,3 +79,17 @@ Le catalogue public `#/clubs` permet de découvrir les clubs avant connexion, av
 Source communautaire consultée le 18 octobre 2026 : https://freshman-guide-and-clubs.onrender.com/ et sa fiche basketball https://freshman-guide-and-clubs.onrender.com/basketball.html. Cette dernière indique Oussama Boumlik et le contact WeChat `lkhawa101`, reproduits avec leur source. Les autres responsables, groupes, horaires, lieux et frais ne sont pas inventés. Aucune photo ni texte éditorial du site de référence n’est recopié. Descriptifs et conseils de préparation rédigés pour ce prototype ; à valider avec les clubs.
 
 L’interface des clubs est traduite dans les 11 langues. Les descriptions et conseils détaillés des 13 nouveaux clubs sont rédigés en français, anglais et chinois, avec repli anglais et indication visible pour les autres langues. Les 17 tests couvrent notamment les 13 entrées, les recherches, la migration et les exports calendaires de Pékin.
+
+## Trois niveaux et inscriptions aux clubs — 18 octobre 2026
+
+- Étudiant : toutes les fonctions personnelles, inscription aux 13 clubs, suivi des décisions, annulation ou départ et réinscription après refus/annulation. Aucun espace ISO ni gestion des autres demandes.
+- Responsable de club : conserve les fonctions étudiantes et accède à `#/club-office` pour les seuls clubs attribués. Peut examiner les demandes, accepter/refuser avec une réponse et consulter les membres acceptés. Aucun accès ISO ni nomination de responsables.
+- Professeur : toutes les fonctions, tous les clubs, toutes les demandes, l’ISO et la nomination/révocation des responsables. Peut également s’inscrire comme membre ; personne ne valide sa propre demande.
+
+Nomination : l’étudiant crée d’abord son compte. Un professeur ouvre **Gestion des clubs → Responsables**, sélectionne le compte et coche ses clubs. Le compte utilise ensuite le portail **Responsable de club** avec son email/matricule et son mot de passe habituels. Retirer tous les clubs lui rend le rôle étudiant. Aucun code responsable partagé n’est nécessaire.
+
+L’inscription au club est maintenant un enregistrement local distinct du brouillon de message. Le formulaire demande le niveau d’expérience, une motivation/disponibilité et l’autorisation de partager les informations nécessaires avec les responsables. Le téléphone reste facultatif. Les états sont `pending`, `approved`, `declined`, `cancelled`, avec un historique daté et une décision visible dans **Mes inscriptions**. Les doublons actifs sont refusés, et une réinscription réutilise le dossier en conservant son historique.
+
+**Limite du prototype :** ces échanges fonctionnent entre comptes du même navigateur. Le stockage local et les contrôles du client ne constituent pas une authentification ou une autorisation serveur. Aucun message externe n’est envoyé et aucune donnée n’est synchronisée entre appareils. Pour ouvrir les inscriptions à de vrais étudiants sur plusieurs appareils, connecter ce modèle au backend et à une base de données, puis y appliquer les vérifications de rôle et d’appartenance au club.
+
+Les tests couvrent les trois rôles, l’absence d’ISO pour les responsables, la nomination/révocation, la portée des données par club, le consentement et la confidentialité du téléphone, les doublons, les décisions et la réinscription.
