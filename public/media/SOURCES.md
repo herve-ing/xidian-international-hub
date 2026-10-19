@@ -75,3 +75,7 @@ Rendered from the user-supplied original PDF pages at 1600 px, preserving comple
 | laboratory-facilities.jpg | [0128英文版] XIDIAN UNIVERSITY.pdf | 30   |
 
 Admissions programme and application requirements use the supplied 2026 Master/Doctoral guides (pp. 1–3). Differences from general presentations are identified in the page text. The 2026 application cycle is historical. Supervisor CV images remain sourced directly from the official SIE profile URLs indexed in `src/supervisors.ts`; they are displayed as documents rather than invented portraits.
+
+## Animated Hub logo · 19 October 2026
+
+`hub-logo.jpg` is the supplied `download.jfif` logo, used unchanged. Animated SVG text and pixels extend its binary disintegration at runtime. Background binary sequences are generated deterministically by `scripts/generate-binary-motion.py`. No generated portrait or university seal is introduced.
