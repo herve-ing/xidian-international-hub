@@ -1,0 +1,38 @@
+export function answerFAQ(question: string, locale: string) {
+  const q = question.toLowerCase();
+  const lang = locale === 'fr' ? 'fr' : locale === 'zh' ? 'zh' : 'en';
+  let key = /visa|permis|residen|签证|居留/.test(q)
+    ? 'visa'
+    : /24|arrival|arriv|logement|住宿/.test(q)
+      ? 'arrival'
+      : /supervis|导师|master|phd/.test(q)
+        ? 'supervisor'
+        : 'other';
+  const entries: any = {
+    visa: {
+      fr: 'Si votre visa exige un permis de séjour après l’entrée, la demande doit être déposée dans les 30 jours suivant l’entrée. Vérifiez la durée de séjour indiquée sur votre visa et préparez votre dossier avec l’ISO. Le compteur de ce site ne remplace pas cette vérification.',
+      en: 'If your visa requires a residence permit after entry, apply within 30 days of entering China. Check the permitted duration of stay on your visa and prepare your application with ISO. This site’s countdown does not replace that check.',
+      zh: '如果所持签证注明入境后需要办理居留证件，应在入境后30日内申请。请核对签证注明的停留期限，并向国际学生办公室确认所需材料。本站倒计时不能替代核验。',
+      url: 'https://en.nia.gov.cn/n147423/n147478/n147715/c158270/content.html',
+    },
+    arrival: {
+      fr: 'Hors hôtel, l’enregistrement de l’hébergement doit normalement être effectué dans les 24 heures après l’installation. L’hôtel réalise la déclaration pour ses clients. La NIA propose aussi un service en ligne ; vérifiez votre situation et la procédure avec l’ISO.',
+      en: 'For accommodation outside hotels, registration is normally required within 24 hours of arrival at the accommodation. Hotels register their guests. NIA also offers online registration; confirm your circumstances and procedure with ISO.',
+      zh: '在旅馆以外的住所居住或住宿，一般应在入住后24小时内办理住宿登记。旅馆负责为住客登记。国家移民管理局也提供网上办理服务，请向国际学生办公室确认具体要求。',
+      url: 'https://en.nia.gov.cn/n147418/n147463/c197328/content.html',
+    },
+    supervisor: {
+      fr: 'Consultez l’annuaire, ouvrez la page officielle de l’enseignant et confirmez ses disponibilités ainsi que la langue de supervision. Le modèle d’email permet de présenter votre parcours, votre projet de recherche et vos pièces jointes.',
+      en: 'Use the directory, open the faculty member’s official page, and confirm current availability and supervision language. Use the email template to introduce your background, research plan and attachments.',
+      zh: '请查看导师目录和教师官方主页，并直接确认招生名额及指导语言。可使用邮件模板介绍学术背景、研究计划和附件。',
+      url: 'https://sie.xidian.edu.cn/lhk/zsjz/yjsxm/dsdw1/txgcyx.htm',
+    },
+    other: {
+      fr: 'Je suis un assistant documentaire à réponses prédéfinies, sans modèle IA connecté. Je peux orienter vers les ressources sur les permis, l’enregistrement de l’hébergement et les superviseurs. Pour une situation personnelle, contactez l’ISO.',
+      en: 'I am a reference assistant using predefined answers, without a connected AI model. I can direct you to residence permit, accommodation registration and supervisor resources. Contact ISO for individual cases.',
+      zh: '我是使用预设答案的资料助手，尚未连接人工智能模型。可提供居留许可、住宿登记和导师信息的参考链接。个人情况请咨询国际学生办公室。',
+      url: 'https://sie.xidian.edu.cn/',
+    },
+  };
+  return { answer: entries[key][lang], source: entries[key].url, mode: 'reference-faq' };
+}

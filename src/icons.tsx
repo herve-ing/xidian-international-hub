@@ -1,0 +1,171 @@
+import React from 'react';
+const paths: Record<string, React.ReactNode> = {
+  home: (
+    <>
+      <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z" />
+      <path d="M9 21v-8h6v8" />
+    </>
+  ),
+  cap: (
+    <>
+      <path d="m2 8 10-5 10 5-10 5zM6 10v7c4 3 8 3 12 0v-7M22 8v8" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 3 3 7v6c0 5 9 9 9 9s9-4 9-9V7Z" />
+      <path d="m8 12 3 3 5-6" />
+    </>
+  ),
+  compass: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m16 8-3 5-5 3 3-5z" />
+    </>
+  ),
+  chat: (
+    <>
+      <path d="M21 11a8 8 0 0 1-8 8H8l-5 3 1-6a8 8 0 1 1 17-5Z" />
+      <path d="M8 10h8M8 14h5" />
+    </>
+  ),
+  users: (
+    <>
+      <circle cx="9" cy="7" r="3" />
+      <path d="M3 21v-3a6 6 0 0 1 12 0v3M17 4a3 3 0 0 1 0 6M21 21v-3a6 6 0 0 0-4-5" />
+    </>
+  ),
+  settings: (
+    <>
+      <circle cx="12" cy="12" r="3" />
+      <path d="m9 3-1 3-3 1-2 3 2 2-1 3 3 2 1 4h4l2-3 3-1 3-3-2-3 1-3-4-2-1-3Z" />
+    </>
+  ),
+  search: (
+    <>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m16 16 5 5" />
+    </>
+  ),
+  bell: (
+    <>
+      <path d="M5 9a7 7 0 0 1 14 0c0 8 3 8 3 9H2c0-1 3-1 3-9M10 22h4" />
+    </>
+  ),
+  arrow: <path d="M4 12h16m-6-6 6 6-6 6" />,
+  external: (
+    <>
+      <path d="M14 3h7v7m0-7L10 14M10 3H3v18h18v-7" />
+    </>
+  ),
+  plus: <path d="M12 4v16M4 12h16" />,
+  file: (
+    <>
+      <path d="M14 2H5v20h14V7Z" />
+      <path d="M14 2v6h5M8 12h8M8 16h6" />
+    </>
+  ),
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M7 2v6M17 2v6M3 11h18M8 15h2m4 0h2M8 18h2" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 6v6l4 2" />
+    </>
+  ),
+  check: <path d="m5 12 4 4L20 5" />,
+  chevron: <path d="m9 5 7 7-7 7" />,
+  bookmark: <path d="M6 3h12v18l-6-4-6 4Z" />,
+  mail: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 6 9 7 9-7" />
+    </>
+  ),
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <ellipse cx="12" cy="12" rx="4" ry="9" />
+      <path d="M3 12h18" />
+    </>
+  ),
+  download: (
+    <>
+      <path d="M12 3v12m-5-5 5 5 5-5M3 17v4h18v-4" />
+    </>
+  ),
+  close: <path d="m5 5 14 14M5 19 19 5" />,
+  menu: <path d="M3 6h18M3 12h18M3 18h18" />,
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v6M12 7v1" />
+    </>
+  ),
+  spark: (
+    <>
+      <path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z" />
+      <path d="m20 2 .5 1.5L22 4l-1.5.5L20 6l-.5-1.5L18 4l1.5-.5Z" />
+    </>
+  ),
+  location: (
+    <>
+      <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </>
+  ),
+  logout: (
+    <>
+      <path d="M9 3H3v18h6M9 12h12m-5-5 5 5-5 5" />
+    </>
+  ),
+  trash: (
+    <>
+      <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7" />
+    </>
+  ),
+};
+export function Icon({
+  name,
+  size = 20,
+  ...props
+}: { name: string; size?: number } & React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      {paths[name] || paths.file}
+    </svg>
+  );
+}
+export function Campus() {
+  return (
+    <svg className="campus-art" viewBox="0 0 500 280" fill="none" aria-hidden="true">
+      <circle cx="309" cy="90" r="71" fill="#ead3cb" />
+      <circle cx="420" cy="180" r="49" fill="#dfc5ba" opacity=".55" />
+      <g stroke="#ae7b72" strokeWidth="1.1">
+        <path d="M30 249h453M45 257h425M91 244V133h70v111M161 244V91h176v153M337 244V133h70v111" />
+        <path d="m142 91 107-54 107 54H142Zm-2-8h218M164 105h170M173 118h152M173 130h152M176 234h145M143 241h213M173 244v-91h152v91M188 231v-75h15v75M219 231v-75h15v75M250 231v-75h15v75M281 231v-75h15v75" />
+        <path d="M101 147h49v10h-49zM101 171h49v10h-49zM101 195h49v10h-49zM350 147h45v10h-45zM350 171h45v10h-45zM350 195h45v10h-45zM91 225h70M337 225h70" />
+        <circle cx="250" cy="75" r="9" />
+        <path d="M250 68v14m-7-7h14" />
+        <path d="M65 245v-57M45 211c-16-25 2-50 20-50 21 0 37 29 17 50-12 12-29 12-37 0ZM433 244v-54M416 209c-17-20-1-53 18-53 23 0 37 37 17 55-10 9-26 7-35-2Z" />
+        <path d="M217 257v-13h67v13M203 264v-7h94v7M251 37V13h33l-7 9 7 8h-33" />
+      </g>
+      <path d="M45 267h430" stroke="#b79184" strokeWidth="2" />
+    </svg>
+  );
+}
