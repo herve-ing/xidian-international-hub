@@ -28,7 +28,7 @@ const professor = {
   grade: '',
   phone: '',
 };
-test('club studio exposes creation only to professors; published text is escaped; all clubs have original illustrations', async () => {
+test('club studio exposes creation only to professors; published text is escaped; clubs use local photos with an original fallback', async () => {
   const server = await createServer({
     root: new URL('..', import.meta.url).pathname,
     server: { middlewareMode: true, hmr: false },
@@ -74,10 +74,14 @@ test('club studio exposes creation only to professors; published text is escaped
     const { clubs } = await server.ssrLoadModule('/src/clubs.ts');
     for (const club of clubs) {
       html = renderToStaticMarkup(React.createElement(ClubVisual, { club }));
-      assert.match(html, /role="img"/);
-      assert.match(html, /viewBox="0 0 640 360"/);
+      assert.match(html, /class="club-visual club-photograph"/);
+      assert.match(html, /src="\.\/media\//);
       assert.ok(html.includes(club.name));
     }
+    html = renderToStaticMarkup(
+      React.createElement(ClubVisual, { club: { ...clubs[0], id: 'new-custom-club' } }),
+    );
+    assert.match(html, /viewBox="0 0 640 360"/);
   } finally {
     await server.close();
   }
