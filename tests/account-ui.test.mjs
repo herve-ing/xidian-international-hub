@@ -54,6 +54,8 @@ test('account portal and role-specific navigation render without exposing ISO to
       assert.doesNotMatch(html, /Suivi des étudiants/);
       assert.doesNotMatch(html, /href="#\/club-office"/);
       assert.match(html, /Se déconnecter/);
+      assert.match(html, /media\/hub-logo-live.jpg/);
+      assert.doesNotMatch(html, /class="brand-mark"/);
     }
     window.location.hash = '#/';
     html = renderToStaticMarkup(
