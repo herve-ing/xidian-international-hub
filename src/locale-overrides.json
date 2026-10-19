@@ -58,7 +58,17 @@
     "Next": "Próximo",
     "Menu": "Menu",
     "FAQ": "Perguntas frequentes",
-    "The [0128] presentation, p. 42, lists the Chinese Government Scholarship (tuition, accommodation, living allowance; 2026 deadline March 1), Central Asia Five-Nation Scholarship (tuition, accommodation, living allowance), Belt and Road (living allowance) and Huashan (tuition), with July 1 listed for the latter three. Eligibility, actual coverage and procedure vary; awards are never automatic.": "A apresentação [0128], p. 42, lista a Bolsa do Governo Chinês (propinas, alojamento e subsídio de subsistência; prazo de 2026: 1 de março), a Bolsa dos Cinco Países da Ásia Central (propinas, alojamento e subsídio de subsistência), a Bolsa Cinturão e Rota (subsídio de subsistência) e a Bolsa Huashan (propinas). Para as últimas três, o prazo indicado é 1 de julho. A elegibilidade, a cobertura efetiva e o procedimento variam; a concessão nunca é automática."
+    "The [0128] presentation, p. 42, lists the Chinese Government Scholarship (tuition, accommodation, living allowance; 2026 deadline March 1), Central Asia Five-Nation Scholarship (tuition, accommodation, living allowance), Belt and Road (living allowance) and Huashan (tuition), with July 1 listed for the latter three. Eligibility, actual coverage and procedure vary; awards are never automatic.": "A apresentação [0128], p. 42, lista a Bolsa do Governo Chinês (propinas, alojamento e subsídio de subsistência; prazo de 2026: 1 de março), a Bolsa dos Cinco Países da Ásia Central (propinas, alojamento e subsídio de subsistência), a Bolsa Cinturão e Rota (subsídio de subsistência) e a Bolsa Huashan (propinas). Para as últimas três, o prazo indicado é 1 de julho. A elegibilidade, a cobertura efetiva e o procedimento variam; a concessão nunca é automática.",
+    "PROSPECTIVE STUDENTS": "FUTUROS ESTUDANTES",
+    "RESEARCH": "INVESTIGAÇÃO",
+    "CAMPUS LIFE": "VIDA NO CAMPUS",
+    "STUDENT WORKSPACE": "ESPAÇO DO ESTUDANTE",
+    "CLUB LEADER WORKSPACE": "ESPAÇO DO RESPONSÁVEL DO CLUBE",
+    "PROFESSOR ACCESS": "ACESSO DOS PROFESSORES",
+    "INTERNATIONAL ADMISSIONS": "ADMISSÕES INTERNACIONAIS",
+    "APPLICANT SPACE": "ESPAÇO DO CANDIDATO",
+    "SUPERVISOR SPACE": "ESPAÇO DO ORIENTADOR",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / CONECTE-SE · CRIE · FAÇA PARTE"
   },
   "id": {
     "Language": "Bahasa",
@@ -118,7 +128,17 @@
     "Previous": "Sebelumnya",
     "Next": "Berikutnya",
     "Menu": "Menu",
-    "FAQ": "Pertanyaan umum"
+    "FAQ": "Pertanyaan umum",
+    "PROSPECTIVE STUDENTS": "CALON MAHASISWA",
+    "RESEARCH": "PENELITIAN",
+    "CAMPUS LIFE": "KEHIDUPAN KAMPUS",
+    "STUDENT WORKSPACE": "RUANG MAHASISWA",
+    "CLUB LEADER WORKSPACE": "RUANG PENGELOLA KLUB",
+    "PROFESSOR ACCESS": "AKSES DOSEN",
+    "INTERNATIONAL ADMISSIONS": "PENERIMAAN MAHASISWA INTERNASIONAL",
+    "APPLICANT SPACE": "RUANG PENDAFTAR",
+    "SUPERVISOR SPACE": "RUANG PEMBIMBING",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / TERHUBUNG · BERKARYA · MENJADI BAGIAN"
   },
   "ms": {
     "Language": "Bahasa",
@@ -178,7 +198,17 @@
     "Previous": "Sebelumnya",
     "Next": "Seterusnya",
     "Menu": "Menu",
-    "FAQ": "Soalan lazim"
+    "FAQ": "Soalan lazim",
+    "PROSPECTIVE STUDENTS": "BAKAL PELAJAR",
+    "RESEARCH": "PENYELIDIKAN",
+    "CAMPUS LIFE": "KEHIDUPAN KAMPUS",
+    "STUDENT WORKSPACE": "RUANG PELAJAR",
+    "CLUB LEADER WORKSPACE": "RUANG PENGURUS KELAB",
+    "PROFESSOR ACCESS": "AKSES PENSYARAH",
+    "INTERNATIONAL ADMISSIONS": "KEMASUKAN PELAJAR ANTARABANGSA",
+    "APPLICANT SPACE": "RUANG PEMOHON",
+    "SUPERVISOR SPACE": "RUANG PENYELIA",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / BERHUBUNG · BERKARYA · MENJADI SEBAHAGIAN"
   },
   "hi": {
     "Language": "भाषा",
@@ -238,7 +268,17 @@
     "Previous": "पिछला",
     "Next": "अगला",
     "Menu": "मेनू",
-    "FAQ": "अक्सर पूछे जाने वाले प्रश्न"
+    "FAQ": "अक्सर पूछे जाने वाले प्रश्न",
+    "PROSPECTIVE STUDENTS": "भावी विद्यार्थी",
+    "RESEARCH": "अनुसंधान",
+    "CAMPUS LIFE": "परिसर का जीवन",
+    "STUDENT WORKSPACE": "विद्यार्थी कार्यक्षेत्र",
+    "CLUB LEADER WORKSPACE": "क्लब प्रबंधक कार्यक्षेत्र",
+    "PROFESSOR ACCESS": "शिक्षक प्रवेश",
+    "INTERNATIONAL ADMISSIONS": "अंतरराष्ट्रीय प्रवेश",
+    "APPLICANT SPACE": "आवेदक क्षेत्र",
+    "SUPERVISOR SPACE": "शोध पर्यवेक्षक क्षेत्र",
+    "XIDIAN / CONNECT · CREATE · BELONG": "शिदियान / जुड़ें · सृजन करें · समुदाय का हिस्सा बनें"
   },
   "zh": {
     "Your future begins at Xidian.": "你的未来，从西电启程。",
@@ -253,40 +293,110 @@
     "1. Approve suggestions · 2. Open voting · 3. Close voting · 4. Confirm the film. Suggestions are frozen while voting is open.": "1. 审核建议 · 2. 开放投票 · 3. 关闭投票 · 4. 确认影片。投票期间不能更改影片建议。",
     "13 international clubs for sports, creativity and study. Find your next connection.": "13 个国际学生社团，涵盖体育、创作和学习。在这里结识志同道合的朋友。",
     "Applicant’s or parents’ bank statement: balance of at least RMB 30,000, stamped by the bank.": "申请人或父母的银行存款证明：余额至少为 RMB 30,000，并须加盖银行印章。",
-    "The 2026 guides restrict Chinese Government Scholarship applicants to round one. July’s offer date is normalized to 2026: the PDF has a “20262” typo.": "2026 年指南规定，中国政府奖学金申请者须在第一轮申请。7 月的录取日期在此规范为 2026 年，原 PDF 中误写为“20262”。"
+    "The 2026 guides restrict Chinese Government Scholarship applicants to round one. July’s offer date is normalized to 2026: the PDF has a “20262” typo.": "2026 年指南规定，中国政府奖学金申请者须在第一轮申请。7 月的录取日期在此规范为 2026 年，原 PDF 中误写为“20262”。",
+    "PROSPECTIVE STUDENTS": "未来学生",
+    "RESEARCH": "科学研究",
+    "CAMPUS LIFE": "校园生活",
+    "STUDENT WORKSPACE": "学生工作空间",
+    "CLUB LEADER WORKSPACE": "社团负责人空间",
+    "PROFESSOR ACCESS": "教师入口",
+    "INTERNATIONAL ADMISSIONS": "国际学生招生",
+    "APPLICANT SPACE": "申请人空间",
+    "SUPERVISOR SPACE": "导师空间",
+    "XIDIAN / CONNECT · CREATE · BELONG": "西电 / 连接 · 创造 · 归属"
   },
   "ar": {
     "Your future begins at Xidian.": "مستقبلك يبدأ في جامعة شيديان.",
     "FAQ": "الأسئلة الشائعة",
-    "A video retrospective of the 46th university sports meet, published in the SIE media library.": "فيديو يستعرض الملتقى الرياضي الجامعي السادس والأربعين، منشور في مكتبة الوسائط التابعة لكلية التعليم الدولي."
+    "A video retrospective of the 46th university sports meet, published in the SIE media library.": "فيديو يستعرض الملتقى الرياضي الجامعي السادس والأربعين، منشور في مكتبة الوسائط التابعة لكلية التعليم الدولي.",
+    "PROSPECTIVE STUDENTS": "الطلاب المرتقبون",
+    "RESEARCH": "البحث العلمي",
+    "CAMPUS LIFE": "الحياة الجامعية",
+    "STUDENT WORKSPACE": "مساحة الطالب",
+    "CLUB LEADER WORKSPACE": "مساحة مسؤول النادي",
+    "PROFESSOR ACCESS": "دخول الأساتذة",
+    "INTERNATIONAL ADMISSIONS": "القبول الدولي",
+    "APPLICANT SPACE": "مساحة المتقدم",
+    "SUPERVISOR SPACE": "مساحة المشرف",
+    "XIDIAN / CONNECT · CREATE · BELONG": "شيديان / تواصل · ابتكر · انتمِ"
   },
   "ru": {
     "Your future begins at Xidian.": "Ваше будущее начинается в Сидяне.",
-    "FAQ": "Частые вопросы"
+    "FAQ": "Частые вопросы",
+    "PROSPECTIVE STUDENTS": "БУДУЩИМ СТУДЕНТАМ",
+    "RESEARCH": "НАУЧНЫЕ ИССЛЕДОВАНИЯ",
+    "CAMPUS LIFE": "ЖИЗНЬ КАМПУСА",
+    "STUDENT WORKSPACE": "КАБИНЕТ СТУДЕНТА",
+    "CLUB LEADER WORKSPACE": "КАБИНЕТ РУКОВОДИТЕЛЯ КЛУБА",
+    "PROFESSOR ACCESS": "ДОСТУП ПРЕПОДАВАТЕЛЯ",
+    "INTERNATIONAL ADMISSIONS": "ПРИЁМ ИНОСТРАННЫХ СТУДЕНТОВ",
+    "APPLICANT SPACE": "КАБИНЕТ АБИТУРИЕНТА",
+    "SUPERVISOR SPACE": "КАБИНЕТ НАУЧНОГО РУКОВОДИТЕЛЯ",
+    "XIDIAN / CONNECT · CREATE · BELONG": "СИДЯНЬ / ОБЩАЙТЕСЬ · СОЗДАВАЙТЕ · БУДЬТЕ ЧАСТЬЮ СООБЩЕСТВА"
   },
   "es": {
     "Your future begins at Xidian.": "Tu futuro comienza en Xidian.",
     "Master": "Máster",
     "PhD": "Doctorado",
-    "FAQ": "Preguntas frecuentes"
+    "FAQ": "Preguntas frecuentes",
+    "PROSPECTIVE STUDENTS": "FUTUROS ESTUDIANTES",
+    "RESEARCH": "INVESTIGACIÓN",
+    "CAMPUS LIFE": "VIDA EN EL CAMPUS",
+    "STUDENT WORKSPACE": "ESPACIO DEL ESTUDIANTE",
+    "CLUB LEADER WORKSPACE": "ESPACIO DEL RESPONSABLE DEL CLUB",
+    "PROFESSOR ACCESS": "ACCESO DEL PROFESORADO",
+    "INTERNATIONAL ADMISSIONS": "ADMISIONES INTERNACIONALES",
+    "APPLICANT SPACE": "ESPACIO DEL SOLICITANTE",
+    "SUPERVISOR SPACE": "ESPACIO DEL SUPERVISOR",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / CONECTA · CREA · FORMA PARTE"
   },
   "fr": {
     "Master": "Master",
     "PhD": "Doctorat",
-    "FAQ": "Questions fréquentes"
+    "FAQ": "Questions fréquentes",
+    "PROSPECTIVE STUDENTS": "FUTURS ÉTUDIANTS",
+    "RESEARCH": "RECHERCHE",
+    "CAMPUS LIFE": "VIE DE CAMPUS",
+    "STUDENT WORKSPACE": "ESPACE ÉTUDIANT",
+    "CLUB LEADER WORKSPACE": "ESPACE RESPONSABLE DE CLUB",
+    "PROFESSOR ACCESS": "ACCÈS PROFESSEUR",
+    "INTERNATIONAL ADMISSIONS": "ADMISSIONS INTERNATIONALES",
+    "APPLICANT SPACE": "ESPACE CANDIDAT",
+    "SUPERVISOR SPACE": "ESPACE SUPERVISEUR",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / RENCONTRER · CRÉER · APPARTENIR"
   },
   "tr": {
     "Your future begins at Xidian.": "Geleceğiniz Xidian’da başlar.",
     "Master": "Yüksek lisans",
     "PhD": "Doktora",
     "FAQ": "Sık sorulan sorular",
-    "The “Graduation Outcomes” visual reproduces destinations shown in the presentation; it does not guarantee recruitment. The 95% undergraduate and 98% postgraduate figures in 260401, p. 15, are university-wide: no international-student-specific statistic is provided.": "“Mezuniyet Sonuçları” görseli sunumda belirtilen kurumları gösterir; işe alınma garantisi vermez. 260401 belgesinin 15. sayfasındaki lisans için %95 ve lisansüstü için %98 oranları üniversitenin tamamına aittir; uluslararası öğrencilere özel istatistik verilmemiştir."
+    "The “Graduation Outcomes” visual reproduces destinations shown in the presentation; it does not guarantee recruitment. The 95% undergraduate and 98% postgraduate figures in 260401, p. 15, are university-wide: no international-student-specific statistic is provided.": "“Mezuniyet Sonuçları” görseli sunumda belirtilen kurumları gösterir; işe alınma garantisi vermez. 260401 belgesinin 15. sayfasındaki lisans için %95 ve lisansüstü için %98 oranları üniversitenin tamamına aittir; uluslararası öğrencilere özel istatistik verilmemiştir.",
+    "PROSPECTIVE STUDENTS": "ADAY ÖĞRENCİLER",
+    "RESEARCH": "ARAŞTIRMA",
+    "CAMPUS LIFE": "KAMPÜS YAŞAMI",
+    "STUDENT WORKSPACE": "ÖĞRENCİ ALANI",
+    "CLUB LEADER WORKSPACE": "KULÜP YÖNETİCİSİ ALANI",
+    "PROFESSOR ACCESS": "ÖĞRETİM ÜYESİ GİRİŞİ",
+    "INTERNATIONAL ADMISSIONS": "ULUSLARARASI ÖĞRENCİ KABULÜ",
+    "APPLICANT SPACE": "ADAY ALANI",
+    "SUPERVISOR SPACE": "DANIŞMAN ALANI",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / BAĞ KUR · ÜRET · AİT OL"
   },
   "ur": {
     "Your future begins at Xidian.": "آپ کا مستقبل شیڈیان سے شروع ہوتا ہے۔",
     "Master": "ماسٹرز",
     "PhD": "پی ایچ ڈی",
-    "FAQ": "اکثر پوچھے گئے سوالات"
+    "FAQ": "اکثر پوچھے گئے سوالات",
+    "PROSPECTIVE STUDENTS": "مستقبل کے طلبہ",
+    "RESEARCH": "تحقیق",
+    "CAMPUS LIFE": "کیمپس کی زندگی",
+    "STUDENT WORKSPACE": "طالب علم کا شعبہ",
+    "CLUB LEADER WORKSPACE": "کلب منتظم کا شعبہ",
+    "PROFESSOR ACCESS": "اساتذہ کے لیے رسائی",
+    "INTERNATIONAL ADMISSIONS": "بین الاقوامی داخلے",
+    "APPLICANT SPACE": "درخواست دہندہ کا شعبہ",
+    "SUPERVISOR SPACE": "نگران کا شعبہ",
+    "XIDIAN / CONNECT · CREATE · BELONG": "شیڈیان / رابطہ بنائیں · تخلیق کریں · حصہ بنیں"
   },
   "ary": {
     "Your future begins at Xidian.": "المستقبل ديالك كيبدا فجامعة شيديان.",
@@ -308,18 +418,48 @@
     "Suggestions & voting": "الاقتراحات والتصويت",
     "Master": "الماستر",
     "PhD": "الدكتوراه",
-    "FAQ": "الأسئلة اللي كتعاود بزاف"
+    "FAQ": "الأسئلة اللي كتعاود بزاف",
+    "PROSPECTIVE STUDENTS": "طلبة المستقبل",
+    "RESEARCH": "البحث العلمي",
+    "CAMPUS LIFE": "الحياة فالجامعة",
+    "STUDENT WORKSPACE": "فضاء الطالب",
+    "CLUB LEADER WORKSPACE": "فضاء مسؤول النادي",
+    "PROFESSOR ACCESS": "دخول الأساتذة",
+    "INTERNATIONAL ADMISSIONS": "التسجيل الدولي",
+    "APPLICANT SPACE": "فضاء المترشح",
+    "SUPERVISOR SPACE": "فضاء المشرف",
+    "XIDIAN / CONNECT · CREATE · BELONG": "شيديان / تواصل · بدع · كون جزء من المجموعة"
   },
   "tk": {
     "Your future begins at Xidian.": "Geljegiňiz Xidian uniwersitetinde başlanýar.",
     "Master": "Magistratura",
     "PhD": "Doktorantura",
-    "FAQ": "Ýygy soralýan soraglar"
+    "FAQ": "Ýygy soralýan soraglar",
+    "PROSPECTIVE STUDENTS": "GELJEKKI TALYPLAR",
+    "RESEARCH": "YLMY BARLAGLAR",
+    "CAMPUS LIFE": "KAMPUS DURMUŞY",
+    "STUDENT WORKSPACE": "TALYP MEÝDANÇASY",
+    "CLUB LEADER WORKSPACE": "KLUB ÝOLBAŞÇYSYNYŇ MEÝDANÇASY",
+    "PROFESSOR ACCESS": "MUGALLYMLAR ÜÇIN GIRIŞ",
+    "INTERNATIONAL ADMISSIONS": "HALKARA TALYPLARYŇ KABULY",
+    "APPLICANT SPACE": "DALAŞGÄR MEÝDANÇASY",
+    "SUPERVISOR SPACE": "YLMY ÝOLBAŞÇYNYŇ MEÝDANÇASY",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / ARAGATNAŞYK GUR · DÖRET · JEMGYÝETE GOŞUL"
   },
   "ln": {
     "Your future begins at Xidian.": "Avenir na yo ebandi na Xidian.",
     "Master": "Master",
     "PhD": "Doctorat",
-    "FAQ": "Mituna oyo batunaka mingi"
+    "FAQ": "Mituna oyo batunaka mingi",
+    "PROSPECTIVE STUDENTS": "BAYEKOLI YA MIKOLO EKOYA",
+    "RESEARCH": "BOLUKILUKI",
+    "CAMPUS LIFE": "BOMOI NA KAMPUS",
+    "STUDENT WORKSPACE": "ESIKA YA MOYEKOLI",
+    "CLUB LEADER WORKSPACE": "ESIKA YA MOKAMBI YA KLUBE",
+    "PROFESSOR ACCESS": "BOKOTI YA BALAKISI",
+    "INTERNATIONAL ADMISSIONS": "BOYAMBI BAYEKOLI YA BIKÓLO MOSUSU",
+    "APPLICANT SPACE": "ESIKA YA MOSENGI",
+    "SUPERVISOR SPACE": "ESIKA YA MOKAMBI YA BOLUKILUKI",
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / KUTANA · KELA · ZALA NA LISANGA"
   }
 }
