@@ -78,4 +78,4 @@ Admissions programme and application requirements use the supplied 2026 Master/D
 
 ## Animated Hub logo · 19 October 2026
 
-`hub-logo.jpg` is the supplied `download.jfif` logo, used unchanged. Animated SVG text and pixels extend its binary disintegration at runtime. Background binary sequences are generated deterministically by `scripts/generate-binary-motion.py`. No generated portrait or university seal is introduced.
+`hub-logo-live.jpg` is the supplied `download.jfif` logo (a new URL avoids cached copies of the previous logo), used unchanged. Animated SVG text and pixels extend its binary disintegration at runtime. Background binary sequences are generated deterministically by `scripts/generate-binary-motion.py`. No generated portrait or university seal is introduced.
