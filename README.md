@@ -78,3 +78,9 @@ Les étapes reproduisent le parcours des diapositives fournies : préparer, dép
 **Messagerie :** les échanges sont fonctionnels entre comptes de démonstration du même navigateur. Aucun email n’est envoyé ; aucun vrai superviseur ne reçoit ces messages. Un backend avec comptes universitaires vérifiés et stockage partagé reste nécessaire pour une messagerie réelle. Le Hub n’est pas connecté au portail officiel d’admission.
 
 Les images de campus, laboratoire, salle de cours et vie internationale proviennent du PowerPoint transmis. Le logo Hub est celui fourni par le porteur du projet. L’animation binaire est décorative, dispose d’un bouton pause et respecte `prefers-reduced-motion`. Le design est une composition originale inspirée de la navigation institutionnelle et des entrées par public du site HKU, sans reprise de ses visuels ou textes.
+
+## Union étudiante et galerie (19 octobre 2026)
+
+`#/union` réunit l’actualité issue du communiqué transmis, les huit départements, le recrutement, les clubs/inscriptions existants et une galerie de 12 photos d’archives extraites des pages 40–43 du PDF d’introduction et de la diapositive 32 du PPT. Les articles des responsables et professeurs restent ceux publiés localement via le studio des clubs. Les rattachements des clubs aux départements ne sont pas inventés. Le lien Kdocs est celui du communiqué : disponibilité non vérifiée, aucune candidature transmise par le Hub. Les photos ne sont pas présentées comme celles d’événements actuels de l’ISU.
+
+L’annuaire public rétablit une fiche de contact avant la demande de connexion : email si publié, modèle d’email copiable/téléchargeable, lien officiel et documents en images. Aucune adresse manquante n’est fabriquée. Les images SIE externes dépendent de la disponibilité du site source ; le lien vers le document original reste accessible.
