@@ -27,3 +27,29 @@ Photographies d’archives extraites des présentations fournies, sans attributi
 - `campus-friends.jpg` : PDF 260401-XDU Introduction, p. 43.
 - `international-stage.jpg` : PPT XIDIAN UNIVERSITY, slide 32.
 - `international-workshop.jpg` : PPT XIDIAN UNIVERSITY, slide 32.
+
+## Visuels intégrés aux clubs et départements (19 octobre 2026)
+
+Images intégrées dans le site de référence demandé par l’utilisateur : https://freshman-guide-and-clubs.onrender.com/ . Extraction des données image embarquées, optimisation locale, sans reprise du code ou du design. Elles constituent des visuels contextuels d’archives, pas une preuve de l’effectif actuel des clubs.
+
+- `club-football.jpg` : image embarquée no 21 du site de référence (index à partir de 0).
+- `club-basketball.jpg` : image embarquée no 22 du site de référence (index à partir de 0).
+- `club-badminton.jpg` : image embarquée no 23 du site de référence (index à partir de 0).
+- `club-volleyball.jpg` : image embarquée no 24 du site de référence (index à partir de 0).
+- `club-tennis.jpg` : image embarquée no 25 du site de référence (index à partir de 0).
+- `club-film.jpg` : image embarquée no 26 du site de référence (index à partir de 0).
+- `community-workshop.jpg` : image embarquée no 3 du site de référence (index à partir de 0).
+- `community-academic.jpg` : image embarquée no 0 du site de référence (index à partir de 0).
+- `community-youth.jpg` : image embarquée no 1 du site de référence (index à partir de 0).
+- `community-friends.jpg` : image embarquée no 4 du site de référence (index à partir de 0).
+- `community-culture.jpg` : image embarquée no 27 du site de référence (index à partir de 0).
+- `community-performance.jpg` : image embarquée no 28 du site de référence (index à partir de 0).
+- `community-fan-dance.jpg` : image embarquée no 29 du site de référence (index à partir de 0).
+- `community-sports.jpg` : image embarquée no 30 du site de référence (index à partir de 0).
+- `community-parade.jpg` : image embarquée no 32 du site de référence (index à partir de 0).
+- `community-team.jpg` : image embarquée no 33 du site de référence (index à partir de 0).
+- `sie-safety.jpg` : Xidian SIE, https://sie.xidian.edu.cn/info/1129/7695.htm ; image originale https://sie.xidian.edu.cn/__local/3/C9/81/06BD30654AFA2079E4BBB6396B6_C3D6B1B8_1AD04.jpeg.
+- `sie-welcome-2026.jpg` : Xidian SIE, https://sie.xidian.edu.cn/info/1131/7755.htm ; image originale https://sie.xidian.edu.cn/__local/D/03/C9/A1A363D815CDFA76B8B55BC6BEE_4FEE08C0_1F70E.jpg.
+- `sie-sports-2026.jpg` : Xidian SIE, https://sie.xidian.edu.cn/info/1131/7465.htm ; image originale https://sie.xidian.edu.cn/__local/C/18/67/55F0BC7DB1C7073460B38A9353D_2C27E530_BFC1.jpg.
+
+Inspiration fonctionnelle : Imperial College Union, https://www.imperialcollegeunion.org/activities et /activities/a-to-z (annuaire, découverte, accès responsables). Aucun texte ni visuel d’Imperial ou HKU n’est réutilisé.
