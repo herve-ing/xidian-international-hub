@@ -68,7 +68,15 @@
     "INTERNATIONAL ADMISSIONS": "ADMISSÕES INTERNACIONAIS",
     "APPLICANT SPACE": "ESPAÇO DO CANDIDATO",
     "SUPERVISOR SPACE": "ESPAÇO DO ORIENTADOR",
-    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / CONECTE-SE · CRIE · FAÇA PARTE"
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / CONECTE-SE · CRIE · FAÇA PARTE",
+    "A UNIVERSITY LOOKING AHEAD": "UMA UNIVERSIDADE VOLTADA PARA O FUTURO",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "O AMBIENTE CERTO PARA O SEU PROJETO",
+    "FROM AMBITION TO APPLICATION": "DA AMBIÇÃO À CANDIDATURA",
+    "MORE THAN A CAMPUS": "MAIS DO QUE UM CAMPUS",
+    "IN FOCUS": "EM DESTAQUE",
+    "SUPPLIED NOTICE · RECRUITMENT": "COMUNICADO RECEBIDO · RECRUTAMENTO",
+    "ORGANIZATION": "ORGANIZAÇÃO",
+    "CLUBS & CREATIVITY": "CLUBES E CRIATIVIDADE"
   },
   "id": {
     "Language": "Bahasa",
@@ -138,7 +146,15 @@
     "INTERNATIONAL ADMISSIONS": "PENERIMAAN MAHASISWA INTERNASIONAL",
     "APPLICANT SPACE": "RUANG PENDAFTAR",
     "SUPERVISOR SPACE": "RUANG PEMBIMBING",
-    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / TERHUBUNG · BERKARYA · MENJADI BAGIAN"
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / TERHUBUNG · BERKARYA · MENJADI BAGIAN",
+    "A UNIVERSITY LOOKING AHEAD": "UNIVERSITAS YANG MENATAP MASA DEPAN",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "LINGKUNGAN YANG TEPAT UNTUK PROYEK ANDA",
+    "FROM AMBITION TO APPLICATION": "DARI CITA-CITA HINGGA PENDAFTARAN",
+    "MORE THAN A CAMPUS": "LEBIH DARI SEKADAR KAMPUS",
+    "IN FOCUS": "SOROTAN",
+    "SUPPLIED NOTICE · RECRUITMENT": "PENGUMUMAN YANG DIBERIKAN · REKRUTMEN",
+    "ORGANIZATION": "ORGANISASI",
+    "CLUBS & CREATIVITY": "KLUB DAN KREATIVITAS"
   },
   "ms": {
     "Language": "Bahasa",
@@ -208,7 +224,15 @@
     "INTERNATIONAL ADMISSIONS": "KEMASUKAN PELAJAR ANTARABANGSA",
     "APPLICANT SPACE": "RUANG PEMOHON",
     "SUPERVISOR SPACE": "RUANG PENYELIA",
-    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / BERHUBUNG · BERKARYA · MENJADI SEBAHAGIAN"
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / BERHUBUNG · BERKARYA · MENJADI SEBAHAGIAN",
+    "A UNIVERSITY LOOKING AHEAD": "UNIVERSITI YANG MEMANDANG KE HADAPAN",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "PERSEKITARAN YANG SESUAI UNTUK PROJEK ANDA",
+    "FROM AMBITION TO APPLICATION": "DARIPADA CITA-CITA KEPADA PERMOHONAN",
+    "MORE THAN A CAMPUS": "LEBIH DARIPADA SEKADAR KAMPUS",
+    "IN FOCUS": "TUMPUAN",
+    "SUPPLIED NOTICE · RECRUITMENT": "NOTIS YANG DIBERIKAN · PENGAMBILAN AHLI",
+    "ORGANIZATION": "ORGANISASI",
+    "CLUBS & CREATIVITY": "KELAB DAN KREATIVITI"
   },
   "hi": {
     "Language": "भाषा",
@@ -278,7 +302,15 @@
     "INTERNATIONAL ADMISSIONS": "अंतरराष्ट्रीय प्रवेश",
     "APPLICANT SPACE": "आवेदक क्षेत्र",
     "SUPERVISOR SPACE": "शोध पर्यवेक्षक क्षेत्र",
-    "XIDIAN / CONNECT · CREATE · BELONG": "शिदियान / जुड़ें · सृजन करें · समुदाय का हिस्सा बनें"
+    "XIDIAN / CONNECT · CREATE · BELONG": "शिदियान / जुड़ें · सृजन करें · समुदाय का हिस्सा बनें",
+    "A UNIVERSITY LOOKING AHEAD": "भविष्य की ओर बढ़ता विश्वविद्यालय",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "आपकी परियोजना के लिए सही वातावरण",
+    "FROM AMBITION TO APPLICATION": "आकांक्षा से आवेदन तक",
+    "MORE THAN A CAMPUS": "परिसर से कहीं बढ़कर",
+    "IN FOCUS": "प्रमुख समाचार",
+    "SUPPLIED NOTICE · RECRUITMENT": "प्राप्त सूचना · सदस्य भर्ती",
+    "ORGANIZATION": "संगठन",
+    "CLUBS & CREATIVITY": "क्लब और रचनात्मकता"
   },
   "zh": {
     "Your future begins at Xidian.": "你的未来，从西电启程。",
@@ -303,7 +335,15 @@
     "INTERNATIONAL ADMISSIONS": "国际学生招生",
     "APPLICANT SPACE": "申请人空间",
     "SUPERVISOR SPACE": "导师空间",
-    "XIDIAN / CONNECT · CREATE · BELONG": "西电 / 连接 · 创造 · 归属"
+    "XIDIAN / CONNECT · CREATE · BELONG": "西电 / 连接 · 创造 · 归属",
+    "A UNIVERSITY LOOKING AHEAD": "面向未来的大学",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "为你的项目寻找合适的环境",
+    "FROM AMBITION TO APPLICATION": "从志向到申请",
+    "MORE THAN A CAMPUS": "不止于校园",
+    "IN FOCUS": "焦点资讯",
+    "SUPPLIED NOTICE · RECRUITMENT": "所提供的通知 · 招募",
+    "ORGANIZATION": "组织架构",
+    "CLUBS & CREATIVITY": "社团与创意"
   },
   "ar": {
     "Your future begins at Xidian.": "مستقبلك يبدأ في جامعة شيديان.",
@@ -318,7 +358,15 @@
     "INTERNATIONAL ADMISSIONS": "القبول الدولي",
     "APPLICANT SPACE": "مساحة المتقدم",
     "SUPERVISOR SPACE": "مساحة المشرف",
-    "XIDIAN / CONNECT · CREATE · BELONG": "شيديان / تواصل · ابتكر · انتمِ"
+    "XIDIAN / CONNECT · CREATE · BELONG": "شيديان / تواصل · ابتكر · انتمِ",
+    "A UNIVERSITY LOOKING AHEAD": "جامعة تتطلع إلى المستقبل",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "البيئة المناسبة لمشروعك",
+    "FROM AMBITION TO APPLICATION": "من الطموح إلى التقديم",
+    "MORE THAN A CAMPUS": "أكثر من مجرد حرم جامعي",
+    "IN FOCUS": "في دائرة الضوء",
+    "SUPPLIED NOTICE · RECRUITMENT": "إعلان مقدم · استقطاب الأعضاء",
+    "ORGANIZATION": "الهيكل التنظيمي",
+    "CLUBS & CREATIVITY": "الأندية والإبداع"
   },
   "ru": {
     "Your future begins at Xidian.": "Ваше будущее начинается в Сидяне.",
@@ -332,7 +380,15 @@
     "INTERNATIONAL ADMISSIONS": "ПРИЁМ ИНОСТРАННЫХ СТУДЕНТОВ",
     "APPLICANT SPACE": "КАБИНЕТ АБИТУРИЕНТА",
     "SUPERVISOR SPACE": "КАБИНЕТ НАУЧНОГО РУКОВОДИТЕЛЯ",
-    "XIDIAN / CONNECT · CREATE · BELONG": "СИДЯНЬ / ОБЩАЙТЕСЬ · СОЗДАВАЙТЕ · БУДЬТЕ ЧАСТЬЮ СООБЩЕСТВА"
+    "XIDIAN / CONNECT · CREATE · BELONG": "СИДЯНЬ / ОБЩАЙТЕСЬ · СОЗДАВАЙТЕ · БУДЬТЕ ЧАСТЬЮ СООБЩЕСТВА",
+    "A UNIVERSITY LOOKING AHEAD": "УНИВЕРСИТЕТ, УСТРЕМЛЁННЫЙ В БУДУЩЕЕ",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "ПОДХОДЯЩАЯ СРЕДА ДЛЯ ВАШЕГО ПРОЕКТА",
+    "FROM AMBITION TO APPLICATION": "ОТ МЕЧТЫ К ПОДАЧЕ ЗАЯВКИ",
+    "MORE THAN A CAMPUS": "БОЛЬШЕ, ЧЕМ КАМПУС",
+    "IN FOCUS": "В ЦЕНТРЕ ВНИМАНИЯ",
+    "SUPPLIED NOTICE · RECRUITMENT": "ПРЕДОСТАВЛЕННОЕ ОБЪЯВЛЕНИЕ · НАБОР",
+    "ORGANIZATION": "ОРГАНИЗАЦИЯ",
+    "CLUBS & CREATIVITY": "КЛУБЫ И ТВОРЧЕСТВО"
   },
   "es": {
     "Your future begins at Xidian.": "Tu futuro comienza en Xidian.",
@@ -348,7 +404,15 @@
     "INTERNATIONAL ADMISSIONS": "ADMISIONES INTERNACIONALES",
     "APPLICANT SPACE": "ESPACIO DEL SOLICITANTE",
     "SUPERVISOR SPACE": "ESPACIO DEL SUPERVISOR",
-    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / CONECTA · CREA · FORMA PARTE"
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / CONECTA · CREA · FORMA PARTE",
+    "A UNIVERSITY LOOKING AHEAD": "UNA UNIVERSIDAD QUE MIRA AL FUTURO",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "EL ENTORNO ADECUADO PARA TU PROYECTO",
+    "FROM AMBITION TO APPLICATION": "DE LA AMBICIÓN A LA SOLICITUD",
+    "MORE THAN A CAMPUS": "MÁS QUE UN CAMPUS",
+    "IN FOCUS": "ACTUALIDAD",
+    "SUPPLIED NOTICE · RECRUITMENT": "AVISO RECIBIDO · CONVOCATORIA",
+    "ORGANIZATION": "ORGANIZACIÓN",
+    "CLUBS & CREATIVITY": "CLUBES Y CREATIVIDAD"
   },
   "fr": {
     "Master": "Master",
@@ -380,7 +444,15 @@
     "INTERNATIONAL ADMISSIONS": "ULUSLARARASI ÖĞRENCİ KABULÜ",
     "APPLICANT SPACE": "ADAY ALANI",
     "SUPERVISOR SPACE": "DANIŞMAN ALANI",
-    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / BAĞ KUR · ÜRET · AİT OL"
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / BAĞ KUR · ÜRET · AİT OL",
+    "A UNIVERSITY LOOKING AHEAD": "GELECEĞE BAKAN BİR ÜNİVERSİTE",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "PROJENİZ İÇİN DOĞRU ORTAM",
+    "FROM AMBITION TO APPLICATION": "HEDEFTEN BAŞVURUYA",
+    "MORE THAN A CAMPUS": "BİR KAMPÜSTEN DAHA FAZLASI",
+    "IN FOCUS": "ÖNE ÇIKANLAR",
+    "SUPPLIED NOTICE · RECRUITMENT": "PAYLAŞILAN DUYURU · ÜYE ALIMI",
+    "ORGANIZATION": "ORGANİZASYON",
+    "CLUBS & CREATIVITY": "KULÜPLER VE YARATICILIK"
   },
   "ur": {
     "Your future begins at Xidian.": "آپ کا مستقبل شیڈیان سے شروع ہوتا ہے۔",
@@ -396,7 +468,15 @@
     "INTERNATIONAL ADMISSIONS": "بین الاقوامی داخلے",
     "APPLICANT SPACE": "درخواست دہندہ کا شعبہ",
     "SUPERVISOR SPACE": "نگران کا شعبہ",
-    "XIDIAN / CONNECT · CREATE · BELONG": "شیڈیان / رابطہ بنائیں · تخلیق کریں · حصہ بنیں"
+    "XIDIAN / CONNECT · CREATE · BELONG": "شیڈیان / رابطہ بنائیں · تخلیق کریں · حصہ بنیں",
+    "A UNIVERSITY LOOKING AHEAD": "مستقبل کی جانب بڑھتی جامعہ",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "آپ کے منصوبے کے لیے موزوں ماحول",
+    "FROM AMBITION TO APPLICATION": "خواہش سے درخواست تک",
+    "MORE THAN A CAMPUS": "محض کیمپس سے بڑھ کر",
+    "IN FOCUS": "اہم خبریں",
+    "SUPPLIED NOTICE · RECRUITMENT": "فراہم کردہ اعلان · اراکین کی بھرتی",
+    "ORGANIZATION": "تنظیمی ڈھانچہ",
+    "CLUBS & CREATIVITY": "کلب اور تخلیقی سرگرمیاں"
   },
   "ary": {
     "Your future begins at Xidian.": "المستقبل ديالك كيبدا فجامعة شيديان.",
@@ -428,7 +508,15 @@
     "INTERNATIONAL ADMISSIONS": "التسجيل الدولي",
     "APPLICANT SPACE": "فضاء المترشح",
     "SUPERVISOR SPACE": "فضاء المشرف",
-    "XIDIAN / CONNECT · CREATE · BELONG": "شيديان / تواصل · بدع · كون جزء من المجموعة"
+    "XIDIAN / CONNECT · CREATE · BELONG": "شيديان / تواصل · بدع · كون جزء من المجموعة",
+    "A UNIVERSITY LOOKING AHEAD": "جامعة كتشوف للمستقبل",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "الوسط المناسب للمشروع ديالك",
+    "FROM AMBITION TO APPLICATION": "من الطموح للترشح",
+    "MORE THAN A CAMPUS": "كثر من غير جامعة",
+    "IN FOCUS": "فالأضواء",
+    "SUPPLIED NOTICE · RECRUITMENT": "بلاغ متوصل به · الانخراط",
+    "ORGANIZATION": "التنظيم",
+    "CLUBS & CREATIVITY": "النوادي والإبداع"
   },
   "tk": {
     "Your future begins at Xidian.": "Geljegiňiz Xidian uniwersitetinde başlanýar.",
@@ -444,7 +532,15 @@
     "INTERNATIONAL ADMISSIONS": "HALKARA TALYPLARYŇ KABULY",
     "APPLICANT SPACE": "DALAŞGÄR MEÝDANÇASY",
     "SUPERVISOR SPACE": "YLMY ÝOLBAŞÇYNYŇ MEÝDANÇASY",
-    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / ARAGATNAŞYK GUR · DÖRET · JEMGYÝETE GOŞUL"
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / ARAGATNAŞYK GUR · DÖRET · JEMGYÝETE GOŞUL",
+    "A UNIVERSITY LOOKING AHEAD": "GELJEGE GARAÝAN UNIWERSITET",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "TASLAMAŇYZ ÜÇIN AMATLY GURŞAW",
+    "FROM AMBITION TO APPLICATION": "ARZUWDAN ARZA ÇENLI",
+    "MORE THAN A CAMPUS": "KAMPUSDAN HAS KÖP",
+    "IN FOCUS": "ÜNS MERKEZINDE",
+    "SUPPLIED NOTICE · RECRUITMENT": "BERLEN BILDIRIŞ · AGZA KABULY",
+    "ORGANIZATION": "GURAMAÇYLYK",
+    "CLUBS & CREATIVITY": "KLUBLAR WE DÖREDIJILIK"
   },
   "ln": {
     "Your future begins at Xidian.": "Avenir na yo ebandi na Xidian.",
@@ -460,6 +556,14 @@
     "INTERNATIONAL ADMISSIONS": "BOYAMBI BAYEKOLI YA BIKÓLO MOSUSU",
     "APPLICANT SPACE": "ESIKA YA MOSENGI",
     "SUPERVISOR SPACE": "ESIKA YA MOKAMBI YA BOLUKILUKI",
-    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / KUTANA · KELA · ZALA NA LISANGA"
+    "XIDIAN / CONNECT · CREATE · BELONG": "XIDIAN / KUTANA · KELA · ZALA NA LISANGA",
+    "A UNIVERSITY LOOKING AHEAD": "UNIVERSITÉ OYO ETALAKA MIKOLO EKOYA",
+    "YOUR PROJECT, THE RIGHT ENVIRONMENT": "ESIKA OYO EBONGI MPO NA MOSALA NA YO",
+    "FROM AMBITION TO APPLICATION": "LONGWA NA NDOTO KINO NA BOKOMISI",
+    "MORE THAN A CAMPUS": "ELEKI KAMPUS MOKO",
+    "IN FOCUS": "MAKAMBO YA NTINA",
+    "SUPPLIED NOTICE · RECRUITMENT": "LIYEBISI OYO EPESAMI · BONDIMAMI YA BANDIMI YA SIKA",
+    "ORGANIZATION": "EBONGISELI",
+    "CLUBS & CREATIVITY": "BAKLUBE MPE BOKELI"
   }
 }
