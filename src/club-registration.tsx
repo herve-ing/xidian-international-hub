@@ -30,7 +30,7 @@ export function ClubRegistration({
   );
   const login = () => {
     sessionStorage.setItem('xidian-club-intent', club.id);
-    window.location.hash = '#/';
+    window.location.hash = '/login';
   };
   return (
     <ClubDialog

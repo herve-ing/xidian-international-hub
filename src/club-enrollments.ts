@@ -184,3 +184,12 @@ export function enrollmentStatus(lang: string, status: EnrollmentStatus) {
   };
   return labels[status];
 }
+
+export function hasActiveEnrollment(accountId: string, clubId: string): boolean {
+  return read().some(
+    (e) =>
+      e.accountId === accountId &&
+      e.clubId === clubId &&
+      ['pending', 'approved'].includes(e.status),
+  );
+}

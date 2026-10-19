@@ -1,4 +1,6 @@
 export const clubPhotos: Record<string, { image: string; context: boolean }> = {
+  calisthenics: { image: 'community-sports.jpg', context: true },
+  'friday-movie-night': { image: 'friday-movie-night.jpg', context: false },
   football: { image: 'club-football.jpg', context: false },
   basketball: { image: 'club-basketball.jpg', context: false },
   badminton: { image: 'club-badminton.jpg', context: false },

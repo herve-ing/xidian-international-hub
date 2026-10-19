@@ -92,6 +92,11 @@ export function ClubDetails({
               )}
         </p>
       )}
+      {club.id === 'friday-movie-night' && (
+        <a className="button primary" href="#/union?tab=cinema" onClick={onClose}>
+          {c('Proposer un film et voter', 'Suggest a film and vote', '推荐影片并投票')} →
+        </a>
+      )}
       <p className="club-detail-intro">{tr(club.description)}</p>
       <h3>{c('À découvrir', 'What to explore', '活动方向')}</h3>
       <p>{tr(club.activity)}</p>

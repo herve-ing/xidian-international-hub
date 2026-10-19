@@ -1197,3 +1197,18 @@ const photoKeys = [
 for (const [locale, values] of Object.entries(photoCopy)) {
   for (const [i, key] of photoKeys.entries()) clubTranslations[locale][key] = values[i];
 }
+
+const newClubCopy: Record<string, string[]> = {
+  ar: ['اللياقة وتمارين وزن الجسم', 'اقترح فيلماً وصوّت'],
+  es: ['Fitness y peso corporal', 'Proponer una película y votar'],
+  ln: ['Fitness mpe ngalasisi na kilo ya nzoto', 'Kopesa likanisi ya filme mpe kopona'],
+  ru: ['Фитнес и упражнения с весом тела', 'Предложить фильм и проголосовать'],
+  tr: ['Fitness ve vücut ağırlığı', 'Film öner ve oy ver'],
+  ary: ['اللياقة وتمارين بوزن الجسم', 'اقترح فيلم وصوّت'],
+  tk: ['Fitnes we beden agramy bilen türgenleşik', 'Film teklip et we ses ber'],
+  ur: ['فٹنس اور جسمانی وزن کی ورزش', 'فلم تجویز کریں اور ووٹ دیں'],
+};
+for (const [locale, values] of Object.entries(newClubCopy)) {
+  clubTranslations[locale]['Fitness and bodyweight'] = values[0];
+  clubTranslations[locale]['Suggest a film and vote'] = values[1];
+}

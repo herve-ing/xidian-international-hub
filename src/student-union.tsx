@@ -3,6 +3,8 @@ import { content } from './i18n';
 import { departmentPhotos, xidianNews } from './community-imagery';
 import { currentAccount } from './accounts';
 import CampusLife from './campus';
+import MovieNight from './movie-night-ui';
+import { clubs } from './clubs';
 import { ClubJournal } from './club-journal';
 import { unionDepartments, recruitmentUrl, recruitmentOpen } from './union-data';
 export function UnionNews({ lang }: { lang: string }) {
@@ -114,14 +116,17 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
   const c = (fr: string, en: string) => content(lang, fr, en);
   const readTab = () =>
     new URLSearchParams(window.location.hash.split('?')[1]).get('tab') ||
-    (window.location.hash.startsWith('#/clubs') ? 'clubs' : 'actu');
+    (window.location.hash.startsWith('#/clubs') ||
+    new URLSearchParams(window.location.hash.split('?')[1]).has('enroll')
+      ? 'clubs'
+      : 'actu');
   const [requested, setRequested] = useState(readTab);
   useEffect(() => {
     const update = () => setRequested(readTab());
     window.addEventListener('hashchange', update);
     return () => window.removeEventListener('hashchange', update);
   }, []);
-  const tab = ['actu', 'departments', 'clubs', 'recruitment'].includes(requested)
+  const tab = ['actu', 'departments', 'clubs', 'cinema', 'recruitment'].includes(requested)
     ? requested
     : requested === 'photos'
       ? 'clubs'
@@ -187,6 +192,7 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
           ['actu', c('Actualités', 'News')],
           ['departments', c('Les 8 départements', '8 departments')],
           ['clubs', c('Clubs & inscriptions', 'Clubs & registration')],
+          ['cinema', 'Friday Movie Night'],
           ['recruitment', c('Recrutement', 'Recruitment')],
         ].map(([id, label]) => (
           <a key={id} href={'#/union?tab=' + id} aria-current={tab === id ? 'page' : undefined}>
@@ -213,8 +219,9 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
                 <h2>{c('Un club pour chaque énergie.', 'A club for every interest.')}</h2>
                 <p>
                   {c(
-                    '13 clubs, des activités à découvrir et votre inscription au même endroit.',
-                    '13 clubs, activities to explore and registration in one place.',
+                    clubs.length +
+                      ' clubs, des activités à découvrir et votre inscription au même endroit.',
+                    clubs.length + ' clubs, activities to explore and registration in one place.',
                   )}{' '}
                   ↗
                 </p>
@@ -343,6 +350,7 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
           <CampusLife lang={lang} workspaceId={workspaceId} />
         </>
       )}
+      {tab === 'cinema' && <MovieNight lang={lang} />}
       {tab === 'recruitment' && (
         <section className="union-recruitment">
           <div>

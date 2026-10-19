@@ -3,6 +3,7 @@ import { content } from './i18n';
 import { clubs } from './clubs';
 import { ClubDialog } from './club-dialog';
 import { ClubVisual } from './club-visual';
+import ArticleActions from './article-actions';
 import { publicArticles, readMedia, type ArticleMedia, type ClubArticle } from './club-publishing';
 export function ArticleMediaView({ media }: { media: ArticleMedia }) {
   const [url, setUrl] = useState(''),
@@ -78,6 +79,7 @@ export function ArticleReader({
           <p key={i}>{p}</p>
         ))}
       </div>
+      {article.status === 'published' && <ArticleActions id={article.id} lang={lang} />}
       <div className="article-gallery">
         {article.media.map((m) => (
           <ArticleMediaView key={m.id} media={m} />
@@ -99,15 +101,32 @@ export function ClubJournal({
   const [articles, setArticles] = useState(() => publicArticles()),
     [query, setQuery] = useState(''),
     [filter, setFilter] = useState(clubId),
-    [selected, setSelected] = useState<ClubArticle | null>(null);
+    [selected, setSelected] = useState<ClubArticle | null>(
+      () =>
+        publicArticles().find(
+          (a) =>
+            a.id ===
+            new URLSearchParams(
+              typeof window === 'undefined' ? '' : window.location.hash.split('?')[1],
+            ).get('article'),
+        ) || null,
+    );
   useEffect(() => {
     const refresh = () => setArticles(publicArticles());
     refresh();
     window.addEventListener('storage', refresh);
     window.addEventListener('focus', refresh);
+    const openShared = () => {
+      const id = new URLSearchParams(
+        typeof window === 'undefined' ? '' : window.location.hash.split('?')[1],
+      ).get('article');
+      if (id) setSelected(publicArticles().find((a) => a.id === id) || null);
+    };
+    window.addEventListener('hashchange', openShared);
     return () => {
       window.removeEventListener('storage', refresh);
       window.removeEventListener('focus', refresh);
+      window.removeEventListener('hashchange', openShared);
     };
   }, [clubId]);
   const visible = articles.filter(
@@ -184,6 +203,7 @@ export function ClubJournal({
                 <button className="text-button" onClick={() => setSelected(a)}>
                   {c('Lire l’article', 'Read story', '阅读文章')} →
                 </button>
+                <ArticleActions id={a.id} lang={lang} />
               </div>
             </article>
           );

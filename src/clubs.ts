@@ -4,7 +4,7 @@ export type Club = {
   name: string;
   zh: string;
   category: 'sport' | 'creative' | 'academic';
-  format: 'team' | 'racket' | 'combat' | 'art' | 'music' | 'dance' | 'media' | 'math';
+  format: 'team' | 'racket' | 'combat' | 'fitness' | 'art' | 'music' | 'dance' | 'media' | 'math';
   symbol: string;
   tone: string;
   aliases: string;
@@ -339,6 +339,57 @@ const seedClubs: Club[] = [
       'Une question ou un sujet d’intérêt ; confirmer les thèmes et prérequis des rencontres.',
       'A question or topic of interest; confirm meeting topics and prerequisites.',
       '可准备问题或感兴趣的主题；请确认活动主题与先修要求。',
+    ],
+  },
+  {
+    id: 'calisthenics',
+    name: 'Xidian Calisthenics Club',
+    zh: '西电徒手健身社',
+    category: 'sport',
+    format: 'fitness',
+    symbol: '💪',
+    tone: 'amber',
+    aliases: 'calisthenics street workout fitness musculation poids du corps 徒手健身 自重训练',
+    description: [
+      'TRAIN • IMPROVE • COMPETE. Une communauté de fitness ouverte aux débutants comme aux athlètes expérimentés, aux étudiants chinois et internationaux.',
+      'TRAIN • IMPROVE • COMPETE. A fitness community for beginners and experienced athletes alike, welcoming Chinese and international students.',
+      '训练·进步·竞赛。欢迎零基础和有经验的运动爱好者，中国学生和国际学生均可参加。',
+    ],
+    activity: [
+      'Programme annoncé : entraînements collectifs hebdomadaires, apprentissage de techniques, force, endurance, entraide et défis mensuels pour tous niveaux. Prix prévus pour les meilleures performances ; certificats avec cachet universitaire uniquement sous réserve d’approbation.',
+      'Announced programme: weekly group training, new skills, strength, endurance, peer motivation and monthly challenges for all levels. Prizes are planned for top performers; potential university-stamped certificates remain subject to approval.',
+      '计划每周集体训练，学习技巧、增强力量与耐力、相互激励，并每月开展适合各水平的挑战。拟为优秀表现者设置奖品；校方盖章证书须经批准。',
+    ],
+    kit: [
+      'Tenue et chaussures adaptées, eau et motivation. Consignes de sécurité, encadrement approprié et soutien de membres expérimentés prévus ; horaires, lieux et disponibilité de l’encadrement à confirmer avec le responsable.',
+      'Suitable sportswear, shoes, water and motivation. Safety guidelines, appropriate supervision and experienced-member support are planned; confirm times, venue and supervision with the organizer.',
+      '准备合适运动服、鞋、饮水和积极态度。计划提供安全指导、适当监督和有经验成员支持；时间、地点和指导安排请向负责人确认。',
+    ],
+  },
+  {
+    id: 'friday-movie-night',
+    name: 'Friday Movie Night',
+    zh: '周五电影之夜',
+    category: 'creative',
+    format: 'media',
+    symbol: '🎬',
+    tone: 'blue',
+    aliases: 'friday movie night cinema film vendredi soirée cinéma 电影 周五',
+    source: 'https://ghazzali19.github.io/friday-Movie-Night/',
+    description: [
+      'Un rendez-vous cinéma pour se retrouver, proposer le prochain film et voter entre membres inscrits.',
+      'A movie-night community where registered members suggest and vote for the next film.',
+      '电影交流活动，已报名成员可推荐下一部影片并参与投票。',
+    ],
+    activity: [
+      'Propositions des membres, validation par le responsable ou un professeur, vote par séance et choix final confirmé par l’organisateur. Indications du site de référence : vendredi à 18 h 30, Building 6 Smart Classroom ; à reconfirmer pour chaque séance.',
+      'Member suggestions, review by the club leader or a professor, voting per screening and final selection confirmed by the organizer. Reference-site information: Friday 18:30, Building 6 Smart Classroom; reconfirm for each screening.',
+      '成员推荐影片，由负责人或教师审核，按场次投票，组织者确认最终选片。参考网站标注周五18:30、6号楼智慧教室；每场安排须再次确认。',
+    ],
+    kit: [
+      'Créer un compte étudiant et s’inscrire au club. Préparer le titre, l’année éventuelle et une courte recommandation ; indiquer les besoins de langue et sous-titres.',
+      'Create a student account and register with the club. Prepare a title, optional year and a short recommendation, including language and subtitle preferences.',
+      '创建学生账户并报名社团。准备片名、可选年份和简短推荐理由，并注明语言及字幕需求。',
     ],
   },
 ];

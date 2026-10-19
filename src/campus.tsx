@@ -124,6 +124,7 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
     ['team', c('Sport collectif', 'Team sport', '团队运动')],
     ['racket', c('Sport de raquette', 'Racket sport', '球拍运动')],
     ['combat', c('Sport de combat', 'Combat sport', '搏击运动')],
+    ['fitness', c('Fitness et poids du corps', 'Fitness and bodyweight', '健身与自重训练')],
     ['art', c('Arts visuels', 'Visual arts', '视觉艺术')],
     ['music', c('Musique', 'Music', '音乐')],
     ['dance', c('Danse', 'Dance', '舞蹈')],
@@ -790,7 +791,9 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
             setTab('registrations');
             reset();
             setNotice('registered');
-            window.history.replaceState(null, '', window.location.hash.split('?')[0]);
+            if (registrationClub.id === 'friday-movie-night')
+              window.location.hash = '/union?tab=cinema';
+            else window.history.replaceState(null, '', window.location.hash.split('?')[0]);
           }}
         />
       )}
