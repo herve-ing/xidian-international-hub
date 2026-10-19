@@ -56,3 +56,22 @@ Inspiration fonctionnelle : Imperial College Union, https://www.imperialcollegeu
 
 - `friday-movie-night.jpg` : image « Friday Movie Night club » intégrée au site de référence des nouveaux étudiants, extraite précédemment (index 26), copie optimisée identique à `club-film.jpg`. Le site https://ghazzali19.github.io/friday-Movie-Night/ a été lu le 19 octobre 2026 ; son HTML et CSS ne contiennent aucune image.
 - Calisthenics : visuel d’ambiance sportive `community-sports.jpg`, sans représentation confirmée de l’équipe actuelle du nouveau club. Description transmise par l’utilisateur ; aucun certificat universitaire n’est annoncé comme acquis.
+
+## Admissions enrichment · 19 October 2026
+
+Rendered from the user-supplied original PDF pages at 1600 px, preserving complete slides and their embedded labels/logos. No images are generated and no affiliation or employment guarantee is implied. These assets are placed in context on Admissions, with source/page captions and full-size links.
+
+| Asset                     | Supplied source                    | Page |
+| ------------------------- | ---------------------------------- | ---- |
+| xian-industry.jpg         | 260401-XDU Introduction.pdf        | 5    |
+| smart-learning.jpg        | 260401-XDU Introduction.pdf        | 18   |
+| research-fields.jpg       | 260401-XDU Introduction.pdf        | 24   |
+| research-centres.jpg      | 260401-XDU Introduction.pdf        | 25   |
+| global-programmes.jpg     | 260401-XDU Introduction.pdf        | 30   |
+| joint-institutes.jpg      | 260401-XDU Introduction.pdf        | 33   |
+| joint-laboratories.jpg    | 260401-XDU Introduction.pdf        | 37   |
+| career-pathways.jpg       | [0128英文版] XIDIAN UNIVERSITY.pdf | 27   |
+| graduate-destinations.jpg | [0128英文版] XIDIAN UNIVERSITY.pdf | 28   |
+| laboratory-facilities.jpg | [0128英文版] XIDIAN UNIVERSITY.pdf | 30   |
+
+Admissions programme and application requirements use the supplied 2026 Master/Doctoral guides (pp. 1–3). Differences from general presentations are identified in the page text. The 2026 application cycle is historical. Supervisor CV images remain sourced directly from the official SIE profile URLs indexed in `src/supervisors.ts`; they are displayed as documents rather than invented portraits.
