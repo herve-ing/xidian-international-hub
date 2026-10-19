@@ -50,7 +50,12 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
     [notice, setNotice] = useState('');
   const [registrations, setRegistrations] = useState(ownEnrollments),
     [registrationClub, setRegistrationClub] = useState<Club | null>(null);
-  const [selected, setSelected] = useState<Club | null>(null),
+  const readSelectedClub = () => {
+    const params = new URLSearchParams(window.location.hash.split('?')[1] || '');
+    const id = params.get('club') || (params.get('tab') === 'cinema' ? 'friday-movie-night' : '');
+    return clubs.find((club) => club.id === id) || null;
+  };
+  const [selected, setSelected] = useState<Club | null>(readSelectedClub),
     [application, setApplication] = useState<Club | null>(null),
     [plan, setPlan] = useState<Club | null>(null),
     [proposal, setProposal] = useState(false);
@@ -67,12 +72,18 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
       setClubVersion((v) => v + 1);
       setRegistrations(ownEnrollments());
     };
+    const openLinkedClub = () => {
+      const club = readSelectedClub();
+      if (club) setSelected(club);
+    };
+    window.addEventListener('hashchange', openLinkedClub);
     window.addEventListener('storage', refresh);
     window.addEventListener('focus', refresh);
     const id = new URLSearchParams(window.location.hash.split('?')[1] || '').get('enroll');
     const club = clubs.find((c) => c.id === id);
     if (club) setRegistrationClub(club);
     return () => {
+      window.removeEventListener('hashchange', openLinkedClub);
       window.removeEventListener('storage', refresh);
       window.removeEventListener('focus', refresh);
     };
@@ -756,6 +767,7 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
       </section>
       {selected && (
         <ClubDetails
+          key={selected.id}
           onJournal={() => {
             setJournalClub(selected.id);
             setSelected(null);
@@ -791,9 +803,10 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
             setTab('registrations');
             reset();
             setNotice('registered');
-            if (registrationClub.id === 'friday-movie-night')
-              window.location.hash = '/union?tab=cinema';
-            else window.history.replaceState(null, '', window.location.hash.split('?')[0]);
+            if (registrationClub.id === 'friday-movie-night') {
+              setSelected(registrationClub);
+              window.location.hash = '/union?tab=clubs&club=friday-movie-night&activity=cinema';
+            } else window.history.replaceState(null, '', window.location.hash.split('?')[0]);
           }}
         />
       )}

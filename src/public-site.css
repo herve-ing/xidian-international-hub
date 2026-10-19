@@ -2768,3 +2768,386 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
 }
+
+/* Document-led admissions and original supervisor CVs */
+.admissions-story-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  background: #192b32;
+  color: #fff;
+  margin: 44px 0 0;
+  overflow: hidden;
+}
+.admissions-story-hero > div {
+  padding: clamp(28px, 4vw, 66px);
+}
+.admissions-story-hero h1 {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(38px, 4.5vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  margin: 22px 0;
+}
+.admissions-story-hero p {
+  color: #e2e8e6;
+  max-width: 42ch;
+  margin-bottom: 30px;
+}
+.admissions-story-hero > img {
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+.admissions-section-nav {
+  display: flex;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+  padding: 24px 0;
+  border-bottom: 1px solid #d6dcda;
+  margin-bottom: 28px;
+}
+.admissions-section-nav a {
+  font-size: 13px;
+  font-weight: 600;
+  color: #25403d;
+}
+.admission-content-section {
+  margin: 90px 0;
+  scroll-margin-top: 120px;
+}
+.admission-content-section .public-section-title {
+  max-width: 850px;
+}
+.admission-content-section h2 {
+  font-size: clamp(30px, 3.5vw, 48px);
+  line-height: 1.15;
+}
+.admissions-source-visual {
+  margin: 0;
+  background: #f2f3ef;
+  min-width: 0;
+}
+.admissions-source-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.admissions-source-visual figcaption {
+  padding: 12px 16px;
+  font-size: 11px;
+  color: #576361;
+}
+.admissions-source-visual figcaption a {
+  float: right;
+}
+.admission-feature-row {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(25px, 5vw, 70px);
+  align-items: center;
+  margin: 60px 0;
+}
+.admission-feature-row.reverse {
+  direction: rtl;
+}
+.admission-feature-row.reverse > * {
+  direction: ltr;
+}
+.admission-feature-row h3,
+.admission-requirement-grid h3 {
+  font-size: clamp(23px, 2.3vw, 32px);
+  line-height: 1.2;
+  font-weight: 500;
+}
+.admission-feature-row p {
+  line-height: 1.8;
+  color: #55615f;
+}
+.admissions-programme-tools {
+  display: flex;
+  align-items: end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 30px 0 18px;
+}
+.admissions-programme-tools label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  flex: 1;
+  min-width: 180px;
+}
+.admissions-programme-tools input,
+.admissions-programme-tools select {
+  padding: 12px;
+  border: 1px solid #c4cfca;
+  background: white;
+  border-radius: 2px;
+  width: 100%;
+  color: #243b38;
+}
+.admissions-programme-tools > span {
+  padding: 12px;
+  font-size: 13px;
+}
+.admission-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #d9dfd9;
+  margin: 20px 0;
+}
+.admission-table-scroll table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+  min-width: 580px;
+}
+.admission-table-scroll caption {
+  text-align: left;
+  padding: 14px 18px;
+  background: #f0f2ed;
+  color: #3c514b;
+  font-weight: 600;
+}
+.admission-table-scroll th {
+  text-align: left;
+  padding: 14px 18px;
+  background: #203b38;
+  color: #fff;
+}
+.admission-table-scroll td {
+  padding: 13px 18px;
+  border-bottom: 1px solid #e1e5df;
+  vertical-align: top;
+}
+.admission-table-scroll tr:nth-child(even) {
+  background: #f8f9f6;
+}
+.admission-table-scroll th:last-child {
+  min-width: 155px;
+}
+.admission-requirement-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin: 36px 0;
+}
+.admission-language-list dt {
+  font-weight: 600;
+  margin-top: 20px;
+}
+.admission-language-list dd {
+  margin: 8px 0 0;
+  color: #56615f;
+  line-height: 1.7;
+}
+.admission-documents {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+  border-top: 1px solid #ccd5cd;
+}
+.admission-documents article {
+  display: flex;
+  gap: 18px;
+  padding: 24px 0;
+  border-bottom: 1px solid #ccd5cd;
+}
+.admission-documents article > span {
+  font-size: 12px;
+  color: #9a3b4f;
+  padding-top: 6px;
+}
+.admission-documents h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.admission-documents p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #56615f;
+}
+.admission-budget-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 28px 0;
+}
+.admission-budget-grid article {
+  padding: 28px;
+  background: #f1f3ed;
+}
+.admission-budget-grid h3 {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 20px;
+}
+.admission-budget-grid strong {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 500;
+}
+.admission-budget-grid p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #56615f;
+}
+.faculty-cv-preview {
+  display: block;
+  position: relative;
+  height: 180px;
+  width: 100%;
+  padding: 0;
+  border: 1px solid #dfe5df;
+  margin: 0 0 22px;
+  background: #f1f2ee;
+  overflow: hidden;
+  cursor: pointer;
+}
+.faculty-cv-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.35s;
+}
+.faculty-cv-preview:hover img {
+  transform: scale(1.025);
+}
+.faculty-cv-preview span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #203b38ee;
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+}
+.cv-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+.cv-toolbar h3 {
+  margin: 8px 0;
+  font-size: 23px;
+}
+.cv-page {
+  margin: 22px 0;
+  border: 1px solid #cbd5ce;
+  background: #f3f5f1;
+}
+.cv-page figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px;
+  font-size: 12px;
+  color: #324c44;
+}
+.cv-page-scroll {
+  overflow: auto;
+  max-height: 72vh;
+  background: #e4e9e2;
+}
+.supervisor-cv .official-profile-document {
+  display: block;
+  max-width: none;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border: 0;
+}
+.supervisor-cv.cv-zoomed .official-profile-document {
+  width: 140%;
+  min-width: 850px;
+}
+.club-activity-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 16px 0 20px;
+  border-bottom: 1px solid #d8dfd7;
+  margin-bottom: 22px;
+}
+.club-activity-tabs button {
+  padding: 12px 18px;
+  border: 1px solid #c5d1c7;
+  background: #fff;
+  color: #26433a;
+  font-size: 13px;
+  cursor: pointer;
+}
+.club-activity-tabs button[aria-selected='true'] {
+  background: #26433a;
+  color: white;
+  border-color: #26433a;
+}
+.club-dialog .movie-night-space {
+  margin-top: 0;
+}
+.club-dialog .movie-proposal-grid {
+  grid-template-columns: 1fr;
+}
+.club-dialog .movie-admin {
+  padding: 20px;
+}
+.club-dialog .movie-phase-bar {
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .admissions-story-hero {
+    grid-template-columns: 1fr;
+    margin-top: 25px;
+  }
+  .admissions-story-hero > img {
+    min-height: 0;
+    height: 250px;
+  }
+  .admission-content-section {
+    margin: 60px 0;
+  }
+  .admission-feature-row,
+  .admission-requirement-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .admission-feature-row.reverse {
+    direction: ltr;
+  }
+  .admission-documents {
+    grid-template-columns: 1fr;
+  }
+  .admission-budget-grid {
+    grid-template-columns: 1fr;
+  }
+  .admissions-programme-tools {
+    gap: 14px;
+  }
+  .admissions-section-nav {
+    gap: 14px 20px;
+  }
+  .cv-toolbar {
+    align-items: start;
+  }
+  .cv-page-scroll {
+    max-height: 65vh;
+  }
+  .club-dialog .movie-phase-bar h3 {
+    font-size: 23px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faculty-cv-preview img {
+    transition: none;
+  }
+}

@@ -3,7 +3,6 @@ import { content } from './i18n';
 import { departmentPhotos, xidianNews } from './community-imagery';
 import { currentAccount } from './accounts';
 import CampusLife from './campus';
-import MovieNight from './movie-night-ui';
 import { clubs } from './clubs';
 import { ClubJournal } from './club-journal';
 import { unionDepartments, recruitmentUrl, recruitmentOpen } from './union-data';
@@ -126,9 +125,9 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
     window.addEventListener('hashchange', update);
     return () => window.removeEventListener('hashchange', update);
   }, []);
-  const tab = ['actu', 'departments', 'clubs', 'cinema', 'recruitment'].includes(requested)
+  const tab = ['actu', 'departments', 'clubs', 'recruitment'].includes(requested)
     ? requested
-    : requested === 'photos'
+    : requested === 'photos' || requested === 'cinema'
       ? 'clubs'
       : 'actu';
   const open = recruitmentOpen();
@@ -192,7 +191,6 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
           ['actu', c('Actualités', 'News')],
           ['departments', c('Les 8 départements', '8 departments')],
           ['clubs', c('Clubs & inscriptions', 'Clubs & registration')],
-          ['cinema', 'Friday Movie Night'],
           ['recruitment', c('Recrutement', 'Recruitment')],
         ].map(([id, label]) => (
           <a key={id} href={'#/union?tab=' + id} aria-current={tab === id ? 'page' : undefined}>
@@ -350,7 +348,6 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
           <CampusLife lang={lang} workspaceId={workspaceId} />
         </>
       )}
-      {tab === 'cinema' && <MovieNight lang={lang} />}
       {tab === 'recruitment' && (
         <section className="union-recruitment">
           <div>

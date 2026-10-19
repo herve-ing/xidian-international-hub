@@ -1212,3 +1212,19 @@ for (const [locale, values] of Object.entries(newClubCopy)) {
   clubTranslations[locale]['Fitness and bodyweight'] = values[0];
   clubTranslations[locale]['Suggest a film and vote'] = values[1];
 }
+
+const clubActivityCopy: Record<string, string[]> = {
+  ar: ['أنشطة النادي', 'عن النادي', 'الاقتراحات والتصويت'],
+  es: ['Actividades del club', 'Sobre el club', 'Propuestas y votación'],
+  ln: ['Misala ya club', 'Makambo ya club', 'Makanisi mpe kopona'],
+  ru: ['Мероприятия клуба', 'О клубе', 'Предложения и голосование'],
+  tr: ['Kulüp etkinlikleri', 'Kulüp hakkında', 'Öneriler ve oylama'],
+  ary: ['أنشطة النادي', 'على النادي', 'الاقتراحات والتصويت'],
+  tk: ['Klubuň çäreleri', 'Klub barada', 'Teklipler we ses bermek'],
+  ur: ['کلب کی سرگرمیاں', 'کلب کے بارے میں', 'تجاویز اور ووٹنگ'],
+};
+for (const [locale, values] of Object.entries(clubActivityCopy)) {
+  ['Club activities', 'About the club', 'Suggestions & voting'].forEach((key, i) => {
+    clubTranslations[locale][key] = values[i];
+  });
+}

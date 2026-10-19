@@ -1,3 +1,4 @@
+import Admissions from './admissions-page';
 import React, { useEffect, useState } from 'react';
 import { content, languages } from './i18n';
 import { currentAccount, signOut, type Account } from './accounts';
@@ -242,109 +243,6 @@ function Landing({ lang }: { lang: string }) {
         <UnionNews lang={lang} />
       </div>
     </>
-  );
-}
-function Admissions({ lang }: { lang: string }) {
-  const c = (fr: string, en: string) => content(lang, fr, en);
-  return (
-    <section className="admissions-public public-container">
-      <header className="public-page-title">
-        <span className="public-kicker">
-          {c('ADMISSIONS INTERNATIONALES', 'INTERNATIONAL ADMISSIONS')}
-        </span>
-        <h1>{c('Préparez la suite de votre parcours.', 'Prepare your next chapter.')}</h1>
-        <p>
-          {c(
-            'Les repères des guides Master et Doctorat 2026, réunis pour vous aider à préparer votre candidature.',
-            'Key information from the 2026 Master and Doctoral guides, brought together to help you prepare.',
-          )}
-        </p>
-      </header>
-      <div className="admissions-alert">
-        <strong>
-          {c('Guides 2026 · calendrier passé', '2026 guides · past application cycle')}
-        </strong>
-        <p>
-          {c(
-            'Les trois dates limites indiquées sont le 1er mars, le 17 mai et le 1er juillet 2026. Elles sont passées. Aucune ouverture de candidature 2027 n’est annoncée ici : vérifiez le prochain calendrier auprès de Xidian.',
-            'The three listed deadlines are 1 March, 17 May and 1 July 2026. They have passed. No 2027 application opening is announced here: confirm the next schedule with Xidian.',
-          )}
-        </p>
-      </div>
-      <div className="programme-grid">
-        {[
-          ['Master', '3', '30 000', 'master-admissions-2026.pdf'],
-          ['PhD', '4', '40 000', 'doctoral-admissions-2026.pdf'],
-        ].map(([level, years, tuition, file]) => (
-          <article key={level}>
-            <span className="public-kicker">
-              {c('GUIDE FOURNI · ÉDITION 2026', 'SUPPLIED GUIDE · 2026 EDITION')}
-            </span>
-            <h2>
-              {level === 'PhD' ? c('Doctorat', 'Doctoral study') : c('Master', 'Master’s study')}
-            </h2>
-            <p>
-              <strong>{years}</strong> {c('ans · durée indiquée', 'years · listed duration')}
-            </p>
-            <p>
-              <strong>{tuition}</strong> RMB / {c('année universitaire', 'academic year')}
-            </p>
-            <small>
-              {c(
-                'Frais et conditions 2026, à vérifier pour le prochain cycle.',
-                '2026 fees and conditions; verify for the next cycle.',
-              )}
-            </small>
-            <a className="public-button" href={'./media/' + file} target="_blank" rel="noreferrer">
-              {c('Consulter le guide PDF', 'Read the PDF guide')} ↗
-            </a>
-          </article>
-        ))}
-      </div>
-      <div className="public-section-title">
-        <span className="public-kicker">{c('LE PARCOURS', 'THE JOURNEY')}</span>
-        <h2>{c('Une étape après l’autre.', 'One step at a time.')}</h2>
-      </div>
-      <div className="admission-steps">
-        {admissionsSteps.map((s, i) => (
-          <article key={s.id}>
-            <span>{String(i + 1).padStart(2, '0')}</span>
-            <div>
-              <h3>{lang === 'fr' ? s.fr : s.en}</h3>
-              <p>{lang === 'fr' ? s.descriptionFr : s.descriptionEn}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-      <div className="admissions-actions">
-        <div>
-          <h2>{c('Commencez par votre préparation.', 'Start with your preparation.')}</h2>
-          <p>
-            {c(
-              'Le Hub n’est ni un intermédiaire d’admission ni le portail officiel. Les guides fournis précisent que Xidian accepte les candidatures directement des étudiants.',
-              'The Hub is neither an admissions agent nor the official portal. The supplied guides state that Xidian accepts applications directly from students.',
-            )}
-          </p>
-        </div>
-        <a className="public-button" href="#/apply">
-          {c('Créer mon espace candidat', 'Create my applicant space')} →
-        </a>
-        <a
-          className="public-button secondary"
-          href={officialPortal}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {c('Aller au portail officiel', 'Go to the official portal')} ↗
-        </a>
-      </div>
-      <p className="public-small-note">
-        {c(
-          'Source : guides Master/Doctorat 2026 fournis et présentation Xidian, diapositive « Application Process ». Les exigences peuvent changer. Contact officiel : sie@xidian.edu.cn.',
-          'Sources: supplied 2026 Master/Doctoral guides and Xidian’s “Application Process” slide. Requirements may change. Official contact: sie@xidian.edu.cn.',
-        )}
-      </p>
-    </section>
   );
 }
 export default function PublicSite() {

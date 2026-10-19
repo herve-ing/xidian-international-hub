@@ -14,7 +14,13 @@ import {
   MovieError,
   movieClubId,
 } from './movie-night';
-export default function MovieNight({ lang }: { lang: string }) {
+export default function MovieNight({
+  lang,
+  embedded = false,
+}: {
+  lang: string;
+  embedded?: boolean;
+}) {
   const c = (fr: string, en: string) => content(lang, fr, en);
   const [board, setBoard] = useState(movieBoard),
     [title, setTitle] = useState(''),
@@ -82,34 +88,36 @@ export default function MovieNight({ lang }: { lang: string }) {
   const chosen = board.proposals.find((p) => p.id === board.chosenId);
   return (
     <section className="movie-night-space">
-      <header className="movie-night-hero">
-        <img
-          src="./media/friday-movie-night.jpg"
-          alt={c(
-            'Soirée cinéma du site de référence des nouveaux étudiants',
-            'Movie-night photo from the reference freshman site',
-          )}
-        />
-        <div>
-          <span className="public-kicker">FRIDAY MOVIE NIGHT</span>
-          <h2>
-            {c('Le prochain film ?\nÀ vous de choisir.', 'The next movie?\nYou help choose.')}
-          </h2>
-          <p>
-            {c(
-              'Rejoignez le club, proposez un film et participez au vote de la prochaine séance.',
-              'Join the club, suggest a movie and vote for the next session.',
+      {!embedded && (
+        <header className="movie-night-hero">
+          <img
+            src="./media/friday-movie-night.jpg"
+            alt={c(
+              'Soirée cinéma du site de référence des nouveaux étudiants',
+              'Movie-night photo from the reference freshman site',
             )}
-          </p>
-          <a
-            href="https://ghazzali19.github.io/friday-Movie-Night/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {c('Site de référence du club', 'Club reference site')} ↗
-          </a>
-        </div>
-      </header>
+          />
+          <div>
+            <span className="public-kicker">FRIDAY MOVIE NIGHT</span>
+            <h2>
+              {c('Le prochain film ?\nÀ vous de choisir.', 'The next movie?\nYou help choose.')}
+            </h2>
+            <p>
+              {c(
+                'Rejoignez le club, proposez un film et participez au vote de la prochaine séance.',
+                'Join the club, suggest a movie and vote for the next session.',
+              )}
+            </p>
+            <a
+              href="https://ghazzali19.github.io/friday-Movie-Night/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {c('Site de référence du club', 'Club reference site')} ↗
+            </a>
+          </div>
+        </header>
+      )}
       <p className="info-box">
         {c(
           'Démonstration locale : inscriptions, propositions, votes et résultats restent dans ce navigateur. Une inscription en attente ou approuvée permet de participer ; une inscription annulée ou refusée ne le permet plus. Aucune séance n’est confirmée automatiquement.',

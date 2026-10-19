@@ -1,3 +1,4 @@
+import MovieNight from './movie-night-ui';
 import { clubLeaderNames } from './accounts';
 import { ClubVisual } from './club-visual';
 import { clubPhotos } from './community-imagery';
@@ -36,7 +37,12 @@ export function ClubDialog({
         <button
           type="button"
           className="icon-button"
-          aria-label={content(document.documentElement.lang, 'Fermer', 'Close', '关闭')}
+          aria-label={content(
+            typeof document === 'undefined' ? 'fr' : document.documentElement.lang,
+            'Fermer',
+            'Close',
+            '关闭',
+          )}
           onClick={onClose}
         >
           <Icon name="close" />
@@ -71,98 +77,148 @@ export function ClubDetails({
 }) {
   const c = (fr: string, en: string, zh?: string) => content(lang, fr, en, zh),
     tr = (v: string[]) => c(v[0], v[1], v[2]);
+  const [activityTab, setActivityTab] = useState(() => {
+    const params = new URLSearchParams(
+      typeof window === 'undefined' ? '' : window.location.hash.split('?')[1],
+    );
+    return params.get('activity') === 'cinema' || params.get('tab') === 'cinema'
+      ? 'cinema'
+      : 'about';
+  });
   return (
     <ClubDialog title={club.name} onClose={onClose}>
-      <div className={'club-detail-art ' + club.tone}>
-        <ClubVisual club={club} />
-        <span>{club.zh}</span>
-      </div>
-      {clubPhotos[club.id] && (
-        <p className="muted small">
-          {clubPhotos[club.id].context
-            ? c(
-                'Photo d’ambiance : illustration de l’activité, sans représentation confirmée de l’équipe actuelle.',
-                'Context photo illustrating the activity, not a confirmed representation of the current team.',
-                '活动配图，不代表当前社团成员。',
-              )
-            : c(
-                'Photo extraite du site de référence des nouveaux étudiants. Composition actuelle du club à confirmer.',
-                'Photo from the reference freshman site. Current club membership remains to be confirmed.',
-                '图片来自新生参考网站，当前成员须确认。',
-              )}
-        </p>
-      )}
       {club.id === 'friday-movie-night' && (
-        <a className="button primary" href="#/union?tab=cinema" onClick={onClose}>
-          {c('Proposer un film et voter', 'Suggest a film and vote', '推荐影片并投票')} →
-        </a>
-      )}
-      <p className="club-detail-intro">{tr(club.description)}</p>
-      <h3>{c('À découvrir', 'What to explore', '活动方向')}</h3>
-      <p>{tr(club.activity)}</p>
-      <h3>{c('Préparer ma première visite', 'Prepare my first visit', '准备首次参加')}</h3>
-      <p>{tr(club.kit)}</p>
-      <div className="club-facts">
-        {[
-          c('Responsable', 'Organizer', '负责人'),
-          c('Contact WeChat', 'WeChat contact', '微信联系人'),
-          c('Groupe WeChat', 'WeChat group', '微信群'),
-          c('Campus et lieu', 'Campus and venue', '校区与地点'),
-          c('Créneaux, niveaux et langues', 'Schedule, levels and languages', '时间、水平与语言'),
-          c('Cotisation et matériel', 'Fees and equipment', '费用与器材'),
-        ].map((label) => (
-          <div key={label}>
-            <span>{label}</span>
-            <strong>
-              {label === c('Responsable', 'Organizer', '负责人') &&
-              (clubLeaderNames(club.id).length || club.organizer)
-                ? clubLeaderNames(club.id).join(' · ') || club.organizer
-                : label === c('Contact WeChat', 'WeChat contact', '微信联系人') && club.wechat
-                  ? club.wechat
-                  : c('À confirmer', 'To confirm', '待确认')}
-            </strong>
-          </div>
-        ))}
-      </div>
-      {club.source && (
-        <a className="text-button" href={club.source} target="_blank" rel="noreferrer">
-          {c(
-            'Source communautaire · vérifier les mises à jour',
-            'Community source · check for updates',
-            '社区来源 · 请核验更新',
-          )}
-          <Icon name="external" size={15} />
-        </a>
-      )}
-      <p className="muted small">
-        {c(
-          'Club communiqué par la communauté. Présentation indicative ; modalités à valider avec les responsables.',
-          'Club supplied by the community. Introductory content is indicative; confirm arrangements with organizers.',
-          '社团名单由社区提供，简介仅供了解；具体安排请向负责人确认。',
-        )}
-      </p>
-      <div className="club-detail-actions">
-        {onJournal && (
-          <button className="button secondary" onClick={onJournal}>
-            {c('Voir les articles du club', 'View club stories', '查看社团文章')}
+        <div
+          className="club-activity-tabs"
+          role="tablist"
+          aria-label={c('Activités du club', 'Club activities', '社团活动')}
+        >
+          <button
+            role="tab"
+            id="movie-about-tab"
+            aria-controls="movie-about-panel"
+            aria-selected={activityTab === 'about'}
+            onClick={() => setActivityTab('about')}
+          >
+            {c('Le club', 'About the club', '关于社团')}
           </button>
-        )}
-        <button className="button primary" onClick={onRegister}>
-          {registrationLabel}
-          <Icon name="users" size={16} />
-        </button>
-        <button className="button secondary" onClick={onApply}>
-          {c('Préparer ma demande', 'Prepare my request', '准备申请')}
-          <Icon name="arrow" size={16} />
-        </button>
-        <button className="button secondary" onClick={onPlan}>
-          {c('Planifier une visite', 'Plan a visit', '规划参加时间')}
-        </button>
-        <button className="text-button" onClick={onSave} aria-pressed={saved}>
-          <Icon name={saved ? 'check' : 'bookmark'} size={16} />
-          {saved ? c('Enregistré', 'Saved', '已收藏') : c('Enregistrer', 'Save', '收藏')}
-        </button>
-      </div>
+          <button
+            role="tab"
+            id="movie-vote-tab"
+            aria-controls="movie-vote-panel"
+            aria-selected={activityTab === 'cinema'}
+            onClick={() => setActivityTab('cinema')}
+          >
+            {c('Propositions & votes', 'Suggestions & voting', '推荐与投票')}
+          </button>
+        </div>
+      )}
+      {club.id === 'friday-movie-night' && activityTab === 'cinema' ? (
+        <div id="movie-vote-panel" role="tabpanel" aria-labelledby="movie-vote-tab">
+          <MovieNight lang={lang} embedded />
+        </div>
+      ) : (
+        <div
+          id={club.id === 'friday-movie-night' ? 'movie-about-panel' : undefined}
+          role={club.id === 'friday-movie-night' ? 'tabpanel' : undefined}
+          aria-labelledby={club.id === 'friday-movie-night' ? 'movie-about-tab' : undefined}
+        >
+          <div className={'club-detail-art ' + club.tone}>
+            <ClubVisual club={club} />
+            <span>{club.zh}</span>
+          </div>
+          {clubPhotos[club.id] && (
+            <p className="muted small">
+              {clubPhotos[club.id].context
+                ? c(
+                    'Photo d’ambiance : illustration de l’activité, sans représentation confirmée de l’équipe actuelle.',
+                    'Context photo illustrating the activity, not a confirmed representation of the current team.',
+                    '活动配图，不代表当前社团成员。',
+                  )
+                : c(
+                    'Photo extraite du site de référence des nouveaux étudiants. Composition actuelle du club à confirmer.',
+                    'Photo from the reference freshman site. Current club membership remains to be confirmed.',
+                    '图片来自新生参考网站，当前成员须确认。',
+                  )}
+            </p>
+          )}
+          {club.id === 'friday-movie-night' && (
+            <button className="button primary" onClick={() => setActivityTab('cinema')}>
+              {c('Proposer un film et voter', 'Suggest a film and vote', '推荐影片并投票')} →
+            </button>
+          )}
+          <p className="club-detail-intro">{tr(club.description)}</p>
+          <h3>{c('À découvrir', 'What to explore', '活动方向')}</h3>
+          <p>{tr(club.activity)}</p>
+          <h3>{c('Préparer ma première visite', 'Prepare my first visit', '准备首次参加')}</h3>
+          <p>{tr(club.kit)}</p>
+          <div className="club-facts">
+            {[
+              c('Responsable', 'Organizer', '负责人'),
+              c('Contact WeChat', 'WeChat contact', '微信联系人'),
+              c('Groupe WeChat', 'WeChat group', '微信群'),
+              c('Campus et lieu', 'Campus and venue', '校区与地点'),
+              c(
+                'Créneaux, niveaux et langues',
+                'Schedule, levels and languages',
+                '时间、水平与语言',
+              ),
+              c('Cotisation et matériel', 'Fees and equipment', '费用与器材'),
+            ].map((label) => (
+              <div key={label}>
+                <span>{label}</span>
+                <strong>
+                  {label === c('Responsable', 'Organizer', '负责人') &&
+                  (clubLeaderNames(club.id).length || club.organizer)
+                    ? clubLeaderNames(club.id).join(' · ') || club.organizer
+                    : label === c('Contact WeChat', 'WeChat contact', '微信联系人') && club.wechat
+                      ? club.wechat
+                      : c('À confirmer', 'To confirm', '待确认')}
+                </strong>
+              </div>
+            ))}
+          </div>
+          {club.source && (
+            <a className="text-button" href={club.source} target="_blank" rel="noreferrer">
+              {c(
+                'Source communautaire · vérifier les mises à jour',
+                'Community source · check for updates',
+                '社区来源 · 请核验更新',
+              )}
+              <Icon name="external" size={15} />
+            </a>
+          )}
+          <p className="muted small">
+            {c(
+              'Club communiqué par la communauté. Présentation indicative ; modalités à valider avec les responsables.',
+              'Club supplied by the community. Introductory content is indicative; confirm arrangements with organizers.',
+              '社团名单由社区提供，简介仅供了解；具体安排请向负责人确认。',
+            )}
+          </p>
+          <div className="club-detail-actions">
+            {onJournal && (
+              <button className="button secondary" onClick={onJournal}>
+                {c('Voir les articles du club', 'View club stories', '查看社团文章')}
+              </button>
+            )}
+            <button className="button primary" onClick={onRegister}>
+              {registrationLabel}
+              <Icon name="users" size={16} />
+            </button>
+            <button className="button secondary" onClick={onApply}>
+              {c('Préparer ma demande', 'Prepare my request', '准备申请')}
+              <Icon name="arrow" size={16} />
+            </button>
+            <button className="button secondary" onClick={onPlan}>
+              {c('Planifier une visite', 'Plan a visit', '规划参加时间')}
+            </button>
+            <button className="text-button" onClick={onSave} aria-pressed={saved}>
+              <Icon name={saved ? 'check' : 'bookmark'} size={16} />
+              {saved ? c('Enregistré', 'Saved', '已收藏') : c('Enregistrer', 'Save', '收藏')}
+            </button>
+          </div>
+        </div>
+      )}
     </ClubDialog>
   );
 }

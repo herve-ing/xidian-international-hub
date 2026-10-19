@@ -1,3 +1,4 @@
+import { SupervisorCV } from './supervisor-cv';
 import React, { useState } from 'react';
 import { supervisors, type Supervisor } from './supervisors';
 import { content } from './i18n';
@@ -14,6 +15,7 @@ export default function PublicDirectory({ lang }: { lang: string }) {
     [unknown, setUnknown] = useState(true),
     [page, setPage] = useState(1),
     [selected, setSelected] = useState<Supervisor | null>(null),
+    [profileTab, setProfileTab] = useState('cv'),
     [compose, setCompose] = useState<Supervisor | null>(null),
     [notice, setNotice] = useState(''),
     [copied, setCopied] = useState(false);
@@ -139,6 +141,24 @@ export default function PublicDirectory({ lang }: { lang: string }) {
       <div className="public-faculty-grid">
         {matches.slice((current - 1) * 18, current * 18).map((s) => (
           <article className="public-faculty-card" key={s.id}>
+            {s.profileImages?.[0] && (
+              <button
+                className="faculty-cv-preview"
+                aria-label={c('Lire le CV complet de ', 'Read the full CV of ') + s.name}
+                onClick={() => {
+                  setProfileTab('cv');
+                  setSelected(s);
+                }}
+              >
+                <img
+                  src={s.profileImages[0]}
+                  alt={c('Aperçu de la fiche SIE de ', 'SIE profile preview for ') + s.name}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
+                <span>{c('CV & fiche officielle', 'CV & official profile')} ↗</span>
+              </button>
+            )}
             <div className="faculty-card-top">
               <span className="faculty-monogram" style={{ background: s.color }}>
                 {s.initials || s.name.slice(0, 2)}
@@ -163,14 +183,16 @@ export default function PublicDirectory({ lang }: { lang: string }) {
               <button
                 onClick={() => {
                   setCopied(false);
+                  setProfileTab('cv');
                   setSelected(s);
                 }}
               >
-                {c('Voir le profil', 'View profile')} ↗
+                {c('Lire le CV complet', 'Read the full CV')} ↗
               </button>
               <button
                 onClick={() => {
                   setCopied(false);
+                  setProfileTab('contact');
                   setSelected(s);
                 }}
               >
@@ -226,107 +248,118 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                 'See the official document for the academic title.',
               )}
           </p>
-          <a className="button secondary" href={selected.source} target="_blank" rel="noreferrer">
-            {c('Ouvrir le profil officiel', 'Open official profile')} ↗
-          </a>
-          <section className="supervisor-contact-card">
-            <h3>{c('Coordonnées et premier contact', 'Contact details and first introduction')}</h3>
-            <p>
-              {c('Niveau', 'Degree')} :{' '}
-              {selected.levels.join(' / ') || c('À confirmer', 'To confirm')}
-            </p>
-            <p>{(lang === 'fr' ? selected.researchFr : selected.research).join(' · ')}</p>
-            {selected.email ? (
-              <p>
-                {c('Email publié', 'Published email')} :{' '}
-                <a href={'mailto:' + selected.email}>{selected.email}</a>
-              </p>
-            ) : (
-              <p>
+          <div
+            className="club-activity-tabs"
+            role="tablist"
+            aria-label={c('Fiche du superviseur', 'Supervisor profile')}
+          >
+            <button
+              role="tab"
+              id="supervisor-cv-tab"
+              aria-controls="supervisor-cv-panel"
+              aria-selected={profileTab === 'cv'}
+              onClick={() => setProfileTab('cv')}
+            >
+              {c('CV complet', 'Full CV')}
+            </button>
+            <button
+              role="tab"
+              id="supervisor-contact-tab"
+              aria-controls="supervisor-contact-panel"
+              aria-selected={profileTab === 'contact'}
+              onClick={() => setProfileTab('contact')}
+            >
+              {c('Contact & email', 'Contact & email')}
+            </button>
+          </div>
+          {profileTab === 'cv' ? (
+            <div id="supervisor-cv-panel" role="tabpanel" aria-labelledby="supervisor-cv-tab">
+              <SupervisorCV key={selected.id} supervisor={selected} lang={lang} />
+            </div>
+          ) : (
+            <div
+              id="supervisor-contact-panel"
+              role="tabpanel"
+              aria-labelledby="supervisor-contact-tab"
+            >
+              <section className="supervisor-contact-card">
+                <h3>
+                  {c('Coordonnées et premier contact', 'Contact details and first introduction')}
+                </h3>
+                <p>
+                  {c('Niveau', 'Degree')} :{' '}
+                  {selected.levels.join(' / ') || c('À confirmer', 'To confirm')}
+                </p>
+                <p>{(lang === 'fr' ? selected.researchFr : selected.research).join(' · ')}</p>
+                {selected.email ? (
+                  <p>
+                    {c('Email publié', 'Published email')} :{' '}
+                    <a href={'mailto:' + selected.email}>{selected.email}</a>
+                  </p>
+                ) : (
+                  <p>
+                    {c(
+                      'Email non retranscrit : consultez la fiche officielle ci-dessus ou le document ci-dessous. Aucune adresse n’est inventée.',
+                      'Email not transcribed: consult the official profile above or document below. No address is invented.',
+                    )}
+                  </p>
+                )}
+                <h3>{c('Modèle d’email à personnaliser', 'Email template to personalize')}</h3>
+                <p>
+                  {c(
+                    'Modèle en anglais : remplacez les champs entre crochets.',
+                    'English template: replace the bracketed fields.',
+                  )}
+                </p>
+                <textarea
+                  aria-label={c('Modèle d’email', 'Email template')}
+                  readOnly
+                  value={emailText}
+                  rows={10}
+                />
+                <div className="faculty-card-actions">
+                  <button
+                    onClick={async () => {
+                      try {
+                        await navigator.clipboard.writeText(emailText);
+                        setCopied(true);
+                      } catch {
+                        setNotice(
+                          c(
+                            'Copie indisponible : sélectionnez le texte ou téléchargez le modèle.',
+                            'Clipboard unavailable: select the text or download the template.',
+                          ),
+                        );
+                      }
+                    }}
+                  >
+                    {copied ? c('Copié', 'Copied') : c('Copier le modèle', 'Copy template')}
+                  </button>
+                  <a
+                    download="supervisor-email.txt"
+                    href={'data:text/plain;charset=utf-8,' + encodeURIComponent(emailText)}
+                  >
+                    {c('Télécharger le modèle', 'Download template')} ↓
+                  </a>
+                </div>
+                <button className="button primary" onClick={() => contact(selected)}>
+                  {c('Échanger dans le Hub', 'Chat in the Hub')} →
+                </button>
+                <p>
+                  {c(
+                    'La fiche et les coordonnées sont publiques. Un compte est demandé uniquement pour la conversation locale dans le Hub.',
+                    'The contact card is public. Only the local Hub conversation requires an account.',
+                  )}
+                </p>
+              </section>
+              <p className="info-box">
                 {c(
-                  'Email non retranscrit : consultez la fiche officielle ci-dessus ou le document ci-dessous. Aucune adresse n’est inventée.',
-                  'Email not transcribed: consult the official profile above or document below. No address is invented.',
+                  'Le Hub est indépendant. Un message enregistré dans cette démonstration n’est pas transmis à l’université. Utilisez les coordonnées officielles pour un contact réel.',
+                  'The Hub is independent. Messages saved in this demo are not delivered to the university. Use official contact details for real correspondence.',
                 )}
               </p>
-            )}
-            <h3>{c('Modèle d’email à personnaliser', 'Email template to personalize')}</h3>
-            <p>
-              {c(
-                'Modèle en anglais : remplacez les champs entre crochets.',
-                'English template: replace the bracketed fields.',
-              )}
-            </p>
-            <textarea
-              aria-label={c('Modèle d’email', 'Email template')}
-              readOnly
-              value={emailText}
-              rows={10}
-            />
-            <div className="faculty-card-actions">
-              <button
-                onClick={async () => {
-                  try {
-                    await navigator.clipboard.writeText(emailText);
-                    setCopied(true);
-                  } catch {
-                    setNotice(
-                      c(
-                        'Copie indisponible : sélectionnez le texte ou téléchargez le modèle.',
-                        'Clipboard unavailable: select the text or download the template.',
-                      ),
-                    );
-                  }
-                }}
-              >
-                {copied ? c('Copié', 'Copied') : c('Copier le modèle', 'Copy template')}
-              </button>
-              <a
-                download="supervisor-email.txt"
-                href={'data:text/plain;charset=utf-8,' + encodeURIComponent(emailText)}
-              >
-                {c('Télécharger le modèle', 'Download template')} ↓
-              </a>
             </div>
-            <button className="button primary" onClick={() => contact(selected)}>
-              {c('Échanger dans le Hub', 'Chat in the Hub')} →
-            </button>
-            <p>
-              {c(
-                'La fiche et les coordonnées sont publiques. Un compte est demandé uniquement pour la conversation locale dans le Hub.',
-                'The contact card is public. Only the local Hub conversation requires an account.',
-              )}
-            </p>
-          </section>
-          <p className="info-box">
-            {c(
-              'Le Hub est indépendant. Un message enregistré dans cette démonstration n’est pas transmis à l’université. Utilisez les coordonnées officielles pour un contact réel.',
-              'The Hub is independent. Messages saved in this demo are not delivered to the university. Use official contact details for real correspondence.',
-            )}
-          </p>
-          {selected.profileImages?.length ? (
-            <h3>{c('Document officiel détaillé', 'Detailed official document')}</h3>
-          ) : null}
-          {selected.profileImages?.map((src, i) => (
-            <a href={src} key={src} target="_blank" rel="noreferrer">
-              <img
-                className="official-profile-document"
-                key={src}
-                src={src}
-                alt={
-                  c(
-                    'Document officiel du superviseur, page ',
-                    'Official supervisor document, page ',
-                  ) +
-                  (i + 1)
-                }
-                loading="lazy"
-                referrerPolicy="no-referrer"
-              />
-              <span>
-                {c('Ouvrir le document en taille réelle', 'Open full-size document')} {i + 1} ↗
-              </span>
-            </a>
-          ))}
+          )}
           <button className="button primary" onClick={() => contact(selected)}>
             {c('Commencer un échange dans le Hub', 'Start a conversation in the Hub')}
           </button>
