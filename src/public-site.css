@@ -1999,3 +1999,475 @@
     transition: none;
   }
 }
+/* Campus editorial: photography belongs to activities and departments, not a separate gallery. */
+.union-editorial .union-editorial-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.12fr;
+  align-items: stretch;
+  min-height: 500px;
+  background: #e8eee7;
+  overflow: visible;
+}
+.union-editorial .union-editorial-hero:after {
+  display: none;
+}
+.union-editorial .union-editorial-hero > div {
+  max-width: none;
+  padding: 0;
+  color: #173732;
+  position: relative;
+  z-index: auto;
+}
+.union-editorial .union-editorial-hero .union-hero-copy {
+  padding: 52px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.union-editorial .union-editorial-hero h1 {
+  font-size: clamp(42px, 4.6vw, 66px);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  margin: 20px 0;
+}
+.union-editorial-hero .union-hero-copy > p {
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 390px;
+}
+.union-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.union-hero-actions > a:last-child {
+  font-size: 13px;
+  font-weight: 650;
+  color: #173732;
+}
+.union-editorial .union-hero-mosaic {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  overflow: hidden;
+}
+.union-hero-mosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 0;
+  transition: transform 0.7s;
+}
+.union-hero-mosaic img:first-child {
+  grid-row: 1/3;
+  object-position: 47% center;
+}
+.union-hero-mosaic img:nth-child(2) {
+  object-position: 55% center;
+}
+.union-editorial.union-subpage .union-editorial-hero {
+  min-height: 260px;
+  max-height: 300px;
+}
+.union-editorial.union-subpage .union-editorial-hero .union-hero-copy {
+  padding: 24px 32px;
+}
+.union-editorial.union-subpage .union-editorial-hero h1 {
+  font-size: 34px;
+  white-space: normal;
+  max-width: 390px;
+  margin: 14px 0;
+}
+.union-editorial.union-subpage .union-hero-copy > p {
+  display: none;
+}
+.union-editorial .union-tabs {
+  padding: 10px 0;
+  margin-top: 12px;
+}
+.union-editorial .union-tabs a {
+  padding: 17px 24px;
+  font-weight: 650;
+  font-size: 14px;
+}
+.union-editorial .union-tabs a[aria-current] {
+  color: #173732;
+  border-color: #173732;
+}
+.union-editorial .union-source-note {
+  max-width: 950px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #6b7872;
+  margin: 16px 0 30px;
+}
+.union-pathways {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  padding: 26px 0 20px;
+}
+.union-pathways > a {
+  background: #f4f1e9;
+  text-decoration: none;
+  color: #173732;
+  overflow: hidden;
+}
+.union-pathways img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s;
+}
+.union-pathways a:hover img {
+  transform: scale(1.035);
+}
+.union-pathways a > div {
+  padding: 24px;
+}
+.union-pathways span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.union-pathways h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.1;
+  margin: 16px 0;
+}
+.union-pathways p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0;
+}
+.union-pathways a:last-child {
+  background: #e9eeed;
+}
+.union-editorial .union-department-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: none;
+  border: 0;
+  gap: 24px;
+}
+.union-editorial .union-department-grid article {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  overflow: hidden;
+  background: #f4f1e9;
+  min-height: 290px;
+}
+.union-department-grid article > img {
+  width: 100%;
+  height: 100%;
+  min-height: 290px;
+  object-fit: cover;
+  display: block;
+}
+.union-department-grid article > div {
+  padding: 26px 22px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+.union-department-number {
+  font-size: 12px;
+  font-weight: 700;
+  color: #8c2f46;
+}
+.union-department-grid article > div h3 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  margin: 15px 0 8px;
+}
+.union-department-grid article > div p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 10px 0 18px;
+}
+.union-department-grid article > div a {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 650;
+}
+.union-editorial .union-departments > .info-box {
+  font-size: 11px;
+  background: transparent;
+  border-top: 1px solid #ddd;
+  padding: 20px 0;
+}
+.union-clubs-banner {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: stretch;
+  background: #193c36;
+  color: #fff;
+  margin: 35px 0;
+}
+.union-clubs-banner img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+.union-clubs-banner > div {
+  padding: 38px;
+}
+.union-clubs-banner h2 {
+  font-family: Georgia, serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.13;
+  margin: 20px 0;
+}
+.union-clubs-banner p {
+  line-height: 1.9;
+  font-size: 14px;
+}
+.union-sie-news {
+  margin-top: 55px;
+}
+.union-sie-news .union-section-heading > h3 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 34px;
+  margin: 0;
+}
+.union-sie-news .union-section-heading > span {
+  font-size: 11px;
+  color: #63746e;
+}
+.union-official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.union-official-news-grid article {
+  background: #f4f1e9;
+}
+.union-official-news-grid a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+}
+.union-official-news-grid img {
+  width: 100%;
+  height: 200px;
+  display: block;
+  object-fit: cover;
+}
+.union-official-news-grid article a > div {
+  padding: 24px;
+}
+.union-official-news-grid time {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: #8c2f46;
+}
+.union-official-news-grid h3 {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 14px 0;
+}
+.union-official-news-grid p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.union-official-news-grid article a > div > span {
+  font-size: 12px;
+  font-weight: 650;
+}
+.union-visual-credits {
+  border-top: 1px solid #dbe0dc;
+  padding: 24px 0;
+  margin-top: 35px;
+  font-size: 11px;
+  color: #65736e;
+  line-height: 1.9;
+}
+.union-visual-credits summary {
+  cursor: pointer;
+}
+.union-visual-credits p {
+  max-width: 850px;
+}
+.union-visual-credits a {
+  color: #8c2f46;
+}
+.club-photo-credit {
+  display: block;
+  font-size: 10px;
+  color: #6f7973;
+  margin: -3px 0 12px;
+  line-height: 1.6;
+}
+.club-art > .club-photograph {
+  object-fit: cover;
+  object-position: center 42%;
+}
+.club-detail-art > .club-photograph {
+  height: 290px;
+  max-height: 330px;
+  object-fit: cover;
+}
+.union-editorial .campus-club {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #dbe3dc;
+  box-shadow: none;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+.union-editorial .campus-club:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px #17373212;
+}
+.union-editorial .club-art {
+  min-height: 220px;
+}
+.union-editorial .club-body {
+  padding: 24px;
+}
+.union-editorial .club-body h2 {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+.union-editorial .campus-hero {
+  background: #f5f3ed;
+  border-radius: 4px;
+}
+.union-editorial .campus-hero .campus-mosaic {
+  display: none;
+}
+@media (max-width: 1050px) {
+  .union-editorial .union-editorial-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+  .union-editorial .union-department-grid article {
+    grid-template-columns: 1fr;
+  }
+  .union-department-grid article > img {
+    height: 220px;
+    min-height: 0;
+  }
+  .union-editorial .union-department-grid article > div {
+    padding: 25px;
+  }
+  .union-editorial.union-subpage .union-editorial-hero h1 {
+    font-size: 30px;
+  }
+  .union-pathways {
+    gap: 16px;
+  }
+  .union-pathways a > div {
+    padding: 20px;
+  }
+  .union-pathways h2 {
+    font-size: 26px;
+  }
+}
+@media (max-width: 740px) {
+  .union-editorial .union-editorial-hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .union-editorial .union-editorial-hero .union-hero-copy {
+    padding: 34px 26px;
+  }
+  .union-editorial .union-editorial-hero h1 {
+    font-size: 48px;
+  }
+  .union-editorial .union-hero-mosaic {
+    height: 310px;
+  }
+  .union-editorial.union-subpage .union-editorial-hero {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+  .union-editorial.union-subpage .union-hero-mosaic {
+    display: none;
+  }
+  .union-pathways,
+  .union-official-news-grid {
+    grid-template-columns: 1fr;
+  }
+  .union-pathways > a {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+  .union-pathways img {
+    height: 100%;
+    min-height: 210px;
+  }
+  .union-editorial .union-tabs a {
+    padding: 13px 12px;
+    font-size: 12px;
+  }
+  .union-clubs-banner {
+    grid-template-columns: 1fr;
+  }
+  .union-clubs-banner img {
+    height: 260px;
+  }
+  .union-clubs-banner > div {
+    padding: 28px;
+  }
+  .union-clubs-banner h2 {
+    font-size: 34px;
+  }
+  .union-official-news-grid article a {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+  }
+  .union-official-news-grid img {
+    height: 100%;
+    min-height: 230px;
+  }
+}
+@media (max-width: 480px) {
+  .union-editorial .union-department-grid {
+    grid-template-columns: 1fr;
+  }
+  .union-editorial .union-hero-mosaic {
+    height: 250px;
+  }
+  .union-editorial .union-editorial-hero h1 {
+    font-size: 42px;
+  }
+  .union-pathways > a,
+  .union-official-news-grid article a {
+    grid-template-columns: 1fr;
+  }
+  .union-pathways img,
+  .union-official-news-grid img {
+    height: 200px;
+    min-height: 0;
+  }
+  .union-department-grid article > img {
+    height: 240px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .union-hero-mosaic img,
+  .union-pathways img,
+  .union-editorial .campus-club {
+    transition: none;
+  }
+  .union-pathways a:hover img,
+  .union-editorial .campus-club:hover {
+    transform: none;
+  }
+}

@@ -4,7 +4,7 @@ import { currentAccount, signOut, type Account } from './accounts';
 import { usePathname } from './navigation';
 import AccountPortal from './account-portal';
 import Hub from './hub';
-import StudentUnion, { CampusGallery, UnionNews } from './student-union';
+import StudentUnion, { UnionNews } from './student-union';
 import PublicDirectory from './public-directory';
 import ApplicantAccess from './applicant-access';
 import ApplicationWorkspace, { FacultyWorkspace } from './application-workspace';
@@ -240,7 +240,6 @@ function Landing({ lang }: { lang: string }) {
       </section>
       <div className="public-container">
         <UnionNews lang={lang} />
-        <CampusGallery lang={lang} compact />
       </div>
     </>
   );

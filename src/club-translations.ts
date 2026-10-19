@@ -1137,3 +1137,63 @@ for (const [locale, values] of Object.entries(editorialNavigation))
     'Stories',
     'View club stories',
   ].forEach((key, i) => (clubTranslations[locale][key] = values[i]));
+
+const photoCopy: Record<string, string[]> = {
+  ar: [
+    'صورة توضيحية · أرشيف',
+    'صورة من الموقع المرجعي · أرشيف',
+    'صورة توضيحية للنشاط، ولا تؤكد أعضاء الفريق الحاليين.',
+    'صورة من الموقع المرجعي للطلاب الجدد. يجب تأكيد أعضاء النادي الحاليين.',
+  ],
+  es: [
+    'Foto de ambiente · archivo',
+    'Foto del sitio de referencia · archivo',
+    'Foto de ambiente que ilustra la actividad, sin confirmar el equipo actual.',
+    'Foto del sitio de referencia para nuevos estudiantes. Los miembros actuales del club están por confirmar.',
+  ],
+  ln: [
+    'Elilingi ya ndakisa · bilili ya kala',
+    'Elilingi ya site ya ndakisa · bilili ya kala',
+    'Elilingi ezali kolakisa mosala, kasi endimisi te bato ya ekipi ya lelo.',
+    'Elilingi euti na site ya ndakisa ya bayekoli ya sika. Bato ya club ya lelo basengeli kondimama.',
+  ],
+  ru: [
+    'Атмосферное фото · архив',
+    'Фото с сайта-образца · архив',
+    'Фото иллюстрирует деятельность и не подтверждает текущий состав команды.',
+    'Фото с сайта для первокурсников. Текущий состав клуба следует уточнить.',
+  ],
+  tr: [
+    'Temsili fotoğraf · arşiv',
+    'Referans siteden fotoğraf · arşiv',
+    'Etkinliği gösteren temsili fotoğraf; mevcut takımın üyelerini doğrulamaz.',
+    'Yeni öğrenciler için referans siteden fotoğraf. Kulübün mevcut üyeleri teyit edilmelidir.',
+  ],
+  ary: [
+    'تصويرة توضيحية · أرشيف',
+    'تصويرة من الموقع المرجعي · أرشيف',
+    'تصويرة كتوضح النشاط وما كتأكدش أعضاء الفريق الحاليين.',
+    'تصويرة من الموقع المرجعي ديال الطلبة الجداد. خاص التأكد من أعضاء النادي الحاليين.',
+  ],
+  tk: [
+    'Düşündiriş suraty · arhiw',
+    'Nusga saýtdan surat · arhiw',
+    'Işi görkezýän surat häzirki toparyň agzalaryny tassyklamaýar.',
+    'Täze talyplar üçin nusga saýtdan surat. Klubuň häzirki agzalaryny tassyklamaly.',
+  ],
+  ur: [
+    'وضاحتی تصویر · محفوظات',
+    'حوالہ ویب سائٹ کی تصویر · محفوظات',
+    'سرگرمی کی وضاحتی تصویر، موجودہ ٹیم کے ارکان کی تصدیق نہیں کرتی۔',
+    'نئے طلبہ کی حوالہ ویب سائٹ سے تصویر۔ کلب کے موجودہ ارکان کی تصدیق ضروری ہے۔',
+  ],
+};
+const photoKeys = [
+  'Context photo · archives',
+  'Reference-site photo · archives',
+  'Context photo illustrating the activity, not a confirmed representation of the current team.',
+  'Photo from the reference freshman site. Current club membership remains to be confirmed.',
+];
+for (const [locale, values] of Object.entries(photoCopy)) {
+  for (const [i, key] of photoKeys.entries()) clubTranslations[locale][key] = values[i];
+}

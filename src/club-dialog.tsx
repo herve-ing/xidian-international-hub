@@ -1,5 +1,6 @@
 import { clubLeaderNames } from './accounts';
 import { ClubVisual } from './club-visual';
+import { clubPhotos } from './community-imagery';
 import React, { useEffect, useRef, useState } from 'react';
 import { Icon } from './icons';
 import { content } from './i18n';
@@ -76,6 +77,21 @@ export function ClubDetails({
         <ClubVisual club={club} />
         <span>{club.zh}</span>
       </div>
+      {clubPhotos[club.id] && (
+        <p className="muted small">
+          {clubPhotos[club.id].context
+            ? c(
+                'Photo d’ambiance : illustration de l’activité, sans représentation confirmée de l’équipe actuelle.',
+                'Context photo illustrating the activity, not a confirmed representation of the current team.',
+                '活动配图，不代表当前社团成员。',
+              )
+            : c(
+                'Photo extraite du site de référence des nouveaux étudiants. Composition actuelle du club à confirmer.',
+                'Photo from the reference freshman site. Current club membership remains to be confirmed.',
+                '图片来自新生参考网站，当前成员须确认。',
+              )}
+        </p>
+      )}
       <p className="club-detail-intro">{tr(club.description)}</p>
       <h3>{c('À découvrir', 'What to explore', '活动方向')}</h3>
       <p>{tr(club.activity)}</p>

@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { clubPhotos } from './community-imagery';
 import type { Club } from './clubs';
-// Original vector illustrations; no university photos or third-party assets.
+// Locally optimized archive photography; original vectors remain the fallback for new clubs.
 export function ClubVisual({ club }: { club: Club }) {
+  const [failed, setFailed] = useState(false);
+  const photo = clubPhotos[club.id];
+  if (photo && !failed)
+    return (
+      <img
+        className="club-visual club-photograph"
+        src={'./media/' + photo.image}
+        alt={club.name}
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
+    );
+  return <OriginalClubVisual club={club} />;
+}
+function OriginalClubVisual({ club }: { club: Club }) {
   const id = club.id,
     ink = '#f7f1e7',
     dark = '#183d38',

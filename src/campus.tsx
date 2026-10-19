@@ -1,6 +1,7 @@
 import { clubLeaderNames } from './accounts';
 import React, { useEffect, useState, useRef } from 'react';
 import { ClubVisual } from './club-visual';
+import { clubPhotos } from './community-imagery';
 import { ClubJournal } from './club-journal';
 import { Icon } from './icons';
 import { content } from './i18n';
@@ -426,6 +427,21 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
                     </div>
                     <div className="club-body">
                       <h2>{club.name}</h2>
+                      {clubPhotos[club.id] && (
+                        <small className="club-photo-credit">
+                          {clubPhotos[club.id].context
+                            ? c(
+                                'Photo d’ambiance · archives',
+                                'Context photo · archives',
+                                '活动配图 · 资料图片',
+                              )
+                            : c(
+                                'Photo du site de référence · archives',
+                                'Reference-site photo · archives',
+                                '参考网站图片 · 资料图片',
+                              )}
+                        </small>
+                      )}
                       <p>{tr(club.description)}</p>
                       <div className="club-activity">
                         <Icon name="spark" size={16} />
