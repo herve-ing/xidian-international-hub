@@ -1,3 +1,4 @@
+import { AnimatedHubLogo } from './binary-motion';
 import { AuthError, AuthErrorCode, authErrorCode } from './auth-errors';
 import React, { useState, useEffect } from 'react';
 import { Icon } from './icons';
@@ -149,12 +150,7 @@ export default function AccountPortal() {
       <div className="public-clubs">
         <header className="account-header">
           <a className="brand" href="#/">
-            <span className="brand-mark">
-              X<span />
-            </span>
-            <span>
-              XIDIAN<span>INTERNATIONAL HUB</span>
-            </span>
+            <AnimatedHubLogo />
           </a>
           <div className="row">
             <label className="language-picker">
@@ -197,12 +193,7 @@ export default function AccountPortal() {
       </a>
       <header className="account-header">
         <a className="brand" href="#/">
-          <span className="brand-mark">
-            X<span />
-          </span>
-          <span>
-            XIDIAN<span>INTERNATIONAL HUB</span>
-          </span>
+          <AnimatedHubLogo />
         </a>
         <label className="language-picker">
           <Icon name="globe" size={18} />
@@ -499,7 +490,6 @@ export default function AccountPortal() {
                   : role === 'student' && register
                     ? c('Créer mon compte', 'Create my account', '创建账户')
                     : c('Se connecter', 'Sign in', '登录')}
-                <Icon name="arrow" size={18} />
               </button>
             </form>
             {role === 'student' && (
@@ -554,7 +544,6 @@ export default function AccountPortal() {
       <div className="account-public-link">
         <a className="text-button" href="#/clubs">
           {c('Explorer les clubs', 'Explore clubs', '探索社团')}
-          <Icon name="arrow" size={16} />
         </a>
       </div>
       <footer className="account-footer">

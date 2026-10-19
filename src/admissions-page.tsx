@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { content } from './i18n';
 import { admissionsSteps, graduateProgrammes, officialPortal } from './admissions-data';
-function SourceVisual({ file, title, source }: { file: string; title: string; source: string }) {
+function SourceVisual({
+  file,
+  title,
+  source,
+  lang,
+}: {
+  file: string;
+  title: string;
+  source: string;
+  lang: string;
+}) {
   return (
     <figure className="admissions-source-visual">
-      <a
-        href={'./media/' + file + '.jpg'}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={title + ' ↗'}
-      >
+      <a href={'./media/' + file + '.jpg'} target="_blank" rel="noreferrer" aria-label={title}>
         <img src={'./media/' + file + '.jpg'} alt={title} loading="lazy" />
       </a>
       <figcaption>
         {source} ·{' '}
         <a href={'./media/' + file + '.jpg'} target="_blank" rel="noreferrer">
-          ↗
+          {content(lang, 'Agrandir', 'Enlarge')}
         </a>
       </figcaption>
     </figure>
@@ -44,7 +49,7 @@ export default function Admissions({ lang }: { lang: string }) {
             )}
           </p>
           <a className="public-button" href="#/supervisors">
-            {c('Rencontrer les superviseurs', 'Explore supervisors')} ↗
+            {c('Rencontrer les superviseurs', 'Explore supervisors')}
           </a>
         </div>
         <img
@@ -121,7 +126,7 @@ export default function Admissions({ lang }: { lang: string }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                {c('Lire le guide PDF', 'Read the PDF guide')} ↗
+                {c('Lire le guide PDF', 'Read the PDF guide')}
               </a>
             </article>
           ))}
@@ -236,6 +241,7 @@ export default function Admissions({ lang }: { lang: string }) {
             </dl>
           </div>
           <SourceVisual
+            lang={lang}
             file="smart-learning"
             title={c('Salles et laboratoire intelligents', 'Intelligent classrooms and laboratory')}
             source="260401-XDU Introduction · p. 18"
@@ -459,6 +465,7 @@ export default function Admissions({ lang }: { lang: string }) {
         </div>
         <div className="admission-feature-row">
           <SourceVisual
+            lang={lang}
             file="laboratory-facilities"
             title={c(
               'Équipements et installations de laboratoire',
@@ -475,12 +482,13 @@ export default function Admissions({ lang }: { lang: string }) {
               )}
             </p>
             <a className="public-button secondary" href="#/supervisors">
-              {c('Trouver une équipe de recherche', 'Find a research team')} →
+              {c('Trouver une équipe de recherche', 'Find a research team')}
             </a>
           </div>
         </div>
         <div className="admission-feature-row reverse">
           <SourceVisual
+            lang={lang}
             file="research-fields"
             title={c('Les sept grands domaines de recherche', 'Seven major research areas')}
             source="260401-XDU Introduction · p. 24"
@@ -497,6 +505,7 @@ export default function Admissions({ lang }: { lang: string }) {
         </div>
         <div className="admission-feature-row">
           <SourceVisual
+            lang={lang}
             file="research-centres"
             title={c('Centres de recherche présentés par Xidian', 'Xidian research centres')}
             source="260401-XDU Introduction · p. 25"
@@ -525,6 +534,7 @@ export default function Admissions({ lang }: { lang: string }) {
         </div>
         <div className="admission-feature-row reverse">
           <SourceVisual
+            lang={lang}
             file="joint-laboratories"
             title={c(
               'Coopérations scientifiques et laboratoires conjoints',
@@ -546,6 +556,7 @@ export default function Admissions({ lang }: { lang: string }) {
         </div>
         <div className="admission-feature-row">
           <SourceVisual
+            lang={lang}
             file="global-programmes"
             title={c(
               'Exemples de programmes internationaux',
@@ -565,6 +576,7 @@ export default function Admissions({ lang }: { lang: string }) {
         </div>
         <div className="admission-feature-row reverse">
           <SourceVisual
+            lang={lang}
             file="joint-institutes"
             title={c(
               'Instituts conjoints UTAR et Xidian–FIAS',
@@ -584,6 +596,7 @@ export default function Admissions({ lang }: { lang: string }) {
         </div>
         <div className="admission-feature-row">
           <SourceVisual
+            lang={lang}
             file="xian-industry"
             title={c(
               'Écosystème électronique et numérique de Xi’an',
@@ -605,6 +618,7 @@ export default function Admissions({ lang }: { lang: string }) {
         </div>
         <div className="admission-feature-row reverse">
           <SourceVisual
+            lang={lang}
             file="career-pathways"
             title={c(
               'Trajectoires professionnelles présentées par Xidian',
@@ -628,6 +642,7 @@ export default function Admissions({ lang }: { lang: string }) {
           </div>
         </div>
         <SourceVisual
+          lang={lang}
           file="graduate-destinations"
           title={c(
             'Entreprises et établissements cités dans les débouchés',
@@ -653,7 +668,7 @@ export default function Admissions({ lang }: { lang: string }) {
           </p>
         </div>
         <a className="public-button" href="#/apply">
-          {c('Créer mon espace candidat', 'Create my applicant space')} →
+          {c('Créer mon espace candidat', 'Create my applicant space')}
         </a>
         <a
           className="public-button secondary"
@@ -661,7 +676,7 @@ export default function Admissions({ lang }: { lang: string }) {
           target="_blank"
           rel="noreferrer"
         >
-          {c('Portail officiel · lien 2026', 'Official portal · 2026 link')} ↗
+          {c('Portail officiel · lien 2026', 'Official portal · 2026 link')}
         </a>
       </div>
       <p className="public-small-note">

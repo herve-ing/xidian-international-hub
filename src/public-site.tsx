@@ -73,10 +73,10 @@ function Landing({ lang }: { lang: string }) {
           </p>
           <div className="hero-actions">
             <a className="public-button light" href="#/supervisors">
-              {c('Trouver un superviseur', 'Find a supervisor')} ↗
+              {c('Trouver un superviseur', 'Find a supervisor')}
             </a>
             <a className="public-button outline-light" href="#/admissions">
-              {c('Explorer les admissions', 'Explore admissions')} →
+              {c('Explorer les admissions', 'Explore admissions')}
             </a>
           </div>
         </div>
@@ -107,7 +107,6 @@ function Landing({ lang }: { lang: string }) {
               'Programmes, documents and your application journey.',
             )}
           </p>
-          <span>↗</span>
         </a>
         <a href="#/supervisors">
           <small>{c('RECHERCHE', 'RESEARCH')}</small>
@@ -118,7 +117,6 @@ function Landing({ lang }: { lang: string }) {
               'A public directory to prepare your first connection.',
             )}
           </p>
-          <span>↗</span>
         </a>
         <a href="#/union?tab=clubs">
           <small>{c('VIE DE CAMPUS', 'CAMPUS LIFE')}</small>
@@ -129,7 +127,6 @@ function Landing({ lang }: { lang: string }) {
               'Clubs, creativity and international connections.',
             )}
           </p>
-          <span>↗</span>
         </a>
       </section>
       <section className="public-research public-container">
@@ -170,7 +167,6 @@ function Landing({ lang }: { lang: string }) {
               {researchAreas.map(([en, fr, q]) => (
                 <a href={'#/supervisors?q=' + encodeURIComponent(q)} key={en}>
                   {lang === 'fr' ? fr : en}
-                  <span>↗</span>
                 </a>
               ))}
             </div>
@@ -207,7 +203,7 @@ function Landing({ lang }: { lang: string }) {
               )}
             </p>
             <a className="public-button" href="#/apply">
-              {c('Préparer mon dossier', 'Prepare my application')} →
+              {c('Préparer mon dossier', 'Prepare my application')}
             </a>
           </div>
         </div>
@@ -236,7 +232,7 @@ function Landing({ lang }: { lang: string }) {
             )}
           </p>
           <a className="public-button" href="#/union?tab=clubs">
-            {c('Vivre le campus', 'Explore campus life')} ↗
+            {c('Vivre le campus', 'Explore campus life')}
           </a>
         </div>
       </section>
@@ -319,7 +315,7 @@ export default function PublicSite() {
         </span>
         <div>
           <a href="https://sie.xidian.edu.cn/" target="_blank" rel="noreferrer">
-            {c('Xidian SIE officiel', 'Official Xidian SIE')} ↗
+            {c('Xidian SIE officiel', 'Official Xidian SIE')}
           </a>
           <select
             aria-label={c('Langue', 'Language')}
@@ -374,7 +370,7 @@ export default function PublicSite() {
                 : '#/apply'
             }
           >
-            {account ? c('Mon espace', 'My space') : c('Candidater', 'Apply')} ↗
+            {account ? c('Mon espace', 'My space') : c('Candidater', 'Apply')}
           </a>
           {account ? (
             <button className="public-login" onClick={logout}>
@@ -420,7 +416,7 @@ export default function PublicSite() {
           <section className="public-container public-page-title">
             <h1>{c('Retrouvez votre espace candidat.', 'Open your applicant space.')}</h1>
             <a className="public-button" href="#/applications">
-              {c('Mon dossier', 'My application')} →
+              {c('Mon dossier', 'My application')}
             </a>
           </section>
         )}

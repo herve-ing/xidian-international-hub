@@ -15,7 +15,7 @@ export function UnionNews({ lang }: { lang: string }) {
           <span className="public-kicker">{c('À LA UNE', 'IN FOCUS')}</span>
           <h2>{c('La vie étudiante prend la parole.', 'Student life has a voice.')}</h2>
         </div>
-        <a href="#/union?tab=actu">{c('L’espace de l’Union', 'Union hub')} ↗</a>
+        <a href="#/union?tab=actu">{c('L’espace de l’Union', 'Union hub')} </a>
       </div>
       <div className="union-news-grid">
         <article className="union-feature-news">
@@ -50,7 +50,7 @@ export function UnionNews({ lang }: { lang: string }) {
               )}
             </p>
             <a href="#/union?tab=recruitment">
-              {c('Lire l’appel et les conditions', 'Read the notice and requirements')} →
+              {c('Lire l’appel et les conditions', 'Read the notice and requirements')}
             </a>
           </div>
         </article>
@@ -66,7 +66,7 @@ export function UnionNews({ lang }: { lang: string }) {
             )}
           </p>
           <a href="#/union?tab=departments">
-            {c('Découvrir les départements', 'Explore departments')} →
+            {c('Découvrir les départements', 'Explore departments')}
           </a>
           <hr />
           <span className="public-kicker">{c('CLUBS & CRÉATIONS', 'CLUBS & CREATIVITY')}</span>
@@ -77,7 +77,7 @@ export function UnionNews({ lang }: { lang: string }) {
               'Find articles published by club leaders and professors in this local demo.',
             )}
           </p>
-          <a href="#/union?tab=clubs">{c('Explorer les clubs', 'Explore clubs')} →</a>
+          <a href="#/union?tab=clubs">{c('Explorer les clubs', 'Explore clubs')} </a>
         </article>
       </div>
       <div className="union-sie-news">
@@ -101,7 +101,7 @@ export function UnionNews({ lang }: { lang: string }) {
                   </time>
                   <h3>{c(n.fr, n.en)}</h3>
                   <p>{c(n.summaryFr, n.summaryEn)}</p>
-                  <span>{c('Lire la source officielle', 'Read the official source')} ↗</span>
+                  <span>{c('Lire la source officielle', 'Read the official source')} </span>
                 </div>
               </a>
             </article>
@@ -154,9 +154,9 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
           </p>
           <div className="union-hero-actions">
             <a className="public-button" href="#/union?tab=clubs">
-              {c('Trouver mon club', 'Find my club')} ↗
+              {c('Trouver mon club', 'Find my club')}
             </a>
-            <a href="#/union?tab=departments">{c('Découvrir l’Union', 'Discover the Union')} →</a>
+            <a href="#/union?tab=departments">{c('Découvrir l’Union', 'Discover the Union')} </a>
           </div>
         </div>
         <div
@@ -221,7 +221,6 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
                       ' clubs, des activités à découvrir et votre inscription au même endroit.',
                     clubs.length + ' clubs, activities to explore and registration in one place.',
                   )}{' '}
-                  ↗
                 </p>
               </div>
             </a>
@@ -235,7 +234,6 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
                     'Huit départements au service de la communauté internationale.',
                     'Eight departments serving the international community.',
                   )}{' '}
-                  ↗
                 </p>
               </div>
             </a>
@@ -255,7 +253,6 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
                     'Responsables : inscriptions, articles, photos et vidéos.',
                     'Club leaders: registrations, articles, photos and videos.',
                   )}{' '}
-                  ↗
                 </p>
               </div>
             </a>
@@ -297,7 +294,7 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
                   <span className="union-department-number">0{i + 1}</span>
                   <h3>{c(d.fr, d.en)}</h3>
                   <p>{c(d.summaryFr, d.summaryEn)}</p>
-                  <a href="#/union?tab=recruitment">{c('M’engager', 'Get involved')} ↗</a>
+                  <a href="#/union?tab=recruitment">{c('M’engager', 'Get involved')} </a>
                 </div>
               </article>
             ))}
@@ -413,7 +410,7 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
               )}
             </p>
             <a className="public-button" href={recruitmentUrl} target="_blank" rel="noreferrer">
-              {c('Ouvrir le formulaire indiqué', 'Open the supplied registration form')} ↗
+              {c('Ouvrir le formulaire indiqué', 'Open the supplied registration form')}
             </a>
             <p className="small">
               {c(
@@ -461,7 +458,7 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
           )}
         </p>
         <a href="https://freshman-guide-and-clubs.onrender.com/" target="_blank" rel="noreferrer">
-          {c('Site de référence des nouveaux étudiants', 'Reference freshman site')} ↗
+          {c('Site de référence des nouveaux étudiants', 'Reference freshman site')}
         </a>
       </details>
     </div>

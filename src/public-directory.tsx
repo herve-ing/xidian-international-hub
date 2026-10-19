@@ -156,7 +156,7 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                   loading="lazy"
                   referrerPolicy="no-referrer"
                 />
-                <span>{c('CV & fiche officielle', 'CV & official profile')} ↗</span>
+                <span>{c('CV & fiche officielle', 'CV & official profile')} </span>
               </button>
             )}
             <div className="faculty-card-top">
@@ -187,7 +187,7 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                   setSelected(s);
                 }}
               >
-                {c('Lire le CV complet', 'Read the full CV')} ↗
+                {c('Lire le CV complet', 'Read the full CV')}
               </button>
               <button
                 onClick={() => {
@@ -196,7 +196,7 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                   setSelected(s);
                 }}
               >
-                {c('Fiche de contact', 'Contact card')} →
+                {c('Fiche de contact', 'Contact card')}
               </button>
             </div>
           </article>
@@ -289,7 +289,7 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {c('Ouvrir le profil officiel', 'Open official profile')} ↗
+                  {c('Ouvrir le profil officiel', 'Open official profile')}
                 </a>
                 <h3>
                   {c('Coordonnées et premier contact', 'Contact details and first introduction')}
@@ -347,11 +347,11 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                     download="supervisor-email.txt"
                     href={'data:text/plain;charset=utf-8,' + encodeURIComponent(emailText)}
                   >
-                    {c('Télécharger le modèle', 'Download template')} ↓
+                    {c('Télécharger le modèle', 'Download template')}
                   </a>
                 </div>
                 <button className="button primary" onClick={() => contact(selected)}>
-                  {c('Échanger dans le Hub', 'Chat in the Hub')} →
+                  {c('Échanger dans le Hub', 'Chat in the Hub')}
                 </button>
                 <p>
                   {c(

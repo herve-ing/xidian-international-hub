@@ -286,7 +286,6 @@ export default function ClubOffice({ lang, account }: { lang: string; account: A
                         {e.status === 'pending'
                           ? c('Examiner', 'Review', '审核')
                           : c('Consulter', 'View', '查看')}
-                        <Icon name="arrow" size={14} />
                       </button>
                     </td>
                   </tr>

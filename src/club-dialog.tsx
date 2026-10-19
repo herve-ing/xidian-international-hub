@@ -144,7 +144,7 @@ export function ClubDetails({
           )}
           {club.id === 'friday-movie-night' && (
             <button className="button primary" onClick={() => setActivityTab('cinema')}>
-              {c('Proposer un film et voter', 'Suggest a film and vote', '推荐影片并投票')} →
+              {c('Proposer un film et voter', 'Suggest a film and vote', '推荐影片并投票')}
             </button>
           )}
           <p className="club-detail-intro">{tr(club.description)}</p>
@@ -185,7 +185,6 @@ export function ClubDetails({
                 'Community source · check for updates',
                 '社区来源 · 请核验更新',
               )}
-              <Icon name="external" size={15} />
             </a>
           )}
           <p className="muted small">
@@ -207,7 +206,6 @@ export function ClubDetails({
             </button>
             <button className="button secondary" onClick={onApply}>
               {c('Préparer ma demande', 'Prepare my request', '准备申请')}
-              <Icon name="arrow" size={16} />
             </button>
             <button className="button secondary" onClick={onPlan}>
               {c('Planifier une visite', 'Plan a visit', '规划参加时间')}

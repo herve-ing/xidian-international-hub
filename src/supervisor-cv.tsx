@@ -42,7 +42,7 @@ export function SupervisorCV({ supervisor, lang }: { supervisor: Supervisor; lan
           <figcaption>
             {c('Page', 'Page')} {i + 1} / {pages.length} · {supervisor.name}{' '}
             <a href={src} target="_blank" rel="noreferrer">
-              {c('Ouvrir en taille réelle', 'Open full size')} ↗
+              {c('Ouvrir en taille réelle', 'Open full size')}
             </a>
           </figcaption>
           {failed.includes(src) ? (
@@ -75,7 +75,7 @@ export function SupervisorCV({ supervisor, lang }: { supervisor: Supervisor; lan
         </figure>
       ))}
       <a className="button secondary" href={supervisor.source} target="_blank" rel="noreferrer">
-        {c('Consulter la source officielle', 'Read the official source')} ↗
+        {c('Consulter la source officielle', 'Read the official source')}
       </a>
     </section>
   );

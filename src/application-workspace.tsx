@@ -75,7 +75,7 @@ export function ThreadInbox({ lang, account }: { lang: string; account: Account 
             )}
           </p>
           <a className="public-button" href="#/supervisors">
-            {c('Explorer les superviseurs', 'Explore supervisors')} →
+            {c('Explorer les superviseurs', 'Explore supervisors')}
           </a>
         </div>
       ) : (
@@ -135,7 +135,7 @@ export function ThreadInbox({ lang, account }: { lang: string; account: Account 
                 </label>
                 {error && <p role="alert">{error}</p>}
                 <button className="public-button">
-                  {c('Enregistrer la réponse', 'Save reply')} →
+                  {c('Enregistrer la réponse', 'Save reply')}
                 </button>
               </form>
             </div>
@@ -359,7 +359,7 @@ export default function ApplicationWorkspace({
                 </p>
               )}
               <button className="public-button">
-                {c('Enregistrer mon suivi', 'Save my tracker')} →
+                {c('Enregistrer mon suivi', 'Save my tracker')}
               </button>
             </form>
             <aside className="application-side">
@@ -374,7 +374,7 @@ export default function ApplicationWorkspace({
                   )}
                 </p>
                 <a href={officialPortal} className="public-button" target="_blank" rel="noreferrer">
-                  {c('Portail officiel', 'Official portal')} ↗
+                  {c('Portail officiel', 'Official portal')}
                 </a>
                 <a href="#/admissions">
                   {c('Lire le guide de candidature', 'Read the application guide')}
@@ -457,7 +457,7 @@ export default function ApplicationWorkspace({
               <textarea required name="body" rows={7} maxLength={4000} />
             </label>
             <button className="public-button">
-              {c('Enregistrer et ouvrir la conversation', 'Save and open conversation')} →
+              {c('Enregistrer et ouvrir la conversation', 'Save and open conversation')}
             </button>
           </form>
         </ClubDialog>

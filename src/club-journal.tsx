@@ -201,7 +201,7 @@ export function ClubJournal({
                   {a.authorName} · {new Date(a.publishedAt || a.updatedAt).toLocaleDateString()}
                 </small>
                 <button className="text-button" onClick={() => setSelected(a)}>
-                  {c('Lire l’article', 'Read story', '阅读文章')} →
+                  {c('Lire l’article', 'Read story', '阅读文章')}
                 </button>
                 <ArticleActions id={a.id} lang={lang} />
               </div>

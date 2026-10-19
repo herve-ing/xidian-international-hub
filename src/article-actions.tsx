@@ -35,7 +35,7 @@ export default function ArticleActions({ id, lang }: { id: string; lang: string 
             }
           }}
         >
-          {reaction.liked ? '♥' : '♡'} {c('J’aime', 'Like')} · {reaction.count}
+          {c('J’aime', 'Like')} · {reaction.count}
         </button>
         <button
           type="button"
@@ -65,7 +65,7 @@ export default function ArticleActions({ id, lang }: { id: string; lang: string 
             }
           }}
         >
-          ↗ {c('Partager', 'Share')}
+          {c('Partager', 'Share')}
         </button>
       </div>
       {notice && <p role="status">{notice}</p>}

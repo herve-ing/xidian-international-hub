@@ -3280,3 +3280,83 @@
 .university-site[data-motion='paused'] .binary-watermark-column {
   will-change: auto;
 }
+
+/* Consistent identity and restrained, text-first navigation. */
+.sidebar .brand,
+.account-header .brand {
+  justify-content: flex-start;
+  padding: 0;
+  letter-spacing: normal;
+  line-height: 1;
+}
+.sidebar .brand .animated-hub-logo {
+  width: 155px;
+  height: 112px;
+  flex-shrink: 0;
+}
+.account-header .brand .animated-hub-logo {
+  width: 138px;
+  height: 96px;
+  flex-shrink: 0;
+}
+.public-button,
+.faculty-card-actions button,
+.club-activity-tabs button {
+  line-height: 1.45;
+  text-align: center;
+}
+.faculty-card-actions {
+  flex-wrap: wrap;
+}
+.admissions-source-visual figcaption a {
+  float: none;
+  margin-inline-start: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-social button {
+  min-height: 44px;
+  line-height: 1.4;
+}
+.public-header nav > a {
+  white-space: nowrap;
+}
+.public-directory input,
+.admissions-programme-tools input {
+  min-width: 0;
+}
+@media (hover: hover) {
+  .faculty-card-actions button:hover,
+  .admissions-source-visual figcaption a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+@media (max-width: 760px) {
+  .public-button,
+  .faculty-card-actions button,
+  .club-activity-tabs button,
+  .public-menu-button {
+    min-height: 44px;
+  }
+  .public-faculty-card {
+    min-width: 0;
+  }
+  .faculty-card-actions > * {
+    flex: 1 1 140px;
+  }
+  .account-header .brand .animated-hub-logo {
+    width: 118px;
+    height: 82px;
+  }
+  .sidebar .brand .animated-hub-logo {
+    width: 140px;
+    height: 100px;
+  }
+  .public-directory .directory-result-bar {
+    gap: 14px;
+  }
+  .article-social > div {
+    flex-wrap: wrap;
+  }
+}

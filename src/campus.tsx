@@ -244,7 +244,6 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
               }}
             >
               {c('Explorer les clubs', 'Explore clubs', '探索社团')}
-              <Icon name="arrow" size={18} />
             </button>
             <button
               className="button secondary"
@@ -480,7 +479,6 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
                       </p>
                       <button className="button secondary full" onClick={() => setSelected(club)}>
                         {c('Découvrir le club', 'View club details', '查看社团详情')}
-                        <Icon name="arrow" size={16} />
                       </button>
                       <button
                         className="button primary full club-register-button"
@@ -748,7 +746,6 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
               '校园、银行、医疗与入学',
             )}
           </span>
-          <Icon name="arrow" />
         </Link>
         <Link href="/visas">
           <Icon name="shield" />
@@ -762,7 +759,6 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
               'Xie-Visas日期和提醒',
             )}
           </span>
-          <Icon name="arrow" />
         </Link>
       </section>
       {selected && (

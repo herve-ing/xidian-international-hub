@@ -113,7 +113,7 @@ export default function MovieNight({
               target="_blank"
               rel="noreferrer"
             >
-              {c('Site de référence du club', 'Club reference site')} ↗
+              {c('Site de référence du club', 'Club reference site')}
             </a>
           </div>
         </header>
@@ -331,7 +331,7 @@ export default function MovieNight({
                   }
                 >
                   {board.vote === p.id
-                    ? c('Mon vote ✓', 'My vote ✓')
+                    ? c('Mon vote', 'My vote')
                     : c('Voter pour ce film', 'Vote for this movie')}
                 </button>
               )}

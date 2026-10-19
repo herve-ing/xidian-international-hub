@@ -178,7 +178,6 @@ export default function ApplicantAccess({ lang }: { lang: string }) {
               : register
                 ? c('Créer mon espace candidat', 'Create my applicant space')
                 : c('Ouvrir mon dossier', 'Open my application')}{' '}
-            →
           </button>
         </form>
         <a href="#/login">

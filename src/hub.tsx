@@ -1,3 +1,4 @@
+import { AnimatedHubLogo } from './binary-motion';
 import { usePageMotion } from './use-page-motion';
 ('use client');
 import React, { useState, useEffect, useRef } from 'react';
@@ -746,7 +747,6 @@ export default function Hub({
           }}
         >
           {c('Gérer ce document', 'Manage document', '管理文件')}
-          <Icon name="arrow" size={16} />
         </button>
       </article>
     );
@@ -765,12 +765,7 @@ export default function Hub({
       )}
       <aside className="sidebar">
         <Link className="brand" href="/">
-          <span className="brand-mark">
-            X<span />
-          </span>
-          <span>
-            XIDIAN<span>INTERNATIONAL HUB</span>
-          </span>
+          <AnimatedHubLogo />
         </Link>
         <div className="workspace">
           <span className="workspace-dot" />{' '}
@@ -797,15 +792,15 @@ export default function Hub({
         </nav>
         <div className="sidebar-bottom">
           <a className="nav-link" href="#/union">
-            {c('Union étudiante', 'Student Union', '学生会')} ↗
+            {c('Union étudiante', 'Student Union', '学生会')}
           </a>
           {isProfessor && (
             <a className="nav-link" href="#/faculty">
-              {c('Espace superviseur', 'Supervisor space', '导师空间')} ↗
+              {c('Espace superviseur', 'Supervisor space', '导师空间')}
             </a>
           )}
           <a className="nav-link" href="#/">
-            {c('Accueil public', 'Public home', '公开首页')} ↗
+            {c('Accueil public', 'Public home', '公开首页')}
           </a>
           <div className="help-card">
             <span className="help-icon">
@@ -819,10 +814,7 @@ export default function Hub({
                 '为每个问题找到起点。',
               )}
             </p>
-            <Link href="/chat">
-              {c('Parlons-en', 'Let’s talk', '聊一聊')}
-              <Icon name="arrow" size={16} />
-            </Link>
+            <Link href="/chat">{c('Parlons-en', 'Let’s talk', '聊一聊')}</Link>
           </div>
           <button className="sidebar-profile" onClick={() => setModal('profile')}>
             <span className="avatar">
@@ -841,7 +833,6 @@ export default function Hub({
             <Icon name="chevron" size={16} />
           </button>
           <button className="sidebar-signout text-button" onClick={onSignOut}>
-            <Icon name="arrow" size={16} />
             {c('Se déconnecter', 'Sign out', '退出登录')}
           </button>
         </div>
@@ -936,7 +927,6 @@ export default function Hub({
                 : demo
                   ? c('Tester mon espace local', 'Try my local workspace', '体验本地空间')
                   : c('Voir la démonstration', 'View demo', '查看演示')}
-              <Icon name="arrow" size={14} />
             </button>
           </div>
           {!['fr', 'en', 'zh'].includes(lang) && (
@@ -1000,13 +990,9 @@ export default function Hub({
                   <div className="row banner-buttons">
                     <Link href="/visas" className="button primary">
                       {c('Vérifier mes échéances', 'Check my deadlines', '查看到期提醒')}
-                      <span>
-                        <Icon name="arrow" size={17} />
-                      </span>
                     </Link>
                     <Link href="/guide" className="banner-link">
                       {c('Je viens d’arriver', 'I’ve just arrived', '我刚到校')}
-                      <Icon name="external" size={14} />
                     </Link>
                   </div>
                 </div>
@@ -1083,10 +1069,7 @@ export default function Hub({
                 <section className="panel deadline-panel reveal">
                   <div className="section-heading">
                     <h2>{c('À garder en tête', 'Keep on your radar', '值得关注')}</h2>
-                    <Link href="/visas">
-                      {t('viewAll')}
-                      <Icon name="arrow" size={15} />
-                    </Link>
+                    <Link href="/visas">{t('viewAll')}</Link>
                   </div>
                   {next ? (
                     <>
@@ -1117,7 +1100,6 @@ export default function Hub({
                         </div>
                         <Link href="/visas" className="text-button">
                           {c('Préparer mon renouvellement', 'Prepare my renewal', '准备续签')}
-                          <Icon name="arrow" size={17} />
                         </Link>
                       </div>
                       <div className="mini-documents">
@@ -1197,7 +1179,6 @@ export default function Hub({
                   ))}
                   <Link href="/guide" className="checklist-footer">
                     {c('Voir mon guide d’arrivée', 'Open my arrival guide', '打开入学指南')}
-                    <Icon name="arrow" size={17} />
                   </Link>
                 </section>
               </div>
@@ -1232,9 +1213,7 @@ export default function Hub({
                           '每段科研之旅始于一次交流。',
                         )}
                       </p>
-                      <span className="round-arrow">
-                        <Icon name="arrow" />
-                      </span>
+                      <span className="round-arrow"></span>
                     </div>
                   </Link>
                   <Link href="/chat" className="quick-card assistant-quick">
@@ -1261,9 +1240,7 @@ export default function Hub({
                           '查找实用解答和官方来源。',
                         )}
                       </p>
-                      <span className="round-arrow">
-                        <Icon name="arrow" />
-                      </span>
+                      <span className="round-arrow"></span>
                     </div>
                   </Link>
                 </div>
@@ -1290,7 +1267,6 @@ export default function Hub({
                 </div>
                 <Link className="button secondary" href="/campus">
                   {c('Découvrir la vie de campus', 'Discover campus life', '探索校园生活')}
-                  <Icon name="arrow" size={16} />
                 </Link>
               </section>
             </>
@@ -1413,7 +1389,6 @@ export default function Hub({
                     'Source: visa application service centre',
                     '来源：签证申请服务中心',
                   )}
-                  <Icon name="external" size={13} />
                 </a>
               </section>
               <div className="two-columns">
@@ -1486,7 +1461,6 @@ export default function Hub({
                       'Read the NIA guidance',
                       '查看国家移民管理局指南',
                     )}
-                    <Icon name="external" size={15} />
                   </a>
                 </section>
                 <section className="panel">
@@ -1557,7 +1531,6 @@ export default function Hub({
                     onClick={() => setModal('notifications')}
                   >
                     {c('Voir l’historique', 'View history', '查看历史')}
-                    <Icon name="arrow" size={16} />
                   </button>
                 </section>
               </div>
@@ -1807,7 +1780,6 @@ export default function Hub({
                       }}
                     >
                       {c('Découvrir le profil', 'View profile', '查看导师')}
-                      <Icon name="arrow" size={17} />
                     </button>
                   </article>
                 ))}
@@ -1839,7 +1811,6 @@ export default function Hub({
                   }}
                 >
                   {c('Suivant', 'Next', '下一页')}
-                  <Icon name="arrow" size={15} />
                 </button>
               </nav>
               {!filtered.length && (
@@ -1878,7 +1849,6 @@ export default function Hub({
                   'Open the official SIE directory',
                   '打开SIE官方目录',
                 )}
-                <Icon name="external" size={16} />
               </a>
             </>
           )}
@@ -1979,7 +1949,6 @@ export default function Hub({
                             'Official NIA source',
                             '国家移民管理局官方来源',
                           )}
-                          <Icon name="external" size={13} />
                         </a>
                       )}
                     </div>
@@ -2037,7 +2006,6 @@ export default function Hub({
                           <Icon name="location" size={16} />
                           {label}
                         </span>
-                        <Icon name="external" size={14} />
                       </a>
                     ))}
                   </section>
@@ -2059,7 +2027,6 @@ export default function Hub({
                     </p>
                     <button className="text-button" onClick={() => setModal('profile')}>
                       {c('Noter ma date d’arrivée', 'Record my arrival date', '记录入境日期')}
-                      <Icon name="arrow" size={16} />
                     </button>
                   </section>
                 </aside>
@@ -2145,7 +2112,6 @@ export default function Hub({
                         ].map((q) => (
                           <button key={q} onClick={() => sendChat(q)}>
                             {q}
-                            <Icon name="arrow" size={17} />
                           </button>
                         ))}
                       </div>
@@ -2170,7 +2136,6 @@ export default function Hub({
                               rel="noreferrer"
                             >
                               {c('Consulter la source', 'View source', '查看来源')}
-                              <Icon name="external" size={13} />
                             </a>
                           )}
                         </div>
@@ -2200,9 +2165,7 @@ export default function Hub({
                   <button
                     disabled={chatBusy || !chatInput.trim()}
                     aria-label={c('Envoyer', 'Send', '发送')}
-                  >
-                    <Icon name="arrow" />
-                  </button>
+                  ></button>
                 </form>
                 <p className="chat-disclosure">
                   {c(
@@ -2264,7 +2227,6 @@ export default function Hub({
                   </p>
                   <button className="button primary" onClick={() => setDemo(true)}>
                     {c('Explorer la démonstration', 'Explore the demo', '查看演示')}
-                    <Icon name="arrow" size={17} />
                   </button>
                 </section>
               ) : (
@@ -2594,7 +2556,6 @@ export default function Hub({
                   </div>
                   <button className="button secondary" onClick={() => setModal('profile')}>
                     {c('Modifier mon profil', 'Edit profile', '编辑个人信息')}
-                    <Icon name="arrow" size={16} />
                   </button>
                   <button className="text-button account-settings-signout" onClick={onSignOut}>
                     {c('Se déconnecter', 'Sign out', '退出登录')}
@@ -2721,7 +2682,6 @@ export default function Hub({
                       'API documentation · OpenAPI',
                       'API文档 · OpenAPI',
                     )}
-                    <Icon name="external" size={16} />
                   </a>
                 </section>
               </div>
@@ -2756,7 +2716,6 @@ export default function Hub({
                     }}
                   >
                     {c('Modifier', 'Edit', '编辑')}
-                    <Icon name="arrow" size={15} />
                   </button>
                 </div>
               ))}
@@ -2772,7 +2731,6 @@ export default function Hub({
             </button>
             <a href="https://sie.xidian.edu.cn/" target="_blank" rel="noreferrer">
               {c('Site officiel SIE', 'Official SIE website', 'SIE官方网站')}
-              <Icon name="external" size={12} />
             </a>
           </footer>
         </main>
@@ -3243,7 +3201,6 @@ export default function Hub({
           )}
           <a href={selected.source} className="text-button" target="_blank" rel="noreferrer">
             {c('Ouvrir la fiche officielle', 'Open official profile', '打开官方资料')}
-            <Icon name="external" size={15} />
           </a>
           {selected.profileImages?.length ? (
             <section className="official-profile-images">
@@ -3271,7 +3228,6 @@ export default function Hub({
                   />
                   <span>
                     {c('Ouvrir le document', 'Open document', '打开资料')} {i + 1}
-                    <Icon name="external" size={14} />
                   </span>
                 </a>
               ))}
@@ -3417,7 +3373,6 @@ export default function Hub({
             </button>
             <a className="button primary" href="#/" target="_top">
               {c('Se connecter', 'Sign in', '登录')}
-              <Icon name="arrow" size={16} />
             </a>
           </div>
         </Modal>
