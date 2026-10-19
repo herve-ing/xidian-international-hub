@@ -24,7 +24,7 @@ test('public home and directory do not require sign-in; official application ste
     const { default: Site } = await server.ssrLoadModule('/src/public-site.tsx');
     let html = renderToStaticMarkup(React.createElement(Site));
     assert.match(html, /Votre avenir commence à Xidian/);
-    assert.match(html, /media\/hub-logo.jpg/);
+    assert.match(html, /media\/hub-logo-live.jpg/);
     assert.match(html, /binary-ribbon/);
     assert.doesNotMatch(html, /type="password"/);
     window.location.hash = '#/supervisors';
