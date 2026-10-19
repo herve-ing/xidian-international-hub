@@ -53,3 +53,6 @@ Images intégrées dans le site de référence demandé par l’utilisateur : ht
 - `sie-sports-2026.jpg` : Xidian SIE, https://sie.xidian.edu.cn/info/1131/7465.htm ; image originale https://sie.xidian.edu.cn/__local/C/18/67/55F0BC7DB1C7073460B38A9353D_2C27E530_BFC1.jpg.
 
 Inspiration fonctionnelle : Imperial College Union, https://www.imperialcollegeunion.org/activities et /activities/a-to-z (annuaire, découverte, accès responsables). Aucun texte ni visuel d’Imperial ou HKU n’est réutilisé.
+
+- `friday-movie-night.jpg` : image « Friday Movie Night club » intégrée au site de référence des nouveaux étudiants, extraite précédemment (index 26), copie optimisée identique à `club-film.jpg`. Le site https://ghazzali19.github.io/friday-Movie-Night/ a été lu le 19 octobre 2026 ; son HTML et CSS ne contiennent aucune image.
+- Calisthenics : visuel d’ambiance sportive `community-sports.jpg`, sans représentation confirmée de l’équipe actuelle du nouveau club. Description transmise par l’utilisateur ; aucun certificat universitaire n’est annoncé comme acquis.
