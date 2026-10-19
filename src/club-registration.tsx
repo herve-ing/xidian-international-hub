@@ -1,3 +1,5 @@
+import { intlLocale } from './locale-config';
+import { localize } from './i18n';
 import React, { useState } from 'react';
 import { content } from './i18n';
 import { currentAccount } from './accounts';
@@ -127,7 +129,7 @@ export function ClubRegistration({
                 )}
               </span>
               <textarea
-                value={message}
+                value={localize(lang, message)}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={4}
                 maxLength={800}
@@ -224,7 +226,7 @@ export function MyRegistrations({
           return (
             <article className="panel registration-card" key={e.id}>
               <div className="section-heading">
-                <h3>{club.name}</h3>
+                <h3>{localize(lang, club.name)}</h3>
                 <span
                   className={
                     'status ' +
@@ -239,7 +241,7 @@ export function MyRegistrations({
                 </span>
               </div>
               <p className="muted small">
-                {new Intl.DateTimeFormat(lang === 'ary' ? 'ar-MA' : lang === 'ln' ? 'fr' : lang, {
+                {new Intl.DateTimeFormat(intlLocale(lang), {
                   dateStyle: 'medium',
                   timeStyle: 'short',
                   timeZone: 'Asia/Shanghai',
@@ -259,10 +261,11 @@ export function MyRegistrations({
                   {e.history.map((h, i) => (
                     <li key={i}>
                       {c(...enrollmentStatus(lang, h.status))} ·{' '}
-                      {new Intl.DateTimeFormat(
-                        lang === 'ary' ? 'ar-MA' : lang === 'ln' ? 'fr' : lang,
-                        { dateStyle: 'short', timeStyle: 'short', timeZone: 'Asia/Shanghai' },
-                      ).format(new Date(h.at))}
+                      {new Intl.DateTimeFormat(intlLocale(lang), {
+                        dateStyle: 'short',
+                        timeStyle: 'short',
+                        timeZone: 'Asia/Shanghai',
+                      }).format(new Date(h.at))}
                     </li>
                   ))}
                 </ol>

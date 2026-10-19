@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import MovieNight from './movie-night-ui';
 import { clubLeaderNames } from './accounts';
 import { ClubVisual } from './club-visual';
@@ -38,7 +39,7 @@ export function ClubDialog({
           type="button"
           className="icon-button"
           aria-label={content(
-            typeof document === 'undefined' ? 'fr' : document.documentElement.lang,
+            typeof document === 'undefined' ? 'en' : document.documentElement.lang,
             'Fermer',
             'Close',
             '关闭',
@@ -86,7 +87,7 @@ export function ClubDetails({
       : 'about';
   });
   return (
-    <ClubDialog title={club.name} onClose={onClose}>
+    <ClubDialog title={localize(lang, club.name)} onClose={onClose}>
       {club.id === 'friday-movie-night' && (
         <div
           className="club-activity-tabs"
@@ -124,7 +125,7 @@ export function ClubDetails({
           aria-labelledby={club.id === 'friday-movie-night' ? 'movie-about-tab' : undefined}
         >
           <div className={'club-detail-art ' + club.tone}>
-            <ClubVisual club={club} />
+            <ClubVisual club={club} lang={lang} />
             <span>{club.zh}</span>
           </div>
           {clubPhotos[club.id] && (
@@ -357,7 +358,7 @@ export function ClubApplication({
         <label className="field">
           <span>{c('Mes envies ou questions', 'My interests or questions', '我的兴趣或问题')}</span>
           <textarea
-            value={message}
+            value={localize(lang, message)}
             onChange={(e) => {
               setMessage(e.target.value);
               setCopied(false);

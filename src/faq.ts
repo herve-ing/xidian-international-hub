@@ -1,13 +1,22 @@
+import { normalizeLocale } from './locale-config.ts';
+import { content } from './i18n.ts';
 export function answerFAQ(question: string, locale: string) {
   const q = question.toLowerCase();
-  const lang = locale === 'fr' ? 'fr' : locale === 'zh' ? 'zh' : 'en';
-  let key = /visa|permis|residen|签证|居留/.test(q)
-    ? 'visa'
-    : /24|arrival|arriv|logement|住宿/.test(q)
-      ? 'arrival'
-      : /supervis|导师|master|phd/.test(q)
-        ? 'supervisor'
-        : 'other';
+  const lang = normalizeLocale(locale);
+  let key =
+    /visa|visum|visto|permis|residen|签证|居留|تأشير|إقام|فيزا|виза|визу|житель|vize|ikamet|ویزا|वीजा|वीज़ा|निवास|wiza/.test(
+      q,
+    )
+      ? 'visa'
+      : /24|arrival|arriv|logement|住宿|وصول|السكن|السكنى|прибыт|жиль|chegada|alojamento|varış|konaklama|kedatangan|ketibaan|penginapan|آمد|رہائش|आगमन|आवास|gelmek/.test(
+            q,
+          )
+        ? 'arrival'
+        : /supervis|导师|master|phd|orientador|pembimbing|penyelia|مشرف|mushrif|руковод|danışman|نگران|पर्यवेक्षक|rehber|mokambi/.test(
+              q,
+            )
+          ? 'supervisor'
+          : 'other';
   const entries: any = {
     visa: {
       fr: 'Si votre visa exige un permis de séjour après l’entrée, la demande doit être déposée dans les 30 jours suivant l’entrée. Vérifiez la durée de séjour indiquée sur votre visa et préparez votre dossier avec l’ISO. Le compteur de ce site ne remplace pas cette vérification.',
@@ -34,5 +43,9 @@ export function answerFAQ(question: string, locale: string) {
       url: 'https://sie.xidian.edu.cn/',
     },
   };
-  return { answer: entries[key][lang], source: entries[key].url, mode: 'reference-faq' };
+  return {
+    answer: content(lang, entries[key].fr, entries[key].en, entries[key].zh),
+    source: entries[key].url,
+    mode: 'reference-faq',
+  };
 }

@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import React, { useEffect, useState } from 'react';
 import { content } from './i18n';
 import { articleReaction, toggleArticleLike, articleShare } from './club-interactions';
@@ -68,7 +69,7 @@ export default function ArticleActions({ id, lang }: { id: string; lang: string 
           {c('Partager', 'Share')}
         </button>
       </div>
-      {notice && <p role="status">{notice}</p>}
+      {notice && <p role="status">{localize(lang, notice)}</p>}
     </div>
   );
 }

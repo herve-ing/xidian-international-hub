@@ -1,3 +1,5 @@
+import { localize } from './i18n';
+import { useLocale } from './locale-store';
 import { AnimatedHubLogo, BinaryBackground } from './binary-motion';
 import Admissions from './admissions-page';
 import React, { useEffect, useState } from 'react';
@@ -28,7 +30,7 @@ function BinaryRibbon({
       <div aria-hidden="true" className="binary-track">
         {Array.from({ length: 6 }, (_, i) => (
           <span key={i}>
-            {bits} <b> XIDIAN / CONNECT · CREATE · BELONG </b> {bits}{' '}
+            {bits} <b>{localize(lang, 'XIDIAN / CONNECT · CREATE · BELONG')}</b> {bits}{' '}
           </span>
         ))}
       </div>
@@ -63,7 +65,9 @@ function Landing({ lang }: { lang: string }) {
         />
         <div className="hero-shade" />
         <div className="university-hero-copy">
-          <span className="public-kicker">XI’AN, CHINA · XIDIAN INTERNATIONAL HUB</span>
+          <span className="public-kicker">
+            {localize(lang, 'XI’AN, CHINA · XIDIAN INTERNATIONAL HUB')}
+          </span>
           <h1>{c('Votre avenir commence à Xidian.', 'Your future begins at Xidian.')}</h1>
           <p>
             {c(
@@ -166,7 +170,7 @@ function Landing({ lang }: { lang: string }) {
             <div className="research-links">
               {researchAreas.map(([en, fr, q]) => (
                 <a href={'#/supervisors?q=' + encodeURIComponent(q)} key={en}>
-                  {lang === 'fr' ? fr : en}
+                  {c(fr, en)}
                 </a>
               ))}
             </div>
@@ -190,8 +194,8 @@ function Landing({ lang }: { lang: string }) {
             {admissionsSteps.slice(1).map((s, i) => (
               <article key={s.id}>
                 <span>{String(i + 1).padStart(2, '0')}</span>
-                <h3>{lang === 'fr' ? s.fr : s.en}</h3>
-                <p>{lang === 'fr' ? s.descriptionFr : s.descriptionEn}</p>
+                <h3>{c(s.fr, s.en)}</h3>
+                <p>{c(s.descriptionFr, s.descriptionEn)}</p>
               </article>
             ))}
           </div>
@@ -245,13 +249,7 @@ function Landing({ lang }: { lang: string }) {
 export default function PublicSite() {
   const path = usePathname(),
     [account, setAccount] = useState<Account | null>(currentAccount),
-    [lang, setLang] = useState(() => {
-      try {
-        return localStorage.getItem('xidian-locale') || 'fr';
-      } catch {
-        return 'fr';
-      }
-    }),
+    [lang, setLang] = useLocale(),
     [menu, setMenu] = useState(false),
     [paused, setPaused] = useState(false);
   const c = (fr: string, en: string) => content(lang, fr, en);
@@ -266,11 +264,6 @@ export default function PublicSite() {
       window.removeEventListener('focus', refresh);
     };
   }, []);
-  useEffect(() => {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = ['ar', 'ary', 'ur'].includes(lang) ? 'rtl' : 'ltr';
-    localStorage.setItem('xidian-locale', lang);
-  }, [lang]);
   useEffect(() => setMenu(false), [path]);
   function logout() {
     signOut();
@@ -330,12 +323,6 @@ export default function PublicSite() {
           </select>
         </div>
       </div>
-      {lang !== 'fr' && lang !== 'en' && (
-        <p className="public-language-note" role="status">
-          New admissions and applicant pages are currently available in English and French. Other
-          sections retain their existing translations.
-        </p>
-      )}
       <header className="public-header">
         <a href="#/" className="public-logo" aria-label="Xidian International Hub">
           <AnimatedHubLogo />

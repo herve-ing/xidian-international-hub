@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import React, { useEffect, useState } from 'react';
 import { content } from './i18n';
 import { Icon } from './icons';
@@ -203,7 +204,7 @@ export default function ClubOffice({ lang, account }: { lang: string; account: A
                 <option value="">{c('Tous mes clubs', 'All my clubs', '我负责的所有社团')}</option>
                 {accessible.map((club) => (
                   <option key={club.id} value={club.id}>
-                    {club.name}
+                    {localize(lang, club.name)}
                   </option>
                 ))}
               </select>
@@ -370,7 +371,7 @@ export default function ClubOffice({ lang, account }: { lang: string; account: A
                       )
                     }
                   />
-                  {club.name}
+                  {localize(lang, club.name)}
                 </label>
               ))}
             </fieldset>

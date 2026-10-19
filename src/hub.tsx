@@ -1,3 +1,6 @@
+import { intlLocale } from './locale-config';
+import { localize } from './i18n';
+import { useLocale } from './locale-store';
 import { AnimatedHubLogo } from './binary-motion';
 import { usePageMotion } from './use-page-motion';
 ('use client');
@@ -250,13 +253,7 @@ export default function Hub({
     !(pathname === '/club-office' && !mayManageClubs)
       ? pathname
       : '/workspace';
-  const [lang, setLang] = useState(() => {
-      try {
-        return localStorage.getItem('xidian-locale') || 'fr';
-      } catch {
-        return 'fr';
-      }
-    }),
+  const [lang, setLang] = useLocale(),
     [mobile, setMobile] = useState(false),
     [demo, setDemo] = useState(false),
     [live, setLive] = useState<State | null>(null),
@@ -353,15 +350,8 @@ export default function Hub({
     request('/api/supervisors')
       .then((d) => setRoster(d.items))
       .catch(() => {});
-    const l = localStorage.getItem('xidian-locale');
-    if (l && languages.some((x) => x[0] === l)) setLang(l);
     load();
   }, []);
-  useEffect(() => {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = ['ar', 'ary', 'ur'].includes(lang) ? 'rtl' : 'ltr';
-    localStorage.setItem('xidian-locale', lang);
-  }, [lang]);
   useEffect(() => {
     if (!toast) return;
     const id = setTimeout(() => setToast(''), 5000);
@@ -504,7 +494,7 @@ export default function Hub({
     }
   }
   const date = (s: string) =>
-    new Intl.DateTimeFormat(lang === 'ary' ? 'ar-MA' : lang === 'ln' ? 'fr' : lang, {
+    new Intl.DateTimeFormat(intlLocale(lang), {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
@@ -517,6 +507,22 @@ export default function Hub({
       visa: c('Visa étudiant', 'Student visa', '学生签证'),
       insurance: c('Assurance santé', 'Health insurance', '医疗保险'),
     })[d.type] || d.label;
+  const alertMessage = (alert: Alert) => {
+    if (alert.message === 'Prototype ISO reminder: check your administrative documents.')
+      return c(
+        'Rappel ISO : vérifiez vos documents administratifs.',
+        'ISO reminder: check your administrative documents.',
+      );
+    const remaining = alert.message.match(/: (\d+) days remaining$/);
+    const expired = alert.message.match(/: expired (\d+) days ago$/);
+    const title = docTitle({ id: '', type: alert.documentType, label: '', expiry: '' });
+    if (remaining) return `${title} · ${remaining[1]} ${c('jours restants', 'days remaining')}`;
+    if (expired)
+      return `${title} · ${c('Expiré depuis', 'Expired for')} ${expired[1]} ${t('days')}`;
+    return localize(lang, alert.message);
+  };
+  const alertChannel = (channel: string) =>
+    ['local-demo', 'in-app'].includes(channel) ? c('Dans l’application', 'In-app') : channel;
   const status = (days: number) =>
     days < 0
       ? c('Expiré', 'Expired', '已到期')
@@ -686,10 +692,9 @@ export default function Hub({
     try {
       const r = await request('/api/admin', 'POST', { studentIds: chosenStudents });
       showToast(
-        c(
-          `${r.created} rappel(s) ajoutés dans les espaces étudiants.`,
-          `${r.created} in-app reminder(s) created.`,
-        ),
+        c('Rappels ajoutés dans les espaces étudiants :', 'In-app reminders created:') +
+          ' ' +
+          r.created,
       );
       setChosenStudents([]);
     } catch (e) {
@@ -929,30 +934,18 @@ export default function Hub({
                   : c('Voir la démonstration', 'View demo', '查看演示')}
             </button>
           </div>
-          {!['fr', 'en', 'zh'].includes(lang) && (
-            <div className="locale-note">
-              {c(
-                'Certains textes détaillés restent en anglais. Les documents sources conservent leur langue originale.',
-                'Some detailed text is still in English. Source documents retain their original language.',
-                '部分详细内容仍为英文，来源文件保留原始语言。',
-              )}
-            </div>
-          )}
           {page === '/workspace' && (
             <>
               <div className="page-title row between reveal">
                 <div>
                   <div className="date-caption">
-                    {new Intl.DateTimeFormat(
-                      lang === 'ary' ? 'ar-MA' : lang === 'ln' ? 'fr' : lang,
-                      {
-                        weekday: 'long',
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric',
-                        timeZone: 'Asia/Shanghai',
-                      },
-                    ).format(new Date())}{' '}
+                    {new Intl.DateTimeFormat(intlLocale(lang), {
+                      weekday: 'long',
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                      timeZone: 'Asia/Shanghai',
+                    }).format(new Date())}{' '}
                     <span>· Xi’an</span>
                   </div>
                   <h1>
@@ -1832,9 +1825,9 @@ export default function Hub({
                 <Icon name="info" size={20} />
                 <p>
                   {c(
-                    `${directoryMeta.officialProfiles} fiches SIE recensées dans ${directoryMeta.schools.length} rubriques, pages suivantes comprises, le 15 octobre 2026. Les documents officiels sont majoritairement des images consultables dans les fiches. Les données absentes ne sont pas inventées ; disponibilité, langue et coordonnées doivent être confirmées.`,
-                    `${directoryMeta.officialProfiles} SIE listings across ${directoryMeta.schools.length} sections, including pagination, checked on October 15, 2026. Official profile documents are mostly images, available inside each profile. Missing fields are not inferred; confirm availability, language and contact details.`,
-                    `2026年10月15日已核对${directoryMeta.schools.length}个栏目及所有分页，共${directoryMeta.officialProfiles}条SIE导师资料。官方资料多以图片发布，可在个人资料中查看。未注明的信息不作推断，请确认招生名额、指导语言和联系方式。`,
+                    'Fiches SIE vérifiées le 15 octobre 2026, toutes rubriques et pages comprises. Les documents officiels sont majoritairement des images consultables dans les fiches. Les données absentes ne sont pas inventées ; disponibilité, langue et coordonnées doivent être confirmées.',
+                    'SIE listings checked on October 15, 2026, across all sections and pages. Official profile documents are mostly images, available inside each profile. Missing fields are not inferred; confirm availability, language and contact details.',
+                    '2026年10月15日已核对所有栏目及分页的SIE导师资料。官方资料多以图片发布，可在个人资料中查看。未注明的信息不作推断，请确认招生名额、指导语言和联系方式。',
                   )}
                 </p>
               </div>
@@ -2070,7 +2063,7 @@ export default function Hub({
                       )}
                     </small>
                   </div>
-                  <span className="subtle-badge">FAQ</span>
+                  <span className="subtle-badge">{localize(lang, 'FAQ')}</span>
                 </div>
                 <div className="chat-messages" aria-live="polite">
                   {!messages.length ? (
@@ -2127,7 +2120,7 @@ export default function Hub({
                           )}
                         </span>
                         <div>
-                          <p>{m.text}</p>
+                          <p>{m.role === 'assistant' ? localize(lang, m.text) : m.text}</p>
                           {m.source && (
                             <a
                               className="text-button small"
@@ -2322,7 +2315,7 @@ export default function Hub({
                         />
                       </div>
                       <select
-                        aria-label="Status"
+                        aria-label={localize(lang, 'Status')}
                         value={adminUrgency}
                         onChange={(e) => setAdminUrgency(e.target.value)}
                       >
@@ -2398,7 +2391,7 @@ export default function Hub({
                               </td>
                               <td>{s.nationality || '—'}</td>
                               <td>
-                                <span className="subtle-badge">{s.program}</span>
+                                <span className="subtle-badge">{localize(lang, s.program)}</span>
                               </td>
                               <td>{s.expiry ? date(s.expiry) : '—'}</td>
                               <td>
@@ -2489,9 +2482,13 @@ export default function Hub({
                           <div className="alert-item" key={a.id}>
                             <Icon name="bell" size={18} />
                             <div>
-                              <p>{a.message}</p>
+                              <p>{alertMessage(a)}</p>
                               <small>
-                                {a.channel} · {a.status} · {new Date(a.sentAt).toLocaleDateString()}
+                                {alertChannel(a.channel)} ·{' '}
+                                {a.status === 'read' ? c('Lu', 'Read') : c('Non lu', 'Unread')} ·{' '}
+                                {new Date(a.sentAt).toLocaleDateString(intlLocale(lang), {
+                                  timeZone: 'Asia/Shanghai',
+                                })}
                               </small>
                             </div>
                           </div>
@@ -2574,9 +2571,9 @@ export default function Hub({
                   </label>
                   <p className="muted small">
                     {c(
-                      'Navigation : 11 langues. Contenus détaillés : français, anglais et chinois. Les traductions nécessitent une validation humaine avant usage institutionnel.',
-                      'Navigation and campus life: 11 languages. Detailed content: French, English and Chinese; further translations in progress. Human review is required before institutional use.',
-                      '导航支持11种语言，详细内容提供法语、英语和中文版本。正式使用前需人工审核翻译。',
+                      'Interface disponible en 15 langues. Les documents sources et les contributions restent dans leur langue originale. Les traductions nécessitent une validation humaine avant usage institutionnel.',
+                      'Interface available in 15 languages. Source documents and contributions remain in their original language. Human review is required before institutional use.',
+                      '界面支持15种语言。原始文件和用户内容保留原文。正式使用前需人工审核翻译。',
                     )}
                   </p>
                   <hr />
@@ -2706,7 +2703,7 @@ export default function Hub({
                 <div className="service-status" key={s.id}>
                   <span>
                     {s.name} · {s.zh}
-                    <small style={{ display: 'block' }}>{s.school}</small>
+                    <small style={{ display: 'block' }}>{localize(lang, s.school)}</small>
                   </span>
                   <button
                     className="text-button"
@@ -2864,7 +2861,7 @@ export default function Hub({
                   value="Master"
                   defaultChecked={!editFaculty || editFaculty.levels.includes('Master')}
                 />
-                Master
+                {localize(lang, 'Master')}
               </label>
               <label className="row small">
                 <input
@@ -2873,11 +2870,11 @@ export default function Hub({
                   value="PhD"
                   defaultChecked={editFaculty?.levels.includes('PhD')}
                 />
-                PhD
+                {localize(lang, 'PhD')}
               </label>
             </div>
             <label className="field">
-              <span>Email</span>
+              <span>{localize(lang, 'Email')}</span>
               <input
                 type="email"
                 required
@@ -3016,7 +3013,7 @@ export default function Hub({
           onClose={() => setModal('document')}
         >
           <p className="muted">
-            {editDoc.label} · {date(editDoc.expiry)}
+            {docTitle(editDoc)} · {date(editDoc.expiry)}
           </p>
           <div className="modal-actions">
             <button className="button secondary" onClick={() => setModal('document')}>
@@ -3309,12 +3306,12 @@ export default function Hub({
                 <Icon name="bell" size={18} />
               </span>
               <div>
-                <p>{a.message}</p>
+                <p>{alertMessage(a)}</p>
                 <small>
-                  {new Date(a.sentAt).toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+                  {new Date(a.sentAt).toLocaleString(intlLocale(lang), {
                     timeZone: 'Asia/Shanghai',
                   })}{' '}
-                  · {a.channel} ·{' '}
+                  · {alertChannel(a.channel)} ·{' '}
                   {a.status === 'read' ? c('Lu', 'Read', '已读') : c('Non lu', 'Unread', '未读')}
                 </small>
               </div>
@@ -3424,7 +3421,7 @@ export default function Hub({
       {toast && (
         <div className="toast" role="status">
           <Icon name="info" size={18} />
-          <span>{toast}</span>
+          <span>{localize(lang, toast)}</span>
           <button
             className="icon-button"
             aria-label={content(document.documentElement.lang, 'Fermer', 'Close', '关闭')}

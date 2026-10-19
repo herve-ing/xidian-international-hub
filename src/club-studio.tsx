@@ -1,3 +1,4 @@
+import { languages, normalizeLocale } from './locale-config';
 import React, { useEffect, useState } from 'react';
 import { content } from './i18n';
 import { clubs, type Club } from './clubs';
@@ -24,7 +25,7 @@ export default function ClubStudio({ lang, onChange }: { lang: string; onChange:
     [clubId, setClubId] = useState(accessible[0]?.id || ''),
     [title, setTitle] = useState(''),
     [body, setBody] = useState(''),
-    [language, setLanguage] = useState('fr'),
+    [language, setLanguage] = useState<string>(() => normalizeLocale(lang)),
     [media, setMedia] = useState<ArticleMedia[]>([]),
     [busy, setBusy] = useState(false),
     [notice, setNotice] = useState(''),
@@ -45,12 +46,7 @@ export default function ClubStudio({ lang, onChange }: { lang: string; onChange:
     setClubId(article?.clubId || accessible[0]?.id || '');
     setTitle(article?.title || '');
     setBody(article?.body || '');
-    setLanguage(
-      article?.language ||
-        (['fr', 'en', 'zh', 'ar', 'es', 'ln', 'ru', 'tr', 'ary', 'tk', 'ur'].includes(lang)
-          ? lang
-          : 'en'),
-    );
+    setLanguage(article?.language || normalizeLocale(lang));
     setMedia(article?.media || []);
     setNotice('');
     setEditing(true);
@@ -235,19 +231,7 @@ export default function ClubStudio({ lang, onChange }: { lang: string; onChange:
               <label className="field">
                 <span>{c('Langue de l’article', 'Story language', '文章语言')}</span>
                 <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-                  {[
-                    ['fr', 'Français'],
-                    ['en', 'English'],
-                    ['zh', '中文'],
-                    ['ar', 'العربية'],
-                    ['es', 'Español'],
-                    ['ln', 'Lingála'],
-                    ['ru', 'Русский'],
-                    ['tr', 'Türkçe'],
-                    ['ary', 'الدارجة'],
-                    ['tk', 'Türkmençe'],
-                    ['ur', 'اردو'],
-                  ].map(([id, label]) => (
+                  {languages.map(([id, label]) => (
                     <option key={id} value={id}>
                       {label}
                     </option>

@@ -1,8 +1,9 @@
+import { localize } from './i18n';
 import React, { useState } from 'react';
 import { clubPhotos } from './community-imagery';
 import type { Club } from './clubs';
 // Locally optimized archive photography; original vectors remain the fallback for new clubs.
-export function ClubVisual({ club }: { club: Club }) {
+export function ClubVisual({ club, lang = 'en' }: { club: Club; lang?: string }) {
   const [failed, setFailed] = useState(false);
   const photo = clubPhotos[club.id];
   if (photo && !failed)
@@ -10,14 +11,14 @@ export function ClubVisual({ club }: { club: Club }) {
       <img
         className="club-visual club-photograph"
         src={'./media/' + photo.image}
-        alt={club.name}
+        alt={localize(lang, club.name)}
         loading="lazy"
         onError={() => setFailed(true)}
       />
     );
-  return <OriginalClubVisual club={club} />;
+  return <OriginalClubVisual club={club} lang={lang} />;
 }
-function OriginalClubVisual({ club }: { club: Club }) {
+function OriginalClubVisual({ club, lang }: { club: Club; lang: string }) {
   const id = club.id,
     ink = '#f7f1e7',
     dark = '#183d38',
@@ -35,7 +36,7 @@ function OriginalClubVisual({ club }: { club: Club }) {
       viewBox="0 0 640 360"
       preserveAspectRatio="xMidYMid slice"
       role="img"
-      aria-label={club.name}
+      aria-label={localize(lang, club.name)}
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect width="640" height="360" fill={dark} />

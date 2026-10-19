@@ -1,3 +1,4 @@
+import { useLocale, readLocale } from './locale-store';
 import { AnimatedHubLogo } from './binary-motion';
 import { AuthError, AuthErrorCode, authErrorCode } from './auth-errors';
 import React, { useState, useEffect } from 'react';
@@ -18,7 +19,7 @@ export default function AccountPortal() {
   const path = usePathname(),
     router = useRouter();
   const [account, setAccount] = useState<Account | null>(currentAccount);
-  const [lang, setLang] = useState(() => localStorage.getItem('xidian-locale') || 'fr');
+  const [lang, setLang] = useLocale();
   const [role, setRole] = useState<'student' | 'club_leader' | 'professor'>('student'),
     [register, setRegister] = useState(false),
     [error, setError] = useState(''),
@@ -34,11 +35,6 @@ export default function AccountPortal() {
       window.removeEventListener('focus', refresh);
     };
   }, []);
-  useEffect(() => {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = ['ar', 'ary', 'ur'].includes(lang) ? 'rtl' : 'ltr';
-    localStorage.setItem('xidian-locale', lang);
-  }, [lang]);
   const errors: Record<string, string> = {
     leader: c(
       'Ce compte n’a pas été nommé responsable de club. Demandez à un professeur de l’affecter à un club.',
@@ -138,7 +134,7 @@ export default function AccountPortal() {
     setError('');
     setRegister(false);
     setReveal(false);
-    setLang(localStorage.getItem('xidian-locale') || 'fr');
+    setLang(readLocale());
     window.location.hash = '#/';
   }
   if (account)
@@ -173,15 +169,6 @@ export default function AccountPortal() {
           </div>
         </header>
         <main>
-          {!['fr', 'en', 'zh'].includes(lang) && (
-            <p className="locale-note">
-              {c(
-                'Certains textes détaillés restent en anglais. Les documents sources conservent leur langue originale.',
-                'Some detailed text is still in English. Source documents retain their original language.',
-                '部分详细内容仍为英文，来源文件保留原始语言。',
-              )}
-            </p>
-          )}
           <CampusLife lang={lang} workspaceId="public-discovery" />
         </main>
       </div>

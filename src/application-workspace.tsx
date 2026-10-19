@@ -1,3 +1,5 @@
+import { intlLocale } from './locale-config';
+import { localize } from './i18n';
 import React, { useEffect, useState } from 'react';
 import { content } from './i18n';
 import type { Account } from './accounts';
@@ -19,7 +21,7 @@ import {
 } from './repositories/application-repository';
 import { ClubDialog } from './club-dialog';
 function localDate(at: string, lang: string) {
-  return new Intl.DateTimeFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+  return new Intl.DateTimeFormat(intlLocale(lang), {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Asia/Shanghai',
@@ -133,7 +135,7 @@ export function ThreadInbox({ lang, account }: { lang: string; account: Account 
                   <span>{c('Votre réponse', 'Your reply')}</span>
                   <textarea name="reply" required rows={4} maxLength={4000} />
                 </label>
-                {error && <p role="alert">{error}</p>}
+                {error && <p role="alert">{localize(lang, error)}</p>}
                 <button className="public-button">
                   {c('Enregistrer la réponse', 'Save reply')}
                 </button>
@@ -236,7 +238,7 @@ export default function ApplicationWorkspace({
             {admissionsSteps.map((s, i) => (
               <div key={s.id} data-state={i < index ? 'done' : i === index ? 'current' : 'next'}>
                 <span>{i < index ? '✓' : String(i + 1).padStart(2, '0')}</span>
-                <strong>{lang === 'fr' ? s.fr : s.en}</strong>
+                <strong>{c(s.fr, s.en)}</strong>
                 <small>
                   {i < index
                     ? c('Étape déclarée passée', 'Reported complete')
@@ -259,8 +261,8 @@ export default function ApplicationWorkspace({
                       setForm({ ...form, level: e.target.value as 'Master' | 'PhD' })
                     }
                   >
-                    <option>Master</option>
-                    <option>PhD</option>
+                    <option value="Master">{localize(lang, 'Master')}</option>
+                    <option value="PhD">{localize(lang, 'PhD')}</option>
                   </select>
                 </label>
                 <label>
@@ -269,8 +271,8 @@ export default function ApplicationWorkspace({
                     value={form.language}
                     onChange={(e) => setForm({ ...form, language: e.target.value })}
                   >
-                    <option>English</option>
-                    <option>Chinese</option>
+                    <option value="English">{localize(lang, 'English')}</option>
+                    <option value="Chinese">{localize(lang, 'Chinese')}</option>
                   </select>
                 </label>
               </div>
@@ -318,7 +320,7 @@ export default function ApplicationWorkspace({
                 >
                   {admissionsSteps.map((s) => (
                     <option key={s.id} value={s.id}>
-                      {lang === 'fr' ? s.fr : s.en}
+                      {c(s.fr, s.en)}
                     </option>
                   ))}
                 </select>
@@ -349,13 +351,13 @@ export default function ApplicationWorkspace({
                         })
                       }
                     />
-                    <span>{lang === 'fr' ? d.fr : d.en}</span>
+                    <span>{c(d.fr, d.en)}</span>
                   </label>
                 ))}
               </fieldset>
               {notice && (
                 <p className="info-box" role="status">
-                  {notice}
+                  {localize(lang, notice)}
                 </p>
               )}
               <button className="public-button">
@@ -388,9 +390,7 @@ export default function ApplicationWorkspace({
                   .map((h, i) => (
                     <p key={i}>
                       <strong>
-                        {lang === 'fr'
-                          ? admissionsSteps.find((s) => s.id === h.stage)?.fr
-                          : admissionsSteps.find((s) => s.id === h.stage)?.en}
+                        {localize(lang, admissionsSteps.find((s) => s.id === h.stage)?.en || '')}
                       </strong>
                       <br />
                       <small>
@@ -541,7 +541,7 @@ export function FacultyWorkspace({ lang, account }: { lang: string; account: Acc
       </form>
       {notice && (
         <p role="status" className="info-box">
-          {notice}
+          {localize(lang, notice)}
         </p>
       )}
       {linked && <ThreadInbox key={linked} lang={lang} account={account} />}
@@ -574,13 +574,9 @@ export function FacultyWorkspace({ lang, account }: { lang: string; account: Acc
                     <strong>{a.displayName}</strong>
                   </td>
                   <td>
-                    {a.level} · {a.major}
+                    {localize(lang, a.level)} · {localize(lang, a.major)}
                   </td>
-                  <td>
-                    {lang === 'fr'
-                      ? admissionsSteps.find((s) => s.id === a.stage)?.fr
-                      : admissionsSteps.find((s) => s.id === a.stage)?.en}
-                  </td>
+                  <td>{localize(lang, admissionsSteps.find((s) => s.id === a.stage)?.en || '')}</td>
                   <td>{localDate(a.updatedAt, lang)}</td>
                 </tr>
               ))}

@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import React, { useEffect, useState } from 'react';
 import { content } from './i18n';
 import { currentAccount } from './accounts';
@@ -149,7 +150,7 @@ export default function MovieNight({
       </div>
       {message && (
         <p role="status" className="info-box">
-          {message}
+          {localize(lang, message)}
         </p>
       )}
       {chosen && (

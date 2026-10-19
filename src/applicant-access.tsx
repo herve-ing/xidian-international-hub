@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import React, { useState } from 'react';
 import { registerApplicant, loginStudent } from './accounts';
 import { authErrorCode } from './auth-errors';
@@ -124,8 +125,8 @@ export default function ApplicantAccess({ lang }: { lang: string }) {
                 <label>
                   <span>{c('Niveau visé', 'Target degree')}</span>
                   <select name="grade">
-                    <option>Master</option>
-                    <option>PhD</option>
+                    <option value="Master">{localize(lang, 'Master')}</option>
+                    <option value="PhD">{localize(lang, 'PhD')}</option>
                   </select>
                 </label>
                 <label>
@@ -140,7 +141,7 @@ export default function ApplicantAccess({ lang }: { lang: string }) {
             </>
           )}
           <label>
-            <span>Email</span>
+            <span>{localize(lang, 'Email')}</span>
             <input name="email" required type="email" autoComplete="email" maxLength={160} />
           </label>
           <label>
@@ -169,7 +170,7 @@ export default function ApplicantAccess({ lang }: { lang: string }) {
           )}
           {error && (
             <p className="error-message" role="alert">
-              {error}
+              {localize(lang, error)}
             </p>
           )}
           <button className="public-button" disabled={busy}>

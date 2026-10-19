@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import React, { useEffect, useState } from 'react';
 import { content } from './i18n';
 import { clubs } from './clubs';
@@ -190,7 +191,7 @@ export function ClubJournal({
               {a.media[0] ? <ArticleMediaView media={a.media[0]} /> : <ClubVisual club={club} />}
               <div>
                 <span className="journal-byline">
-                  {club.name} · {a.language.toUpperCase()}
+                  {localize(lang, club.name)} · {a.language.toUpperCase()}
                 </span>
                 <h3>{a.title}</h3>
                 <p>

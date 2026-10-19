@@ -1,18 +1,8 @@
-import { clubTranslations } from './club-translations.ts';
-import { translations } from './translations.ts';
-export const languages = [
-  ['fr', 'Français'],
-  ['en', 'English'],
-  ['zh', '中文'],
-  ['ar', 'العربية'],
-  ['es', 'Español'],
-  ['ln', 'Lingála'],
-  ['ru', 'Русский'],
-  ['tr', 'Türkçe'],
-  ['ary', 'الدارجة المغربية'],
-  ['tk', 'Türkmençe'],
-  ['ur', 'اردو'],
-];
+import overrides from './locale-overrides.json' with { type: 'json' };
+export { languages } from './locale-config.ts';
+import { normalizeLocale } from './locale-config.ts';
+import { catalogues } from './locale-catalogues.ts';
+
 const keys = [
   'home',
   'supervisors',
@@ -339,34 +329,31 @@ const rows: Record<string, string[]> = {
     'طالب علم',
   ],
 };
+const reverse = new Map<string, string>();
+for (const dictionary of [...Object.values(catalogues), ...Object.values(overrides)])
+  for (const [key, value] of Object.entries(dictionary))
+    if (value && !reverse.has(value)) reverse.set(value, key);
+export function localize(lang: string, text: string | null | undefined): string {
+  if (!text) return '';
+  const locale = normalizeLocale(lang);
+  const key = Object.prototype.hasOwnProperty.call(catalogues.en, text)
+    ? text
+    : reverse.get(text) || text;
+  return locale === 'en'
+    ? key
+    : (overrides as Record<string, Record<string, string>>)[locale]?.[key] ||
+        catalogues[locale]?.[key] ||
+        text;
+}
 export function translate(lang: string, key: string) {
-  if (key === 'campus')
-    return (
-      (
-        {
-          fr: 'Vie de campus',
-          en: 'Campus life',
-          zh: '校园生活',
-          ar: 'الحياة الجامعية',
-          es: 'Vida universitaria',
-          ln: 'Bomoi na campus',
-          ru: 'Жизнь кампуса',
-          tr: 'Kampüs hayatı',
-          ary: 'الحياة فالجامعة',
-          tk: 'Uniwersitet durmuşy',
-          ur: 'کیمپس کی زندگی',
-        } as Record<string, string>
-      )[lang] || 'Campus life'
-    );
-  const i = keys.indexOf(key);
-  return i < 0 ? key : (rows[lang] || rows.en)[i];
+  if (key === 'campus') return localize(lang, 'Campus life');
+  const index = keys.indexOf(key);
+  return index < 0 ? key : localize(lang, rows.en[index]);
 }
 export function content(lang: string, fr: string, en: string, zh?: string) {
-  return lang === 'fr'
-    ? fr
-    : lang === 'en'
-      ? en
-      : lang === 'zh' && zh
-        ? zh
-        : clubTranslations[lang]?.[en] || translations[lang]?.[en] || en;
+  const locale = normalizeLocale(lang);
+  if (locale === 'en') return en;
+  if (locale === 'fr' && fr) return fr;
+  if (locale === 'zh' && zh) return zh;
+  return localize(locale, en);
 }

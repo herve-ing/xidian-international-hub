@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import React, { useEffect, useState } from 'react';
 import { content } from './i18n';
 import { departmentPhotos, xidianNews } from './community-imagery';
@@ -97,7 +98,8 @@ export function UnionNews({ lang }: { lang: string }) {
                 <img src={'./media/' + n.image} alt={c(n.fr, n.en)} loading="lazy" />
                 <div>
                   <time dateTime={n.date}>
-                    {n.date.split('-').reverse().join('.')} · XIDIAN SIE
+                    {n.date.split('-').reverse().join('.')}
+                    {localize(lang, '· XIDIAN SIE')}
                   </time>
                   <h3>{c(n.fr, n.en)}</h3>
                   <p>{c(n.summaryFr, n.summaryEn)}</p>
@@ -139,7 +141,9 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
     >
       <section className="union-hero union-editorial-hero">
         <div className="union-hero-copy">
-          <span className="public-kicker">XIDIAN · INTERNATIONAL STUDENT UNION</span>
+          <span className="public-kicker">
+            {localize(lang, 'XIDIAN · INTERNATIONAL STUDENT UNION')}
+          </span>
           <h1>
             {c(
               'Votre campus.\nVos rencontres.\nVotre place.',

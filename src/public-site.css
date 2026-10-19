@@ -3365,3 +3365,51 @@
 .brand .animated-hub-logo {
   mix-blend-mode: multiply;
 }
+
+/* Locale changes preserve layout, reading direction and legible native scripts. */
+html[dir='rtl'] .university-site,
+html[dir='rtl'] .account-page,
+html[dir='rtl'] .app {
+  font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+}
+html[lang='hi'] body {
+  font-family: 'Noto Sans Devanagari', 'Segoe UI', sans-serif;
+}
+html[dir='rtl'] .public-page-title,
+html[dir='rtl'] .public-section-title,
+html[dir='rtl'] .public-faculty-card,
+html[dir='rtl'] .account-intro {
+  text-align: start;
+}
+html[dir='rtl'] .admission-feature-row.reverse,
+html[dir='rtl'] .admission-feature-row.reverse > * {
+  direction: rtl;
+}
+.public-header nav {
+  flex-wrap: wrap;
+}
+.public-header nav > a,
+.union-tabs a {
+  overflow-wrap: anywhere;
+}
+.club-dialog input[type='email'],
+.account-card input[type='email'],
+input[type='url'],
+input[type='tel'] {
+  direction: ltr;
+  text-align: start;
+}
+.public-menu-button {
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .public-header nav {
+    max-width: 100%;
+  }
+  .union-tabs {
+    flex-wrap: wrap;
+  }
+  .public-header {
+    min-width: 0;
+  }
+}

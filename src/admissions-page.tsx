@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import React, { useState } from 'react';
 import { content } from './i18n';
 import { admissionsSteps, graduateProgrammes, officialPortal } from './admissions-data';
@@ -32,7 +33,10 @@ export default function Admissions({ lang }: { lang: string }) {
     [search, setSearch] = useState('');
   const programmes = graduateProgrammes.filter(
     (p) =>
-      p.level === level && (p.major + ' ' + p.school).toLowerCase().includes(search.toLowerCase()),
+      p.level === level &&
+      (p.major + ' ' + p.school + ' ' + localize(lang, p.major) + ' ' + localize(lang, p.school))
+        .toLowerCase()
+        .includes(search.toLowerCase()),
   );
   return (
     <section className="admissions-public public-container admissions-expanded">
@@ -101,8 +105,8 @@ export default function Admissions({ lang }: { lang: string }) {
           <h2>{c('Quel programme vous ressemble ?', 'Which programme fits your ambitions?')}</h2>
           <p>
             {c(
-              '28 entrées Master et 21 entrées Doctorat dans les guides internationaux 2026. Les intitulés officiels anglais sont conservés pour faciliter la recherche sur le portail.',
-              '28 Master and 21 doctoral entries in the 2026 international guides. Official English names are retained to help you find them in the application portal.',
+              '28 entrées Master et 21 entrées Doctorat dans les guides internationaux 2026. Les intitulés sont traduits pour la lecture ; les noms officiels restent consultables dans les guides PDF.',
+              '28 Master and 21 doctoral entries in the 2026 international guides. Titles are translated for reading; consult the PDF guides for the official programme names.',
             )}
           </p>
         </div>
@@ -135,8 +139,8 @@ export default function Admissions({ lang }: { lang: string }) {
           <label>
             {c('Niveau', 'Degree')}
             <select value={level} onChange={(e) => setLevel(e.target.value)}>
-              <option>Master</option>
-              <option>PhD</option>
+              <option value="Master">{localize(lang, 'Master')}</option>
+              <option value="PhD">{localize(lang, 'PhD')}</option>
             </select>
           </label>
           <label>
@@ -144,7 +148,7 @@ export default function Admissions({ lang }: { lang: string }) {
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Communication, Cyber, Physics…"
+              placeholder={localize(lang, 'Communication, Cyber, Physics…')}
             />
           </label>
           <span role="status">
@@ -168,8 +172,8 @@ export default function Admissions({ lang }: { lang: string }) {
             <tbody>
               {programmes.map((p) => (
                 <tr key={p.school + p.major}>
-                  <td>{p.major}</td>
-                  <td>{p.school}</td>
+                  <td>{localize(lang, p.major)}</td>
+                  <td>{localize(lang, p.school)}</td>
                   <td>
                     {p.language === 'ZH/EN'
                       ? c('Chinois / anglais', 'Chinese / English')

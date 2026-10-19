@@ -1,3 +1,5 @@
+import { intlLocale } from './locale-config';
+import { localize } from './i18n';
 import { clubLeaderNames } from './accounts';
 import React, { useEffect, useState, useRef } from 'react';
 import { ClubVisual } from './club-visual';
@@ -142,11 +144,29 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
     ['media', c('Cinéma et vidéo', 'Film and video', '电影与视频')],
     ['math', c('Mathématiques', 'Mathematics', '数学')],
   ];
-  const visible = searchClubs(query, category, format).filter(
-    (x) =>
-      (!savedOnly || state.saved.includes(x.id)) &&
-      (tab !== 'mine' || state.saved.includes(x.id) || state.drafts.some((d) => d.clubId === x.id)),
-  );
+  const visible = searchClubs('', category, format)
+    .filter(
+      (club) =>
+        !query ||
+        [
+          club.name,
+          ...club.description,
+          ...club.activity,
+          localize(lang, club.name),
+          localize(lang, club.description[1]),
+          localize(lang, club.activity[1]),
+        ]
+          .join(' ')
+          .toLocaleLowerCase()
+          .includes(query.toLocaleLowerCase()),
+    )
+    .filter(
+      (x) =>
+        (!savedOnly || state.saved.includes(x.id)) &&
+        (tab !== 'mine' ||
+          state.saved.includes(x.id) ||
+          state.drafts.some((d) => d.clubId === x.id)),
+    );
   const reset = () => {
     setQuery('');
     setCategory('all');
@@ -422,7 +442,7 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
                 return (
                   <article className="campus-club" key={club.id}>
                     <div className={'club-art ' + club.tone}>
-                      <ClubVisual club={club} />
+                      <ClubVisual club={club} lang={lang} />
                       <span>{tr(categories.find(([id]) => id === club.category)!.slice(1))}</span>
                       <button
                         className="icon-button"
@@ -437,7 +457,7 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
                       </button>
                     </div>
                     <div className="club-body">
-                      <h2>{club.name}</h2>
+                      <h2>{localize(lang, club.name)}</h2>
                       {clubPhotos[club.id] && (
                         <small className="club-photo-credit">
                           {clubPhotos[club.id].context
@@ -613,22 +633,20 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
                   <article className="campus-event" key={e.id}>
                     <div className="event-date">
                       <strong>
-                        {new Intl.DateTimeFormat(
-                          lang === 'ary' ? 'ar-MA' : lang === 'ln' ? 'fr' : lang,
-                          {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric',
-                            timeZone: 'Asia/Shanghai',
-                          },
-                        ).format(new Date(e.date + 'T12:00:00+08:00'))}
+                        {new Intl.DateTimeFormat(intlLocale(lang), {
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric',
+                          timeZone: 'Asia/Shanghai',
+                        }).format(new Date(e.date + 'T12:00:00+08:00'))}
                       </strong>
                       <span>
-                        {e.time} · {e.duration} min
+                        {e.time} · {e.duration}
+                        {localize(lang, 'min')}
                       </span>
                     </div>
                     <div className="event-body">
-                      <h3>{club.name}</h3>
+                      <h3>{localize(lang, club.name)}</h3>
                       <p>
                         {e.note ||
                           c(
@@ -853,7 +871,8 @@ export default function CampusLife({ lang, workspaceId }: { lang: string; worksp
               <select name="duration" defaultValue="60">
                 {[30, 60, 90, 120].map((n) => (
                   <option key={n} value={n}>
-                    {n} min
+                    {n}
+                    {localize(lang, 'min')}
                   </option>
                 ))}
               </select>

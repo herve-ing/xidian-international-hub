@@ -1,3 +1,4 @@
+import { localize } from './i18n';
 import { SupervisorCV } from './supervisor-cv';
 import React, { useState } from 'react';
 import { supervisors, type Supervisor } from './supervisors';
@@ -27,7 +28,16 @@ export default function PublicDirectory({ lang }: { lang: string }) {
     (s) =>
       (!school || s.school === school) &&
       (!query ||
-        [s.name, s.zh, s.school, s.schoolFr, ...s.research, ...s.researchFr]
+        [
+          s.name,
+          s.zh,
+          s.school,
+          s.schoolFr,
+          localize(lang, s.school),
+          ...s.research,
+          ...s.researchFr,
+          ...s.research.map((value) => localize(lang, value)),
+        ]
           .join(' ')
           .toLocaleLowerCase()
           .includes(query.toLocaleLowerCase())) &&
@@ -86,7 +96,9 @@ export default function PublicDirectory({ lang }: { lang: string }) {
           >
             <option value="">{c('Toutes les écoles', 'All schools')}</option>
             {schools.map((s) => (
-              <option key={s}>{s}</option>
+              <option key={s} value={s}>
+                {localize(lang, s)}
+              </option>
             ))}
           </select>
         </label>
@@ -100,8 +112,8 @@ export default function PublicDirectory({ lang }: { lang: string }) {
             }}
           >
             <option value="">{c('Master et doctorat', 'Master and PhD')}</option>
-            <option>Master</option>
-            <option>PhD</option>
+            <option value="Master">{localize(lang, 'Master')}</option>
+            <option value="PhD">{localize(lang, 'PhD')}</option>
           </select>
         </label>
       </div>
@@ -168,13 +180,13 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                 {s.levels.join(' / ') || c('Niveau à confirmer', 'Degree to confirm')}
               </span>
             </div>
-            <p className="faculty-school">{lang === 'fr' ? s.schoolFr : s.school}</p>
+            <p className="faculty-school">{c(s.schoolFr, s.school)}</p>
             <h2>{s.name}</h2>
             <span className="faculty-name-zh" lang="zh">
               {s.zh}
             </span>
             <p>
-              {(lang === 'fr' ? s.researchFr : s.research).join(' · ') ||
+              {s.research.map((value, i) => c(s.researchFr[i] || value, value)).join(' · ') ||
                 c(
                   'Consulter le document officiel pour les axes de recherche.',
                   'See the official document for research areas.',
@@ -239,11 +251,7 @@ export default function PublicDirectory({ lang }: { lang: string }) {
       </nav>
       {selected && (
         <ClubDialog title={selected.name} onClose={() => setSelected(null)}>
-          <p>
-            {[selected.zh, lang === 'fr' ? selected.schoolFr : selected.school]
-              .filter(Boolean)
-              .join(' · ')}
-          </p>
+          <p>{[selected.zh, c(selected.schoolFr, selected.school)].filter(Boolean).join(' · ')}</p>
           <p>
             {selected.title ||
               c(
@@ -301,7 +309,11 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                   {c('Niveau', 'Degree')} :{' '}
                   {selected.levels.join(' / ') || c('À confirmer', 'To confirm')}
                 </p>
-                <p>{(lang === 'fr' ? selected.researchFr : selected.research).join(' · ')}</p>
+                <p>
+                  {selected.research
+                    .map((value, i) => c(selected.researchFr[i] || value, value))
+                    .join(' · ')}
+                </p>
                 {selected.email ? (
                   <p>
                     {c('Email publié', 'Published email')} :{' '}
@@ -422,7 +434,7 @@ export default function PublicDirectory({ lang }: { lang: string }) {
               </span>
               <textarea required name="body" maxLength={4000} rows={8} />
             </label>
-            {notice && <p role="alert">{notice}</p>}
+            {notice && <p role="alert">{localize(lang, notice)}</p>}
             <button className="button primary">
               {c('Enregistrer le message dans le Hub', 'Save message in the Hub')}
             </button>
