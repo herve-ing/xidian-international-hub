@@ -15,7 +15,11 @@ export default function PublicDirectory({ lang }: { lang: string }) {
     [page, setPage] = useState(1),
     [selected, setSelected] = useState<Supervisor | null>(null),
     [compose, setCompose] = useState<Supervisor | null>(null),
-    [notice, setNotice] = useState('');
+    [notice, setNotice] = useState(''),
+    [copied, setCopied] = useState(false);
+  const emailText = selected
+    ? `Subject: Prospective ${level || 'Master / PhD'} student — Research supervision inquiry\n\nDear Professor ${selected.name},\n\nMy name is [your name], and I am studying [degree / major] at [university]. I am interested in applying to Xidian University for [intake].\n\nMy proposed research concerns [topic], which relates to your work on ${selected.research[0] || '[research area from the official profile]'}. Are you accepting international students? Could you confirm the language of supervision and requirements?\n\nI can provide my CV, transcripts and research proposal on request.\n\nThank you for your time.\nBest regards,\n[your name]\n[email]`
+    : '';
   const schools = [...new Set(supervisors.map((s) => s.school))].sort();
   const matches = supervisors.filter(
     (s) =>
@@ -156,10 +160,22 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                 )}
             </p>
             <div className="faculty-card-actions">
-              <button onClick={() => setSelected(s)}>
+              <button
+                onClick={() => {
+                  setCopied(false);
+                  setSelected(s);
+                }}
+              >
                 {c('Voir le profil', 'View profile')} ↗
               </button>
-              <button onClick={() => contact(s)}>{c('Contacter', 'Contact')} →</button>
+              <button
+                onClick={() => {
+                  setCopied(false);
+                  setSelected(s);
+                }}
+              >
+                {c('Fiche de contact', 'Contact card')} →
+              </button>
             </div>
           </article>
         ))}
@@ -213,32 +229,103 @@ export default function PublicDirectory({ lang }: { lang: string }) {
           <a className="button secondary" href={selected.source} target="_blank" rel="noreferrer">
             {c('Ouvrir le profil officiel', 'Open official profile')} ↗
           </a>
-          {selected.email && (
+          <section className="supervisor-contact-card">
+            <h3>{c('Coordonnées et premier contact', 'Contact details and first introduction')}</h3>
             <p>
-              {c('Email publié', 'Published email')} :{' '}
-              <a href={'mailto:' + selected.email}>{selected.email}</a>
+              {c('Niveau', 'Degree')} :{' '}
+              {selected.levels.join(' / ') || c('À confirmer', 'To confirm')}
             </p>
-          )}
+            <p>{(lang === 'fr' ? selected.researchFr : selected.research).join(' · ')}</p>
+            {selected.email ? (
+              <p>
+                {c('Email publié', 'Published email')} :{' '}
+                <a href={'mailto:' + selected.email}>{selected.email}</a>
+              </p>
+            ) : (
+              <p>
+                {c(
+                  'Email non retranscrit : consultez la fiche officielle ci-dessus ou le document ci-dessous. Aucune adresse n’est inventée.',
+                  'Email not transcribed: consult the official profile above or document below. No address is invented.',
+                )}
+              </p>
+            )}
+            <h3>{c('Modèle d’email à personnaliser', 'Email template to personalize')}</h3>
+            <p>
+              {c(
+                'Modèle en anglais : remplacez les champs entre crochets.',
+                'English template: replace the bracketed fields.',
+              )}
+            </p>
+            <textarea
+              aria-label={c('Modèle d’email', 'Email template')}
+              readOnly
+              value={emailText}
+              rows={10}
+            />
+            <div className="faculty-card-actions">
+              <button
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(emailText);
+                    setCopied(true);
+                  } catch {
+                    setNotice(
+                      c(
+                        'Copie indisponible : sélectionnez le texte ou téléchargez le modèle.',
+                        'Clipboard unavailable: select the text or download the template.',
+                      ),
+                    );
+                  }
+                }}
+              >
+                {copied ? c('Copié', 'Copied') : c('Copier le modèle', 'Copy template')}
+              </button>
+              <a
+                download="supervisor-email.txt"
+                href={'data:text/plain;charset=utf-8,' + encodeURIComponent(emailText)}
+              >
+                {c('Télécharger le modèle', 'Download template')} ↓
+              </a>
+            </div>
+            <button className="button primary" onClick={() => contact(selected)}>
+              {c('Échanger dans le Hub', 'Chat in the Hub')} →
+            </button>
+            <p>
+              {c(
+                'La fiche et les coordonnées sont publiques. Un compte est demandé uniquement pour la conversation locale dans le Hub.',
+                'The contact card is public. Only the local Hub conversation requires an account.',
+              )}
+            </p>
+          </section>
           <p className="info-box">
             {c(
               'Le Hub est indépendant. Un message enregistré dans cette démonstration n’est pas transmis à l’université. Utilisez les coordonnées officielles pour un contact réel.',
               'The Hub is independent. Messages saved in this demo are not delivered to the university. Use official contact details for real correspondence.',
             )}
           </p>
+          {selected.profileImages?.length ? (
+            <h3>{c('Document officiel détaillé', 'Detailed official document')}</h3>
+          ) : null}
           {selected.profileImages?.map((src, i) => (
-            <img
-              className="official-profile-document"
-              key={src}
-              src={src}
-              alt={
-                c(
-                  'Document officiel du superviseur, page ',
-                  'Official supervisor document, page ',
-                ) +
-                (i + 1)
-              }
-              loading="lazy"
-            />
+            <a href={src} key={src} target="_blank" rel="noreferrer">
+              <img
+                className="official-profile-document"
+                key={src}
+                src={src}
+                alt={
+                  c(
+                    'Document officiel du superviseur, page ',
+                    'Official supervisor document, page ',
+                  ) +
+                  (i + 1)
+                }
+                loading="lazy"
+                referrerPolicy="no-referrer"
+              />
+              <span>
+                {c('Ouvrir le document en taille réelle', 'Open full-size document')} {i + 1} ↗
+              </span>
+            </a>
           ))}
           <button className="button primary" onClick={() => contact(selected)}>
             {c('Commencer un échange dans le Hub', 'Start a conversation in the Hub')}

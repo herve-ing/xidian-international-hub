@@ -4,7 +4,7 @@ import { currentAccount, signOut, type Account } from './accounts';
 import { usePathname } from './navigation';
 import AccountPortal from './account-portal';
 import Hub from './hub';
-import CampusLife from './campus';
+import StudentUnion, { CampusGallery, UnionNews } from './student-union';
 import PublicDirectory from './public-directory';
 import ApplicantAccess from './applicant-access';
 import ApplicationWorkspace, { FacultyWorkspace } from './application-workspace';
@@ -118,7 +118,7 @@ function Landing({ lang }: { lang: string }) {
           </p>
           <span>↗</span>
         </a>
-        <a href="#/clubs">
+        <a href="#/union?tab=clubs">
           <small>{c('VIE DE CAMPUS', 'CAMPUS LIFE')}</small>
           <h2>{c('Trouvez votre place.', 'Find where you belong.')}</h2>
           <p>
@@ -233,11 +233,15 @@ function Landing({ lang }: { lang: string }) {
               'From your first conversation to your first club, build connections for your journey in Xi’an.',
             )}
           </p>
-          <a className="public-button" href="#/clubs">
+          <a className="public-button" href="#/union?tab=clubs">
             {c('Vivre le campus', 'Explore campus life')} ↗
           </a>
         </div>
       </section>
+      <div className="public-container">
+        <UnionNews lang={lang} />
+        <CampusGallery lang={lang} compact />
+      </div>
     </>
   );
 }
@@ -397,6 +401,7 @@ export default function PublicSite() {
     '/admissions',
     '/clubs',
     '/campus',
+    '/union',
     '/apply',
     '/applications',
     '/faculty',
@@ -451,7 +456,7 @@ export default function PublicSite() {
             ['/', c('Découvrir', 'Discover')],
             ['/admissions', c('Admissions', 'Admissions')],
             ['/supervisors', c('Superviseurs', 'Supervisors')],
-            ['/clubs', c('Vie de campus', 'Campus life')],
+            ['/union', c('Union étudiante', 'Student Union')],
           ].map(([href, label]) => (
             <a href={'#' + href} key={href} aria-current={path === href ? 'page' : undefined}>
               {label}
@@ -488,10 +493,8 @@ export default function PublicSite() {
         {path === '/' && <Landing lang={lang} />}
         {path === '/supervisors' && <PublicDirectory lang={lang} />}{' '}
         {path === '/admissions' && <Admissions lang={lang} />}
-        {['/clubs', '/campus'].includes(path) && (
-          <div className="public-container public-campus">
-            <CampusLife lang={lang} workspaceId={account?.id || 'public-discovery'} />
-          </div>
+        {['/clubs', '/campus', '/union'].includes(path) && (
+          <StudentUnion lang={lang} workspaceId={account?.id || 'public-discovery'} />
         )}
         {['/apply', '/applications'].includes(path) &&
           (account ? (
@@ -541,7 +544,7 @@ export default function PublicSite() {
               <h3>{c('Explorer', 'Explore')}</h3>
               <a href="#/supervisors">{c('Trouver un superviseur', 'Find a supervisor')}</a>
               <a href="#/admissions">{c('Préparer ma candidature', 'Prepare my application')}</a>
-              <a href="#/clubs">{c('Rejoindre la communauté', 'Join the community')}</a>
+              <a href="#/union?tab=clubs">{c('Rejoindre la communauté', 'Join the community')}</a>
             </div>
             <div>
               <h3>{c('Mes espaces', 'My spaces')}</h3>

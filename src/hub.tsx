@@ -796,6 +796,9 @@ export default function Hub({
           )}
         </nav>
         <div className="sidebar-bottom">
+          <a className="nav-link" href="#/union">
+            {c('Union étudiante', 'Student Union', '学生会')} ↗
+          </a>
           {isProfessor && (
             <a className="nav-link" href="#/faculty">
               {c('Espace superviseur', 'Supervisor space', '导师空间')} ↗
