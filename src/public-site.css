@@ -3162,7 +3162,7 @@
   display: block;
   width: 150px;
   height: 102px;
-  overflow: visible;
+  overflow: hidden;
 }
 .logo-code-row {
   animation: logo-code-release var(--row-duration) linear infinite;
@@ -3359,4 +3359,9 @@
   .article-social > div {
     flex-wrap: wrap;
   }
+}
+
+/* Prevent the source image white canvas from spilling beyond the shared mark. */
+.brand .animated-hub-logo {
+  mix-blend-mode: multiply;
 }
