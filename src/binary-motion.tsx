@@ -22,7 +22,7 @@ export function AnimatedHubLogo() {
           <rect x="99" y="44" width="68" height="80" fill="url(#hub-code-fade)" />
         </mask>
       </defs>
-      <image href="./media/hub-logo.jpg" width="200" height="200" />
+      <image href="./media/hub-logo-live.jpg" width="200" height="200" />
       <g className="logo-live-code" aria-hidden="true">
         <rect x="130" y="43" width="37" height="79" fill="#fdfdfd" />
         <g clipPath="url(#hub-code-window)" mask="url(#hub-code-mask)">
