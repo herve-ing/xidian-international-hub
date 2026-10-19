@@ -106,3 +106,7 @@ La publication d’articles reste réservée aux responsables de leurs clubs et 
 - Superviseurs : aperçu de la fiche SIE sur les cartes lorsqu'une image est disponible ; lecteur de toutes les pages originales, agrandissement et accès séparé aux coordonnées et au modèle d'email. Sans document indexé, le lien officiel est conservé ; aucun CV n'est inventé.
 - Friday Movie Night : les propositions et votes sont un sous-onglet de la fiche du club, dans Clubs & inscriptions. L'ancien lien `#/union?tab=cinema` ouvre cette fiche pour préserver les liens existants. Le lien actuel est `#/union?tab=clubs&club=friday-movie-night&activity=cinema`.
 - Les limites du prototype restent applicables : stockage local, rôles de démonstration, pas de synchronisation collective, pas de transmission des conversations à l'université.
+
+### Identité animée et filigrane binaire
+
+Le logo transmis (`download.jfif`) remplace le logo précédent. Le composant SVG conserve son image originale et anime une désagrégation binaire en boucle ; sans animation, la version originale reste affichée. Python prépare les séquences déterministes (`python3 scripts/generate-binary-motion.py`), React/JavaScript et CSS affichent les colonnes de 0/1 du bas vers le haut, sur les pages publiques. Décor sans interaction, exclu de la lecture assistée ; bouton pause global et `prefers-reduced-motion` respectés. Aucun Java/plugin navigateur requis.
