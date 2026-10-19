@@ -110,3 +110,7 @@ La publication d’articles reste réservée aux responsables de leurs clubs et 
 ### Identité animée et filigrane binaire
 
 Le logo transmis (`download.jfif`) remplace le logo précédent. Le composant SVG conserve son image originale et anime une désagrégation binaire en boucle ; sans animation, la version originale reste affichée. Python prépare les séquences déterministes (`python3 scripts/generate-binary-motion.py`), React/JavaScript et CSS affichent les colonnes de 0/1 du bas vers le haut, sur les pages publiques. Décor sans interaction, exclu de la lecture assistée ; bouton pause global et `prefers-reduced-motion` respectés. Aucun Java/plugin navigateur requis.
+
+### Finitions de navigation et identité partagée
+
+Les flèches Unicode et les flèches SVG décoratives des liens et boutons sont retirées pour éviter les rendus emoji sur téléphone. Les liens d’agrandissement ont un libellé explicite. Le même composant `AnimatedHubLogo` et le fichier fourni `hub-logo-live.jpg` sont utilisés par l’accueil public, le portail de connexion et My Space. Boutons tactiles de 44 px, retours à la ligne et focus visibles sont conservés.
