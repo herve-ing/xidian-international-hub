@@ -90,3 +90,11 @@ L’annuaire public rétablit une fiche de contact avant la demande de connexion
 La rubrique galerie est supprimée. Les 13 clubs utilisent des photos locales optimisées du site de référence demandé ; une illustration vectorielle originale reste disponible pour les nouveaux clubs et en cas d’échec de chargement. Les visuels d’ambiance (notamment pour les activités sans photo confirmée) sont étiquetés. Les huit départements ont une image contextualisée. `community-imagery.ts` centralise la sélection.
 
 L’espace Union reprend les principes d’Imperial College Union : découverte des activités, engagement dans les départements et accès à la gestion pour les responsables. Le design et les textes sont propres au Hub. Les trois actualités SIE ajoutées sont datées et liées aux sources officielles ; il s’agit d’une sélection éditoriale statique mise à jour le 19 octobre 2026, sans synchronisation automatique. Les visuels ne sont pas une preuve d’affiliation officielle à l’ISU ou de composition actuelle d’une équipe. Provenance détaillée dans `public/media/SOURCES.md`.
+
+## Nouveaux clubs, cinéma participatif et réactions (19 octobre 2026)
+
+Le catalogue comporte 15 clubs, dont Xidian Calisthenics Club et Friday Movie Night. La description Calisthenics est celle transmise par l’utilisateur : entraînements hebdomadaires et défis mensuels annoncés, certificats universitaires seulement sous réserve d’approbation.
+
+`#/union?tab=cinema` permet aux étudiants ayant une inscription active (en attente ou approuvée) de proposer des films. Le responsable de Friday Movie Night et les professeurs valident ou refusent les propositions, ouvrent et clôturent le vote et confirment le film. Un vote par compte et par séance, modifiable avant clôture ; les propositions en attente sont visibles uniquement par leur auteur et les modérateurs. Les noms des votants ne sont pas publics. Les anciennes séances sont archivées.
+
+La publication d’articles reste réservée aux responsables de leurs clubs et aux professeurs. Les étudiants peuvent aimer les articles publiés et partager le texte avec son lien. Les liens d’articles, likes, propositions et votes restent **locaux au navigateur** : ils ne sont ni synchronisés entre étudiants sur des appareils différents ni envoyés au site Friday Movie Night de référence. Les partages incluent cette limite.
