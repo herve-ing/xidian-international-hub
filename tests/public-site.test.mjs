@@ -62,6 +62,12 @@ test('public home and directory do not require sign-in; official application ste
     html = renderToStaticMarkup(React.createElement(Site));
     assert.match(html, /Friday Movie Night/);
     assert.match(html, /M’inscrire au club/);
+    assert.match(html, /role="tab"[^>]*>Propositions &amp; votes/);
+    assert.doesNotMatch(html, /href="#\/union\?tab=cinema"/);
+    window.location.hash = '#/union?tab=clubs&club=friday-movie-night&activity=cinema';
+    html = renderToStaticMarkup(React.createElement(Site));
+    assert.match(html, /id="movie-vote-panel"/);
+    assert.match(html, /M’inscrire au club/);
     assert.doesNotMatch(html, /class="movie-admin"/);
     assert.doesNotMatch(html, /class="movie-proposal-form"/);
     window.location.hash = '#/admissions';
@@ -70,6 +76,15 @@ test('public home and directory do not require sign-in; official application ste
     assert.match(html, /master-admissions-2026.pdf/);
     assert.match(html, /doctoral-admissions-2026.pdf/);
     assert.match(html, /xdgjxs.xidian.edu.cn/);
+    assert.match(html, /28 entrées Master et 21 entrées Doctorat/);
+    assert.match(html, /graduate-destinations.jpg/);
+    assert.match(html, /laboratory-facilities.jpg/);
+    assert.match(html, /joint-laboratories.jpg/);
+    assert.match(html, /IELTS Academic/);
+    assert.match(html, /30 000 RMB/);
+    assert.match(html, /au moins deux ans de validité/);
+    assert.match(html, /196 universités partenaires/);
+    assert.match(html, /194 universités/);
     window.location.hash = '#/apply';
     html = renderToStaticMarkup(React.createElement(Site));
     assert.match(html, /Aucun matricule Xidian nécessaire/);
