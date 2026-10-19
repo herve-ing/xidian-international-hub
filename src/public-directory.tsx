@@ -283,6 +283,14 @@ export default function PublicDirectory({ lang }: { lang: string }) {
               aria-labelledby="supervisor-contact-tab"
             >
               <section className="supervisor-contact-card">
+                <a
+                  className="button secondary"
+                  href={selected.source}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {c('Ouvrir le profil officiel', 'Open official profile')} ↗
+                </a>
                 <h3>
                   {c('Coordonnées et premier contact', 'Contact details and first introduction')}
                 </h3>
@@ -299,8 +307,8 @@ export default function PublicDirectory({ lang }: { lang: string }) {
                 ) : (
                   <p>
                     {c(
-                      'Email non retranscrit : consultez la fiche officielle ci-dessus ou le document ci-dessous. Aucune adresse n’est inventée.',
-                      'Email not transcribed: consult the official profile above or document below. No address is invented.',
+                      'Email non retranscrit : consultez l’onglet CV complet ou le profil officiel. Aucune adresse n’est inventée.',
+                      'Email not transcribed: consult the Full CV tab or official profile. No address is invented.',
                     )}
                   </p>
                 )}
