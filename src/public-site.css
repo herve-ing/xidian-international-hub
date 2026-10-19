@@ -3087,7 +3087,7 @@
   font-size: 13px;
   cursor: pointer;
 }
-.club-activity-tabs button[aria-selected='true'] {
+.university-site .club-dialog .club-activity-tabs button[aria-selected='true'] {
   background: #26433a;
   color: white;
   border-color: #26433a;
