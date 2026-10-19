@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { clubs, searchClubs, migrateCampus, sessionCalendar } from '../src/clubs.ts';
-test('all 13 community clubs are present once and searches cover French, English, Chinese and common spelling', () => {
-  assert.equal(clubs.length, 13);
-  assert.equal(new Set(clubs.map((c) => c.id)).size, 13);
+test('all 15 community clubs are present once and searches cover French, English, Chinese and common spelling', () => {
+  assert.equal(clubs.length, 15);
+  assert.equal(new Set(clubs.map((c) => c.id)).size, 15);
   assert.deepEqual(
     clubs.map((c) => c.id),
     [
@@ -20,10 +20,12 @@ test('all 13 community clubs are present once and searches cover French, English
       'chinese-dance',
       'fox',
       'math',
+      'calisthenics',
+      'friday-movie-night',
     ],
   );
-  assert.equal(searchClubs('', 'sport').length, 7);
-  assert.equal(searchClubs('', 'creative').length, 5);
+  assert.equal(searchClubs('', 'sport').length, 8);
+  assert.equal(searchClubs('', 'creative').length, 6);
   assert.equal(searchClubs('', 'academic').length, 1);
   assert.equal(searchClubs('', 'all', 'racket').length, 3);
   for (const q of ['mathématiques', 'mathematiques', '数学'])

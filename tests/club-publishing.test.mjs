@@ -74,7 +74,7 @@ test('professors create durable clubs and appoint students; editorial permission
     kit: 'Any camera',
     leaderId: studentA.id,
   });
-  assert.equal(clubs.length, 14);
+  assert.equal(clubs.length, 16);
   reloadClubs();
   assert.ok(clubs.some((c) => c.id === club.id));
   assert.equal(searchClubs('Photography')[0].id, club.id);

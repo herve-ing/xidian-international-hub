@@ -58,6 +58,12 @@ test('public home and directory do not require sign-in; official application ste
     html = renderToStaticMarkup(React.createElement(Site));
     assert.match(html, /info\/1129\/7695.htm/);
     assert.match(html, /2026-10-14/);
+    window.location.hash = '#/union?tab=cinema';
+    html = renderToStaticMarkup(React.createElement(Site));
+    assert.match(html, /Friday Movie Night/);
+    assert.match(html, /M’inscrire au club/);
+    assert.doesNotMatch(html, /class="movie-admin"/);
+    assert.doesNotMatch(html, /class="movie-proposal-form"/);
     window.location.hash = '#/admissions';
     html = renderToStaticMarkup(React.createElement(Site));
     assert.match(html, /calendrier passé/);

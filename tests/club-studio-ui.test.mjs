@@ -70,6 +70,8 @@ test('club studio exposes creation only to professors; published text is escaped
     assert.match(html, /&lt;script&gt;/);
     assert.doesNotMatch(html, /<script>/);
     assert.match(html, /Lire l’article/);
+    assert.match(html, /J’aime/);
+    assert.match(html, /Partager/);
     const { ClubVisual } = await server.ssrLoadModule('/src/club-visual.tsx');
     const { clubs } = await server.ssrLoadModule('/src/clubs.ts');
     for (const club of clubs) {

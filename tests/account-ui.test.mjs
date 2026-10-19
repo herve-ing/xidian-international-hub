@@ -80,7 +80,7 @@ test('account portal and role-specific navigation render without exposing ISO to
     assert.match(html, /International Pickleball Club/);
     assert.match(html, /Filmmaker of Xidian/);
     assert.doesNotMatch(html, /href="#\/admin"/);
-    assert.equal((html.match(/class="campus-club"/g) || []).length, 13);
+    assert.equal((html.match(/class="campus-club"/g) || []).length, 15);
   } finally {
     await server.close();
   }
