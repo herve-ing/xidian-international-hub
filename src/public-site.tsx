@@ -1,3 +1,4 @@
+import { AnimatedHubLogo, BinaryBackground } from './binary-motion';
 import Admissions from './admissions-page';
 import React, { useEffect, useState } from 'react';
 import { content, languages } from './i18n';
@@ -305,6 +306,7 @@ export default function PublicSite() {
   ].includes(path);
   return (
     <div className="university-site" data-motion={paused ? 'paused' : 'active'}>
+      <BinaryBackground />
       <a className="skip-link" href="#public-main">
         {c('Aller au contenu', 'Skip to content')}
       </a>
@@ -340,7 +342,7 @@ export default function PublicSite() {
       )}
       <header className="public-header">
         <a href="#/" className="public-logo" aria-label="Xidian International Hub">
-          <img src="./media/hub-logo.jpg" alt="Xidian International Hub" />
+          <AnimatedHubLogo />
         </a>
         <button className="public-menu-button" aria-expanded={menu} onClick={() => setMenu(!menu)}>
           {c('Menu', 'Menu')} {menu ? '−' : '+'}

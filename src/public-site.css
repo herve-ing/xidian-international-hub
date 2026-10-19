@@ -3151,3 +3151,132 @@
     transition: none;
   }
 }
+
+/* Original supplied logo, with an endlessly flowing binary edge. */
+.public-logo {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+.animated-hub-logo {
+  display: block;
+  width: 150px;
+  height: 102px;
+  overflow: visible;
+}
+.logo-code-row {
+  animation: logo-code-release var(--row-duration) linear infinite;
+  animation-delay: var(--row-delay);
+}
+.logo-code-row text {
+  font: 8px/1 monospace;
+  letter-spacing: 1px;
+  fill: #b2082b;
+}
+.logo-code-pixel {
+  fill: #b2082b;
+  animation: logo-pixel-release 3.6s linear infinite;
+}
+.logo-live-code {
+  pointer-events: none;
+}
+@keyframes logo-code-release {
+  from {
+    transform: translateX(-126px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes logo-pixel-release {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+}
+.university-site {
+  position: relative;
+  isolation: isolate;
+}
+.university-site > .binary-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  color: #123e39;
+  opacity: 0.065;
+  mask-image: linear-gradient(90deg, #000, transparent 25%, transparent 75%, #000);
+}
+.binary-watermark-column {
+  position: absolute;
+  top: 0;
+  width: 15px;
+  animation: binary-watermark-rise var(--rise-duration) linear infinite;
+  animation-delay: var(--rise-delay);
+  will-change: transform;
+}
+.binary-watermark-column span {
+  display: block;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font: 12px/1.6 monospace;
+  letter-spacing: 5px;
+  white-space: nowrap;
+  height: 1200px;
+  overflow: hidden;
+}
+.university-site .public-container {
+  position: relative;
+}
+.university-site .public-header,
+.university-site .public-utility {
+  background: rgba(255, 255, 255, 0.96);
+}
+@keyframes binary-watermark-rise {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1200px);
+  }
+}
+@media (max-width: 760px) {
+  .animated-hub-logo {
+    width: 120px;
+    height: 82px;
+  }
+  .binary-watermark-column:nth-child(2n) {
+    display: none;
+  }
+  .university-site > .binary-background {
+    opacity: 0.045;
+    mask-image: linear-gradient(90deg, #000, transparent 20%, transparent 80%, #000);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-live-code {
+    display: none;
+  }
+  .binary-watermark-column {
+    animation: none;
+    will-change: auto;
+  }
+  .university-site > .binary-background {
+    opacity: 0.025;
+  }
+}
+.university-site[data-motion='paused'] .logo-live-code {
+  display: none;
+}
+.university-site[data-motion='paused'] .binary-watermark-column {
+  will-change: auto;
+}
