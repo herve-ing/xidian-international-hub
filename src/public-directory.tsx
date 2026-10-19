@@ -107,7 +107,8 @@ export default function PublicDirectory({ lang }: { lang: string }) {
       </div>
       <div className="directory-result-bar">
         <span role="status">
-          {matches.length} {c('profils', 'profiles')}
+          {matches.length}{' '}
+          {matches.length === 1 ? c('profil', 'profile') : c('profils', 'profiles')}
         </span>
         <label>
           <input
@@ -239,7 +240,9 @@ export default function PublicDirectory({ lang }: { lang: string }) {
       {selected && (
         <ClubDialog title={selected.name} onClose={() => setSelected(null)}>
           <p>
-            {selected.zh} · {lang === 'fr' ? selected.schoolFr : selected.school}
+            {[selected.zh, lang === 'fr' ? selected.schoolFr : selected.school]
+              .filter(Boolean)
+              .join(' · ')}
           </p>
           <p>
             {selected.title ||

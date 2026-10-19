@@ -148,7 +148,8 @@ export default function Admissions({ lang }: { lang: string }) {
             />
           </label>
           <span role="status">
-            {programmes.length} {c('entrées', 'entries')}
+            {programmes.length}{' '}
+            {programmes.length === 1 ? c('entrée', 'entry') : c('entrées', 'entries')}
           </span>
         </div>
         <div className="admission-table-scroll">
