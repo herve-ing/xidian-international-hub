@@ -2471,3 +2471,61 @@
     transform: none;
   }
 }
+/* Keep the mosaic within its hero and give inner pages direct access to their content. */
+.union-editorial .union-editorial-hero {
+  height: 520px;
+  min-height: 0;
+  overflow: hidden;
+}
+.union-editorial .union-hero-mosaic {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+}
+.union-hero-mosaic img {
+  min-height: 0;
+  min-width: 0;
+}
+.union-editorial.union-subpage .union-editorial-hero {
+  display: none;
+}
+.union-editorial.union-subpage .union-tabs {
+  margin-top: 0;
+}
+.union-editorial .campus-hero {
+  display: none;
+}
+.union-editorial .union-clubs-banner {
+  margin: 24px 0;
+}
+.union-editorial .union-clubs-banner img {
+  height: 250px;
+}
+.union-editorial .union-clubs-banner > div {
+  padding: 25px 32px;
+}
+.union-editorial .union-clubs-banner h2 {
+  font-size: 34px;
+  margin: 14px 0;
+}
+.union-clubs-banner + .union-section-heading {
+  display: none;
+}
+@media (max-width: 740px) {
+  .union-editorial .union-editorial-hero {
+    height: auto;
+    overflow: hidden;
+  }
+  .union-editorial .union-hero-mosaic {
+    height: 310px;
+  }
+  .union-editorial .union-clubs-banner img {
+    height: 230px;
+  }
+}
+@media (max-width: 480px) {
+  .union-editorial .union-hero-mosaic {
+    height: 250px;
+  }
+}
