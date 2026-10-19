@@ -14,6 +14,7 @@ for (const name of ['localStorage', 'sessionStorage'])
     configurable: true,
   });
 Object.defineProperty(globalThis, 'window', { value: { location: { hash: '#/' } } });
+localStorage.setItem('xidian-locale', 'fr');
 test('public home and directory do not require sign-in; official application steps are distinguished from local tracking', async () => {
   const server = await createServer({
     root: new URL('..', import.meta.url).pathname,

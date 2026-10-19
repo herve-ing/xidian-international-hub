@@ -5,6 +5,7 @@ import ts from 'typescript';
 import { content, languages, translate } from '../src/i18n.ts';
 import { clubTranslations } from '../src/club-translations.ts';
 import { translations } from '../src/translations.ts';
+import { catalogues } from '../src/locale-catalogues.ts';
 test('campus visible copy has a translation in every offered locale', () => {
   const sf = ts.createSourceFile(
     'campus.tsx',
@@ -52,8 +53,7 @@ test('campus visible copy has a translation in every offered locale', () => {
   for (const [locale] of languages) {
     assert.notEqual(translate(locale, 'campus'), 'campus');
     if (['fr', 'en', 'zh'].includes(locale)) continue;
-    for (const en of copy)
-      assert.ok(clubTranslations[locale]?.[en] || translations[locale][en], locale + ': ' + en);
+    for (const en of copy) assert.ok(catalogues[locale]?.[en], locale + ': ' + en);
   }
   assert.equal(content('zh', 'Chargement…', 'Loading…'), '正在加载…');
   assert.equal(content('es', 'Fermer', 'Close'), 'Cerrar');

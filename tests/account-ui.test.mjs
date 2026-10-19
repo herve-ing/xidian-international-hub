@@ -20,6 +20,7 @@ Object.defineProperty(globalThis, 'window', {
   value: { location: { hash: '#/' } },
   configurable: true,
 });
+localStorage.setItem('xidian-locale', 'fr');
 test('account portal and role-specific navigation render without exposing ISO to students', async () => {
   const server = await createServer({
     root: new URL('..', import.meta.url).pathname,
