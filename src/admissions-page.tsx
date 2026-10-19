@@ -119,7 +119,7 @@ export default function Admissions({ lang }: { lang: string }) {
               <span className="public-kicker">
                 {c('GUIDE FOURNI · 2026', 'SUPPLIED GUIDE · 2026')}
               </span>
-              <h3>{name === 'PhD' ? c('Doctorat', 'Doctoral study') : 'Master'}</h3>
+              <h3>{name === 'PhD' ? c('Doctorat', 'Doctoral study') : localize(lang, 'Master')}</h3>
               <p>
                 <strong>{years}</strong> {c('ans', 'years')} · <strong>{fee}</strong> RMB /{' '}
                 {c('an', 'year')}

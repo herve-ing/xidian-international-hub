@@ -131,7 +131,7 @@ export default function MovieNight({
           <h3>{board.name}</h3>
         </div>
         <strong>
-          {board.totalVotes} {board.totalVotes === 1 ? 'vote' : 'votes'}
+          {c('votes', 'votes')} : {board.totalVotes}
         </strong>
         {!board.canParticipate &&
           !board.canManage &&
