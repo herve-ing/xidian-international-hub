@@ -1,5 +1,3 @@
-import { localize } from './i18n';
-import { useLocale } from './locale-store';
 import { AnimatedHubLogo, BinaryBackground } from './binary-motion';
 import Admissions from './admissions-page';
 import React, { useEffect, useState } from 'react';
@@ -30,7 +28,7 @@ function BinaryRibbon({
       <div aria-hidden="true" className="binary-track">
         {Array.from({ length: 6 }, (_, i) => (
           <span key={i}>
-            {bits} <b>{localize(lang, 'XIDIAN / CONNECT · CREATE · BELONG')}</b> {bits}{' '}
+            {bits} <b> XIDIAN / CONNECT · CREATE · BELONG </b> {bits}{' '}
           </span>
         ))}
       </div>
@@ -65,9 +63,7 @@ function Landing({ lang }: { lang: string }) {
         />
         <div className="hero-shade" />
         <div className="university-hero-copy">
-          <span className="public-kicker">
-            {localize(lang, 'XI’AN, CHINA · XIDIAN INTERNATIONAL HUB')}
-          </span>
+          <span className="public-kicker">XI’AN, CHINA · XIDIAN INTERNATIONAL HUB</span>
           <h1>{c('Votre avenir commence à Xidian.', 'Your future begins at Xidian.')}</h1>
           <p>
             {c(
@@ -77,10 +73,10 @@ function Landing({ lang }: { lang: string }) {
           </p>
           <div className="hero-actions">
             <a className="public-button light" href="#/supervisors">
-              {c('Trouver un superviseur', 'Find a supervisor')}
+              {c('Trouver un superviseur', 'Find a supervisor')} ↗
             </a>
             <a className="public-button outline-light" href="#/admissions">
-              {c('Explorer les admissions', 'Explore admissions')}
+              {c('Explorer les admissions', 'Explore admissions')} →
             </a>
           </div>
         </div>
@@ -111,6 +107,7 @@ function Landing({ lang }: { lang: string }) {
               'Programmes, documents and your application journey.',
             )}
           </p>
+          <span>↗</span>
         </a>
         <a href="#/supervisors">
           <small>{c('RECHERCHE', 'RESEARCH')}</small>
@@ -121,6 +118,7 @@ function Landing({ lang }: { lang: string }) {
               'A public directory to prepare your first connection.',
             )}
           </p>
+          <span>↗</span>
         </a>
         <a href="#/union?tab=clubs">
           <small>{c('VIE DE CAMPUS', 'CAMPUS LIFE')}</small>
@@ -131,6 +129,7 @@ function Landing({ lang }: { lang: string }) {
               'Clubs, creativity and international connections.',
             )}
           </p>
+          <span>↗</span>
         </a>
       </section>
       <section className="public-research public-container">
@@ -170,7 +169,8 @@ function Landing({ lang }: { lang: string }) {
             <div className="research-links">
               {researchAreas.map(([en, fr, q]) => (
                 <a href={'#/supervisors?q=' + encodeURIComponent(q)} key={en}>
-                  {c(fr, en)}
+                  {lang === 'fr' ? fr : en}
+                  <span>↗</span>
                 </a>
               ))}
             </div>
@@ -194,8 +194,8 @@ function Landing({ lang }: { lang: string }) {
             {admissionsSteps.slice(1).map((s, i) => (
               <article key={s.id}>
                 <span>{String(i + 1).padStart(2, '0')}</span>
-                <h3>{c(s.fr, s.en)}</h3>
-                <p>{c(s.descriptionFr, s.descriptionEn)}</p>
+                <h3>{lang === 'fr' ? s.fr : s.en}</h3>
+                <p>{lang === 'fr' ? s.descriptionFr : s.descriptionEn}</p>
               </article>
             ))}
           </div>
@@ -207,7 +207,7 @@ function Landing({ lang }: { lang: string }) {
               )}
             </p>
             <a className="public-button" href="#/apply">
-              {c('Préparer mon dossier', 'Prepare my application')}
+              {c('Préparer mon dossier', 'Prepare my application')} →
             </a>
           </div>
         </div>
@@ -236,7 +236,7 @@ function Landing({ lang }: { lang: string }) {
             )}
           </p>
           <a className="public-button" href="#/union?tab=clubs">
-            {c('Vivre le campus', 'Explore campus life')}
+            {c('Vivre le campus', 'Explore campus life')} ↗
           </a>
         </div>
       </section>
@@ -249,7 +249,13 @@ function Landing({ lang }: { lang: string }) {
 export default function PublicSite() {
   const path = usePathname(),
     [account, setAccount] = useState<Account | null>(currentAccount),
-    [lang, setLang] = useLocale(),
+    [lang, setLang] = useState(() => {
+      try {
+        return localStorage.getItem('xidian-locale') || 'fr';
+      } catch {
+        return 'fr';
+      }
+    }),
     [menu, setMenu] = useState(false),
     [paused, setPaused] = useState(false);
   const c = (fr: string, en: string) => content(lang, fr, en);
@@ -264,6 +270,11 @@ export default function PublicSite() {
       window.removeEventListener('focus', refresh);
     };
   }, []);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['ar', 'ary', 'ur'].includes(lang) ? 'rtl' : 'ltr';
+    localStorage.setItem('xidian-locale', lang);
+  }, [lang]);
   useEffect(() => setMenu(false), [path]);
   function logout() {
     signOut();
@@ -295,7 +306,7 @@ export default function PublicSite() {
   ].includes(path);
   return (
     <div className="university-site" data-motion={paused ? 'paused' : 'active'}>
-      <BinaryBackground />
+      <BinaryBackground paused={paused} />
       <a className="skip-link" href="#public-main">
         {c('Aller au contenu', 'Skip to content')}
       </a>
@@ -308,7 +319,7 @@ export default function PublicSite() {
         </span>
         <div>
           <a href="https://sie.xidian.edu.cn/" target="_blank" rel="noreferrer">
-            {c('Xidian SIE officiel', 'Official Xidian SIE')}
+            {c('Xidian SIE officiel', 'Official Xidian SIE')} ↗
           </a>
           <select
             aria-label={c('Langue', 'Language')}
@@ -323,6 +334,12 @@ export default function PublicSite() {
           </select>
         </div>
       </div>
+      {lang !== 'fr' && lang !== 'en' && (
+        <p className="public-language-note" role="status">
+          New admissions and applicant pages are currently available in English and French. Other
+          sections retain their existing translations.
+        </p>
+      )}
       <header className="public-header">
         <a href="#/" className="public-logo" aria-label="Xidian International Hub">
           <AnimatedHubLogo />
@@ -357,7 +374,7 @@ export default function PublicSite() {
                 : '#/apply'
             }
           >
-            {account ? c('Mon espace', 'My space') : c('Candidater', 'Apply')}
+            {account ? c('Mon espace', 'My space') : c('Candidater', 'Apply')} ↗
           </a>
           {account ? (
             <button className="public-login" onClick={logout}>
@@ -403,7 +420,7 @@ export default function PublicSite() {
           <section className="public-container public-page-title">
             <h1>{c('Retrouvez votre espace candidat.', 'Open your applicant space.')}</h1>
             <a className="public-button" href="#/applications">
-              {c('Mon dossier', 'My application')}
+              {c('Mon dossier', 'My application')} →
             </a>
           </section>
         )}
