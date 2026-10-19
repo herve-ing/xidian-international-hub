@@ -1,0 +1,390 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Xidian International Hub API",
+    "version": "1.0.0",
+    "description": "Reference API contract for the server implementation. GitHub Pages serves only the static prototype; these endpoints are not live on Pages."
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ChatGPTSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "platform-session",
+        "description": "Platform-managed sign-in; not an application-issued JWT."
+      },
+      "CronBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Document": {
+        "type": "object",
+        "required": ["type", "label", "expiry"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": ["residence", "visa", "passport", "insurance"]
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "expiry": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "studentId": {
+            "type": "string"
+          },
+          "program": {
+            "type": "string"
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "registrationDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/state": {
+      "get": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "Get own profile, documents and reminder history; evaluate reminder thresholds.",
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "401": {
+            "description": "JSON response"
+          },
+          "503": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/profile": {
+      "put": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "Upsert own profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Profile"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "400": {
+            "description": "JSON response"
+          },
+          "401": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/documents": {
+      "post": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "Create or edit an owned document",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Document"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "400": {
+            "description": "JSON response"
+          },
+          "401": {
+            "description": "JSON response"
+          },
+          "404": {
+            "description": "JSON response"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "Delete an owned document",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "401": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/checklist": {
+      "put": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "Save own arrival checklist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "maxItems": 9,
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 8
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "400": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/preferences": {
+      "put": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "Save own favorites and filters",
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "401": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/alerts": {
+      "patch": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "Mark own reminders as read",
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "401": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/supervisors": {
+      "get": {
+        "summary": "Official-source initial supervisor directory",
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/chatbot": {
+      "post": {
+        "summary": "Reference FAQ, not generative AI",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["question"],
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "maxLength": 1200
+                  },
+                  "lang": {
+                    "enum": ["fr", "en", "zh"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "400": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/admin": {
+      "get": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "ISO-only student, document and alert listing",
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "403": {
+            "description": "JSON response"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "ChatGPTSession": []
+          }
+        ],
+        "summary": "ISO-only in-app batch reminders; no external messages",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "studentIds": {
+                    "type": "array",
+                    "maxItems": 100,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "403": {
+            "description": "JSON response"
+          }
+        }
+      }
+    },
+    "/api/cron": {
+      "post": {
+        "security": [
+          {
+            "CronBearer": []
+          }
+        ],
+        "summary": "Evaluate all expiry thresholds; requires CRON_SECRET and external scheduler at 00:00 UTC / 08:00 Asia-Shanghai.",
+        "responses": {
+          "200": {
+            "description": "JSON response"
+          },
+          "403": {
+            "description": "JSON response"
+          },
+          "503": {
+            "description": "JSON response"
+          }
+        }
+      }
+    }
+  }
+}

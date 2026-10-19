@@ -1,0 +1,2154 @@
+{
+  "schools": {
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm": "School of Telecommunications Engineering",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm": "School of Electronic Engineering",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm": "School of Computer Science and Technology",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm": "School of Mechano-electronic Engineering",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm": "School of Physics",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm": "School of Optoelectronic Engineering",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm": "School of Economics and Management",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm": "School of Mathematics and Statistics",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm": "School of Humanities and Arts",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Foreign_Languages.htm": "School of Foreign Languages",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm": "Faculty of Integrated Circuit",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm": "School of Life Science and Technology",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm": "School of Aerospace Science and Technology",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm": "School of Advanced Materials and Nanotechnology",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm": "School of Cyber Engineering",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm": "School of Artificial Intelligence",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Hangzhou_Institute_of_Technology.htm": "Hangzhou Institute of Technology",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm": "Guangzhou Institute of Technology",
+    "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Schoo_of_Information_Mechanics_and_Sensing_Enginee.htm": "School of Information Mechanics and Sensing Engineering"
+  },
+  "listPages": [
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm",
+      "school": "School of Telecommunications Engineering",
+      "profiles": 10
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm",
+      "school": "School of Computer Science and Technology",
+      "profiles": 20
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm",
+      "school": "School of Electronic Engineering",
+      "profiles": 20
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm",
+      "school": "School of Mechano-electronic Engineering",
+      "profiles": 18
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm",
+      "school": "School of Economics and Management",
+      "profiles": 18
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm",
+      "school": "School of Physics",
+      "profiles": 13
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm",
+      "school": "School of Mathematics and Statistics",
+      "profiles": 7
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm",
+      "school": "School of Optoelectronic Engineering",
+      "profiles": 11
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm",
+      "school": "School of Humanities and Arts",
+      "profiles": 19
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Foreign_Languages.htm",
+      "school": "School of Foreign Languages",
+      "profiles": 4
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm",
+      "school": "School of Life Science and Technology",
+      "profiles": 14
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm",
+      "school": "School of Cyber Engineering",
+      "profiles": 11
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm",
+      "school": "Faculty of Integrated Circuit",
+      "profiles": 15
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm",
+      "school": "School of Artificial Intelligence",
+      "profiles": 20
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Hangzhou_Institute_of_Technology.htm",
+      "school": "Hangzhou Institute of Technology",
+      "profiles": 0
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm",
+      "school": "School of Aerospace Science and Technology",
+      "profiles": 6
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Schoo_of_Information_Mechanics_and_Sensing_Enginee.htm",
+      "school": "School of Information Mechanics and Sensing Engineering",
+      "profiles": 2
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm",
+      "school": "School of Advanced Materials and Nanotechnology",
+      "profiles": 10
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm",
+      "school": "Guangzhou Institute of Technology",
+      "profiles": 6
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology/1.htm",
+      "school": "School of Computer Science and Technology",
+      "profiles": 5
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm",
+      "school": "School of Electronic Engineering",
+      "profiles": 16
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm",
+      "school": "School of Artificial Intelligence",
+      "profiles": 7
+    }
+  ],
+  "profiles": [
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/3079.htm",
+      "name": "Sun Yongjun",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/3077.htm",
+      "name": "Anthony TRIOUX",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/3075.htm",
+      "name": "Sun Jinhua",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/3064.htm",
+      "name": "Wang Tao",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/2664.htm",
+      "name": "Gu Huaxi",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/2663.htm",
+      "name": "Wen Aijun",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/2662.htm",
+      "name": "Wu Wei",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/2661.htm",
+      "name": "Xiang Zheng",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/2660.htm",
+      "name": "Zhang Yang",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1383/2659.htm",
+      "name": "Zhao Liqiang",
+      "schools": ["School of Telecommunications Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Telecommunications_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2720.htm",
+      "name": "Bao Liang",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2719.htm",
+      "name": "Dong Luobing",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2718.htm",
+      "name": "Dong Xuewen",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2717.htm",
+      "name": "Gao Haichang",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2716.htm",
+      "name": "Ji Jian",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2715.htm",
+      "name": "Gu Guang",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2714.htm",
+      "name": "Li He",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2713.htm",
+      "name": "Lin Yishuai",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2712.htm",
+      "name": "Liu Xiangzeng",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2711.htm",
+      "name": "Ma Xiaoke",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2710.htm",
+      "name": "Niu Zhenxing",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2709.htm",
+      "name": "Shen Yulong",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2708.htm",
+      "name": "Song Jianfeng",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2707.htm",
+      "name": "Sun Penggang",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2706.htm",
+      "name": "Wan Bo",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2705.htm",
+      "name": "Wang Bingbo",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2704.htm",
+      "name": "Wang Shuzhen",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2703.htm",
+      "name": "Wang Xiaoli",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2702.htm",
+      "name": "Wu Yue",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2701.htm",
+      "name": "Xie Fei",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/6725.htm",
+      "name": "Zhu Jiaqi",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3034.htm",
+      "name": "Xing Lining",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3032.htm",
+      "name": "Han Hong",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3030.htm",
+      "name": "Yuan Bing",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3028.htm",
+      "name": "Qin Guogong",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3026.htm",
+      "name": "Wang Qing",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3024.htm",
+      "name": "Liu Nengwu",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3022.htm",
+      "name": "Zhu Cheng",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3019.htm",
+      "name": "Liu Gongxu",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3017.htm",
+      "name": "Dong Ganggang",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/3015.htm",
+      "name": "Li Lin",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2694.htm",
+      "name": "Bao Min",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2693.htm",
+      "name": "Chen Jianzhong",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2692.htm",
+      "name": "Chen Lei",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2691.htm",
+      "name": "Chu Xiuqin",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2690.htm",
+      "name": "Gong Maoguo",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2689.htm",
+      "name": "Jin Yan",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2688.htm",
+      "name": "Lan Lan",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2687.htm",
+      "name": "Li Long",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2686.htm",
+      "name": "Liao Guisheng",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/3158.htm",
+      "name": "Liu Yongkui",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/3005.htm",
+      "name": "Wang Weidong",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2737.htm",
+      "name": "Chen Yufeng",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2736.htm",
+      "name": "Dai Zhiyong",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2735.htm",
+      "name": "Duan Qingjuan",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2734.htm",
+      "name": "Hou Yifan",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2732.htm",
+      "name": "Ji Jing",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2731.htm",
+      "name": "Li Zhiwu",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2730.htm",
+      "name": "Liu Ding",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2729.htm",
+      "name": "Liu Gaiyun",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2728.htm",
+      "name": "Ma Juan",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2727.htm",
+      "name": "Ma Ziyue",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2726.htm",
+      "name": "Ping Xubin",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2725.htm",
+      "name": "Ren Huorong",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2724.htm",
+      "name": "Wang Xi",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2723.htm",
+      "name": "Zhang Jiafeng",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2722.htm",
+      "name": "Zhou Jinzhu",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1386/2721.htm",
+      "name": "Zhu Xiubin",
+      "schools": ["School of Mechano-electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mechano_electronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2778.htm",
+      "name": "Chen Xi",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2777.htm",
+      "name": "Dong Ming",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2776.htm",
+      "name": "Du Rong",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2775.htm",
+      "name": "Feng Pingping",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2774.htm",
+      "name": "Geng Ruibin",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2773.htm",
+      "name": "Hui Tiaoyan",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2772.htm",
+      "name": "Jiang Xiaobing",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2771.htm",
+      "name": "Lang Chungang",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2770.htm",
+      "name": "Liu Aijun",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2769.htm",
+      "name": "Shang Juan",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2768.htm",
+      "name": "Shen Zunhuan",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2767.htm",
+      "name": "Shi Hongwei",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2766.htm",
+      "name": "Wang Tao",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2765.htm",
+      "name": "Xie Yongping",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2764.htm",
+      "name": "Xu Yaqing",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2763.htm",
+      "name": "Zhang Jianjun",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2762.htm",
+      "name": "Zhang Xiong",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1388/2761.htm",
+      "name": "Zhang Zongming",
+      "schools": ["School of Economics and Management"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Economics_and_Management.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/3050.htm",
+      "name": "Cheng Mingjian",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2749.htm",
+      "name": "Gao Peng",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2748.htm",
+      "name": "Gong Shuhong",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2747.htm",
+      "name": "Guo Lixin",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2746.htm",
+      "name": "Han Yiping",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2745.htm",
+      "name": "Li Haiying",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2744.htm",
+      "name": "Li Tanping",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2743.htm",
+      "name": "Lin Ke",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2742.htm",
+      "name": "Wang Jiajie",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2741.htm",
+      "name": "Wang Bingjian",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2740.htm",
+      "name": "Wang Junli",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2739.htm",
+      "name": "Wei Bing",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1387/2738.htm",
+      "name": "Zhou Huixin",
+      "schools": ["School of Physics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Physics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1389/6825.htm",
+      "name": "Zhang Xin",
+      "schools": ["School of Mathematics and Statistics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1389/2784.htm",
+      "name": "Bao Lijun",
+      "schools": ["School of Mathematics and Statistics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1389/2783.htm",
+      "name": "Gao Weifeng",
+      "schools": ["School of Mathematics and Statistics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1389/2782.htm",
+      "name": "Li Wei",
+      "schools": ["School of Mathematics and Statistics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1389/2781.htm",
+      "name": "Wu Shiliang",
+      "schools": ["School of Mathematics and Statistics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1389/2780.htm",
+      "name": "Zhang Leyou",
+      "schools": ["School of Mathematics and Statistics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1389/2779.htm",
+      "name": "Zhu Qiang",
+      "schools": ["School of Mathematics and Statistics"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Mathematics_and_Statistics.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2760.htm",
+      "name": "Cao Changqing",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2759.htm",
+      "name": "Liu Fei",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2758.htm",
+      "name": "Liu Lixin",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2757.htm",
+      "name": "Liu Lixian",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2756.htm",
+      "name": "Qin Hanlin",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2755.htm",
+      "name": "Shao Xiaopeng",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2754.htm",
+      "name": "Wang Lin",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2753.htm",
+      "name": "Wang Xiaorui",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2752.htm",
+      "name": "Yin Xukun",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2751.htm",
+      "name": "Zhang Dacheng",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1484/2750.htm",
+      "name": "Zhu Jiangfeng",
+      "schools": ["School of Optoelectronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Optoelectronic_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/6795.htm",
+      "name": "Xiang Shuchen",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/6785.htm",
+      "name": "Sun Wen",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/6775.htm",
+      "name": "Shi Weijun",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/6765.htm",
+      "name": "Lv Shuang",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/6755.htm",
+      "name": "Jacob Bender",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2799.htm",
+      "name": "Chen Zhiwei",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2797.htm",
+      "name": "Dong Yongqiang",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2796.htm",
+      "name": "Ma Delin",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2795.htm",
+      "name": "Ma Xiaohu",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2794.htm",
+      "name": "Pan Mingjuan",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2793.htm",
+      "name": "Shi Shaobo",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2792.htm",
+      "name": "Su Li",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2791.htm",
+      "name": "Su Xiaobing",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2790.htm",
+      "name": "Wang Chenguang",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2789.htm",
+      "name": "Wang Shi",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2788.htm",
+      "name": "Xu Yongqiang",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2787.htm",
+      "name": "Zhang Simin",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2786.htm",
+      "name": "Zhang Wanqiang",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1390/2785.htm",
+      "name": "Zhu Jianing",
+      "schools": ["School of Humanities and Arts"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Humanities_and_Arts.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1391/2803.htm",
+      "name": "Chen Zhengfeng",
+      "schools": ["School of Foreign Languages"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Foreign_Languages.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1391/2802.htm",
+      "name": "Li Shuqing",
+      "schools": ["School of Foreign Languages"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Foreign_Languages.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1391/2801.htm",
+      "name": "Liu Jianshu",
+      "schools": ["School of Foreign Languages"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Foreign_Languages.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1391/2800.htm",
+      "name": "Zhou Zhenglv",
+      "schools": ["School of Foreign Languages"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Foreign_Languages.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/6815.htm",
+      "name": "Liu Jixin",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/6805.htm",
+      "name": "Cao Zhicheng",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/3008.htm",
+      "name": "Zhao Heng",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2828.htm",
+      "name": "Cao Xu",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2827.htm",
+      "name": "Chen Xueli",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2826.htm",
+      "name": "Deng Hongzhang",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2825.htm",
+      "name": "Hu Bo",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2824.htm",
+      "name": "Liu Peng",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2823.htm",
+      "name": "Ning Pengbo",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2822.htm",
+      "name": "Wang Fu",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2821.htm",
+      "name": "Wang Zhongliang",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2820.htm",
+      "name": "Zhan Yonghua",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2819.htm",
+      "name": "Zhang Yi",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1393/2818.htm",
+      "name": "Zhu Shouping",
+      "schools": ["School of Life Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Life_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/3060.htm",
+      "name": "Guo Jingjing",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/3058.htm",
+      "name": "Jiang Tao",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/3056.htm",
+      "name": "Li Zhao",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/3054.htm",
+      "name": "Jiang Zhongyuan",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/2848.htm",
+      "name": "Cao Jin",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/2847.htm",
+      "name": "Cao Xuefei",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/2846.htm",
+      "name": "Fu Yulong",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/2845.htm",
+      "name": "Li Hui",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/2844.htm",
+      "name": "Miao Yinbin",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/2843.htm",
+      "name": "Wang Hao",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1396/2842.htm",
+      "name": "Yan Zheng",
+      "schools": ["School of Cyber Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Cyber_Engineering.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/3072.htm",
+      "name": "Song Jianjun",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2817.htm",
+      "name": "Fei Chunlong",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2816.htm",
+      "name": "He Yunlong",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2815.htm",
+      "name": "Li Cong",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2814.htm",
+      "name": "Li Yuan",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2813.htm",
+      "name": "Liu Chen",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2812.htm",
+      "name": "Liu Hongxia",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2811.htm",
+      "name": "Luo Zhengdong",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2810.htm",
+      "name": "Lv Hongliang",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2809.htm",
+      "name": "Ning Jing",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2808.htm",
+      "name": "Quan Yi",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2807.htm",
+      "name": "Wei Wei",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2806.htm",
+      "name": "Xie Min",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2805.htm",
+      "name": "Zheng Xuefeng",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1392/2804.htm",
+      "name": "Zhu Jiejie",
+      "schools": ["Faculty of Integrated Circuit"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Faculty_of_Integrated_Circuit.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/3048.htm",
+      "name": "Gu Yu",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/3046.htm",
+      "name": "Zhu Hao",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/3044.htm",
+      "name": "Wu Kai",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/3042.htm",
+      "name": "Ren Bo",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/3040.htm",
+      "name": "Li Lingling",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/3038.htm",
+      "name": "Ding Jingyi",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/3036.htm",
+      "name": "Cao Xinghai",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2892.htm",
+      "name": "Bai Jing",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2891.htm",
+      "name": "Feng Jie",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2890.htm",
+      "name": "Gou Shuiping",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2889.htm",
+      "name": "Gu Jing",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2888.htm",
+      "name": "Jiao Changzhe",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2887.htm",
+      "name": "Jiao Licheng",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2886.htm",
+      "name": "Li Yangyang",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2885.htm",
+      "name": "Liang Xuefeng",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2884.htm",
+      "name": "Liu Bo",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2883.htm",
+      "name": "Liu Fang",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2882.htm",
+      "name": "Liu Hongying",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2881.htm",
+      "name": "Mu Caihong",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2880.htm",
+      "name": "Shang Ronghua",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1394/2834.htm",
+      "name": "Chang Jing",
+      "schools": ["School of Aerospace Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1394/2833.htm",
+      "name": "Feng Dongzhu",
+      "schools": ["School of Aerospace Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1394/2832.htm",
+      "name": "Lv Xiaozhou",
+      "schools": ["School of Aerospace Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1394/2831.htm",
+      "name": "Shi Lei",
+      "schools": ["School of Aerospace Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1394/2830.htm",
+      "name": "Yan Yunyi",
+      "schools": ["School of Aerospace Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1394/2829.htm",
+      "name": "Zhou Suiping",
+      "schools": ["School of Aerospace Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Aerospace_Science_and_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1657/6745.htm",
+      "name": "Yu Chuang",
+      "schools": ["School of Information Mechanics and Sensing Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Schoo_of_Information_Mechanics_and_Sensing_Enginee.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1657/6735.htm",
+      "name": "Xiao Guoyao",
+      "schools": ["School of Information Mechanics and Sensing Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Schoo_of_Information_Mechanics_and_Sensing_Enginee.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/6705.htm",
+      "name": "Chen Hua",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/6695.htm",
+      "name": "Gu Long",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/3073.htm",
+      "name": "Wu Weiwei",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/2841.htm",
+      "name": "Ajit Khosla",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/2840.htm",
+      "name": "Bai Xiaoxia",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/2839.htm",
+      "name": "Lei Yimin",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/2838.htm",
+      "name": "Xie Yong",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/2837.htm",
+      "name": "Yang Rusen",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/2836.htm",
+      "name": "Zhang Dongyan",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1395/2835.htm",
+      "name": "Zhao Zhenhuan",
+      "schools": ["School of Advanced Materials and Nanotechnology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Advanced_Materials_and_Nanotechnology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1626/3156.htm",
+      "name": "Zhao Hong",
+      "schools": ["Guangzhou Institute of Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1626/3155.htm",
+      "name": "Wang Xiaotian",
+      "schools": ["Guangzhou Institute of Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1626/3154.htm",
+      "name": "Wang Congsi",
+      "schools": ["Guangzhou Institute of Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1626/3153.htm",
+      "name": "Liu Xiaotao",
+      "schools": ["Guangzhou Institute of Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1626/3152.htm",
+      "name": "Liu Jing",
+      "schools": ["Guangzhou Institute of Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1626/3151.htm",
+      "name": "Huang Ting",
+      "schools": ["Guangzhou Institute of Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/Guangzhou_Institute_of_Technology.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2700.htm",
+      "name": "Yang Liying",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2699.htm",
+      "name": "Yu Liang",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2698.htm",
+      "name": "Yuan Xiguo",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2697.htm",
+      "name": "Zhang Junying",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1385/2696.htm",
+      "name": "Zhang Liang",
+      "schools": ["School of Computer Science and Technology"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Computer_Science_and_Technology/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2685.htm",
+      "name": "Ren Aifeng",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2684.htm",
+      "name": "Ren Jian",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2683.htm",
+      "name": "Shi Lingfeng",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2682.htm",
+      "name": "Tan Kangbo",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2681.htm",
+      "name": "Wang Bin",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2680.htm",
+      "name": "Wang Xinhuai",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2679.htm",
+      "name": "Wei Feng",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2678.htm",
+      "name": "Wu Bian",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2677.htm",
+      "name": "Xu Le",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2676.htm",
+      "name": "Yang Gang",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2675.htm",
+      "name": "Yang Xiaodong",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2674.htm",
+      "name": "Yin Yingzeng",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2673.htm",
+      "name": "Zang Bo",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2672.htm",
+      "name": "Zhang Mingyang",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2671.htm",
+      "name": "Zhang Pengfei",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1384/2670.htm",
+      "name": "Zheng Chunhong",
+      "schools": ["School of Electronic Engineering"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Electronic_Engineering/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2879.htm",
+      "name": "Wang Jianing",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2878.htm",
+      "name": "Wang Rongfang",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2877.htm",
+      "name": "Wang Shuang",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2876.htm",
+      "name": "Wu Jianshe",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2875.htm",
+      "name": "Yang Shuyuan",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2874.htm",
+      "name": "Zhang Xiaohua",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm"
+      ]
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1397/2873.htm",
+      "name": "Zhu Huming",
+      "schools": ["School of Artificial Intelligence"],
+      "lists": [
+        "https://sie.xidian.edu.cn/EN/Study_in_China/Admissoin/Graduate_Program/Supervisors1/School_of_Artificial_Intelligence/1.htm"
+      ]
+    }
+  ],
+  "errors": []
+}
