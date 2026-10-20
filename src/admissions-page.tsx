@@ -57,6 +57,8 @@ export default function Admissions({ lang }: { lang: string }) {
           </a>
         </div>
         <img
+          data-photo=""
+          decoding="async"
           src="./media/research-lab.jpg"
           alt={c(
             'Recherche à Xidian · visuel de la présentation fournie',
@@ -81,7 +83,12 @@ export default function Admissions({ lang }: { lang: string }) {
             href={'#/admissions?section=' + id}
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById('admission-' + id)?.scrollIntoView({ behavior: 'smooth' });
+              const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+              const paused =
+                e.currentTarget.closest('[data-motion]')?.getAttribute('data-motion') === 'paused';
+              document
+                .getElementById('admission-' + id)
+                ?.scrollIntoView({ behavior: reduced || paused ? 'instant' : 'smooth' });
             }}
           >
             {label}

@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 function currentPath() {
   return (window.location.hash.slice(1) || '/').split('?')[0];
 }
 export function usePathname() {
   const [path, setPath] = useState(currentPath);
+  const previousPath = useRef(path);
   useEffect(() => {
     const update = () => {
-      setPath(currentPath());
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      const next = currentPath();
+      setPath(next);
+      if (next !== previousPath.current) window.scrollTo({ top: 0, behavior: 'instant' });
+      previousPath.current = next;
     };
     window.addEventListener('hashchange', update);
     return () => window.removeEventListener('hashchange', update);

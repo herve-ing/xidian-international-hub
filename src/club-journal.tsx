@@ -32,7 +32,13 @@ export function ArticleMediaView({ media }: { media: ArticleMedia }) {
     <figure className="article-media">
       {url ? (
         media.kind === 'image' ? (
-          <img src={url} alt={media.caption || media.name} loading="lazy" />
+          <img
+            data-photo=""
+            decoding="async"
+            src={url}
+            alt={media.caption || media.name}
+            loading="lazy"
+          />
         ) : (
           <video
             src={url}

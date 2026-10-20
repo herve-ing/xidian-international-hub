@@ -9,6 +9,8 @@ export function ClubVisual({ club, lang = 'en' }: { club: Club; lang?: string })
   if (photo && !failed)
     return (
       <img
+        data-photo=""
+        decoding="async"
         className="club-visual club-photograph"
         src={'./media/' + photo.image}
         alt={localize(lang, club.name)}

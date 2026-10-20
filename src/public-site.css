@@ -3162,7 +3162,7 @@
   display: block;
   width: 150px;
   height: 102px;
-  overflow: visible;
+  overflow: hidden;
 }
 .logo-code-row {
   animation: logo-code-release var(--row-duration) linear infinite;
@@ -3205,16 +3205,26 @@
   position: relative;
   isolation: isolate;
 }
+/* The canvas sits behind content; the menu and skip link keep their own stacking. */
 .university-site > .binary-canvas {
   z-index: 0;
   opacity: 0.56;
+  pointer-events: none;
 }
-.university-site > :not(.binary-canvas) {
+.university-site > main,
+.university-site > .public-footer,
+.university-site > .public-utility,
+.university-site > .binary-ribbon {
   position: relative;
   z-index: 1;
 }
-.university-site .binary-canvas {
-  pointer-events: none;
+.university-site > .public-header {
+  position: relative;
+  z-index: 30;
+}
+.university-site > .skip-link {
+  position: fixed;
+  z-index: 60;
 }
 .university-site .public-container {
   position: relative;
@@ -3235,5 +3245,183 @@
 @media (prefers-reduced-motion: reduce) {
   .logo-live-code {
     display: none;
+  }
+}
+.university-site[data-motion='paused'] .logo-live-code {
+  display: none;
+}
+
+/* Consistent identity and restrained, text-first navigation. */
+.sidebar .brand,
+.account-header .brand {
+  justify-content: flex-start;
+  padding: 0;
+  letter-spacing: normal;
+  line-height: 1;
+}
+.sidebar .brand .animated-hub-logo {
+  width: 155px;
+  height: 112px;
+  flex-shrink: 0;
+}
+.account-header .brand .animated-hub-logo {
+  width: 138px;
+  height: 96px;
+  flex-shrink: 0;
+}
+.public-button,
+.faculty-card-actions button,
+.club-activity-tabs button {
+  line-height: 1.45;
+  text-align: center;
+}
+.faculty-card-actions {
+  flex-wrap: wrap;
+}
+.admissions-source-visual figcaption a {
+  float: none;
+  margin-inline-start: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-social button {
+  min-height: 44px;
+  line-height: 1.4;
+}
+.public-header nav > a {
+  white-space: nowrap;
+}
+.public-directory input,
+.admissions-programme-tools input {
+  min-width: 0;
+}
+@media (hover: hover) {
+  .faculty-card-actions button:hover,
+  .admissions-source-visual figcaption a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+@media (max-width: 760px) {
+  .public-button,
+  .faculty-card-actions button,
+  .club-activity-tabs button,
+  .public-menu-button {
+    min-height: 44px;
+  }
+  .public-faculty-card {
+    min-width: 0;
+  }
+  .faculty-card-actions > * {
+    flex: 1 1 140px;
+  }
+  .account-header .brand .animated-hub-logo {
+    width: 118px;
+    height: 82px;
+  }
+  .sidebar .brand .animated-hub-logo {
+    width: 140px;
+    height: 100px;
+  }
+  .public-directory .directory-result-bar {
+    gap: 14px;
+  }
+  .article-social > div {
+    flex-wrap: wrap;
+  }
+}
+
+/* Prevent the source image white canvas from spilling beyond the shared mark. */
+.brand .animated-hub-logo {
+  mix-blend-mode: multiply;
+}
+
+/* Locale changes preserve layout, reading direction and legible native scripts. */
+html[dir='rtl'] .university-site,
+html[dir='rtl'] .account-page,
+html[dir='rtl'] .app {
+  font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+}
+html[lang='hi'] body {
+  font-family: 'Noto Sans Devanagari', 'Segoe UI', sans-serif;
+}
+html[dir='rtl'] .public-page-title,
+html[dir='rtl'] .public-section-title,
+html[dir='rtl'] .public-faculty-card,
+html[dir='rtl'] .account-intro {
+  text-align: start;
+}
+html[dir='rtl'] .admission-feature-row.reverse,
+html[dir='rtl'] .admission-feature-row.reverse > * {
+  direction: rtl;
+}
+.public-header nav {
+  flex-wrap: wrap;
+}
+.public-header nav > a,
+.union-tabs a {
+  overflow-wrap: anywhere;
+}
+.club-dialog input[type='email'],
+.account-card input[type='email'],
+input[type='url'],
+input[type='tel'] {
+  direction: ltr;
+  text-align: start;
+}
+.public-menu-button {
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .public-header nav {
+    max-width: 100%;
+  }
+  .union-tabs {
+    flex-wrap: wrap;
+  }
+  .public-header {
+    min-width: 0;
+  }
+}
+
+/* Photo motion never hides content before JavaScript or image loading succeeds. */
+.university-hero-image[data-photo] {
+  animation: none;
+}
+[data-photo] {
+  backface-visibility: hidden;
+}
+[data-photo].photo-entering {
+  transition: none !important;
+}
+.union-tabs {
+  scroll-margin-block-start: 18px;
+}
+#public-main:focus {
+  outline: none;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .university-site[data-motion='active'] .union-official-news-grid a:hover img[data-photo],
+  .university-site[data-motion='active'] .union-pathways a:hover img[data-photo] {
+    transform: scale(1.025);
+    transition: transform 650ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+.university-site[data-motion='paused'] [data-photo] {
+  transition: none !important;
+}
+
+.union-official-news-grid img[data-photo],
+.union-pathways img[data-photo] {
+  transition: transform 650ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.university-site[data-motion='paused'] .union-pathways a:hover img,
+.university-site[data-motion='paused'] .union-hero-mosaic img,
+.university-site[data-motion='paused'] .club-card:hover .club-visual {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-photo] {
+    transition: none !important;
   }
 }

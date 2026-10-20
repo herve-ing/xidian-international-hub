@@ -65,7 +65,6 @@ type Point = { x: number; y: number };
 type Trail = { from: Point; to: Point; age: number; red: boolean };
 type Column = { x: number; y: number; speed: number; bits: string[] };
 
-const NIGHT = '#0a0f1c';
 const CYAN = '#00f0ff';
 const RED = '#8b1c24';
 const TAIL_LENGTH = 10;

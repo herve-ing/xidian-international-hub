@@ -1,5 +1,5 @@
 import { localize } from './i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { content } from './i18n';
 import { departmentPhotos, xidianNews } from './community-imagery';
 import { currentAccount } from './accounts';
@@ -21,6 +21,8 @@ export function UnionNews({ lang }: { lang: string }) {
       <div className="union-news-grid">
         <article className="union-feature-news">
           <img
+            data-photo=""
+            decoding="async"
             src="./media/community-culture.jpg"
             alt={c(
               'Étudiants sur le campus · photo d’archive',
@@ -95,7 +97,13 @@ export function UnionNews({ lang }: { lang: string }) {
           {xidianNews.map((n) => (
             <article key={n.source}>
               <a href={n.source} target="_blank" rel="noreferrer">
-                <img src={'./media/' + n.image} alt={c(n.fr, n.en)} loading="lazy" />
+                <img
+                  data-photo=""
+                  decoding="async"
+                  src={'./media/' + n.image}
+                  alt={c(n.fr, n.en)}
+                  loading="lazy"
+                />
                 <div>
                   <time dateTime={n.date}>
                     {n.date.split('-').reverse().join('.')}
@@ -132,6 +140,13 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
     : requested === 'photos' || requested === 'cinema'
       ? 'clubs'
       : 'actu';
+  const tabsRef = useRef<HTMLElement>(null);
+  const previousTab = useRef(tab);
+  useEffect(() => {
+    if (previousTab.current === tab) return;
+    previousTab.current = tab;
+    tabsRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }, [tab]);
   const open = recruitmentOpen();
   return (
     <div
@@ -168,10 +183,14 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
           aria-label={c('La communauté de Xidian en action', 'The Xidian community in action')}
         >
           <img
+            data-photo=""
+            decoding="async"
             src="./media/club-basketball.jpg"
             alt={c('Basketball : photo du site de référence', 'Basketball: reference-site photo')}
           />
           <img
+            data-photo=""
+            decoding="async"
             src="./media/community-fan-dance.jpg"
             alt={c(
               'Danse culturelle : archive du site de référence',
@@ -179,6 +198,8 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
             )}
           />
           <img
+            data-photo=""
+            decoding="async"
             src="./media/community-friends.jpg"
             alt={c(
               'Rencontres sur le campus : archive du site de référence',
@@ -188,6 +209,7 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
         </div>
       </section>
       <nav
+        ref={tabsRef}
         className="union-tabs"
         aria-label={c('Espace Union étudiante', 'Student Union sections')}
       >
@@ -215,7 +237,13 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
             aria-label={c('Choisir mon parcours', 'Choose a pathway')}
           >
             <a href="#/union?tab=clubs">
-              <img src="./media/club-volleyball.jpg" alt="" loading="lazy" />
+              <img
+                data-photo=""
+                decoding="async"
+                src="./media/club-volleyball.jpg"
+                alt=""
+                loading="lazy"
+              />
               <div>
                 <span>01 / {c('PARTICIPER', 'TAKE PART')}</span>
                 <h2>{c('Un club pour chaque énergie.', 'A club for every interest.')}</h2>
@@ -229,7 +257,13 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
               </div>
             </a>
             <a href="#/union?tab=departments">
-              <img src="./media/community-workshop.jpg" alt="" loading="lazy" />
+              <img
+                data-photo=""
+                decoding="async"
+                src="./media/community-workshop.jpg"
+                alt=""
+                loading="lazy"
+              />
               <div>
                 <span>02 / {c('S’ENGAGER', 'CONTRIBUTE')}</span>
                 <h2>{c('Apportez votre idée.', 'Bring your ideas.')}</h2>
@@ -248,7 +282,13 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
                   : '#/login'
               }
             >
-              <img src="./media/club-film.jpg" alt="" loading="lazy" />
+              <img
+                data-photo=""
+                decoding="async"
+                src="./media/club-film.jpg"
+                alt=""
+                loading="lazy"
+              />
               <div>
                 <span>03 / {c('ORGANISER', 'LEAD')}</span>
                 <h2>{c('Faites vivre votre club.', 'Help your club thrive.')}</h2>
@@ -290,6 +330,8 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
             {unionDepartments.map((d, i) => (
               <article key={d.id}>
                 <img
+                  data-photo=""
+                  decoding="async"
                   src={'./media/' + departmentPhotos[d.id]}
                   alt={c('Illustration de la mission : ', 'Mission illustration: ') + c(d.fr, d.en)}
                   loading="lazy"
@@ -315,6 +357,8 @@ export default function StudentUnion({ lang, workspaceId }: { lang: string; work
         <>
           <div className="union-clubs-banner">
             <img
+              data-photo=""
+              decoding="async"
               src="./media/community-sports.jpg"
               alt={c(
                 'Sport et communauté à Xidian · archive',
