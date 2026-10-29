@@ -2,6 +2,7 @@ import { localize } from './i18n';
 import React, { useState } from 'react';
 import { content } from './i18n';
 import { admissionsSteps, graduateProgrammes, officialPortal } from './admissions-data';
+import { studyText } from './study-copy';
 function SourceVisual({
   file,
   title,
@@ -142,6 +143,13 @@ export default function Admissions({ lang }: { lang: string }) {
             </article>
           ))}
         </div>
+        <aside className="study-source-note">
+          <h3>{studyText(lang, 'title')}</h3>
+          <p>{studyText(lang, 'intro')}</p>
+          <a className="public-button" href="#/study">
+            {studyText(lang, 'explore')}
+          </a>
+        </aside>
         <div className="admissions-programme-tools">
           <label>
             {c('Niveau', 'Degree')}

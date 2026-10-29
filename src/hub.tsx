@@ -3,6 +3,7 @@ import { localize } from './i18n';
 import { useLocale } from './locale-store';
 import { AnimatedHubLogo } from './binary-motion';
 import { usePageMotion } from './use-page-motion';
+import { studyText } from './study-copy';
 ('use client');
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, usePathname, useRouter } from './navigation';
@@ -796,6 +797,9 @@ export default function Hub({
           )}
         </nav>
         <div className="sidebar-bottom">
+          <a className="nav-link" href="#/study">
+            {studyText(lang, 'nav')}
+          </a>
           <a className="nav-link" href="#/union">
             {c('Union étudiante', 'Student Union', '学生会')}
           </a>

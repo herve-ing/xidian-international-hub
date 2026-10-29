@@ -5,7 +5,9 @@ import { authErrorCode } from './auth-errors';
 import { content } from './i18n';
 export default function ApplicantAccess({ lang }: { lang: string }) {
   const c = (fr: string, en: string) => content(lang, fr, en),
-    [register, setRegister] = useState(true),
+    [register, setRegister] = useState(
+      () => new URLSearchParams(window.location.hash.split('?')[1]).get('mode') !== 'login',
+    ),
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   return (

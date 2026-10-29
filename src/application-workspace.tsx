@@ -20,6 +20,9 @@ import {
   type ApplicationStage,
 } from './repositories/application-repository';
 import { ClubDialog } from './club-dialog';
+import ApplicantNextSteps from './applicant-next-steps';
+import { studyText } from './study-copy';
+import { applicationSummary } from './application-summary';
 function localDate(at: string, lang: string) {
   return new Intl.DateTimeFormat(intlLocale(lang), {
     dateStyle: 'medium',
@@ -234,6 +237,7 @@ export default function ApplicationWorkspace({
         <ThreadInbox lang={lang} account={account} />
       ) : (
         <>
+          <ApplicantNextSteps lang={lang} record={stored} />
           <div className="application-progress">
             {admissionsSteps.map((s, i) => (
               <div key={s.id} data-state={i < index ? 'done' : i === index ? 'current' : 'next'}>
@@ -279,6 +283,7 @@ export default function ApplicationWorkspace({
               <label>
                 <span>{c('Programme ou spécialité', 'Programme or major')}</span>
                 <input
+                  id="application-major"
                   required
                   maxLength={150}
                   value={form.major}
@@ -332,7 +337,7 @@ export default function ApplicationWorkspace({
                   'Checklist based on the 2026 guides. Check what you have prepared; no personal document is uploaded here.',
                 )}
               </p>
-              <fieldset className="application-checklist">
+              <fieldset id="application-documents" tabIndex={-1} className="application-checklist">
                 <legend>
                   {c('Pièces préparées', 'Prepared documents')} · {form.documents.length}/
                   {documentChecklist.length}
@@ -381,6 +386,11 @@ export default function ApplicationWorkspace({
                 <a href="#/admissions">
                   {c('Lire le guide de candidature', 'Read the application guide')}
                 </a>
+              </div>
+              <div>
+                <h3>{studyText(lang, 'nav')}</h3>
+                <p>{studyText(lang, 'intro')}</p>
+                <a href="#/study">{studyText(lang, 'explore')}</a>
               </div>
               <div>
                 <h3>{c('Mon historique', 'My history')}</h3>
@@ -471,7 +481,17 @@ export function FacultyWorkspace({ lang, account }: { lang: string; account: Acc
     [selected, setSelected] = useState(facultyLink),
     [query, setQuery] = useState(''),
     [notice, setNotice] = useState(''),
-    [overview, setOverview] = useState(applicantOverview);
+    [overview, setOverview] = useState(applicantOverview),
+    [applicationQuery, setApplicationQuery] = useState(''),
+    [stageFilter, setStageFilter] = useState('');
+  const visibleApplications = overview.filter(
+    (a) =>
+      (!stageFilter || a.stage === stageFilter) &&
+      [a.displayName, a.major, a.reference]
+        .join(' ')
+        .toLocaleLowerCase()
+        .includes(applicationQuery.toLocaleLowerCase()),
+  );
   if (account.role !== 'professor')
     return <p>{c('Accès professeur requis.', 'Professor access required.')}</p>;
   return (
@@ -557,6 +577,30 @@ export function FacultyWorkspace({ lang, account }: { lang: string; account: Acc
             {c('Actualiser', 'Refresh')}
           </button>
         </div>
+        <div className="faculty-application-filters">
+          <label>
+            <span>{c('Rechercher', 'Search')}</span>
+            <input
+              type="search"
+              value={applicationQuery}
+              onChange={(e) => setApplicationQuery(e.target.value)}
+            />
+          </label>
+          <label>
+            <span>{c('Étape déclarée', 'Reported step')}</span>
+            <select value={stageFilter} onChange={(e) => setStageFilter(e.target.value)}>
+              <option value="">{c('Tous', 'All')}</option>
+              {admissionsSteps.map((stage) => (
+                <option key={stage.id} value={stage.id}>
+                  {c(stage.fr, stage.en)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <span role="status">
+            {visibleApplications.length} / {overview.length}
+          </span>
+        </div>
         <div className="table-scroll">
           <table>
             <thead>
@@ -564,11 +608,12 @@ export function FacultyWorkspace({ lang, account }: { lang: string; account: Acc
                 <th>{c('Candidat', 'Applicant')}</th>
                 <th>{c('Programme', 'Programme')}</th>
                 <th>{c('Étape déclarée', 'Reported step')}</th>
+                <th>{studyText(lang, 'remaining')}</th>
                 <th>{c('Mise à jour', 'Updated')}</th>
               </tr>
             </thead>
             <tbody>
-              {overview.map((a) => (
+              {visibleApplications.map((a) => (
                 <tr key={a.id}>
                   <td>
                     <strong>{a.displayName}</strong>
@@ -577,6 +622,9 @@ export function FacultyWorkspace({ lang, account }: { lang: string; account: Acc
                     {localize(lang, a.level)} · {localize(lang, a.major)}
                   </td>
                   <td>{localize(lang, admissionsSteps.find((s) => s.id === a.stage)?.en || '')}</td>
+                  <td>
+                    {applicationSummary(a).missing.length} / {applicationSummary(a).total}
+                  </td>
                   <td>{localDate(a.updatedAt, lang)}</td>
                 </tr>
               ))}
@@ -590,6 +638,17 @@ export function FacultyWorkspace({ lang, account }: { lang: string; account: Acc
               'No applications prepared in this browser.',
             )}
           </p>
+        )}
+        {overview.length > 0 && !visibleApplications.length && (
+          <button
+            className="text-button"
+            onClick={() => {
+              setApplicationQuery('');
+              setStageFilter('');
+            }}
+          >
+            {c('Réinitialiser', 'Reset')}
+          </button>
         )}
       </section>
     </section>

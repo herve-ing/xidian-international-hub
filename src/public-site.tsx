@@ -13,6 +13,8 @@ import StudentUnion, { UnionNews } from './student-union';
 import PublicDirectory from './public-directory';
 import ApplicantAccess from './applicant-access';
 import ApplicationWorkspace, { FacultyWorkspace } from './application-workspace';
+import StudyPathways from './study-pathways';
+import { studyText } from './study-copy';
 import { admissionsSteps, officialPortal, researchAreas } from './admissions-data';
 import './public-site.css';
 const bits = Array.from({ length: 100 }, (_, i) => ((i * 37 + 19) % 11) % 2).join('');
@@ -138,6 +140,23 @@ function Landing({ lang }: { lang: string }) {
         </a>
       </section>
       <section className="public-research public-container">
+        <div className="research-feature study-home-feature">
+          <img
+            data-photo=""
+            decoding="async"
+            loading="lazy"
+            src="./media/career-pathways.jpg"
+            alt={studyText(lang, 'nav')}
+          />
+          <div>
+            <span className="public-kicker">XIDIAN GLOBAL CLASSROOM</span>
+            <h2>{studyText(lang, 'title')}</h2>
+            <p>{studyText(lang, 'intro')}</p>
+            <a className="public-button" href="#/study">
+              {studyText(lang, 'explore')}
+            </a>
+          </div>
+        </div>
         <div className="public-section-title">
           <span className="public-kicker">
             {c('UNE UNIVERSITÉ TOURNÉE VERS DEMAIN', 'A UNIVERSITY LOOKING AHEAD')}
@@ -333,6 +352,7 @@ export default function PublicSite() {
     '/apply',
     '/applications',
     '/faculty',
+    '/study',
   ].includes(path);
   return (
     <div className="university-site" data-motion={paused ? 'paused' : 'active'}>
@@ -393,6 +413,7 @@ export default function PublicSite() {
           {[
             ['/', c('Découvrir', 'Discover')],
             ['/admissions', c('Admissions', 'Admissions')],
+            ['/study', studyText(lang, 'nav')],
             ['/supervisors', c('Superviseurs', 'Supervisors')],
             ['/union', c('Union étudiante', 'Student Union')],
           ].map(([href, label]) => (
@@ -431,6 +452,9 @@ export default function PublicSite() {
         {path === '/' && <Landing lang={lang} />}
         {path === '/supervisors' && <PublicDirectory lang={lang} />}{' '}
         {path === '/admissions' && <Admissions lang={lang} />}
+        {path === '/study' && (
+          <StudyPathways key={account?.id || 'visitor'} lang={lang} account={account} />
+        )}
         {['/clubs', '/campus', '/union'].includes(path) && (
           <StudentUnion lang={lang} workspaceId={account?.id || 'public-discovery'} />
         )}
@@ -482,6 +506,7 @@ export default function PublicSite() {
               <h3>{c('Explorer', 'Explore')}</h3>
               <a href="#/supervisors">{c('Trouver un superviseur', 'Find a supervisor')}</a>
               <a href="#/admissions">{c('Préparer ma candidature', 'Prepare my application')}</a>
+              <a href="#/study">{studyText(lang, 'nav')}</a>
               <a href="#/union?tab=clubs">{c('Rejoindre la communauté', 'Join the community')}</a>
             </div>
             <div>
