@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { Account } from './accounts';
 import { localize } from './i18n';
 import { studyText as text } from './study-copy';
@@ -37,8 +37,15 @@ export default function StudyPathways({
 }) {
   const s = (key: Parameters<typeof text>[1]) => text(lang, key);
   const [tab, setTab] = useState<Tab>(readTab);
+  const navRef = useRef<HTMLElement>(null);
+  const previousTab = useRef(tab);
   const [plan, setPlan] = useState<StudyPlan>(() => loadPlan(account));
   const [notice, setNotice] = useState<'saved' | 'failed' | ''>('');
+  useEffect(() => {
+    if (previousTab.current === tab) return;
+    previousTab.current = tab;
+    navRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }, [tab]);
   useEffect(() => {
     const sync = () => setTab(readTab());
     window.addEventListener('hashchange', sync);
@@ -108,7 +115,7 @@ export default function StudyPathways({
           <figcaption>{s('nav')} · CS / ICS</figcaption>
         </figure>
       </header>
-      <nav className="study-nav" aria-label={s('nav')}>
+      <nav ref={navRef} className="study-nav" aria-label={s('nav')}>
         {tabs.map((id) => (
           <a
             key={id}
@@ -213,6 +220,7 @@ export default function StudyPathways({
             <label className="study-text-field">
               <span>{s('notes')}</span>
               <textarea
+                dir="auto"
                 rows={5}
                 maxLength={4000}
                 value={plan.notes}
@@ -247,6 +255,7 @@ export default function StudyPathways({
             <label className="study-text-field">
               <span>{s('question')}</span>
               <textarea
+                dir="auto"
                 rows={3}
                 maxLength={1200}
                 value={plan.question}
@@ -281,6 +290,7 @@ export default function StudyPathways({
             <label className="study-text-field">
               <span>{s('question')}</span>
               <textarea
+                dir="auto"
                 maxLength={1200}
                 rows={3}
                 value={plan.question}
@@ -290,6 +300,7 @@ export default function StudyPathways({
             <label className="study-text-field">
               <span>{s('notes')}</span>
               <textarea
+                dir="auto"
                 maxLength={4000}
                 rows={6}
                 value={plan.notes}
