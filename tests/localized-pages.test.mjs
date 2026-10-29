@@ -43,6 +43,10 @@ test('all public routes render each locale without the old English fallback noti
       '#/union?tab=recruitment',
       '#/apply',
       '#/login',
+      '#/study',
+      '#/study?tab=roadmap',
+      '#/study?tab=session',
+      '#/study?tab=exchange',
     ];
     const candidates = Object.keys(catalogues.en).filter(
       (key) => key.length > 55 && !/IELTS|Cambridge|TOEFL/.test(key),
